@@ -1,0 +1,6 @@
+dagster==1.10.16
+dagster-webserver==1.10.16
+dagster-postgres==1.10.16
+
+# Driver de PostgreSQL
+psycopg2-binary>=2.9,<3.0

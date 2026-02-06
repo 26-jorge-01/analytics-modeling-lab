@@ -1,0 +1,86 @@
+services:
+  postgres:
+    image: postgres:16
+    container_name: modelinglab-postgres
+    environment:
+      POSTGRES_USER: demo
+      POSTGRES_PASSWORD: demo
+      POSTGRES_DB: modeling_lab
+    ports:
+      - "5432:5432"
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U demo -d modeling_lab"]
+      interval: 5s
+      timeout: 5s
+      retries: 20
+
+  dagster-web:
+    build:
+      context: .
+      dockerfile: orchestration/dagster/Dockerfile
+    container_name: modelinglab-dagster-web
+    depends_on:
+      postgres:
+        condition: service_healthy
+    environment:
+      DAGSTER_HOME: /opt/dagster/dagster_home
+
+      # For dagster.yaml Postgres storage:
+      POSTGRES_USER: demo
+      POSTGRES_PASSWORD: demo
+      POSTGRES_DB: modeling_lab
+      POSTGRES_HOST: postgres
+      POSTGRES_PORT: "5432"
+
+      # Tell Dagster where the code is:
+      DAGSTER_MODULE_NAME: orchestration.dagster.dagster_project
+    ports:
+      - "3002:3000"
+    volumes:
+      - dagster_home:/orchestration/dagster/dagster_home
+      - ./:/app
+    command: ["dagster-webserver", "-h", "0.0.0.0", "-p", "3000", "-m", "orchestration.dagster.dagster_project"]
+
+  dagster-daemon:
+    build:
+      context: .
+      dockerfile: orchestration/dagster/Dockerfile
+    container_name: modelinglab-dagster-daemon
+    depends_on:
+      postgres:
+        condition: service_healthy
+    environment:
+      DAGSTER_HOME: /opt/dagster/dagster_home
+
+      POSTGRES_USER: demo
+      POSTGRES_PASSWORD: demo
+      POSTGRES_DB: modeling_lab
+      POSTGRES_HOST: postgres
+      POSTGRES_PORT: "5432"
+
+      DAGSTER_MODULE_NAME: orchestration.dagster.dagster_project
+    volumes:
+      - dagster_home:/opt/dagster/dagster_home
+      - ./:/app
+    command: ["dagster-daemon", "run"]
+
+  metabase:
+    image: metabase/metabase:latest
+    container_name: modelinglab-metabase
+    depends_on:
+      postgres:
+        condition: service_healthy
+    ports:
+      - "3001:3000"
+    environment:
+      # Metabase internal app DB (simple file-based); ok for local demo
+      MB_DB_FILE: /metabase-data/metabase.db
+    volumes:
+      - metabase_data:/metabase-data
+
+volumes:
+  pgdata:
+  dagster_home:
+  metabase_data:
