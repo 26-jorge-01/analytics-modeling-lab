@@ -16,15 +16,15 @@
 
 **Infra / repo**
 
-- [] Crear repo + estructura base (ver sección H).
+- [x] Crear repo + estructura base (ver sección H).
 
-- [] Crear .env.example + Makefile + Compose.
+- [x] Crear .env.example + Makefile + Compose.
 
-- [] Levantar contenedores: Postgres, Dagster (web+daemon), Metabase.
+- [x] Levantar contenedores: Postgres, Dagster (web+daemon), Metabase.
 
 **Datos**
 
-- [] Descargar dataset público e-commerce (CSV) → data/raw/
+- [x] Descargar dataset público e-commerce (CSV) → data/raw/
 
 - [] Script Python: generate_synthetic.py para suscripciones/devoluciones/envíos (si faltan).
 

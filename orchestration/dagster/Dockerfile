@@ -4,26 +4,26 @@ ENV PYTHONDONTWRITEBYTECODE=1 \
     PYTHONUNBUFFERED=1 \
     DAGSTER_HOME=/opt/dagster/dagster_home
 
-# System deps (psycopg2 build + basic tooling)
 RUN apt-get update && apt-get install -y --no-install-recommends \
-    build-essential \
     gcc \
     libpq-dev \
-    curl \
   && rm -rf /var/lib/apt/lists/*
 
 WORKDIR /app
 
-# Install python deps
+# deps (ruta real en tu repo)
 COPY orchestration/dagster/requirements.txt /app/requirements.txt
-RUN pip install --no-cache-dir -r /app/requirements.txt
+RUN pip install --no-cache-dir -U pip \
+ && pip install --no-cache-dir -r /app/requirements.txt
 
-# Copy Dagster home config + project code
+# dagster home + config (tu carpeta real)
 RUN mkdir -p ${DAGSTER_HOME}
 COPY orchestration/dagster/dagster_home/ ${DAGSTER_HOME}/
-COPY orchestration/dagster/dagster_project/ /app/orchestration/dagster/dagster_project/
 
-# Entry point
+# tu código (ajusta si quieres copiar solo subcarpetas)
+COPY . /app
+
+# entrypoint (ruta real)
 COPY orchestration/dagster/entrypoint.sh /entrypoint.sh
 RUN chmod +x /entrypoint.sh
 

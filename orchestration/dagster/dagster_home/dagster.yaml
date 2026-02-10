@@ -1,19 +1,56 @@
 telemetry:
   enabled: false
 
-# Almacenamiento local de artefactos (logs, files, etc.)
 local_artifact_storage:
   module: dagster._core.storage.root
   class: LocalArtifactStorage
   config:
-    base_dir: /orchestration/dagster/dagster_home/storage
+    base_dir: /opt/dagster/dagster_home/storage
 
-# Todos los storages (runs, event logs, schedules) en Postgres
-storage:
-  postgres:
+run_storage:
+  module: dagster_postgres.run_storage
+  class: PostgresRunStorage
+  config:
     postgres_db:
-      username: ${POSTGRES_USER}
-      password: ${POSTGRES_PASSWORD}
-      hostname: ${POSTGRES_HOST}
-      db_name: ${POSTGRES_DB}
-      port: "${POSTGRES_PORT}"
+      username:
+        env: POSTGRES_USER
+      password:
+        env: POSTGRES_PASSWORD
+      hostname:
+        env: POSTGRES_HOST
+      db_name:
+        env: POSTGRES_DB
+      port:
+        env: POSTGRES_PORT
+
+event_log_storage:
+  module: dagster_postgres.event_log
+  class: PostgresEventLogStorage
+  config:
+    postgres_db:
+      username:
+        env: POSTGRES_USER
+      password:
+        env: POSTGRES_PASSWORD
+      hostname:
+        env: POSTGRES_HOST
+      db_name:
+        env: POSTGRES_DB
+      port:
+        env: POSTGRES_PORT
+
+schedule_storage:
+  module: dagster_postgres.schedule_storage
+  class: PostgresScheduleStorage
+  config:
+    postgres_db:
+      username:
+        env: POSTGRES_USER
+      password:
+        env: POSTGRES_PASSWORD
+      hostname:
+        env: POSTGRES_HOST
+      db_name:
+        env: POSTGRES_DB
+      port:
+        env: POSTGRES_PORT
