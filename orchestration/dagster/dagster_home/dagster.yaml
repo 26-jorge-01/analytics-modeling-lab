@@ -19,7 +19,7 @@ run_storage:
       hostname:
         env: POSTGRES_HOST
       db_name:
-        env: POSTGRES_DB
+        env: POSTGRES_DB_METADATA
       port:
         env: POSTGRES_PORT
 
@@ -35,7 +35,7 @@ event_log_storage:
       hostname:
         env: POSTGRES_HOST
       db_name:
-        env: POSTGRES_DB
+        env: POSTGRES_DB_METADATA
       port:
         env: POSTGRES_PORT
 
@@ -51,6 +51,6 @@ schedule_storage:
       hostname:
         env: POSTGRES_HOST
       db_name:
-        env: POSTGRES_DB
+        env: POSTGRES_DB_METADATA
       port:
         env: POSTGRES_PORT

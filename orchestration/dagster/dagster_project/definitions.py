@@ -1,7 +1,8 @@
-from dagster import Definitions, asset
+from dagster import Definitions
+from .assets.bronze import olist_brz_assets
 
-@asset
-def hello_modeling_lab() -> str:
-    return "Dagster is running ✅"
-
-defs = Definitions(assets=[hello_modeling_lab])
+defs = Definitions(
+    assets=[
+        *olist_brz_assets,
+    ]
+)
