@@ -1,0 +1,2294 @@
+[0m02:39:13.479152 [debug] [MainThread]: Sending event: {'category': 'dbt', 'action': 'invocation', 'label': 'start', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x7fa9b6f7a750>, <snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x7fa9b6f72dd0>, <snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x7fa9b6f72e90>]}
+
+
+============================== 02:39:13.493183 | 273e1299-63ea-411f-8cae-ff2ec3f8dc61 ==============================
+[0m02:39:13.493183 [info ] [MainThread]: Running with dbt=1.11.6
+[0m02:39:13.496618 [debug] [MainThread]: running dbt with arguments {'version_check': 'True', 'printer_width': '80', 'use_experimental_parser': 'False', 'introspect': 'True', 'static_parser': 'True', 'log_path': '/app/transform/dbt/logs', 'partial_parse': 'True', 'profiles_dir': '.', 'log_cache_events': 'False', 'fail_fast': 'False', 'empty': 'None', 'quiet': 'False', 'target_path': 'None', 'cache_selected_only': 'False', 'warn_error_options': 'WarnErrorOptionsV2(error=[], warn=[], silence=[])', 'write_json': 'True', 'no_print': 'None', 'log_format': 'default', 'send_anonymous_usage_stats': 'True', 'indirect_selection': 'eager', 'debug': 'False', 'warn_error': 'None', 'use_colors': 'True', 'invocation_command': 'dbt test --profiles-dir .'}
+[0m02:39:15.750598 [debug] [MainThread]: Sending event: {'category': 'dbt', 'action': 'project_id', 'label': '273e1299-63ea-411f-8cae-ff2ec3f8dc61', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x7fa9b5fb2e50>]}
+[0m02:39:15.866145 [debug] [MainThread]: Sending event: {'category': 'dbt', 'action': 'adapter_info', 'label': '273e1299-63ea-411f-8cae-ff2ec3f8dc61', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x7fa9b9ddcc90>]}
+[0m02:39:15.869460 [info ] [MainThread]: Registered adapter: postgres=1.10.0
+[0m02:39:16.036139 [debug] [MainThread]: checksum: ec27062d18352e9cfca161c166fcc73d2201661a23a3cf3c89196a27f32cfcb8, vars: {}, profile: , target: , version: 1.11.6
+[0m02:39:16.044855 [info ] [MainThread]: Unable to do partial parsing because saved manifest not found. Starting full parse.
+[0m02:39:16.047627 [debug] [MainThread]: Sending event: {'category': 'dbt', 'action': 'partial_parser', 'label': '273e1299-63ea-411f-8cae-ff2ec3f8dc61', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x7fa9b571fe90>]}
+[0m02:39:18.804779 [warn ] [MainThread]: [[33mWARNING[0m][MissingArgumentsPropertyInGenericTestDeprecation]: Deprecated
+functionality
+Found top-level arguments to test `relationships` defined on 'fct_order_item' in
+package 'modeling_lab' (models/marts/star/schema.yml). Arguments to generic
+tests should be nested under the `arguments` property.
+[0m02:39:18.807500 [debug] [MainThread]: Sending event: {'category': 'dbt', 'action': 'deprecation', 'label': '273e1299-63ea-411f-8cae-ff2ec3f8dc61', 'property_': 'warn', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x7fa9b53bc390>]}
+[0m02:39:19.455644 [warn ] [MainThread]: [[33mWARNING[0m]: Configuration paths exist in your dbt_project.yml file which do not apply to any resources.
+There are 2 unused configuration paths:
+- models.modeling_lab.dv
+- models.modeling_lab.core_3nf
+[0m02:39:19.480836 [debug] [MainThread]: Sending event: {'category': 'dbt', 'action': 'load_project', 'label': '273e1299-63ea-411f-8cae-ff2ec3f8dc61', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x7fa9b419bcd0>]}
+[0m02:39:19.765444 [debug] [MainThread]: Wrote artifact WritableManifest to /app/transform/dbt/target/manifest.json
+[0m02:39:19.779919 [debug] [MainThread]: Wrote artifact SemanticManifest to /app/transform/dbt/target/semantic_manifest.json
+[0m02:39:19.863159 [debug] [MainThread]: Sending event: {'category': 'dbt', 'action': 'resource_counts', 'label': '273e1299-63ea-411f-8cae-ff2ec3f8dc61', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x7fa9af3cfdd0>]}
+[0m02:39:19.865684 [info ] [MainThread]: Found 13 models, 37 data tests, 9 sources, 464 macros
+[0m02:39:19.869285 [debug] [MainThread]: Sending event: {'category': 'dbt', 'action': 'runnable_timing', 'label': '273e1299-63ea-411f-8cae-ff2ec3f8dc61', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x7fa9af57d650>]}
+[0m02:39:19.879615 [info ] [MainThread]: 
+[0m02:39:19.882332 [info ] [MainThread]: Concurrency: 4 threads (target='dev')
+[0m02:39:19.885712 [info ] [MainThread]: 
+[0m02:39:19.889359 [debug] [MainThread]: Acquiring new postgres connection 'master'
+[0m02:39:19.904155 [debug] [ThreadPool]: Acquiring new postgres connection 'list_modeling_lab_public'
+[0m02:39:20.113185 [debug] [ThreadPool]: Using postgres connection "list_modeling_lab_public"
+[0m02:39:20.115951 [debug] [ThreadPool]: On list_modeling_lab_public: /* {"app": "dbt", "dbt_version": "1.11.6", "profile_name": "modeling_lab", "target_name": "dev", "connection_name": "list_modeling_lab_public"} */
+select
+      'modeling_lab' as database,
+      tablename as name,
+      schemaname as schema,
+      'table' as type
+    from pg_tables
+    where schemaname ilike 'public'
+    union all
+    select
+      'modeling_lab' as database,
+      viewname as name,
+      schemaname as schema,
+      'view' as type
+    from pg_views
+    where schemaname ilike 'public'
+    union all
+    select
+      'modeling_lab' as database,
+      matviewname as name,
+      schemaname as schema,
+      'materialized_view' as type
+    from pg_matviews
+    where schemaname ilike 'public'
+  
+[0m02:39:20.119081 [debug] [ThreadPool]: Opening a new connection, currently in state init
+[0m02:39:20.146203 [debug] [ThreadPool]: SQL status: SELECT 0 in 0.027 seconds
+[0m02:39:20.151990 [debug] [ThreadPool]: On list_modeling_lab_public: ROLLBACK
+[0m02:39:20.155235 [debug] [ThreadPool]: On list_modeling_lab_public: Close
+[0m02:39:20.169593 [debug] [MainThread]: Using postgres connection "master"
+[0m02:39:20.173358 [debug] [MainThread]: On master: /* {"app": "dbt", "dbt_version": "1.11.6", "profile_name": "modeling_lab", "target_name": "dev", "connection_name": "master"} */
+select distinct
+        dependent_namespace.nspname as dependent_schema,
+        dependent_class.relname as dependent_name,
+        referenced_namespace.nspname as referenced_schema,
+        referenced_class.relname as referenced_name
+
+    -- Query for views: views are entries in pg_class with an entry in pg_rewrite, but we avoid
+    -- a seq scan on pg_rewrite by leveraging the fact there is an "internal" row in pg_depend for
+    -- the view...
+    from pg_class as dependent_class
+    join pg_namespace as dependent_namespace on dependent_namespace.oid = dependent_class.relnamespace
+    join pg_depend as dependent_depend on dependent_depend.refobjid = dependent_class.oid
+        and dependent_depend.classid = 'pg_rewrite'::regclass
+        and dependent_depend.refclassid = 'pg_class'::regclass
+        and dependent_depend.deptype = 'i'
+
+    -- ... and via pg_depend (that has a row per column, hence the need for "distinct" above, and
+    -- making sure to exclude the internal row to avoid a view appearing to depend on itself)...
+    join pg_depend as joining_depend on joining_depend.objid = dependent_depend.objid
+        and joining_depend.classid = 'pg_rewrite'::regclass
+        and joining_depend.refclassid = 'pg_class'::regclass
+        and joining_depend.refobjid != dependent_depend.refobjid
+
+    -- ... we can find the tables they query from in pg_class, but excluding system tables. Note we
+    -- don't need need to exclude _dependent_ system tables, because they only query from other
+    -- system tables, and so are automatically excluded by excluding _referenced_ system tables
+    join pg_class as referenced_class on referenced_class.oid = joining_depend.refobjid
+    join pg_namespace as referenced_namespace on referenced_namespace.oid = referenced_class.relnamespace
+        and referenced_namespace.nspname != 'information_schema'
+        and referenced_namespace.nspname not like 'pg\_%'
+
+    order by
+        dependent_schema, dependent_name, referenced_schema, referenced_name;
+[0m02:39:20.175996 [debug] [MainThread]: Opening a new connection, currently in state init
+[0m02:39:20.199216 [debug] [MainThread]: SQL status: SELECT 0 in 0.023 seconds
+[0m02:39:20.202950 [debug] [MainThread]: Sending event: {'category': 'dbt', 'action': 'runnable_timing', 'label': '273e1299-63ea-411f-8cae-ff2ec3f8dc61', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x7fa9af581490>]}
+[0m02:39:20.204963 [debug] [MainThread]: On master: ROLLBACK
+[0m02:39:20.207083 [debug] [MainThread]: On master: COMMIT
+[0m02:39:20.209606 [debug] [MainThread]: Using postgres connection "master"
+[0m02:39:20.211469 [debug] [MainThread]: On master: COMMIT
+[0m02:39:20.213977 [debug] [MainThread]: SQL status: COMMIT in 0.001 seconds
+[0m02:39:20.216694 [debug] [MainThread]: On master: Close
+[0m02:39:20.232247 [debug] [Thread-1 (]: Began running node test.modeling_lab.not_null_dim_customer_customer_id.9775012dfc
+[0m02:39:20.235290 [debug] [Thread-2 (]: Began running node test.modeling_lab.not_null_dim_date_date_key.881d0a31b6
+[0m02:39:20.236177 [debug] [Thread-3 (]: Began running node test.modeling_lab.not_null_dim_product_product_id.02b1f06816
+[0m02:39:20.237250 [debug] [Thread-4 (]: Began running node test.modeling_lab.not_null_fct_order_item_customer_id.6df20948e8
+[0m02:39:20.238515 [info ] [Thread-1 (]: 1 of 37 START test not_null_dim_customer_customer_id ........................... [RUN]
+[0m02:39:20.241089 [info ] [Thread-2 (]: 2 of 37 START test not_null_dim_date_date_key .................................. [RUN]
+[0m02:39:20.244005 [info ] [Thread-3 (]: 3 of 37 START test not_null_dim_product_product_id ............................. [RUN]
+[0m02:39:20.247056 [info ] [Thread-4 (]: 4 of 37 START test not_null_fct_order_item_customer_id ......................... [RUN]
+[0m02:39:20.250466 [debug] [Thread-1 (]: Re-using an available connection from the pool (formerly list_modeling_lab_public, now test.modeling_lab.not_null_dim_customer_customer_id.9775012dfc)
+[0m02:39:20.253056 [debug] [Thread-2 (]: Acquiring new postgres connection 'test.modeling_lab.not_null_dim_date_date_key.881d0a31b6'
+[0m02:39:20.255973 [debug] [Thread-3 (]: Acquiring new postgres connection 'test.modeling_lab.not_null_dim_product_product_id.02b1f06816'
+[0m02:39:20.258917 [debug] [Thread-4 (]: Acquiring new postgres connection 'test.modeling_lab.not_null_fct_order_item_customer_id.6df20948e8'
+[0m02:39:20.261183 [debug] [Thread-1 (]: Began compiling node test.modeling_lab.not_null_dim_customer_customer_id.9775012dfc
+[0m02:39:20.263971 [debug] [Thread-2 (]: Began compiling node test.modeling_lab.not_null_dim_date_date_key.881d0a31b6
+[0m02:39:20.268068 [debug] [Thread-3 (]: Began compiling node test.modeling_lab.not_null_dim_product_product_id.02b1f06816
+[0m02:39:20.271141 [debug] [Thread-4 (]: Began compiling node test.modeling_lab.not_null_fct_order_item_customer_id.6df20948e8
+[0m02:39:20.307765 [debug] [Thread-1 (]: Writing injected SQL for node "test.modeling_lab.not_null_dim_customer_customer_id.9775012dfc"
+[0m02:39:20.311768 [debug] [Thread-2 (]: Writing injected SQL for node "test.modeling_lab.not_null_dim_date_date_key.881d0a31b6"
+[0m02:39:20.322443 [debug] [Thread-3 (]: Writing injected SQL for node "test.modeling_lab.not_null_dim_product_product_id.02b1f06816"
+[0m02:39:20.331970 [debug] [Thread-4 (]: Writing injected SQL for node "test.modeling_lab.not_null_fct_order_item_customer_id.6df20948e8"
+[0m02:39:20.389323 [debug] [Thread-1 (]: Began executing node test.modeling_lab.not_null_dim_customer_customer_id.9775012dfc
+[0m02:39:20.400737 [debug] [Thread-2 (]: Began executing node test.modeling_lab.not_null_dim_date_date_key.881d0a31b6
+[0m02:39:20.414320 [debug] [Thread-4 (]: Began executing node test.modeling_lab.not_null_fct_order_item_customer_id.6df20948e8
+[0m02:39:20.429183 [debug] [Thread-3 (]: Began executing node test.modeling_lab.not_null_dim_product_product_id.02b1f06816
+[0m02:39:20.505771 [debug] [Thread-1 (]: Writing runtime sql for node "test.modeling_lab.not_null_dim_customer_customer_id.9775012dfc"
+[0m02:39:20.507911 [debug] [Thread-4 (]: Writing runtime sql for node "test.modeling_lab.not_null_fct_order_item_customer_id.6df20948e8"
+[0m02:39:20.509420 [debug] [Thread-2 (]: Writing runtime sql for node "test.modeling_lab.not_null_dim_date_date_key.881d0a31b6"
+[0m02:39:20.517407 [debug] [Thread-3 (]: Writing runtime sql for node "test.modeling_lab.not_null_dim_product_product_id.02b1f06816"
+[0m02:39:20.570158 [debug] [Thread-2 (]: Using postgres connection "test.modeling_lab.not_null_dim_date_date_key.881d0a31b6"
+[0m02:39:20.573766 [debug] [Thread-2 (]: On test.modeling_lab.not_null_dim_date_date_key.881d0a31b6: /* {"app": "dbt", "dbt_version": "1.11.6", "profile_name": "modeling_lab", "target_name": "dev", "node_id": "test.modeling_lab.not_null_dim_date_date_key.881d0a31b6"} */
+
+    select
+      count(*) as failures,
+      count(*) != 0 as should_warn,
+      count(*) != 0 as should_error
+    from (
+      
+    
+  
+    
+    
+
+
+
+select date_key
+from "modeling_lab"."public"."dim_date"
+where date_key is null
+
+
+
+  
+  
+      
+    ) dbt_internal_test
+[0m02:39:20.577288 [debug] [Thread-2 (]: Opening a new connection, currently in state init
+[0m02:39:20.596599 [debug] [Thread-2 (]: Postgres adapter: Postgres error: relation "public.dim_date" does not exist
+LINE 17: from "modeling_lab"."public"."dim_date"
+              ^
+
+[0m02:39:20.604743 [debug] [Thread-2 (]: On test.modeling_lab.not_null_dim_date_date_key.881d0a31b6: ROLLBACK
+[0m02:39:20.608816 [debug] [Thread-2 (]: On test.modeling_lab.not_null_dim_date_date_key.881d0a31b6: Close
+[0m02:39:20.619031 [debug] [Thread-2 (]: Database Error in test not_null_dim_date_date_key (models/marts/star/schema.yml)
+  relation "public.dim_date" does not exist
+  LINE 17: from "modeling_lab"."public"."dim_date"
+                ^
+  compiled code at target/run/modeling_lab/models/marts/star/schema.yml/not_null_dim_date_date_key.sql
+[0m02:39:20.621770 [error] [Thread-2 (]: 2 of 37 ERROR not_null_dim_date_date_key ....................................... [[31mERROR[0m in 0.37s]
+[0m02:39:20.625460 [debug] [Thread-2 (]: Finished running node test.modeling_lab.not_null_dim_date_date_key.881d0a31b6
+[0m02:39:20.628938 [debug] [Thread-2 (]: Began running node test.modeling_lab.not_null_fct_order_item_order_date.01983ceb1c
+[0m02:39:20.630392 [debug] [Thread-7 (]: Marking all children of 'test.modeling_lab.not_null_dim_date_date_key.881d0a31b6' to be skipped because of status 'error'.  Reason: Database Error in test not_null_dim_date_date_key (models/marts/star/schema.yml)
+  relation "public.dim_date" does not exist
+  LINE 17: from "modeling_lab"."public"."dim_date"
+                ^
+  compiled code at target/run/modeling_lab/models/marts/star/schema.yml/not_null_dim_date_date_key.sql.
+[0m02:39:20.632347 [info ] [Thread-2 (]: 5 of 37 START test not_null_fct_order_item_order_date .......................... [RUN]
+[0m02:39:20.635537 [debug] [Thread-3 (]: Using postgres connection "test.modeling_lab.not_null_dim_product_product_id.02b1f06816"
+[0m02:39:20.641032 [debug] [Thread-2 (]: Re-using an available connection from the pool (formerly test.modeling_lab.not_null_dim_date_date_key.881d0a31b6, now test.modeling_lab.not_null_fct_order_item_order_date.01983ceb1c)
+[0m02:39:20.642746 [debug] [Thread-4 (]: Using postgres connection "test.modeling_lab.not_null_fct_order_item_customer_id.6df20948e8"
+[0m02:39:20.645785 [debug] [Thread-1 (]: Using postgres connection "test.modeling_lab.not_null_dim_customer_customer_id.9775012dfc"
+[0m02:39:20.646961 [debug] [Thread-3 (]: On test.modeling_lab.not_null_dim_product_product_id.02b1f06816: /* {"app": "dbt", "dbt_version": "1.11.6", "profile_name": "modeling_lab", "target_name": "dev", "node_id": "test.modeling_lab.not_null_dim_product_product_id.02b1f06816"} */
+
+    select
+      count(*) as failures,
+      count(*) != 0 as should_warn,
+      count(*) != 0 as should_error
+    from (
+      
+    
+  
+    
+    
+
+
+
+select product_id
+from "modeling_lab"."public"."dim_product"
+where product_id is null
+
+
+
+  
+  
+      
+    ) dbt_internal_test
+[0m02:39:20.650313 [debug] [Thread-2 (]: Began compiling node test.modeling_lab.not_null_fct_order_item_order_date.01983ceb1c
+[0m02:39:20.653216 [debug] [Thread-4 (]: On test.modeling_lab.not_null_fct_order_item_customer_id.6df20948e8: /* {"app": "dbt", "dbt_version": "1.11.6", "profile_name": "modeling_lab", "target_name": "dev", "node_id": "test.modeling_lab.not_null_fct_order_item_customer_id.6df20948e8"} */
+
+    select
+      count(*) as failures,
+      count(*) != 0 as should_warn,
+      count(*) != 0 as should_error
+    from (
+      
+    
+  
+    
+    
+
+
+
+select customer_id
+from "modeling_lab"."public"."fct_order_item"
+where customer_id is null
+
+
+
+  
+  
+      
+    ) dbt_internal_test
+[0m02:39:20.656637 [debug] [Thread-1 (]: On test.modeling_lab.not_null_dim_customer_customer_id.9775012dfc: /* {"app": "dbt", "dbt_version": "1.11.6", "profile_name": "modeling_lab", "target_name": "dev", "node_id": "test.modeling_lab.not_null_dim_customer_customer_id.9775012dfc"} */
+
+    select
+      count(*) as failures,
+      count(*) != 0 as should_warn,
+      count(*) != 0 as should_error
+    from (
+      
+    
+  
+    
+    
+
+
+
+select customer_id
+from "modeling_lab"."public"."dim_customer"
+where customer_id is null
+
+
+
+  
+  
+      
+    ) dbt_internal_test
+[0m02:39:20.660012 [debug] [Thread-3 (]: Opening a new connection, currently in state init
+[0m02:39:20.673183 [debug] [Thread-2 (]: Writing injected SQL for node "test.modeling_lab.not_null_fct_order_item_order_date.01983ceb1c"
+[0m02:39:20.674798 [debug] [Thread-4 (]: Opening a new connection, currently in state init
+[0m02:39:20.678099 [debug] [Thread-1 (]: Opening a new connection, currently in state closed
+[0m02:39:20.703127 [debug] [Thread-3 (]: Postgres adapter: Postgres error: relation "public.dim_product" does not exist
+LINE 17: from "modeling_lab"."public"."dim_product"
+              ^
+
+[0m02:39:20.706722 [debug] [Thread-4 (]: Postgres adapter: Postgres error: relation "public.fct_order_item" does not exist
+LINE 17: from "modeling_lab"."public"."fct_order_item"
+              ^
+
+[0m02:39:20.708743 [debug] [Thread-3 (]: On test.modeling_lab.not_null_dim_product_product_id.02b1f06816: ROLLBACK
+[0m02:39:20.710281 [debug] [Thread-1 (]: Postgres adapter: Postgres error: relation "public.dim_customer" does not exist
+LINE 17: from "modeling_lab"."public"."dim_customer"
+              ^
+
+[0m02:39:20.713845 [debug] [Thread-4 (]: On test.modeling_lab.not_null_fct_order_item_customer_id.6df20948e8: ROLLBACK
+[0m02:39:20.718031 [debug] [Thread-3 (]: On test.modeling_lab.not_null_dim_product_product_id.02b1f06816: Close
+[0m02:39:20.720916 [debug] [Thread-2 (]: Began executing node test.modeling_lab.not_null_fct_order_item_order_date.01983ceb1c
+[0m02:39:20.723654 [debug] [Thread-1 (]: On test.modeling_lab.not_null_dim_customer_customer_id.9775012dfc: ROLLBACK
+[0m02:39:20.727780 [debug] [Thread-4 (]: On test.modeling_lab.not_null_fct_order_item_customer_id.6df20948e8: Close
+[0m02:39:20.735335 [debug] [Thread-3 (]: Database Error in test not_null_dim_product_product_id (models/marts/star/schema.yml)
+  relation "public.dim_product" does not exist
+  LINE 17: from "modeling_lab"."public"."dim_product"
+                ^
+  compiled code at target/run/modeling_lab/models/marts/star/schema.yml/not_null_dim_product_product_id.sql
+[0m02:39:20.742744 [debug] [Thread-2 (]: Writing runtime sql for node "test.modeling_lab.not_null_fct_order_item_order_date.01983ceb1c"
+[0m02:39:20.745932 [debug] [Thread-1 (]: On test.modeling_lab.not_null_dim_customer_customer_id.9775012dfc: Close
+[0m02:39:20.752069 [debug] [Thread-4 (]: Database Error in test not_null_fct_order_item_customer_id (models/marts/star/schema.yml)
+  relation "public.fct_order_item" does not exist
+  LINE 17: from "modeling_lab"."public"."fct_order_item"
+                ^
+  compiled code at target/run/modeling_lab/models/marts/star/schema.yml/not_null_fct_order_item_customer_id.sql
+[0m02:39:20.753689 [error] [Thread-3 (]: 3 of 37 ERROR not_null_dim_product_product_id .................................. [[31mERROR[0m in 0.50s]
+[0m02:39:20.763238 [debug] [Thread-1 (]: Database Error in test not_null_dim_customer_customer_id (models/marts/star/schema.yml)
+  relation "public.dim_customer" does not exist
+  LINE 17: from "modeling_lab"."public"."dim_customer"
+                ^
+  compiled code at target/run/modeling_lab/models/marts/star/schema.yml/not_null_dim_customer_customer_id.sql
+[0m02:39:20.764995 [error] [Thread-4 (]: 4 of 37 ERROR not_null_fct_order_item_customer_id .............................. [[31mERROR[0m in 0.51s]
+[0m02:39:20.768460 [debug] [Thread-3 (]: Finished running node test.modeling_lab.not_null_dim_product_product_id.02b1f06816
+[0m02:39:20.771476 [error] [Thread-1 (]: 1 of 37 ERROR not_null_dim_customer_customer_id ................................ [[31mERROR[0m in 0.52s]
+[0m02:39:20.774461 [debug] [Thread-4 (]: Finished running node test.modeling_lab.not_null_fct_order_item_customer_id.6df20948e8
+[0m02:39:20.777271 [debug] [Thread-3 (]: Began running node test.modeling_lab.not_null_fct_order_item_order_id.684c6a1570
+[0m02:39:20.778584 [debug] [Thread-7 (]: Marking all children of 'test.modeling_lab.not_null_dim_product_product_id.02b1f06816' to be skipped because of status 'error'.  Reason: Database Error in test not_null_dim_product_product_id (models/marts/star/schema.yml)
+  relation "public.dim_product" does not exist
+  LINE 17: from "modeling_lab"."public"."dim_product"
+                ^
+  compiled code at target/run/modeling_lab/models/marts/star/schema.yml/not_null_dim_product_product_id.sql.
+[0m02:39:20.779743 [debug] [Thread-2 (]: Using postgres connection "test.modeling_lab.not_null_fct_order_item_order_date.01983ceb1c"
+[0m02:39:20.781689 [debug] [Thread-1 (]: Finished running node test.modeling_lab.not_null_dim_customer_customer_id.9775012dfc
+[0m02:39:20.784245 [debug] [Thread-4 (]: Began running node test.modeling_lab.not_null_fct_order_item_order_item_key.63b75612ed
+[0m02:39:20.787002 [info ] [Thread-3 (]: 6 of 37 START test not_null_fct_order_item_order_id ............................ [RUN]
+[0m02:39:20.790677 [debug] [Thread-7 (]: Marking all children of 'test.modeling_lab.not_null_fct_order_item_customer_id.6df20948e8' to be skipped because of status 'error'.  Reason: Database Error in test not_null_fct_order_item_customer_id (models/marts/star/schema.yml)
+  relation "public.fct_order_item" does not exist
+  LINE 17: from "modeling_lab"."public"."fct_order_item"
+                ^
+  compiled code at target/run/modeling_lab/models/marts/star/schema.yml/not_null_fct_order_item_customer_id.sql.
+[0m02:39:20.793172 [debug] [Thread-2 (]: On test.modeling_lab.not_null_fct_order_item_order_date.01983ceb1c: /* {"app": "dbt", "dbt_version": "1.11.6", "profile_name": "modeling_lab", "target_name": "dev", "node_id": "test.modeling_lab.not_null_fct_order_item_order_date.01983ceb1c"} */
+
+    select
+      count(*) as failures,
+      count(*) != 0 as should_warn,
+      count(*) != 0 as should_error
+    from (
+      
+    
+  
+    
+    
+
+
+
+select order_date
+from "modeling_lab"."public"."fct_order_item"
+where order_date is null
+
+
+
+  
+  
+      
+    ) dbt_internal_test
+[0m02:39:20.796925 [debug] [Thread-1 (]: Began running node test.modeling_lab.not_null_fct_order_item_product_id.c4924b6126
+[0m02:39:20.799293 [info ] [Thread-4 (]: 7 of 37 START test not_null_fct_order_item_order_item_key ...................... [RUN]
+[0m02:39:20.802024 [debug] [Thread-3 (]: Re-using an available connection from the pool (formerly test.modeling_lab.not_null_dim_product_product_id.02b1f06816, now test.modeling_lab.not_null_fct_order_item_order_id.684c6a1570)
+[0m02:39:20.804872 [debug] [Thread-7 (]: Marking all children of 'test.modeling_lab.not_null_dim_customer_customer_id.9775012dfc' to be skipped because of status 'error'.  Reason: Database Error in test not_null_dim_customer_customer_id (models/marts/star/schema.yml)
+  relation "public.dim_customer" does not exist
+  LINE 17: from "modeling_lab"."public"."dim_customer"
+                ^
+  compiled code at target/run/modeling_lab/models/marts/star/schema.yml/not_null_dim_customer_customer_id.sql.
+[0m02:39:20.807020 [debug] [Thread-2 (]: Opening a new connection, currently in state closed
+[0m02:39:20.809666 [info ] [Thread-1 (]: 8 of 37 START test not_null_fct_order_item_product_id .......................... [RUN]
+[0m02:39:20.813091 [debug] [Thread-4 (]: Re-using an available connection from the pool (formerly test.modeling_lab.not_null_fct_order_item_customer_id.6df20948e8, now test.modeling_lab.not_null_fct_order_item_order_item_key.63b75612ed)
+[0m02:39:20.815538 [debug] [Thread-3 (]: Began compiling node test.modeling_lab.not_null_fct_order_item_order_id.684c6a1570
+[0m02:39:20.821308 [debug] [Thread-1 (]: Re-using an available connection from the pool (formerly test.modeling_lab.not_null_dim_customer_customer_id.9775012dfc, now test.modeling_lab.not_null_fct_order_item_product_id.c4924b6126)
+[0m02:39:20.823549 [debug] [Thread-4 (]: Began compiling node test.modeling_lab.not_null_fct_order_item_order_item_key.63b75612ed
+[0m02:39:20.835498 [debug] [Thread-3 (]: Writing injected SQL for node "test.modeling_lab.not_null_fct_order_item_order_id.684c6a1570"
+[0m02:39:20.837628 [debug] [Thread-1 (]: Began compiling node test.modeling_lab.not_null_fct_order_item_product_id.c4924b6126
+[0m02:39:20.838712 [debug] [Thread-2 (]: Postgres adapter: Postgres error: relation "public.fct_order_item" does not exist
+LINE 17: from "modeling_lab"."public"."fct_order_item"
+              ^
+
+[0m02:39:20.848375 [debug] [Thread-4 (]: Writing injected SQL for node "test.modeling_lab.not_null_fct_order_item_order_item_key.63b75612ed"
+[0m02:39:20.861944 [debug] [Thread-1 (]: Writing injected SQL for node "test.modeling_lab.not_null_fct_order_item_product_id.c4924b6126"
+[0m02:39:20.863947 [debug] [Thread-2 (]: On test.modeling_lab.not_null_fct_order_item_order_date.01983ceb1c: ROLLBACK
+[0m02:39:20.869006 [debug] [Thread-3 (]: Began executing node test.modeling_lab.not_null_fct_order_item_order_id.684c6a1570
+[0m02:39:20.872489 [debug] [Thread-2 (]: On test.modeling_lab.not_null_fct_order_item_order_date.01983ceb1c: Close
+[0m02:39:20.874408 [debug] [Thread-4 (]: Began executing node test.modeling_lab.not_null_fct_order_item_order_item_key.63b75612ed
+[0m02:39:20.882246 [debug] [Thread-3 (]: Writing runtime sql for node "test.modeling_lab.not_null_fct_order_item_order_id.684c6a1570"
+[0m02:39:20.887498 [debug] [Thread-1 (]: Began executing node test.modeling_lab.not_null_fct_order_item_product_id.c4924b6126
+[0m02:39:20.891287 [debug] [Thread-2 (]: Database Error in test not_null_fct_order_item_order_date (models/marts/star/schema.yml)
+  relation "public.fct_order_item" does not exist
+  LINE 17: from "modeling_lab"."public"."fct_order_item"
+                ^
+  compiled code at target/run/modeling_lab/models/marts/star/schema.yml/not_null_fct_order_item_order_date.sql
+[0m02:39:20.896805 [debug] [Thread-4 (]: Writing runtime sql for node "test.modeling_lab.not_null_fct_order_item_order_item_key.63b75612ed"
+[0m02:39:20.911541 [debug] [Thread-1 (]: Writing runtime sql for node "test.modeling_lab.not_null_fct_order_item_product_id.c4924b6126"
+[0m02:39:20.913316 [error] [Thread-2 (]: 5 of 37 ERROR not_null_fct_order_item_order_date ............................... [[31mERROR[0m in 0.27s]
+[0m02:39:20.916701 [debug] [Thread-3 (]: Using postgres connection "test.modeling_lab.not_null_fct_order_item_order_id.684c6a1570"
+[0m02:39:20.921855 [debug] [Thread-2 (]: Finished running node test.modeling_lab.not_null_fct_order_item_order_date.01983ceb1c
+[0m02:39:20.924881 [debug] [Thread-3 (]: On test.modeling_lab.not_null_fct_order_item_order_id.684c6a1570: /* {"app": "dbt", "dbt_version": "1.11.6", "profile_name": "modeling_lab", "target_name": "dev", "node_id": "test.modeling_lab.not_null_fct_order_item_order_id.684c6a1570"} */
+
+    select
+      count(*) as failures,
+      count(*) != 0 as should_warn,
+      count(*) != 0 as should_error
+    from (
+      
+    
+  
+    
+    
+
+
+
+select order_id
+from "modeling_lab"."public"."fct_order_item"
+where order_id is null
+
+
+
+  
+  
+      
+    ) dbt_internal_test
+[0m02:39:20.927933 [debug] [Thread-2 (]: Began running node test.modeling_lab.not_null_stg_olist__customers_customer_id.fa12d6306e
+[0m02:39:20.929280 [debug] [Thread-7 (]: Marking all children of 'test.modeling_lab.not_null_fct_order_item_order_date.01983ceb1c' to be skipped because of status 'error'.  Reason: Database Error in test not_null_fct_order_item_order_date (models/marts/star/schema.yml)
+  relation "public.fct_order_item" does not exist
+  LINE 17: from "modeling_lab"."public"."fct_order_item"
+                ^
+  compiled code at target/run/modeling_lab/models/marts/star/schema.yml/not_null_fct_order_item_order_date.sql.
+[0m02:39:20.931852 [debug] [Thread-3 (]: Opening a new connection, currently in state closed
+[0m02:39:20.933491 [debug] [Thread-4 (]: Using postgres connection "test.modeling_lab.not_null_fct_order_item_order_item_key.63b75612ed"
+[0m02:39:20.937255 [info ] [Thread-2 (]: 9 of 37 START test not_null_stg_olist__customers_customer_id ................... [RUN]
+[0m02:39:20.939553 [debug] [Thread-1 (]: Using postgres connection "test.modeling_lab.not_null_fct_order_item_product_id.c4924b6126"
+[0m02:39:20.946502 [debug] [Thread-4 (]: On test.modeling_lab.not_null_fct_order_item_order_item_key.63b75612ed: /* {"app": "dbt", "dbt_version": "1.11.6", "profile_name": "modeling_lab", "target_name": "dev", "node_id": "test.modeling_lab.not_null_fct_order_item_order_item_key.63b75612ed"} */
+
+    select
+      count(*) as failures,
+      count(*) != 0 as should_warn,
+      count(*) != 0 as should_error
+    from (
+      
+    
+  
+    
+    
+
+
+
+select order_item_key
+from "modeling_lab"."public"."fct_order_item"
+where order_item_key is null
+
+
+
+  
+  
+      
+    ) dbt_internal_test
+[0m02:39:20.949041 [debug] [Thread-2 (]: Re-using an available connection from the pool (formerly test.modeling_lab.not_null_fct_order_item_order_date.01983ceb1c, now test.modeling_lab.not_null_stg_olist__customers_customer_id.fa12d6306e)
+[0m02:39:20.952705 [debug] [Thread-1 (]: On test.modeling_lab.not_null_fct_order_item_product_id.c4924b6126: /* {"app": "dbt", "dbt_version": "1.11.6", "profile_name": "modeling_lab", "target_name": "dev", "node_id": "test.modeling_lab.not_null_fct_order_item_product_id.c4924b6126"} */
+
+    select
+      count(*) as failures,
+      count(*) != 0 as should_warn,
+      count(*) != 0 as should_error
+    from (
+      
+    
+  
+    
+    
+
+
+
+select product_id
+from "modeling_lab"."public"."fct_order_item"
+where product_id is null
+
+
+
+  
+  
+      
+    ) dbt_internal_test
+[0m02:39:20.955592 [debug] [Thread-4 (]: Opening a new connection, currently in state closed
+[0m02:39:20.958419 [debug] [Thread-2 (]: Began compiling node test.modeling_lab.not_null_stg_olist__customers_customer_id.fa12d6306e
+[0m02:39:20.959434 [debug] [Thread-3 (]: Postgres adapter: Postgres error: relation "public.fct_order_item" does not exist
+LINE 17: from "modeling_lab"."public"."fct_order_item"
+              ^
+
+[0m02:39:20.962251 [debug] [Thread-1 (]: Opening a new connection, currently in state closed
+[0m02:39:20.978641 [debug] [Thread-2 (]: Writing injected SQL for node "test.modeling_lab.not_null_stg_olist__customers_customer_id.fa12d6306e"
+[0m02:39:20.980371 [debug] [Thread-3 (]: On test.modeling_lab.not_null_fct_order_item_order_id.684c6a1570: ROLLBACK
+[0m02:39:20.982950 [debug] [Thread-4 (]: Postgres adapter: Postgres error: relation "public.fct_order_item" does not exist
+LINE 17: from "modeling_lab"."public"."fct_order_item"
+              ^
+
+[0m02:39:20.988306 [debug] [Thread-3 (]: On test.modeling_lab.not_null_fct_order_item_order_id.684c6a1570: Close
+[0m02:39:20.989830 [debug] [Thread-4 (]: On test.modeling_lab.not_null_fct_order_item_order_item_key.63b75612ed: ROLLBACK
+[0m02:39:20.996034 [debug] [Thread-3 (]: Database Error in test not_null_fct_order_item_order_id (models/marts/star/schema.yml)
+  relation "public.fct_order_item" does not exist
+  LINE 17: from "modeling_lab"."public"."fct_order_item"
+                ^
+  compiled code at target/run/modeling_lab/models/marts/star/schema.yml/not_null_fct_order_item_order_id.sql
+[0m02:39:20.998418 [debug] [Thread-4 (]: On test.modeling_lab.not_null_fct_order_item_order_item_key.63b75612ed: Close
+[0m02:39:20.999462 [debug] [Thread-1 (]: Postgres adapter: Postgres error: relation "public.fct_order_item" does not exist
+LINE 17: from "modeling_lab"."public"."fct_order_item"
+              ^
+
+[0m02:39:21.002262 [error] [Thread-3 (]: 6 of 37 ERROR not_null_fct_order_item_order_id ................................. [[31mERROR[0m in 0.20s]
+[0m02:39:21.011371 [debug] [Thread-4 (]: Database Error in test not_null_fct_order_item_order_item_key (models/marts/star/schema.yml)
+  relation "public.fct_order_item" does not exist
+  LINE 17: from "modeling_lab"."public"."fct_order_item"
+                ^
+  compiled code at target/run/modeling_lab/models/marts/star/schema.yml/not_null_fct_order_item_order_item_key.sql
+[0m02:39:21.012605 [debug] [Thread-1 (]: On test.modeling_lab.not_null_fct_order_item_product_id.c4924b6126: ROLLBACK
+[0m02:39:21.015677 [debug] [Thread-3 (]: Finished running node test.modeling_lab.not_null_fct_order_item_order_id.684c6a1570
+[0m02:39:21.019152 [error] [Thread-4 (]: 7 of 37 ERROR not_null_fct_order_item_order_item_key ........................... [[31mERROR[0m in 0.21s]
+[0m02:39:21.022690 [debug] [Thread-1 (]: On test.modeling_lab.not_null_fct_order_item_product_id.c4924b6126: Close
+[0m02:39:21.025081 [debug] [Thread-3 (]: Began running node test.modeling_lab.not_null_stg_olist__order_items_order_id.6260e845c7
+[0m02:39:21.026619 [debug] [Thread-7 (]: Marking all children of 'test.modeling_lab.not_null_fct_order_item_order_id.684c6a1570' to be skipped because of status 'error'.  Reason: Database Error in test not_null_fct_order_item_order_id (models/marts/star/schema.yml)
+  relation "public.fct_order_item" does not exist
+  LINE 17: from "modeling_lab"."public"."fct_order_item"
+                ^
+  compiled code at target/run/modeling_lab/models/marts/star/schema.yml/not_null_fct_order_item_order_id.sql.
+[0m02:39:21.030304 [debug] [Thread-4 (]: Finished running node test.modeling_lab.not_null_fct_order_item_order_item_key.63b75612ed
+[0m02:39:21.031654 [debug] [Thread-2 (]: Began executing node test.modeling_lab.not_null_stg_olist__customers_customer_id.fa12d6306e
+[0m02:39:21.042047 [debug] [Thread-1 (]: Database Error in test not_null_fct_order_item_product_id (models/marts/star/schema.yml)
+  relation "public.fct_order_item" does not exist
+  LINE 17: from "modeling_lab"."public"."fct_order_item"
+                ^
+  compiled code at target/run/modeling_lab/models/marts/star/schema.yml/not_null_fct_order_item_product_id.sql
+[0m02:39:21.043213 [info ] [Thread-3 (]: 10 of 37 START test not_null_stg_olist__order_items_order_id ................... [RUN]
+[0m02:39:21.050608 [debug] [Thread-4 (]: Began running node test.modeling_lab.not_null_stg_olist__order_items_product_id.21dabede7a
+[0m02:39:21.052410 [debug] [Thread-7 (]: Marking all children of 'test.modeling_lab.not_null_fct_order_item_order_item_key.63b75612ed' to be skipped because of status 'error'.  Reason: Database Error in test not_null_fct_order_item_order_item_key (models/marts/star/schema.yml)
+  relation "public.fct_order_item" does not exist
+  LINE 17: from "modeling_lab"."public"."fct_order_item"
+                ^
+  compiled code at target/run/modeling_lab/models/marts/star/schema.yml/not_null_fct_order_item_order_item_key.sql.
+[0m02:39:21.058836 [debug] [Thread-2 (]: Writing runtime sql for node "test.modeling_lab.not_null_stg_olist__customers_customer_id.fa12d6306e"
+[0m02:39:21.061847 [error] [Thread-1 (]: 8 of 37 ERROR not_null_fct_order_item_product_id ............................... [[31mERROR[0m in 0.24s]
+[0m02:39:21.065237 [debug] [Thread-3 (]: Re-using an available connection from the pool (formerly test.modeling_lab.not_null_fct_order_item_order_id.684c6a1570, now test.modeling_lab.not_null_stg_olist__order_items_order_id.6260e845c7)
+[0m02:39:21.068452 [info ] [Thread-4 (]: 11 of 37 START test not_null_stg_olist__order_items_product_id ................. [RUN]
+[0m02:39:21.076002 [debug] [Thread-1 (]: Finished running node test.modeling_lab.not_null_fct_order_item_product_id.c4924b6126
+[0m02:39:21.079936 [debug] [Thread-3 (]: Began compiling node test.modeling_lab.not_null_stg_olist__order_items_order_id.6260e845c7
+[0m02:39:21.082569 [debug] [Thread-4 (]: Re-using an available connection from the pool (formerly test.modeling_lab.not_null_fct_order_item_order_item_key.63b75612ed, now test.modeling_lab.not_null_stg_olist__order_items_product_id.21dabede7a)
+[0m02:39:21.085750 [debug] [Thread-1 (]: Began running node test.modeling_lab.not_null_stg_olist__orders_customer_id.007ae2ad2c
+[0m02:39:21.087386 [debug] [Thread-7 (]: Marking all children of 'test.modeling_lab.not_null_fct_order_item_product_id.c4924b6126' to be skipped because of status 'error'.  Reason: Database Error in test not_null_fct_order_item_product_id (models/marts/star/schema.yml)
+  relation "public.fct_order_item" does not exist
+  LINE 17: from "modeling_lab"."public"."fct_order_item"
+                ^
+  compiled code at target/run/modeling_lab/models/marts/star/schema.yml/not_null_fct_order_item_product_id.sql.
+[0m02:39:21.097540 [debug] [Thread-3 (]: Writing injected SQL for node "test.modeling_lab.not_null_stg_olist__order_items_order_id.6260e845c7"
+[0m02:39:21.100425 [debug] [Thread-4 (]: Began compiling node test.modeling_lab.not_null_stg_olist__order_items_product_id.21dabede7a
+[0m02:39:21.102894 [info ] [Thread-1 (]: 12 of 37 START test not_null_stg_olist__orders_customer_id ..................... [RUN]
+[0m02:39:21.120158 [debug] [Thread-4 (]: Writing injected SQL for node "test.modeling_lab.not_null_stg_olist__order_items_product_id.21dabede7a"
+[0m02:39:21.123797 [debug] [Thread-1 (]: Re-using an available connection from the pool (formerly test.modeling_lab.not_null_fct_order_item_product_id.c4924b6126, now test.modeling_lab.not_null_stg_olist__orders_customer_id.007ae2ad2c)
+[0m02:39:21.125464 [debug] [Thread-2 (]: Using postgres connection "test.modeling_lab.not_null_stg_olist__customers_customer_id.fa12d6306e"
+[0m02:39:21.129149 [debug] [Thread-1 (]: Began compiling node test.modeling_lab.not_null_stg_olist__orders_customer_id.007ae2ad2c
+[0m02:39:21.132151 [debug] [Thread-2 (]: On test.modeling_lab.not_null_stg_olist__customers_customer_id.fa12d6306e: /* {"app": "dbt", "dbt_version": "1.11.6", "profile_name": "modeling_lab", "target_name": "dev", "node_id": "test.modeling_lab.not_null_stg_olist__customers_customer_id.fa12d6306e"} */
+
+    select
+      count(*) as failures,
+      count(*) != 0 as should_warn,
+      count(*) != 0 as should_error
+    from (
+      
+    
+  
+    
+    
+
+
+
+select customer_id
+from "modeling_lab"."public"."stg_olist__customers"
+where customer_id is null
+
+
+
+  
+  
+      
+    ) dbt_internal_test
+[0m02:39:21.133455 [debug] [Thread-3 (]: Began executing node test.modeling_lab.not_null_stg_olist__order_items_order_id.6260e845c7
+[0m02:39:21.147896 [debug] [Thread-4 (]: Began executing node test.modeling_lab.not_null_stg_olist__order_items_product_id.21dabede7a
+[0m02:39:21.151575 [debug] [Thread-1 (]: Writing injected SQL for node "test.modeling_lab.not_null_stg_olist__orders_customer_id.007ae2ad2c"
+[0m02:39:21.154210 [debug] [Thread-2 (]: Opening a new connection, currently in state closed
+[0m02:39:21.162798 [debug] [Thread-3 (]: Writing runtime sql for node "test.modeling_lab.not_null_stg_olist__order_items_order_id.6260e845c7"
+[0m02:39:21.171240 [debug] [Thread-4 (]: Writing runtime sql for node "test.modeling_lab.not_null_stg_olist__order_items_product_id.21dabede7a"
+[0m02:39:21.187288 [debug] [Thread-3 (]: Using postgres connection "test.modeling_lab.not_null_stg_olist__order_items_order_id.6260e845c7"
+[0m02:39:21.193191 [debug] [Thread-3 (]: On test.modeling_lab.not_null_stg_olist__order_items_order_id.6260e845c7: /* {"app": "dbt", "dbt_version": "1.11.6", "profile_name": "modeling_lab", "target_name": "dev", "node_id": "test.modeling_lab.not_null_stg_olist__order_items_order_id.6260e845c7"} */
+
+    select
+      count(*) as failures,
+      count(*) != 0 as should_warn,
+      count(*) != 0 as should_error
+    from (
+      
+    
+  
+    
+    
+
+
+
+select order_id
+from "modeling_lab"."public"."stg_olist__order_items"
+where order_id is null
+
+
+
+  
+  
+      
+    ) dbt_internal_test
+[0m02:39:21.196224 [debug] [Thread-1 (]: Began executing node test.modeling_lab.not_null_stg_olist__orders_customer_id.007ae2ad2c
+[0m02:39:21.198937 [debug] [Thread-4 (]: Using postgres connection "test.modeling_lab.not_null_stg_olist__order_items_product_id.21dabede7a"
+[0m02:39:21.200570 [debug] [Thread-3 (]: Opening a new connection, currently in state closed
+[0m02:39:21.204384 [debug] [Thread-2 (]: Postgres adapter: Postgres error: relation "public.stg_olist__customers" does not exist
+LINE 17: from "modeling_lab"."public"."stg_olist__customers"
+              ^
+
+[0m02:39:21.213835 [debug] [Thread-1 (]: Writing runtime sql for node "test.modeling_lab.not_null_stg_olist__orders_customer_id.007ae2ad2c"
+[0m02:39:21.216175 [debug] [Thread-4 (]: On test.modeling_lab.not_null_stg_olist__order_items_product_id.21dabede7a: /* {"app": "dbt", "dbt_version": "1.11.6", "profile_name": "modeling_lab", "target_name": "dev", "node_id": "test.modeling_lab.not_null_stg_olist__order_items_product_id.21dabede7a"} */
+
+    select
+      count(*) as failures,
+      count(*) != 0 as should_warn,
+      count(*) != 0 as should_error
+    from (
+      
+    
+  
+    
+    
+
+
+
+select product_id
+from "modeling_lab"."public"."stg_olist__order_items"
+where product_id is null
+
+
+
+  
+  
+      
+    ) dbt_internal_test
+[0m02:39:21.222187 [debug] [Thread-2 (]: On test.modeling_lab.not_null_stg_olist__customers_customer_id.fa12d6306e: ROLLBACK
+[0m02:39:21.226135 [debug] [Thread-4 (]: Opening a new connection, currently in state closed
+[0m02:39:21.229863 [debug] [Thread-2 (]: On test.modeling_lab.not_null_stg_olist__customers_customer_id.fa12d6306e: Close
+[0m02:39:21.239615 [debug] [Thread-2 (]: Database Error in test not_null_stg_olist__customers_customer_id (models/staging/schema.yml)
+  relation "public.stg_olist__customers" does not exist
+  LINE 17: from "modeling_lab"."public"."stg_olist__customers"
+                ^
+  compiled code at target/run/modeling_lab/models/staging/schema.yml/not_null_stg_olist__customers_customer_id.sql
+[0m02:39:21.240643 [debug] [Thread-3 (]: Postgres adapter: Postgres error: relation "public.stg_olist__order_items" does not exist
+LINE 17: from "modeling_lab"."public"."stg_olist__order_items"
+              ^
+
+[0m02:39:21.243139 [error] [Thread-2 (]: 9 of 37 ERROR not_null_stg_olist__customers_customer_id ........................ [[31mERROR[0m in 0.29s]
+[0m02:39:21.245106 [debug] [Thread-1 (]: Using postgres connection "test.modeling_lab.not_null_stg_olist__orders_customer_id.007ae2ad2c"
+[0m02:39:21.247037 [debug] [Thread-3 (]: On test.modeling_lab.not_null_stg_olist__order_items_order_id.6260e845c7: ROLLBACK
+[0m02:39:21.248567 [debug] [Thread-4 (]: Postgres adapter: Postgres error: relation "public.stg_olist__order_items" does not exist
+LINE 17: from "modeling_lab"."public"."stg_olist__order_items"
+              ^
+
+[0m02:39:21.251777 [debug] [Thread-2 (]: Finished running node test.modeling_lab.not_null_stg_olist__customers_customer_id.fa12d6306e
+[0m02:39:21.255061 [debug] [Thread-1 (]: On test.modeling_lab.not_null_stg_olist__orders_customer_id.007ae2ad2c: /* {"app": "dbt", "dbt_version": "1.11.6", "profile_name": "modeling_lab", "target_name": "dev", "node_id": "test.modeling_lab.not_null_stg_olist__orders_customer_id.007ae2ad2c"} */
+
+    select
+      count(*) as failures,
+      count(*) != 0 as should_warn,
+      count(*) != 0 as should_error
+    from (
+      
+    
+  
+    
+    
+
+
+
+select customer_id
+from "modeling_lab"."public"."stg_olist__orders"
+where customer_id is null
+
+
+
+  
+  
+      
+    ) dbt_internal_test
+[0m02:39:21.258234 [debug] [Thread-3 (]: On test.modeling_lab.not_null_stg_olist__order_items_order_id.6260e845c7: Close
+[0m02:39:21.260061 [debug] [Thread-4 (]: On test.modeling_lab.not_null_stg_olist__order_items_product_id.21dabede7a: ROLLBACK
+[0m02:39:21.262531 [debug] [Thread-2 (]: Began running node test.modeling_lab.not_null_stg_olist__orders_order_id.9ec9e196cb
+[0m02:39:21.263974 [debug] [Thread-7 (]: Marking all children of 'test.modeling_lab.not_null_stg_olist__customers_customer_id.fa12d6306e' to be skipped because of status 'error'.  Reason: Database Error in test not_null_stg_olist__customers_customer_id (models/staging/schema.yml)
+  relation "public.stg_olist__customers" does not exist
+  LINE 17: from "modeling_lab"."public"."stg_olist__customers"
+                ^
+  compiled code at target/run/modeling_lab/models/staging/schema.yml/not_null_stg_olist__customers_customer_id.sql.
+[0m02:39:21.267106 [debug] [Thread-1 (]: Opening a new connection, currently in state closed
+[0m02:39:21.273945 [debug] [Thread-3 (]: Database Error in test not_null_stg_olist__order_items_order_id (models/staging/schema.yml)
+  relation "public.stg_olist__order_items" does not exist
+  LINE 17: from "modeling_lab"."public"."stg_olist__order_items"
+                ^
+  compiled code at target/run/modeling_lab/models/staging/schema.yml/not_null_stg_olist__order_items_order_id.sql
+[0m02:39:21.276064 [debug] [Thread-4 (]: On test.modeling_lab.not_null_stg_olist__order_items_product_id.21dabede7a: Close
+[0m02:39:21.278700 [info ] [Thread-2 (]: 13 of 37 START test not_null_stg_olist__orders_order_id ........................ [RUN]
+[0m02:39:21.285522 [error] [Thread-3 (]: 10 of 37 ERROR not_null_stg_olist__order_items_order_id ........................ [[31mERROR[0m in 0.22s]
+[0m02:39:21.293342 [debug] [Thread-4 (]: Database Error in test not_null_stg_olist__order_items_product_id (models/staging/schema.yml)
+  relation "public.stg_olist__order_items" does not exist
+  LINE 17: from "modeling_lab"."public"."stg_olist__order_items"
+                ^
+  compiled code at target/run/modeling_lab/models/staging/schema.yml/not_null_stg_olist__order_items_product_id.sql
+[0m02:39:21.294942 [debug] [Thread-2 (]: Re-using an available connection from the pool (formerly test.modeling_lab.not_null_stg_olist__customers_customer_id.fa12d6306e, now test.modeling_lab.not_null_stg_olist__orders_order_id.9ec9e196cb)
+[0m02:39:21.298624 [debug] [Thread-3 (]: Finished running node test.modeling_lab.not_null_stg_olist__order_items_order_id.6260e845c7
+[0m02:39:21.299860 [debug] [Thread-1 (]: Postgres adapter: Postgres error: relation "public.stg_olist__orders" does not exist
+LINE 17: from "modeling_lab"."public"."stg_olist__orders"
+              ^
+
+[0m02:39:21.302016 [error] [Thread-4 (]: 11 of 37 ERROR not_null_stg_olist__order_items_product_id ...................... [[31mERROR[0m in 0.22s]
+[0m02:39:21.304641 [debug] [Thread-2 (]: Began compiling node test.modeling_lab.not_null_stg_olist__orders_order_id.9ec9e196cb
+[0m02:39:21.307134 [debug] [Thread-3 (]: Began running node test.modeling_lab.not_null_stg_olist__products_product_id.8b25aafa0b
+[0m02:39:21.308391 [debug] [Thread-7 (]: Marking all children of 'test.modeling_lab.not_null_stg_olist__order_items_order_id.6260e845c7' to be skipped because of status 'error'.  Reason: Database Error in test not_null_stg_olist__order_items_order_id (models/staging/schema.yml)
+  relation "public.stg_olist__order_items" does not exist
+  LINE 17: from "modeling_lab"."public"."stg_olist__order_items"
+                ^
+  compiled code at target/run/modeling_lab/models/staging/schema.yml/not_null_stg_olist__order_items_order_id.sql.
+[0m02:39:21.310227 [debug] [Thread-1 (]: On test.modeling_lab.not_null_stg_olist__orders_customer_id.007ae2ad2c: ROLLBACK
+[0m02:39:21.313401 [debug] [Thread-4 (]: Finished running node test.modeling_lab.not_null_stg_olist__order_items_product_id.21dabede7a
+[0m02:39:21.322869 [debug] [Thread-2 (]: Writing injected SQL for node "test.modeling_lab.not_null_stg_olist__orders_order_id.9ec9e196cb"
+[0m02:39:21.325039 [info ] [Thread-3 (]: 14 of 37 START test not_null_stg_olist__products_product_id .................... [RUN]
+[0m02:39:21.330911 [debug] [Thread-1 (]: On test.modeling_lab.not_null_stg_olist__orders_customer_id.007ae2ad2c: Close
+[0m02:39:21.332767 [debug] [Thread-4 (]: Began running node test.modeling_lab.relationships_fct_order_item_customer_id__customer_id__ref_dim_customer_.aef2e5b1de
+[0m02:39:21.333916 [debug] [Thread-7 (]: Marking all children of 'test.modeling_lab.not_null_stg_olist__order_items_product_id.21dabede7a' to be skipped because of status 'error'.  Reason: Database Error in test not_null_stg_olist__order_items_product_id (models/staging/schema.yml)
+  relation "public.stg_olist__order_items" does not exist
+  LINE 17: from "modeling_lab"."public"."stg_olist__order_items"
+                ^
+  compiled code at target/run/modeling_lab/models/staging/schema.yml/not_null_stg_olist__order_items_product_id.sql.
+[0m02:39:21.337937 [debug] [Thread-3 (]: Re-using an available connection from the pool (formerly test.modeling_lab.not_null_stg_olist__order_items_order_id.6260e845c7, now test.modeling_lab.not_null_stg_olist__products_product_id.8b25aafa0b)
+[0m02:39:21.347135 [debug] [Thread-1 (]: Database Error in test not_null_stg_olist__orders_customer_id (models/staging/schema.yml)
+  relation "public.stg_olist__orders" does not exist
+  LINE 17: from "modeling_lab"."public"."stg_olist__orders"
+                ^
+  compiled code at target/run/modeling_lab/models/staging/schema.yml/not_null_stg_olist__orders_customer_id.sql
+[0m02:39:21.348295 [info ] [Thread-4 (]: 15 of 37 START test relationships_fct_order_item_customer_id__customer_id__ref_dim_customer_  [RUN]
+[0m02:39:21.352971 [debug] [Thread-3 (]: Began compiling node test.modeling_lab.not_null_stg_olist__products_product_id.8b25aafa0b
+[0m02:39:21.356225 [error] [Thread-1 (]: 12 of 37 ERROR not_null_stg_olist__orders_customer_id .......................... [[31mERROR[0m in 0.23s]
+[0m02:39:21.357841 [debug] [Thread-2 (]: Began executing node test.modeling_lab.not_null_stg_olist__orders_order_id.9ec9e196cb
+[0m02:39:21.360235 [debug] [Thread-4 (]: Re-using an available connection from the pool (formerly test.modeling_lab.not_null_stg_olist__order_items_product_id.21dabede7a, now test.modeling_lab.relationships_fct_order_item_customer_id__customer_id__ref_dim_customer_.aef2e5b1de)
+[0m02:39:21.372716 [debug] [Thread-3 (]: Writing injected SQL for node "test.modeling_lab.not_null_stg_olist__products_product_id.8b25aafa0b"
+[0m02:39:21.375207 [debug] [Thread-1 (]: Finished running node test.modeling_lab.not_null_stg_olist__orders_customer_id.007ae2ad2c
+[0m02:39:21.386430 [debug] [Thread-2 (]: Writing runtime sql for node "test.modeling_lab.not_null_stg_olist__orders_order_id.9ec9e196cb"
+[0m02:39:21.388437 [debug] [Thread-4 (]: Began compiling node test.modeling_lab.relationships_fct_order_item_customer_id__customer_id__ref_dim_customer_.aef2e5b1de
+[0m02:39:21.392239 [debug] [Thread-1 (]: Began running node test.modeling_lab.relationships_fct_order_item_order_date__date_key__ref_dim_date_.5f6ea6f1dc
+[0m02:39:21.393624 [debug] [Thread-7 (]: Marking all children of 'test.modeling_lab.not_null_stg_olist__orders_customer_id.007ae2ad2c' to be skipped because of status 'error'.  Reason: Database Error in test not_null_stg_olist__orders_customer_id (models/staging/schema.yml)
+  relation "public.stg_olist__orders" does not exist
+  LINE 17: from "modeling_lab"."public"."stg_olist__orders"
+                ^
+  compiled code at target/run/modeling_lab/models/staging/schema.yml/not_null_stg_olist__orders_customer_id.sql.
+[0m02:39:21.408679 [debug] [Thread-4 (]: Writing injected SQL for node "test.modeling_lab.relationships_fct_order_item_customer_id__customer_id__ref_dim_customer_.aef2e5b1de"
+[0m02:39:21.411256 [info ] [Thread-1 (]: 16 of 37 START test relationships_fct_order_item_order_date__date_key__ref_dim_date_  [RUN]
+[0m02:39:21.415472 [debug] [Thread-3 (]: Began executing node test.modeling_lab.not_null_stg_olist__products_product_id.8b25aafa0b
+[0m02:39:21.416950 [debug] [Thread-2 (]: Using postgres connection "test.modeling_lab.not_null_stg_olist__orders_order_id.9ec9e196cb"
+[0m02:39:21.421437 [debug] [Thread-1 (]: Re-using an available connection from the pool (formerly test.modeling_lab.not_null_stg_olist__orders_customer_id.007ae2ad2c, now test.modeling_lab.relationships_fct_order_item_order_date__date_key__ref_dim_date_.5f6ea6f1dc)
+[0m02:39:21.432063 [debug] [Thread-3 (]: Writing runtime sql for node "test.modeling_lab.not_null_stg_olist__products_product_id.8b25aafa0b"
+[0m02:39:21.434022 [debug] [Thread-2 (]: On test.modeling_lab.not_null_stg_olist__orders_order_id.9ec9e196cb: /* {"app": "dbt", "dbt_version": "1.11.6", "profile_name": "modeling_lab", "target_name": "dev", "node_id": "test.modeling_lab.not_null_stg_olist__orders_order_id.9ec9e196cb"} */
+
+    select
+      count(*) as failures,
+      count(*) != 0 as should_warn,
+      count(*) != 0 as should_error
+    from (
+      
+    
+  
+    
+    
+
+
+
+select order_id
+from "modeling_lab"."public"."stg_olist__orders"
+where order_id is null
+
+
+
+  
+  
+      
+    ) dbt_internal_test
+[0m02:39:21.436699 [debug] [Thread-1 (]: Began compiling node test.modeling_lab.relationships_fct_order_item_order_date__date_key__ref_dim_date_.5f6ea6f1dc
+[0m02:39:21.441313 [debug] [Thread-2 (]: Opening a new connection, currently in state closed
+[0m02:39:21.442500 [debug] [Thread-4 (]: Began executing node test.modeling_lab.relationships_fct_order_item_customer_id__customer_id__ref_dim_customer_.aef2e5b1de
+[0m02:39:21.456778 [debug] [Thread-1 (]: Writing injected SQL for node "test.modeling_lab.relationships_fct_order_item_order_date__date_key__ref_dim_date_.5f6ea6f1dc"
+[0m02:39:21.466630 [debug] [Thread-3 (]: Using postgres connection "test.modeling_lab.not_null_stg_olist__products_product_id.8b25aafa0b"
+[0m02:39:21.467480 [debug] [Thread-4 (]: Writing runtime sql for node "test.modeling_lab.relationships_fct_order_item_customer_id__customer_id__ref_dim_customer_.aef2e5b1de"
+[0m02:39:21.471151 [debug] [Thread-3 (]: On test.modeling_lab.not_null_stg_olist__products_product_id.8b25aafa0b: /* {"app": "dbt", "dbt_version": "1.11.6", "profile_name": "modeling_lab", "target_name": "dev", "node_id": "test.modeling_lab.not_null_stg_olist__products_product_id.8b25aafa0b"} */
+
+    select
+      count(*) as failures,
+      count(*) != 0 as should_warn,
+      count(*) != 0 as should_error
+    from (
+      
+    
+  
+    
+    
+
+
+
+select product_id
+from "modeling_lab"."public"."stg_olist__products"
+where product_id is null
+
+
+
+  
+  
+      
+    ) dbt_internal_test
+[0m02:39:21.474222 [debug] [Thread-2 (]: Postgres adapter: Postgres error: relation "public.stg_olist__orders" does not exist
+LINE 17: from "modeling_lab"."public"."stg_olist__orders"
+              ^
+
+[0m02:39:21.477666 [debug] [Thread-3 (]: Opening a new connection, currently in state closed
+[0m02:39:21.480127 [debug] [Thread-2 (]: On test.modeling_lab.not_null_stg_olist__orders_order_id.9ec9e196cb: ROLLBACK
+[0m02:39:21.486273 [debug] [Thread-2 (]: On test.modeling_lab.not_null_stg_olist__orders_order_id.9ec9e196cb: Close
+[0m02:39:21.492215 [debug] [Thread-1 (]: Began executing node test.modeling_lab.relationships_fct_order_item_order_date__date_key__ref_dim_date_.5f6ea6f1dc
+[0m02:39:21.496944 [debug] [Thread-2 (]: Database Error in test not_null_stg_olist__orders_order_id (models/staging/schema.yml)
+  relation "public.stg_olist__orders" does not exist
+  LINE 17: from "modeling_lab"."public"."stg_olist__orders"
+                ^
+  compiled code at target/run/modeling_lab/models/staging/schema.yml/not_null_stg_olist__orders_order_id.sql
+[0m02:39:21.498464 [debug] [Thread-4 (]: Using postgres connection "test.modeling_lab.relationships_fct_order_item_customer_id__customer_id__ref_dim_customer_.aef2e5b1de"
+[0m02:39:21.505938 [debug] [Thread-1 (]: Writing runtime sql for node "test.modeling_lab.relationships_fct_order_item_order_date__date_key__ref_dim_date_.5f6ea6f1dc"
+[0m02:39:21.510523 [debug] [Thread-3 (]: Postgres adapter: Postgres error: relation "public.stg_olist__products" does not exist
+LINE 17: from "modeling_lab"."public"."stg_olist__products"
+              ^
+
+[0m02:39:21.509232 [error] [Thread-2 (]: 13 of 37 ERROR not_null_stg_olist__orders_order_id ............................. [[31mERROR[0m in 0.21s]
+[0m02:39:21.513631 [debug] [Thread-4 (]: On test.modeling_lab.relationships_fct_order_item_customer_id__customer_id__ref_dim_customer_.aef2e5b1de: /* {"app": "dbt", "dbt_version": "1.11.6", "profile_name": "modeling_lab", "target_name": "dev", "node_id": "test.modeling_lab.relationships_fct_order_item_customer_id__customer_id__ref_dim_customer_.aef2e5b1de"} */
+
+    select
+      count(*) as failures,
+      count(*) != 0 as should_warn,
+      count(*) != 0 as should_error
+    from (
+      
+    
+  
+    
+    
+
+with child as (
+    select customer_id as from_field
+    from "modeling_lab"."public"."fct_order_item"
+    where customer_id is not null
+),
+
+parent as (
+    select customer_id as to_field
+    from "modeling_lab"."public"."dim_customer"
+)
+
+select
+    from_field
+
+from child
+left join parent
+    on child.from_field = parent.to_field
+
+where parent.to_field is null
+
+
+
+  
+  
+      
+    ) dbt_internal_test
+[0m02:39:21.517715 [debug] [Thread-3 (]: On test.modeling_lab.not_null_stg_olist__products_product_id.8b25aafa0b: ROLLBACK
+[0m02:39:21.520503 [debug] [Thread-2 (]: Finished running node test.modeling_lab.not_null_stg_olist__orders_order_id.9ec9e196cb
+[0m02:39:21.522808 [debug] [Thread-4 (]: Opening a new connection, currently in state closed
+[0m02:39:21.526428 [debug] [Thread-3 (]: On test.modeling_lab.not_null_stg_olist__products_product_id.8b25aafa0b: Close
+[0m02:39:21.528435 [debug] [Thread-2 (]: Began running node test.modeling_lab.relationships_fct_order_item_product_id__product_id__ref_dim_product_.0119306fae
+[0m02:39:21.529554 [debug] [Thread-7 (]: Marking all children of 'test.modeling_lab.not_null_stg_olist__orders_order_id.9ec9e196cb' to be skipped because of status 'error'.  Reason: Database Error in test not_null_stg_olist__orders_order_id (models/staging/schema.yml)
+  relation "public.stg_olist__orders" does not exist
+  LINE 17: from "modeling_lab"."public"."stg_olist__orders"
+                ^
+  compiled code at target/run/modeling_lab/models/staging/schema.yml/not_null_stg_olist__orders_order_id.sql.
+[0m02:39:21.536726 [debug] [Thread-1 (]: Using postgres connection "test.modeling_lab.relationships_fct_order_item_order_date__date_key__ref_dim_date_.5f6ea6f1dc"
+[0m02:39:21.540906 [debug] [Thread-3 (]: Database Error in test not_null_stg_olist__products_product_id (models/staging/schema.yml)
+  relation "public.stg_olist__products" does not exist
+  LINE 17: from "modeling_lab"."public"."stg_olist__products"
+                ^
+  compiled code at target/run/modeling_lab/models/staging/schema.yml/not_null_stg_olist__products_product_id.sql
+[0m02:39:21.542667 [info ] [Thread-2 (]: 17 of 37 START test relationships_fct_order_item_product_id__product_id__ref_dim_product_  [RUN]
+[0m02:39:21.548199 [debug] [Thread-4 (]: Postgres adapter: Postgres error: relation "public.fct_order_item" does not exist
+LINE 16:     from "modeling_lab"."public"."fct_order_item"
+                  ^
+
+[0m02:39:21.550189 [debug] [Thread-1 (]: On test.modeling_lab.relationships_fct_order_item_order_date__date_key__ref_dim_date_.5f6ea6f1dc: /* {"app": "dbt", "dbt_version": "1.11.6", "profile_name": "modeling_lab", "target_name": "dev", "node_id": "test.modeling_lab.relationships_fct_order_item_order_date__date_key__ref_dim_date_.5f6ea6f1dc"} */
+
+    select
+      count(*) as failures,
+      count(*) != 0 as should_warn,
+      count(*) != 0 as should_error
+    from (
+      
+    
+  
+    
+    
+
+with child as (
+    select order_date as from_field
+    from "modeling_lab"."public"."fct_order_item"
+    where order_date is not null
+),
+
+parent as (
+    select date_key as to_field
+    from "modeling_lab"."public"."dim_date"
+)
+
+select
+    from_field
+
+from child
+left join parent
+    on child.from_field = parent.to_field
+
+where parent.to_field is null
+
+
+
+  
+  
+      
+    ) dbt_internal_test
+[0m02:39:21.553718 [error] [Thread-3 (]: 14 of 37 ERROR not_null_stg_olist__products_product_id ......................... [[31mERROR[0m in 0.22s]
+[0m02:39:21.556118 [debug] [Thread-2 (]: Re-using an available connection from the pool (formerly test.modeling_lab.not_null_stg_olist__orders_order_id.9ec9e196cb, now test.modeling_lab.relationships_fct_order_item_product_id__product_id__ref_dim_product_.0119306fae)
+[0m02:39:21.558501 [debug] [Thread-4 (]: On test.modeling_lab.relationships_fct_order_item_customer_id__customer_id__ref_dim_customer_.aef2e5b1de: ROLLBACK
+[0m02:39:21.561439 [debug] [Thread-1 (]: Opening a new connection, currently in state closed
+[0m02:39:21.564257 [debug] [Thread-3 (]: Finished running node test.modeling_lab.not_null_stg_olist__products_product_id.8b25aafa0b
+[0m02:39:21.566718 [debug] [Thread-2 (]: Began compiling node test.modeling_lab.relationships_fct_order_item_product_id__product_id__ref_dim_product_.0119306fae
+[0m02:39:21.569688 [debug] [Thread-4 (]: On test.modeling_lab.relationships_fct_order_item_customer_id__customer_id__ref_dim_customer_.aef2e5b1de: Close
+[0m02:39:21.573557 [debug] [Thread-3 (]: Began running node test.modeling_lab.relationships_stg_olist__order_items_order_id__order_id__ref_stg_olist__orders_.352e2888e0
+[0m02:39:21.574826 [debug] [Thread-7 (]: Marking all children of 'test.modeling_lab.not_null_stg_olist__products_product_id.8b25aafa0b' to be skipped because of status 'error'.  Reason: Database Error in test not_null_stg_olist__products_product_id (models/staging/schema.yml)
+  relation "public.stg_olist__products" does not exist
+  LINE 17: from "modeling_lab"."public"."stg_olist__products"
+                ^
+  compiled code at target/run/modeling_lab/models/staging/schema.yml/not_null_stg_olist__products_product_id.sql.
+[0m02:39:21.588193 [debug] [Thread-2 (]: Writing injected SQL for node "test.modeling_lab.relationships_fct_order_item_product_id__product_id__ref_dim_product_.0119306fae"
+[0m02:39:21.590608 [debug] [Thread-1 (]: Postgres adapter: Postgres error: relation "public.fct_order_item" does not exist
+LINE 16:     from "modeling_lab"."public"."fct_order_item"
+                  ^
+
+[0m02:39:21.596787 [debug] [Thread-4 (]: Database Error in test relationships_fct_order_item_customer_id__customer_id__ref_dim_customer_ (models/marts/star/schema.yml)
+  relation "public.fct_order_item" does not exist
+  LINE 16:     from "modeling_lab"."public"."fct_order_item"
+                    ^
+  compiled code at target/run/modeling_lab/models/marts/star/schema.yml/relationships_fct_order_item_4ce245512d09846e2f2c5fb27a276e40.sql
+[0m02:39:21.599386 [info ] [Thread-3 (]: 18 of 37 START test relationships_stg_olist__order_items_order_id__order_id__ref_stg_olist__orders_  [RUN]
+[0m02:39:21.607349 [debug] [Thread-1 (]: On test.modeling_lab.relationships_fct_order_item_order_date__date_key__ref_dim_date_.5f6ea6f1dc: ROLLBACK
+[0m02:39:21.609759 [error] [Thread-4 (]: 15 of 37 ERROR relationships_fct_order_item_customer_id__customer_id__ref_dim_customer_  [[31mERROR[0m in 0.25s]
+[0m02:39:21.613077 [debug] [Thread-3 (]: Re-using an available connection from the pool (formerly test.modeling_lab.not_null_stg_olist__products_product_id.8b25aafa0b, now test.modeling_lab.relationships_stg_olist__order_items_order_id__order_id__ref_stg_olist__orders_.352e2888e0)
+[0m02:39:21.616192 [debug] [Thread-1 (]: On test.modeling_lab.relationships_fct_order_item_order_date__date_key__ref_dim_date_.5f6ea6f1dc: Close
+[0m02:39:21.619740 [debug] [Thread-4 (]: Finished running node test.modeling_lab.relationships_fct_order_item_customer_id__customer_id__ref_dim_customer_.aef2e5b1de
+[0m02:39:21.622402 [debug] [Thread-3 (]: Began compiling node test.modeling_lab.relationships_stg_olist__order_items_order_id__order_id__ref_stg_olist__orders_.352e2888e0
+[0m02:39:21.628433 [debug] [Thread-2 (]: Began executing node test.modeling_lab.relationships_fct_order_item_product_id__product_id__ref_dim_product_.0119306fae
+[0m02:39:21.631984 [debug] [Thread-1 (]: Database Error in test relationships_fct_order_item_order_date__date_key__ref_dim_date_ (models/marts/star/schema.yml)
+  relation "public.fct_order_item" does not exist
+  LINE 16:     from "modeling_lab"."public"."fct_order_item"
+                    ^
+  compiled code at target/run/modeling_lab/models/marts/star/schema.yml/relationships_fct_order_item_e0ed897e17593c04b46f82b7743f53a8.sql
+[0m02:39:21.633059 [debug] [Thread-4 (]: Began running node test.modeling_lab.relationships_stg_olist__order_items_product_id__product_id__ref_stg_olist__products_.260c5cc788
+[0m02:39:21.634449 [debug] [Thread-7 (]: Marking all children of 'test.modeling_lab.relationships_fct_order_item_customer_id__customer_id__ref_dim_customer_.aef2e5b1de' to be skipped because of status 'error'.  Reason: Database Error in test relationships_fct_order_item_customer_id__customer_id__ref_dim_customer_ (models/marts/star/schema.yml)
+  relation "public.fct_order_item" does not exist
+  LINE 16:     from "modeling_lab"."public"."fct_order_item"
+                    ^
+  compiled code at target/run/modeling_lab/models/marts/star/schema.yml/relationships_fct_order_item_4ce245512d09846e2f2c5fb27a276e40.sql.
+[0m02:39:21.651133 [debug] [Thread-3 (]: Writing injected SQL for node "test.modeling_lab.relationships_stg_olist__order_items_order_id__order_id__ref_stg_olist__orders_.352e2888e0"
+[0m02:39:21.658152 [debug] [Thread-2 (]: Writing runtime sql for node "test.modeling_lab.relationships_fct_order_item_product_id__product_id__ref_dim_product_.0119306fae"
+[0m02:39:21.660377 [error] [Thread-1 (]: 16 of 37 ERROR relationships_fct_order_item_order_date__date_key__ref_dim_date_  [[31mERROR[0m in 0.24s]
+[0m02:39:21.663386 [info ] [Thread-4 (]: 19 of 37 START test relationships_stg_olist__order_items_product_id__product_id__ref_stg_olist__products_  [RUN]
+[0m02:39:21.672778 [debug] [Thread-1 (]: Finished running node test.modeling_lab.relationships_fct_order_item_order_date__date_key__ref_dim_date_.5f6ea6f1dc
+[0m02:39:21.676582 [debug] [Thread-4 (]: Re-using an available connection from the pool (formerly test.modeling_lab.relationships_fct_order_item_customer_id__customer_id__ref_dim_customer_.aef2e5b1de, now test.modeling_lab.relationships_stg_olist__order_items_product_id__product_id__ref_stg_olist__products_.260c5cc788)
+[0m02:39:21.680651 [debug] [Thread-1 (]: Began running node test.modeling_lab.relationships_stg_olist__orders_customer_id__customer_id__ref_stg_olist__customers_.a9f63c5a3a
+[0m02:39:21.682712 [debug] [Thread-7 (]: Marking all children of 'test.modeling_lab.relationships_fct_order_item_order_date__date_key__ref_dim_date_.5f6ea6f1dc' to be skipped because of status 'error'.  Reason: Database Error in test relationships_fct_order_item_order_date__date_key__ref_dim_date_ (models/marts/star/schema.yml)
+  relation "public.fct_order_item" does not exist
+  LINE 16:     from "modeling_lab"."public"."fct_order_item"
+                    ^
+  compiled code at target/run/modeling_lab/models/marts/star/schema.yml/relationships_fct_order_item_e0ed897e17593c04b46f82b7743f53a8.sql.
+[0m02:39:21.685261 [debug] [Thread-4 (]: Began compiling node test.modeling_lab.relationships_stg_olist__order_items_product_id__product_id__ref_stg_olist__products_.260c5cc788
+[0m02:39:21.688522 [info ] [Thread-1 (]: 20 of 37 START test relationships_stg_olist__orders_customer_id__customer_id__ref_stg_olist__customers_  [RUN]
+[0m02:39:21.694043 [debug] [Thread-3 (]: Began executing node test.modeling_lab.relationships_stg_olist__order_items_order_id__order_id__ref_stg_olist__orders_.352e2888e0
+[0m02:39:21.696491 [debug] [Thread-2 (]: Using postgres connection "test.modeling_lab.relationships_fct_order_item_product_id__product_id__ref_dim_product_.0119306fae"
+[0m02:39:21.716920 [debug] [Thread-4 (]: Writing injected SQL for node "test.modeling_lab.relationships_stg_olist__order_items_product_id__product_id__ref_stg_olist__products_.260c5cc788"
+[0m02:39:21.719149 [debug] [Thread-1 (]: Re-using an available connection from the pool (formerly test.modeling_lab.relationships_fct_order_item_order_date__date_key__ref_dim_date_.5f6ea6f1dc, now test.modeling_lab.relationships_stg_olist__orders_customer_id__customer_id__ref_stg_olist__customers_.a9f63c5a3a)
+[0m02:39:21.726435 [debug] [Thread-3 (]: Writing runtime sql for node "test.modeling_lab.relationships_stg_olist__order_items_order_id__order_id__ref_stg_olist__orders_.352e2888e0"
+[0m02:39:21.729414 [debug] [Thread-2 (]: On test.modeling_lab.relationships_fct_order_item_product_id__product_id__ref_dim_product_.0119306fae: /* {"app": "dbt", "dbt_version": "1.11.6", "profile_name": "modeling_lab", "target_name": "dev", "node_id": "test.modeling_lab.relationships_fct_order_item_product_id__product_id__ref_dim_product_.0119306fae"} */
+
+    select
+      count(*) as failures,
+      count(*) != 0 as should_warn,
+      count(*) != 0 as should_error
+    from (
+      
+    
+  
+    
+    
+
+with child as (
+    select product_id as from_field
+    from "modeling_lab"."public"."fct_order_item"
+    where product_id is not null
+),
+
+parent as (
+    select product_id as to_field
+    from "modeling_lab"."public"."dim_product"
+)
+
+select
+    from_field
+
+from child
+left join parent
+    on child.from_field = parent.to_field
+
+where parent.to_field is null
+
+
+
+  
+  
+      
+    ) dbt_internal_test
+[0m02:39:21.734108 [debug] [Thread-1 (]: Began compiling node test.modeling_lab.relationships_stg_olist__orders_customer_id__customer_id__ref_stg_olist__customers_.a9f63c5a3a
+[0m02:39:21.738424 [debug] [Thread-2 (]: Opening a new connection, currently in state closed
+[0m02:39:21.758824 [debug] [Thread-1 (]: Writing injected SQL for node "test.modeling_lab.relationships_stg_olist__orders_customer_id__customer_id__ref_stg_olist__customers_.a9f63c5a3a"
+[0m02:39:21.763339 [debug] [Thread-4 (]: Began executing node test.modeling_lab.relationships_stg_olist__order_items_product_id__product_id__ref_stg_olist__products_.260c5cc788
+[0m02:39:21.765359 [debug] [Thread-3 (]: Using postgres connection "test.modeling_lab.relationships_stg_olist__order_items_order_id__order_id__ref_stg_olist__orders_.352e2888e0"
+[0m02:39:21.774980 [debug] [Thread-4 (]: Writing runtime sql for node "test.modeling_lab.relationships_stg_olist__order_items_product_id__product_id__ref_stg_olist__products_.260c5cc788"
+[0m02:39:21.777684 [debug] [Thread-3 (]: On test.modeling_lab.relationships_stg_olist__order_items_order_id__order_id__ref_stg_olist__orders_.352e2888e0: /* {"app": "dbt", "dbt_version": "1.11.6", "profile_name": "modeling_lab", "target_name": "dev", "node_id": "test.modeling_lab.relationships_stg_olist__order_items_order_id__order_id__ref_stg_olist__orders_.352e2888e0"} */
+
+    select
+      count(*) as failures,
+      count(*) != 0 as should_warn,
+      count(*) != 0 as should_error
+    from (
+      
+    
+  
+    
+    
+
+with child as (
+    select order_id as from_field
+    from "modeling_lab"."public"."stg_olist__order_items"
+    where order_id is not null
+),
+
+parent as (
+    select order_id as to_field
+    from "modeling_lab"."public"."stg_olist__orders"
+)
+
+select
+    from_field
+
+from child
+left join parent
+    on child.from_field = parent.to_field
+
+where parent.to_field is null
+
+
+
+  
+  
+      
+    ) dbt_internal_test
+[0m02:39:21.779233 [debug] [Thread-2 (]: Postgres adapter: Postgres error: relation "public.fct_order_item" does not exist
+LINE 16:     from "modeling_lab"."public"."fct_order_item"
+                  ^
+
+[0m02:39:21.783216 [debug] [Thread-3 (]: Opening a new connection, currently in state closed
+[0m02:39:21.785973 [debug] [Thread-2 (]: On test.modeling_lab.relationships_fct_order_item_product_id__product_id__ref_dim_product_.0119306fae: ROLLBACK
+[0m02:39:21.788280 [debug] [Thread-1 (]: Began executing node test.modeling_lab.relationships_stg_olist__orders_customer_id__customer_id__ref_stg_olist__customers_.a9f63c5a3a
+[0m02:39:21.792214 [debug] [Thread-2 (]: On test.modeling_lab.relationships_fct_order_item_product_id__product_id__ref_dim_product_.0119306fae: Close
+[0m02:39:21.799181 [debug] [Thread-1 (]: Writing runtime sql for node "test.modeling_lab.relationships_stg_olist__orders_customer_id__customer_id__ref_stg_olist__customers_.a9f63c5a3a"
+[0m02:39:21.804927 [debug] [Thread-4 (]: Using postgres connection "test.modeling_lab.relationships_stg_olist__order_items_product_id__product_id__ref_stg_olist__products_.260c5cc788"
+[0m02:39:21.808642 [debug] [Thread-2 (]: Database Error in test relationships_fct_order_item_product_id__product_id__ref_dim_product_ (models/marts/star/schema.yml)
+  relation "public.fct_order_item" does not exist
+  LINE 16:     from "modeling_lab"."public"."fct_order_item"
+                    ^
+  compiled code at target/run/modeling_lab/models/marts/star/schema.yml/relationships_fct_order_item_7792390daabd0807cc252359559c9728.sql
+[0m02:39:21.809761 [debug] [Thread-3 (]: Postgres adapter: Postgres error: relation "public.stg_olist__order_items" does not exist
+LINE 16:     from "modeling_lab"."public"."stg_olist__order_items"
+                  ^
+
+[0m02:39:21.812100 [debug] [Thread-4 (]: On test.modeling_lab.relationships_stg_olist__order_items_product_id__product_id__ref_stg_olist__products_.260c5cc788: /* {"app": "dbt", "dbt_version": "1.11.6", "profile_name": "modeling_lab", "target_name": "dev", "node_id": "test.modeling_lab.relationships_stg_olist__order_items_product_id__product_id__ref_stg_olist__products_.260c5cc788"} */
+
+    select
+      count(*) as failures,
+      count(*) != 0 as should_warn,
+      count(*) != 0 as should_error
+    from (
+      
+    
+  
+    
+    
+
+with child as (
+    select product_id as from_field
+    from "modeling_lab"."public"."stg_olist__order_items"
+    where product_id is not null
+),
+
+parent as (
+    select product_id as to_field
+    from "modeling_lab"."public"."stg_olist__products"
+)
+
+select
+    from_field
+
+from child
+left join parent
+    on child.from_field = parent.to_field
+
+where parent.to_field is null
+
+
+
+  
+  
+      
+    ) dbt_internal_test
+[0m02:39:21.814665 [error] [Thread-2 (]: 17 of 37 ERROR relationships_fct_order_item_product_id__product_id__ref_dim_product_  [[31mERROR[0m in 0.26s]
+[0m02:39:21.817451 [debug] [Thread-3 (]: On test.modeling_lab.relationships_stg_olist__order_items_order_id__order_id__ref_stg_olist__orders_.352e2888e0: ROLLBACK
+[0m02:39:21.820172 [debug] [Thread-4 (]: Opening a new connection, currently in state closed
+[0m02:39:21.823389 [debug] [Thread-2 (]: Finished running node test.modeling_lab.relationships_fct_order_item_product_id__product_id__ref_dim_product_.0119306fae
+[0m02:39:21.826983 [debug] [Thread-3 (]: On test.modeling_lab.relationships_stg_olist__order_items_order_id__order_id__ref_stg_olist__orders_.352e2888e0: Close
+[0m02:39:21.828640 [debug] [Thread-1 (]: Using postgres connection "test.modeling_lab.relationships_stg_olist__orders_customer_id__customer_id__ref_stg_olist__customers_.a9f63c5a3a"
+[0m02:39:21.832534 [debug] [Thread-2 (]: Began running node test.modeling_lab.source_not_null_olist_customers_customer_id.1d007d2aad
+[0m02:39:21.834665 [debug] [Thread-7 (]: Marking all children of 'test.modeling_lab.relationships_fct_order_item_product_id__product_id__ref_dim_product_.0119306fae' to be skipped because of status 'error'.  Reason: Database Error in test relationships_fct_order_item_product_id__product_id__ref_dim_product_ (models/marts/star/schema.yml)
+  relation "public.fct_order_item" does not exist
+  LINE 16:     from "modeling_lab"."public"."fct_order_item"
+                    ^
+  compiled code at target/run/modeling_lab/models/marts/star/schema.yml/relationships_fct_order_item_7792390daabd0807cc252359559c9728.sql.
+[0m02:39:21.841864 [debug] [Thread-3 (]: Database Error in test relationships_stg_olist__order_items_order_id__order_id__ref_stg_olist__orders_ (models/staging/schema.yml)
+  relation "public.stg_olist__order_items" does not exist
+  LINE 16:     from "modeling_lab"."public"."stg_olist__order_items"
+                    ^
+  compiled code at target/run/modeling_lab/models/staging/schema.yml/relationships_stg_olist__order_662a8536f0db16c8c9337e31e19000ac.sql
+[0m02:39:21.843909 [debug] [Thread-1 (]: On test.modeling_lab.relationships_stg_olist__orders_customer_id__customer_id__ref_stg_olist__customers_.a9f63c5a3a: /* {"app": "dbt", "dbt_version": "1.11.6", "profile_name": "modeling_lab", "target_name": "dev", "node_id": "test.modeling_lab.relationships_stg_olist__orders_customer_id__customer_id__ref_stg_olist__customers_.a9f63c5a3a"} */
+
+    select
+      count(*) as failures,
+      count(*) != 0 as should_warn,
+      count(*) != 0 as should_error
+    from (
+      
+    
+  
+    
+    
+
+with child as (
+    select customer_id as from_field
+    from "modeling_lab"."public"."stg_olist__orders"
+    where customer_id is not null
+),
+
+parent as (
+    select customer_id as to_field
+    from "modeling_lab"."public"."stg_olist__customers"
+)
+
+select
+    from_field
+
+from child
+left join parent
+    on child.from_field = parent.to_field
+
+where parent.to_field is null
+
+
+
+  
+  
+      
+    ) dbt_internal_test
+[0m02:39:21.847082 [info ] [Thread-2 (]: 21 of 37 START test source_not_null_olist_customers_customer_id ................ [RUN]
+[0m02:39:21.850775 [debug] [Thread-4 (]: Postgres adapter: Postgres error: relation "public.stg_olist__order_items" does not exist
+LINE 16:     from "modeling_lab"."public"."stg_olist__order_items"
+                  ^
+
+[0m02:39:21.854608 [error] [Thread-3 (]: 18 of 37 ERROR relationships_stg_olist__order_items_order_id__order_id__ref_stg_olist__orders_  [[31mERROR[0m in 0.24s]
+[0m02:39:21.857772 [debug] [Thread-1 (]: Opening a new connection, currently in state closed
+[0m02:39:21.860944 [debug] [Thread-2 (]: Re-using an available connection from the pool (formerly test.modeling_lab.relationships_fct_order_item_product_id__product_id__ref_dim_product_.0119306fae, now test.modeling_lab.source_not_null_olist_customers_customer_id.1d007d2aad)
+[0m02:39:21.863823 [debug] [Thread-4 (]: On test.modeling_lab.relationships_stg_olist__order_items_product_id__product_id__ref_stg_olist__products_.260c5cc788: ROLLBACK
+[0m02:39:21.867172 [debug] [Thread-3 (]: Finished running node test.modeling_lab.relationships_stg_olist__order_items_order_id__order_id__ref_stg_olist__orders_.352e2888e0
+[0m02:39:21.872268 [debug] [Thread-2 (]: Began compiling node test.modeling_lab.source_not_null_olist_customers_customer_id.1d007d2aad
+[0m02:39:21.875921 [debug] [Thread-4 (]: On test.modeling_lab.relationships_stg_olist__order_items_product_id__product_id__ref_stg_olist__products_.260c5cc788: Close
+[0m02:39:21.878017 [debug] [Thread-3 (]: Began running node test.modeling_lab.source_not_null_olist_order_items_order_id.6a31f38874
+[0m02:39:21.879336 [debug] [Thread-7 (]: Marking all children of 'test.modeling_lab.relationships_stg_olist__order_items_order_id__order_id__ref_stg_olist__orders_.352e2888e0' to be skipped because of status 'error'.  Reason: Database Error in test relationships_stg_olist__order_items_order_id__order_id__ref_stg_olist__orders_ (models/staging/schema.yml)
+  relation "public.stg_olist__order_items" does not exist
+  LINE 16:     from "modeling_lab"."public"."stg_olist__order_items"
+                    ^
+  compiled code at target/run/modeling_lab/models/staging/schema.yml/relationships_stg_olist__order_662a8536f0db16c8c9337e31e19000ac.sql.
+[0m02:39:21.895050 [debug] [Thread-1 (]: Postgres adapter: Postgres error: relation "public.stg_olist__orders" does not exist
+LINE 16:     from "modeling_lab"."public"."stg_olist__orders"
+                  ^
+
+[0m02:39:21.897219 [debug] [Thread-2 (]: Writing injected SQL for node "test.modeling_lab.source_not_null_olist_customers_customer_id.1d007d2aad"
+[0m02:39:21.904959 [debug] [Thread-4 (]: Database Error in test relationships_stg_olist__order_items_product_id__product_id__ref_stg_olist__products_ (models/staging/schema.yml)
+  relation "public.stg_olist__order_items" does not exist
+  LINE 16:     from "modeling_lab"."public"."stg_olist__order_items"
+                    ^
+  compiled code at target/run/modeling_lab/models/staging/schema.yml/relationships_stg_olist__order_dc6293c65c57599fd98d33ced9562aeb.sql
+[0m02:39:21.907034 [info ] [Thread-3 (]: 22 of 37 START test source_not_null_olist_order_items_order_id ................. [RUN]
+[0m02:39:21.912328 [debug] [Thread-1 (]: On test.modeling_lab.relationships_stg_olist__orders_customer_id__customer_id__ref_stg_olist__customers_.a9f63c5a3a: ROLLBACK
+[0m02:39:21.917194 [error] [Thread-4 (]: 19 of 37 ERROR relationships_stg_olist__order_items_product_id__product_id__ref_stg_olist__products_  [[31mERROR[0m in 0.24s]
+[0m02:39:21.920995 [debug] [Thread-3 (]: Re-using an available connection from the pool (formerly test.modeling_lab.relationships_stg_olist__order_items_order_id__order_id__ref_stg_olist__orders_.352e2888e0, now test.modeling_lab.source_not_null_olist_order_items_order_id.6a31f38874)
+[0m02:39:21.924073 [debug] [Thread-1 (]: On test.modeling_lab.relationships_stg_olist__orders_customer_id__customer_id__ref_stg_olist__customers_.a9f63c5a3a: Close
+[0m02:39:21.927459 [debug] [Thread-4 (]: Finished running node test.modeling_lab.relationships_stg_olist__order_items_product_id__product_id__ref_stg_olist__products_.260c5cc788
+[0m02:39:21.929770 [debug] [Thread-3 (]: Began compiling node test.modeling_lab.source_not_null_olist_order_items_order_id.6a31f38874
+[0m02:39:21.937976 [debug] [Thread-1 (]: Database Error in test relationships_stg_olist__orders_customer_id__customer_id__ref_stg_olist__customers_ (models/staging/schema.yml)
+  relation "public.stg_olist__orders" does not exist
+  LINE 16:     from "modeling_lab"."public"."stg_olist__orders"
+                    ^
+  compiled code at target/run/modeling_lab/models/staging/schema.yml/relationships_stg_olist__order_f116fbcba3ffa54aed2c19d387a7ac95.sql
+[0m02:39:21.939729 [debug] [Thread-4 (]: Began running node test.modeling_lab.source_not_null_olist_order_items_order_item_id.de73ad88cf
+[0m02:39:21.941088 [debug] [Thread-7 (]: Marking all children of 'test.modeling_lab.relationships_stg_olist__order_items_product_id__product_id__ref_stg_olist__products_.260c5cc788' to be skipped because of status 'error'.  Reason: Database Error in test relationships_stg_olist__order_items_product_id__product_id__ref_stg_olist__products_ (models/staging/schema.yml)
+  relation "public.stg_olist__order_items" does not exist
+  LINE 16:     from "modeling_lab"."public"."stg_olist__order_items"
+                    ^
+  compiled code at target/run/modeling_lab/models/staging/schema.yml/relationships_stg_olist__order_dc6293c65c57599fd98d33ced9562aeb.sql.
+[0m02:39:21.951895 [debug] [Thread-3 (]: Writing injected SQL for node "test.modeling_lab.source_not_null_olist_order_items_order_id.6a31f38874"
+[0m02:39:21.954842 [error] [Thread-1 (]: 20 of 37 ERROR relationships_stg_olist__orders_customer_id__customer_id__ref_stg_olist__customers_  [[31mERROR[0m in 0.24s]
+[0m02:39:21.956733 [debug] [Thread-2 (]: Began executing node test.modeling_lab.source_not_null_olist_customers_customer_id.1d007d2aad
+[0m02:39:21.958697 [info ] [Thread-4 (]: 23 of 37 START test source_not_null_olist_order_items_order_item_id ............ [RUN]
+[0m02:39:21.967168 [debug] [Thread-1 (]: Finished running node test.modeling_lab.relationships_stg_olist__orders_customer_id__customer_id__ref_stg_olist__customers_.a9f63c5a3a
+[0m02:39:21.989392 [debug] [Thread-2 (]: Writing runtime sql for node "test.modeling_lab.source_not_null_olist_customers_customer_id.1d007d2aad"
+[0m02:39:21.991472 [debug] [Thread-4 (]: Re-using an available connection from the pool (formerly test.modeling_lab.relationships_stg_olist__order_items_product_id__product_id__ref_stg_olist__products_.260c5cc788, now test.modeling_lab.source_not_null_olist_order_items_order_item_id.de73ad88cf)
+[0m02:39:21.994083 [debug] [Thread-1 (]: Began running node test.modeling_lab.source_not_null_olist_orders_order_id.441189e023
+[0m02:39:21.995334 [debug] [Thread-7 (]: Marking all children of 'test.modeling_lab.relationships_stg_olist__orders_customer_id__customer_id__ref_stg_olist__customers_.a9f63c5a3a' to be skipped because of status 'error'.  Reason: Database Error in test relationships_stg_olist__orders_customer_id__customer_id__ref_stg_olist__customers_ (models/staging/schema.yml)
+  relation "public.stg_olist__orders" does not exist
+  LINE 16:     from "modeling_lab"."public"."stg_olist__orders"
+                    ^
+  compiled code at target/run/modeling_lab/models/staging/schema.yml/relationships_stg_olist__order_f116fbcba3ffa54aed2c19d387a7ac95.sql.
+[0m02:39:22.000261 [debug] [Thread-4 (]: Began compiling node test.modeling_lab.source_not_null_olist_order_items_order_item_id.de73ad88cf
+[0m02:39:22.001359 [debug] [Thread-3 (]: Began executing node test.modeling_lab.source_not_null_olist_order_items_order_id.6a31f38874
+[0m02:39:22.004097 [info ] [Thread-1 (]: 24 of 37 START test source_not_null_olist_orders_order_id ...................... [RUN]
+[0m02:39:22.020201 [debug] [Thread-4 (]: Writing injected SQL for node "test.modeling_lab.source_not_null_olist_order_items_order_item_id.de73ad88cf"
+[0m02:39:22.027398 [debug] [Thread-3 (]: Writing runtime sql for node "test.modeling_lab.source_not_null_olist_order_items_order_id.6a31f38874"
+[0m02:39:22.030181 [debug] [Thread-1 (]: Re-using an available connection from the pool (formerly test.modeling_lab.relationships_stg_olist__orders_customer_id__customer_id__ref_stg_olist__customers_.a9f63c5a3a, now test.modeling_lab.source_not_null_olist_orders_order_id.441189e023)
+[0m02:39:22.033594 [debug] [Thread-2 (]: Using postgres connection "test.modeling_lab.source_not_null_olist_customers_customer_id.1d007d2aad"
+[0m02:39:22.037476 [debug] [Thread-1 (]: Began compiling node test.modeling_lab.source_not_null_olist_orders_order_id.441189e023
+[0m02:39:22.040425 [debug] [Thread-2 (]: On test.modeling_lab.source_not_null_olist_customers_customer_id.1d007d2aad: /* {"app": "dbt", "dbt_version": "1.11.6", "profile_name": "modeling_lab", "target_name": "dev", "node_id": "test.modeling_lab.source_not_null_olist_customers_customer_id.1d007d2aad"} */
+
+    select
+      count(*) as failures,
+      count(*) != 0 as should_warn,
+      count(*) != 0 as should_error
+    from (
+      
+    
+  
+    
+    
+
+
+
+select customer_id
+from "modeling_lab"."raw"."customers"
+where customer_id is null
+
+
+
+  
+  
+      
+    ) dbt_internal_test
+[0m02:39:22.055047 [debug] [Thread-1 (]: Writing injected SQL for node "test.modeling_lab.source_not_null_olist_orders_order_id.441189e023"
+[0m02:39:22.057014 [debug] [Thread-2 (]: Opening a new connection, currently in state closed
+[0m02:39:22.058820 [debug] [Thread-4 (]: Began executing node test.modeling_lab.source_not_null_olist_order_items_order_item_id.de73ad88cf
+[0m02:39:22.061820 [debug] [Thread-3 (]: Using postgres connection "test.modeling_lab.source_not_null_olist_order_items_order_id.6a31f38874"
+[0m02:39:22.072782 [debug] [Thread-4 (]: Writing runtime sql for node "test.modeling_lab.source_not_null_olist_order_items_order_item_id.de73ad88cf"
+[0m02:39:22.074963 [debug] [Thread-3 (]: On test.modeling_lab.source_not_null_olist_order_items_order_id.6a31f38874: /* {"app": "dbt", "dbt_version": "1.11.6", "profile_name": "modeling_lab", "target_name": "dev", "node_id": "test.modeling_lab.source_not_null_olist_order_items_order_id.6a31f38874"} */
+
+    select
+      count(*) as failures,
+      count(*) != 0 as should_warn,
+      count(*) != 0 as should_error
+    from (
+      
+    
+  
+    
+    
+
+
+
+select order_id
+from "modeling_lab"."raw"."order_items"
+where order_id is null
+
+
+
+  
+  
+      
+    ) dbt_internal_test
+[0m02:39:22.079808 [debug] [Thread-3 (]: Opening a new connection, currently in state closed
+[0m02:39:22.084920 [debug] [Thread-1 (]: Began executing node test.modeling_lab.source_not_null_olist_orders_order_id.441189e023
+[0m02:39:22.095484 [debug] [Thread-1 (]: Writing runtime sql for node "test.modeling_lab.source_not_null_olist_orders_order_id.441189e023"
+[0m02:39:22.099085 [debug] [Thread-4 (]: Using postgres connection "test.modeling_lab.source_not_null_olist_order_items_order_item_id.de73ad88cf"
+[0m02:39:22.103981 [debug] [Thread-4 (]: On test.modeling_lab.source_not_null_olist_order_items_order_item_id.de73ad88cf: /* {"app": "dbt", "dbt_version": "1.11.6", "profile_name": "modeling_lab", "target_name": "dev", "node_id": "test.modeling_lab.source_not_null_olist_order_items_order_item_id.de73ad88cf"} */
+
+    select
+      count(*) as failures,
+      count(*) != 0 as should_warn,
+      count(*) != 0 as should_error
+    from (
+      
+    
+  
+    
+    
+
+
+
+select order_item_id
+from "modeling_lab"."raw"."order_items"
+where order_item_id is null
+
+
+
+  
+  
+      
+    ) dbt_internal_test
+[0m02:39:22.106773 [debug] [Thread-4 (]: Opening a new connection, currently in state closed
+[0m02:39:22.114291 [debug] [Thread-1 (]: Using postgres connection "test.modeling_lab.source_not_null_olist_orders_order_id.441189e023"
+[0m02:39:22.117270 [debug] [Thread-1 (]: On test.modeling_lab.source_not_null_olist_orders_order_id.441189e023: /* {"app": "dbt", "dbt_version": "1.11.6", "profile_name": "modeling_lab", "target_name": "dev", "node_id": "test.modeling_lab.source_not_null_olist_orders_order_id.441189e023"} */
+
+    select
+      count(*) as failures,
+      count(*) != 0 as should_warn,
+      count(*) != 0 as should_error
+    from (
+      
+    
+  
+    
+    
+
+
+
+select order_id
+from "modeling_lab"."raw"."orders"
+where order_id is null
+
+
+
+  
+  
+      
+    ) dbt_internal_test
+[0m02:39:22.120129 [debug] [Thread-1 (]: Opening a new connection, currently in state closed
+[0m02:39:22.128887 [debug] [Thread-3 (]: SQL status: SELECT 1 in 0.049 seconds
+[0m02:39:22.133698 [debug] [Thread-2 (]: SQL status: SELECT 1 in 0.077 seconds
+[0m02:39:22.144975 [debug] [Thread-3 (]: On test.modeling_lab.source_not_null_olist_order_items_order_id.6a31f38874: ROLLBACK
+[0m02:39:22.145823 [debug] [Thread-4 (]: SQL status: SELECT 1 in 0.039 seconds
+[0m02:39:22.149931 [debug] [Thread-2 (]: On test.modeling_lab.source_not_null_olist_customers_customer_id.1d007d2aad: ROLLBACK
+[0m02:39:22.153256 [debug] [Thread-3 (]: On test.modeling_lab.source_not_null_olist_order_items_order_id.6a31f38874: Close
+[0m02:39:22.157121 [debug] [Thread-4 (]: On test.modeling_lab.source_not_null_olist_order_items_order_item_id.de73ad88cf: ROLLBACK
+[0m02:39:22.159800 [debug] [Thread-2 (]: On test.modeling_lab.source_not_null_olist_customers_customer_id.1d007d2aad: Close
+[0m02:39:22.162090 [info ] [Thread-3 (]: 22 of 37 PASS source_not_null_olist_order_items_order_id ....................... [[32mPASS[0m in 0.24s]
+[0m02:39:22.165343 [debug] [Thread-4 (]: On test.modeling_lab.source_not_null_olist_order_items_order_item_id.de73ad88cf: Close
+[0m02:39:22.168065 [info ] [Thread-2 (]: 21 of 37 PASS source_not_null_olist_customers_customer_id ...................... [[32mPASS[0m in 0.31s]
+[0m02:39:22.171834 [debug] [Thread-3 (]: Finished running node test.modeling_lab.source_not_null_olist_order_items_order_id.6a31f38874
+[0m02:39:22.172934 [debug] [Thread-1 (]: SQL status: SELECT 1 in 0.053 seconds
+[0m02:39:22.175824 [info ] [Thread-4 (]: 23 of 37 PASS source_not_null_olist_order_items_order_item_id .................. [[32mPASS[0m in 0.18s]
+[0m02:39:22.178559 [debug] [Thread-2 (]: Finished running node test.modeling_lab.source_not_null_olist_customers_customer_id.1d007d2aad
+[0m02:39:22.181070 [debug] [Thread-3 (]: Began running node test.modeling_lab.source_not_null_olist_products_product_id.93341440fa
+[0m02:39:22.186216 [debug] [Thread-1 (]: On test.modeling_lab.source_not_null_olist_orders_order_id.441189e023: ROLLBACK
+[0m02:39:22.188895 [debug] [Thread-4 (]: Finished running node test.modeling_lab.source_not_null_olist_order_items_order_item_id.de73ad88cf
+[0m02:39:22.191314 [debug] [Thread-2 (]: Began running node test.modeling_lab.source_not_null_olist_sellers_seller_id.fc06a9f6bf
+[0m02:39:22.193448 [info ] [Thread-3 (]: 25 of 37 START test source_not_null_olist_products_product_id .................. [RUN]
+[0m02:39:22.197437 [debug] [Thread-1 (]: On test.modeling_lab.source_not_null_olist_orders_order_id.441189e023: Close
+[0m02:39:22.200097 [debug] [Thread-4 (]: Began running node test.modeling_lab.source_unique_olist_customers_customer_id.efa71c64b9
+[0m02:39:22.203309 [info ] [Thread-2 (]: 26 of 37 START test source_not_null_olist_sellers_seller_id .................... [RUN]
+[0m02:39:22.207302 [debug] [Thread-3 (]: Re-using an available connection from the pool (formerly test.modeling_lab.source_not_null_olist_order_items_order_id.6a31f38874, now test.modeling_lab.source_not_null_olist_products_product_id.93341440fa)
+[0m02:39:22.211744 [info ] [Thread-1 (]: 24 of 37 PASS source_not_null_olist_orders_order_id ............................ [[32mPASS[0m in 0.18s]
+[0m02:39:22.216477 [info ] [Thread-4 (]: 27 of 37 START test source_unique_olist_customers_customer_id .................. [RUN]
+[0m02:39:22.220412 [debug] [Thread-2 (]: Re-using an available connection from the pool (formerly test.modeling_lab.source_not_null_olist_customers_customer_id.1d007d2aad, now test.modeling_lab.source_not_null_olist_sellers_seller_id.fc06a9f6bf)
+[0m02:39:22.223129 [debug] [Thread-3 (]: Began compiling node test.modeling_lab.source_not_null_olist_products_product_id.93341440fa
+[0m02:39:22.226174 [debug] [Thread-1 (]: Finished running node test.modeling_lab.source_not_null_olist_orders_order_id.441189e023
+[0m02:39:22.228489 [debug] [Thread-4 (]: Re-using an available connection from the pool (formerly test.modeling_lab.source_not_null_olist_order_items_order_item_id.de73ad88cf, now test.modeling_lab.source_unique_olist_customers_customer_id.efa71c64b9)
+[0m02:39:22.231800 [debug] [Thread-2 (]: Began compiling node test.modeling_lab.source_not_null_olist_sellers_seller_id.fc06a9f6bf
+[0m02:39:22.242813 [debug] [Thread-3 (]: Writing injected SQL for node "test.modeling_lab.source_not_null_olist_products_product_id.93341440fa"
+[0m02:39:22.245311 [debug] [Thread-1 (]: Began running node test.modeling_lab.source_unique_olist_orders_order_id.df3b066d82
+[0m02:39:22.249813 [debug] [Thread-4 (]: Began compiling node test.modeling_lab.source_unique_olist_customers_customer_id.efa71c64b9
+[0m02:39:22.259290 [debug] [Thread-2 (]: Writing injected SQL for node "test.modeling_lab.source_not_null_olist_sellers_seller_id.fc06a9f6bf"
+[0m02:39:22.263499 [info ] [Thread-1 (]: 28 of 37 START test source_unique_olist_orders_order_id ........................ [RUN]
+[0m02:39:22.279271 [debug] [Thread-4 (]: Writing injected SQL for node "test.modeling_lab.source_unique_olist_customers_customer_id.efa71c64b9"
+[0m02:39:22.282863 [debug] [Thread-3 (]: Began executing node test.modeling_lab.source_not_null_olist_products_product_id.93341440fa
+[0m02:39:22.284440 [debug] [Thread-1 (]: Re-using an available connection from the pool (formerly test.modeling_lab.source_not_null_olist_orders_order_id.441189e023, now test.modeling_lab.source_unique_olist_orders_order_id.df3b066d82)
+[0m02:39:22.287474 [debug] [Thread-2 (]: Began executing node test.modeling_lab.source_not_null_olist_sellers_seller_id.fc06a9f6bf
+[0m02:39:22.296001 [debug] [Thread-3 (]: Writing runtime sql for node "test.modeling_lab.source_not_null_olist_products_product_id.93341440fa"
+[0m02:39:22.298795 [debug] [Thread-1 (]: Began compiling node test.modeling_lab.source_unique_olist_orders_order_id.df3b066d82
+[0m02:39:22.307192 [debug] [Thread-4 (]: Began executing node test.modeling_lab.source_unique_olist_customers_customer_id.efa71c64b9
+[0m02:39:22.308381 [debug] [Thread-2 (]: Writing runtime sql for node "test.modeling_lab.source_not_null_olist_sellers_seller_id.fc06a9f6bf"
+[0m02:39:22.321290 [debug] [Thread-1 (]: Writing injected SQL for node "test.modeling_lab.source_unique_olist_orders_order_id.df3b066d82"
+[0m02:39:22.327299 [debug] [Thread-4 (]: Writing runtime sql for node "test.modeling_lab.source_unique_olist_customers_customer_id.efa71c64b9"
+[0m02:39:22.330170 [debug] [Thread-3 (]: Using postgres connection "test.modeling_lab.source_not_null_olist_products_product_id.93341440fa"
+[0m02:39:22.335982 [debug] [Thread-3 (]: On test.modeling_lab.source_not_null_olist_products_product_id.93341440fa: /* {"app": "dbt", "dbt_version": "1.11.6", "profile_name": "modeling_lab", "target_name": "dev", "node_id": "test.modeling_lab.source_not_null_olist_products_product_id.93341440fa"} */
+
+    select
+      count(*) as failures,
+      count(*) != 0 as should_warn,
+      count(*) != 0 as should_error
+    from (
+      
+    
+  
+    
+    
+
+
+
+select product_id
+from "modeling_lab"."raw"."products"
+where product_id is null
+
+
+
+  
+  
+      
+    ) dbt_internal_test
+[0m02:39:22.338708 [debug] [Thread-3 (]: Opening a new connection, currently in state closed
+[0m02:39:22.342071 [debug] [Thread-2 (]: Using postgres connection "test.modeling_lab.source_not_null_olist_sellers_seller_id.fc06a9f6bf"
+[0m02:39:22.345553 [debug] [Thread-2 (]: On test.modeling_lab.source_not_null_olist_sellers_seller_id.fc06a9f6bf: /* {"app": "dbt", "dbt_version": "1.11.6", "profile_name": "modeling_lab", "target_name": "dev", "node_id": "test.modeling_lab.source_not_null_olist_sellers_seller_id.fc06a9f6bf"} */
+
+    select
+      count(*) as failures,
+      count(*) != 0 as should_warn,
+      count(*) != 0 as should_error
+    from (
+      
+    
+  
+    
+    
+
+
+
+select seller_id
+from "modeling_lab"."raw"."sellers"
+where seller_id is null
+
+
+
+  
+  
+      
+    ) dbt_internal_test
+[0m02:39:22.348316 [debug] [Thread-4 (]: Using postgres connection "test.modeling_lab.source_unique_olist_customers_customer_id.efa71c64b9"
+[0m02:39:22.350268 [debug] [Thread-2 (]: Opening a new connection, currently in state closed
+[0m02:39:22.353144 [debug] [Thread-4 (]: On test.modeling_lab.source_unique_olist_customers_customer_id.efa71c64b9: /* {"app": "dbt", "dbt_version": "1.11.6", "profile_name": "modeling_lab", "target_name": "dev", "node_id": "test.modeling_lab.source_unique_olist_customers_customer_id.efa71c64b9"} */
+
+    select
+      count(*) as failures,
+      count(*) != 0 as should_warn,
+      count(*) != 0 as should_error
+    from (
+      
+    
+  
+    
+    
+
+select
+    customer_id as unique_field,
+    count(*) as n_records
+
+from "modeling_lab"."raw"."customers"
+where customer_id is not null
+group by customer_id
+having count(*) > 1
+
+
+
+  
+  
+      
+    ) dbt_internal_test
+[0m02:39:22.355529 [debug] [Thread-1 (]: Began executing node test.modeling_lab.source_unique_olist_orders_order_id.df3b066d82
+[0m02:39:22.361036 [debug] [Thread-4 (]: Opening a new connection, currently in state closed
+[0m02:39:22.368779 [debug] [Thread-1 (]: Writing runtime sql for node "test.modeling_lab.source_unique_olist_orders_order_id.df3b066d82"
+[0m02:39:22.370217 [debug] [Thread-3 (]: SQL status: SELECT 1 in 0.031 seconds
+[0m02:39:22.375397 [debug] [Thread-2 (]: SQL status: SELECT 1 in 0.025 seconds
+[0m02:39:22.380702 [debug] [Thread-3 (]: On test.modeling_lab.source_not_null_olist_products_product_id.93341440fa: ROLLBACK
+[0m02:39:22.385285 [debug] [Thread-2 (]: On test.modeling_lab.source_not_null_olist_sellers_seller_id.fc06a9f6bf: ROLLBACK
+[0m02:39:22.388525 [debug] [Thread-3 (]: On test.modeling_lab.source_not_null_olist_products_product_id.93341440fa: Close
+[0m02:39:22.391220 [debug] [Thread-2 (]: On test.modeling_lab.source_not_null_olist_sellers_seller_id.fc06a9f6bf: Close
+[0m02:39:22.393702 [debug] [Thread-1 (]: Using postgres connection "test.modeling_lab.source_unique_olist_orders_order_id.df3b066d82"
+[0m02:39:22.395032 [info ] [Thread-3 (]: 25 of 37 PASS source_not_null_olist_products_product_id ........................ [[32mPASS[0m in 0.19s]
+[0m02:39:22.400348 [info ] [Thread-2 (]: 26 of 37 PASS source_not_null_olist_sellers_seller_id .......................... [[32mPASS[0m in 0.18s]
+[0m02:39:22.403470 [debug] [Thread-1 (]: On test.modeling_lab.source_unique_olist_orders_order_id.df3b066d82: /* {"app": "dbt", "dbt_version": "1.11.6", "profile_name": "modeling_lab", "target_name": "dev", "node_id": "test.modeling_lab.source_unique_olist_orders_order_id.df3b066d82"} */
+
+    select
+      count(*) as failures,
+      count(*) != 0 as should_warn,
+      count(*) != 0 as should_error
+    from (
+      
+    
+  
+    
+    
+
+select
+    order_id as unique_field,
+    count(*) as n_records
+
+from "modeling_lab"."raw"."orders"
+where order_id is not null
+group by order_id
+having count(*) > 1
+
+
+
+  
+  
+      
+    ) dbt_internal_test
+[0m02:39:22.407166 [debug] [Thread-3 (]: Finished running node test.modeling_lab.source_not_null_olist_products_product_id.93341440fa
+[0m02:39:22.410472 [debug] [Thread-2 (]: Finished running node test.modeling_lab.source_not_null_olist_sellers_seller_id.fc06a9f6bf
+[0m02:39:22.412885 [debug] [Thread-1 (]: Opening a new connection, currently in state closed
+[0m02:39:22.415462 [debug] [Thread-3 (]: Began running node test.modeling_lab.source_unique_olist_products_product_id.b191d1f5aa
+[0m02:39:22.418648 [debug] [Thread-2 (]: Began running node test.modeling_lab.source_unique_olist_sellers_seller_id.c8d4e16ad8
+[0m02:39:22.423081 [info ] [Thread-3 (]: 29 of 37 START test source_unique_olist_products_product_id .................... [RUN]
+[0m02:39:22.426475 [info ] [Thread-2 (]: 30 of 37 START test source_unique_olist_sellers_seller_id ...................... [RUN]
+[0m02:39:22.430542 [debug] [Thread-3 (]: Re-using an available connection from the pool (formerly test.modeling_lab.source_not_null_olist_products_product_id.93341440fa, now test.modeling_lab.source_unique_olist_products_product_id.b191d1f5aa)
+[0m02:39:22.433156 [debug] [Thread-2 (]: Re-using an available connection from the pool (formerly test.modeling_lab.source_not_null_olist_sellers_seller_id.fc06a9f6bf, now test.modeling_lab.source_unique_olist_sellers_seller_id.c8d4e16ad8)
+[0m02:39:22.435559 [debug] [Thread-3 (]: Began compiling node test.modeling_lab.source_unique_olist_products_product_id.b191d1f5aa
+[0m02:39:22.438759 [debug] [Thread-2 (]: Began compiling node test.modeling_lab.source_unique_olist_sellers_seller_id.c8d4e16ad8
+[0m02:39:22.449978 [debug] [Thread-3 (]: Writing injected SQL for node "test.modeling_lab.source_unique_olist_products_product_id.b191d1f5aa"
+[0m02:39:22.460853 [debug] [Thread-2 (]: Writing injected SQL for node "test.modeling_lab.source_unique_olist_sellers_seller_id.c8d4e16ad8"
+[0m02:39:22.474947 [debug] [Thread-3 (]: Began executing node test.modeling_lab.source_unique_olist_products_product_id.b191d1f5aa
+[0m02:39:22.488364 [debug] [Thread-2 (]: Began executing node test.modeling_lab.source_unique_olist_sellers_seller_id.c8d4e16ad8
+[0m02:39:22.493729 [debug] [Thread-3 (]: Writing runtime sql for node "test.modeling_lab.source_unique_olist_products_product_id.b191d1f5aa"
+[0m02:39:22.502208 [debug] [Thread-2 (]: Writing runtime sql for node "test.modeling_lab.source_unique_olist_sellers_seller_id.c8d4e16ad8"
+[0m02:39:22.515230 [debug] [Thread-3 (]: Using postgres connection "test.modeling_lab.source_unique_olist_products_product_id.b191d1f5aa"
+[0m02:39:22.518194 [debug] [Thread-3 (]: On test.modeling_lab.source_unique_olist_products_product_id.b191d1f5aa: /* {"app": "dbt", "dbt_version": "1.11.6", "profile_name": "modeling_lab", "target_name": "dev", "node_id": "test.modeling_lab.source_unique_olist_products_product_id.b191d1f5aa"} */
+
+    select
+      count(*) as failures,
+      count(*) != 0 as should_warn,
+      count(*) != 0 as should_error
+    from (
+      
+    
+  
+    
+    
+
+select
+    product_id as unique_field,
+    count(*) as n_records
+
+from "modeling_lab"."raw"."products"
+where product_id is not null
+group by product_id
+having count(*) > 1
+
+
+
+  
+  
+      
+    ) dbt_internal_test
+[0m02:39:22.519948 [debug] [Thread-2 (]: Using postgres connection "test.modeling_lab.source_unique_olist_sellers_seller_id.c8d4e16ad8"
+[0m02:39:22.522282 [debug] [Thread-3 (]: Opening a new connection, currently in state closed
+[0m02:39:22.525967 [debug] [Thread-2 (]: On test.modeling_lab.source_unique_olist_sellers_seller_id.c8d4e16ad8: /* {"app": "dbt", "dbt_version": "1.11.6", "profile_name": "modeling_lab", "target_name": "dev", "node_id": "test.modeling_lab.source_unique_olist_sellers_seller_id.c8d4e16ad8"} */
+
+    select
+      count(*) as failures,
+      count(*) != 0 as should_warn,
+      count(*) != 0 as should_error
+    from (
+      
+    
+  
+    
+    
+
+select
+    seller_id as unique_field,
+    count(*) as n_records
+
+from "modeling_lab"."raw"."sellers"
+where seller_id is not null
+group by seller_id
+having count(*) > 1
+
+
+
+  
+  
+      
+    ) dbt_internal_test
+[0m02:39:22.533116 [debug] [Thread-2 (]: Opening a new connection, currently in state closed
+[0m02:39:22.550582 [debug] [Thread-4 (]: SQL status: SELECT 1 in 0.190 seconds
+[0m02:39:22.556194 [debug] [Thread-4 (]: On test.modeling_lab.source_unique_olist_customers_customer_id.efa71c64b9: ROLLBACK
+[0m02:39:22.557298 [debug] [Thread-2 (]: SQL status: SELECT 1 in 0.024 seconds
+[0m02:39:22.560959 [debug] [Thread-4 (]: On test.modeling_lab.source_unique_olist_customers_customer_id.efa71c64b9: Close
+[0m02:39:22.572096 [debug] [Thread-2 (]: On test.modeling_lab.source_unique_olist_sellers_seller_id.c8d4e16ad8: ROLLBACK
+[0m02:39:22.577142 [info ] [Thread-4 (]: 27 of 37 PASS source_unique_olist_customers_customer_id ........................ [[32mPASS[0m in 0.35s]
+[0m02:39:22.581937 [debug] [Thread-2 (]: On test.modeling_lab.source_unique_olist_sellers_seller_id.c8d4e16ad8: Close
+[0m02:39:22.584462 [debug] [Thread-4 (]: Finished running node test.modeling_lab.source_unique_olist_customers_customer_id.efa71c64b9
+[0m02:39:22.591314 [debug] [Thread-4 (]: Began running node test.modeling_lab.unique_dim_customer_customer_id.b42affccd1
+[0m02:39:22.588470 [info ] [Thread-2 (]: 30 of 37 PASS source_unique_olist_sellers_seller_id ............................ [[32mPASS[0m in 0.15s]
+[0m02:39:22.593841 [info ] [Thread-4 (]: 31 of 37 START test unique_dim_customer_customer_id ............................ [RUN]
+[0m02:39:22.598879 [debug] [Thread-2 (]: Finished running node test.modeling_lab.source_unique_olist_sellers_seller_id.c8d4e16ad8
+[0m02:39:22.601661 [debug] [Thread-4 (]: Re-using an available connection from the pool (formerly test.modeling_lab.source_unique_olist_customers_customer_id.efa71c64b9, now test.modeling_lab.unique_dim_customer_customer_id.b42affccd1)
+[0m02:39:22.602868 [debug] [Thread-3 (]: SQL status: SELECT 1 in 0.081 seconds
+[0m02:39:22.606516 [debug] [Thread-2 (]: Began running node test.modeling_lab.unique_dim_date_date_key.0869fd48f9
+[0m02:39:22.609414 [debug] [Thread-4 (]: Began compiling node test.modeling_lab.unique_dim_customer_customer_id.b42affccd1
+[0m02:39:22.615036 [debug] [Thread-3 (]: On test.modeling_lab.source_unique_olist_products_product_id.b191d1f5aa: ROLLBACK
+[0m02:39:22.618200 [info ] [Thread-2 (]: 32 of 37 START test unique_dim_date_date_key ................................... [RUN]
+[0m02:39:22.632634 [debug] [Thread-1 (]: SQL status: SELECT 1 in 0.220 seconds
+[0m02:39:22.631975 [debug] [Thread-4 (]: Writing injected SQL for node "test.modeling_lab.unique_dim_customer_customer_id.b42affccd1"
+[0m02:39:22.635529 [debug] [Thread-3 (]: On test.modeling_lab.source_unique_olist_products_product_id.b191d1f5aa: Close
+[0m02:39:22.637035 [debug] [Thread-2 (]: Re-using an available connection from the pool (formerly test.modeling_lab.source_unique_olist_sellers_seller_id.c8d4e16ad8, now test.modeling_lab.unique_dim_date_date_key.0869fd48f9)
+[0m02:39:22.641565 [debug] [Thread-1 (]: On test.modeling_lab.source_unique_olist_orders_order_id.df3b066d82: ROLLBACK
+[0m02:39:22.646465 [info ] [Thread-3 (]: 29 of 37 PASS source_unique_olist_products_product_id .......................... [[32mPASS[0m in 0.22s]
+[0m02:39:22.650549 [debug] [Thread-2 (]: Began compiling node test.modeling_lab.unique_dim_date_date_key.0869fd48f9
+[0m02:39:22.655940 [debug] [Thread-1 (]: On test.modeling_lab.source_unique_olist_orders_order_id.df3b066d82: Close
+[0m02:39:22.658563 [debug] [Thread-3 (]: Finished running node test.modeling_lab.source_unique_olist_products_product_id.b191d1f5aa
+[0m02:39:22.671489 [debug] [Thread-2 (]: Writing injected SQL for node "test.modeling_lab.unique_dim_date_date_key.0869fd48f9"
+[0m02:39:22.675025 [info ] [Thread-1 (]: 28 of 37 PASS source_unique_olist_orders_order_id .............................. [[32mPASS[0m in 0.39s]
+[0m02:39:22.677073 [debug] [Thread-4 (]: Began executing node test.modeling_lab.unique_dim_customer_customer_id.b42affccd1
+[0m02:39:22.680646 [debug] [Thread-3 (]: Began running node test.modeling_lab.unique_dim_product_product_id.46495bf7fe
+[0m02:39:22.686972 [debug] [Thread-1 (]: Finished running node test.modeling_lab.source_unique_olist_orders_order_id.df3b066d82
+[0m02:39:22.697812 [debug] [Thread-4 (]: Writing runtime sql for node "test.modeling_lab.unique_dim_customer_customer_id.b42affccd1"
+[0m02:39:22.699929 [info ] [Thread-3 (]: 33 of 37 START test unique_dim_product_product_id .............................. [RUN]
+[0m02:39:22.702769 [debug] [Thread-1 (]: Began running node test.modeling_lab.unique_fct_order_item_order_item_key.f3b18f4d69
+[0m02:39:22.708688 [debug] [Thread-3 (]: Re-using an available connection from the pool (formerly test.modeling_lab.source_unique_olist_products_product_id.b191d1f5aa, now test.modeling_lab.unique_dim_product_product_id.46495bf7fe)
+[0m02:39:22.709886 [debug] [Thread-2 (]: Began executing node test.modeling_lab.unique_dim_date_date_key.0869fd48f9
+[0m02:39:22.711990 [info ] [Thread-1 (]: 34 of 37 START test unique_fct_order_item_order_item_key ....................... [RUN]
+[0m02:39:22.717521 [debug] [Thread-3 (]: Began compiling node test.modeling_lab.unique_dim_product_product_id.46495bf7fe
+[0m02:39:22.736804 [debug] [Thread-2 (]: Writing runtime sql for node "test.modeling_lab.unique_dim_date_date_key.0869fd48f9"
+[0m02:39:22.740157 [debug] [Thread-1 (]: Re-using an available connection from the pool (formerly test.modeling_lab.source_unique_olist_orders_order_id.df3b066d82, now test.modeling_lab.unique_fct_order_item_order_item_key.f3b18f4d69)
+[0m02:39:22.742910 [debug] [Thread-4 (]: Using postgres connection "test.modeling_lab.unique_dim_customer_customer_id.b42affccd1"
+[0m02:39:22.753112 [debug] [Thread-3 (]: Writing injected SQL for node "test.modeling_lab.unique_dim_product_product_id.46495bf7fe"
+[0m02:39:22.756920 [debug] [Thread-1 (]: Began compiling node test.modeling_lab.unique_fct_order_item_order_item_key.f3b18f4d69
+[0m02:39:22.760114 [debug] [Thread-4 (]: On test.modeling_lab.unique_dim_customer_customer_id.b42affccd1: /* {"app": "dbt", "dbt_version": "1.11.6", "profile_name": "modeling_lab", "target_name": "dev", "node_id": "test.modeling_lab.unique_dim_customer_customer_id.b42affccd1"} */
+
+    select
+      count(*) as failures,
+      count(*) != 0 as should_warn,
+      count(*) != 0 as should_error
+    from (
+      
+    
+  
+    
+    
+
+select
+    customer_id as unique_field,
+    count(*) as n_records
+
+from "modeling_lab"."public"."dim_customer"
+where customer_id is not null
+group by customer_id
+having count(*) > 1
+
+
+
+  
+  
+      
+    ) dbt_internal_test
+[0m02:39:22.773358 [debug] [Thread-1 (]: Writing injected SQL for node "test.modeling_lab.unique_fct_order_item_order_item_key.f3b18f4d69"
+[0m02:39:22.775748 [debug] [Thread-4 (]: Opening a new connection, currently in state closed
+[0m02:39:22.778944 [debug] [Thread-2 (]: Using postgres connection "test.modeling_lab.unique_dim_date_date_key.0869fd48f9"
+[0m02:39:22.781538 [debug] [Thread-3 (]: Began executing node test.modeling_lab.unique_dim_product_product_id.46495bf7fe
+[0m02:39:22.786517 [debug] [Thread-2 (]: On test.modeling_lab.unique_dim_date_date_key.0869fd48f9: /* {"app": "dbt", "dbt_version": "1.11.6", "profile_name": "modeling_lab", "target_name": "dev", "node_id": "test.modeling_lab.unique_dim_date_date_key.0869fd48f9"} */
+
+    select
+      count(*) as failures,
+      count(*) != 0 as should_warn,
+      count(*) != 0 as should_error
+    from (
+      
+    
+  
+    
+    
+
+select
+    date_key as unique_field,
+    count(*) as n_records
+
+from "modeling_lab"."public"."dim_date"
+where date_key is not null
+group by date_key
+having count(*) > 1
+
+
+
+  
+  
+      
+    ) dbt_internal_test
+[0m02:39:22.797914 [debug] [Thread-3 (]: Writing runtime sql for node "test.modeling_lab.unique_dim_product_product_id.46495bf7fe"
+[0m02:39:22.800358 [debug] [Thread-4 (]: Postgres adapter: Postgres error: relation "public.dim_customer" does not exist
+LINE 18: from "modeling_lab"."public"."dim_customer"
+              ^
+
+[0m02:39:22.801312 [debug] [Thread-2 (]: Opening a new connection, currently in state closed
+[0m02:39:22.805796 [debug] [Thread-1 (]: Began executing node test.modeling_lab.unique_fct_order_item_order_item_key.f3b18f4d69
+[0m02:39:22.807066 [debug] [Thread-4 (]: On test.modeling_lab.unique_dim_customer_customer_id.b42affccd1: ROLLBACK
+[0m02:39:22.815653 [debug] [Thread-1 (]: Writing runtime sql for node "test.modeling_lab.unique_fct_order_item_order_item_key.f3b18f4d69"
+[0m02:39:22.819058 [debug] [Thread-4 (]: On test.modeling_lab.unique_dim_customer_customer_id.b42affccd1: Close
+[0m02:39:22.828065 [debug] [Thread-4 (]: Database Error in test unique_dim_customer_customer_id (models/marts/star/schema.yml)
+  relation "public.dim_customer" does not exist
+  LINE 18: from "modeling_lab"."public"."dim_customer"
+                ^
+  compiled code at target/run/modeling_lab/models/marts/star/schema.yml/unique_dim_customer_customer_id.sql
+[0m02:39:22.829002 [debug] [Thread-2 (]: Postgres adapter: Postgres error: relation "public.dim_date" does not exist
+LINE 18: from "modeling_lab"."public"."dim_date"
+              ^
+
+[0m02:39:22.832921 [debug] [Thread-3 (]: Using postgres connection "test.modeling_lab.unique_dim_product_product_id.46495bf7fe"
+[0m02:39:22.831526 [error] [Thread-4 (]: 31 of 37 ERROR unique_dim_customer_customer_id ................................. [[31mERROR[0m in 0.23s]
+[0m02:39:22.835364 [debug] [Thread-1 (]: Using postgres connection "test.modeling_lab.unique_fct_order_item_order_item_key.f3b18f4d69"
+[0m02:39:22.837942 [debug] [Thread-2 (]: On test.modeling_lab.unique_dim_date_date_key.0869fd48f9: ROLLBACK
+[0m02:39:22.840441 [debug] [Thread-3 (]: On test.modeling_lab.unique_dim_product_product_id.46495bf7fe: /* {"app": "dbt", "dbt_version": "1.11.6", "profile_name": "modeling_lab", "target_name": "dev", "node_id": "test.modeling_lab.unique_dim_product_product_id.46495bf7fe"} */
+
+    select
+      count(*) as failures,
+      count(*) != 0 as should_warn,
+      count(*) != 0 as should_error
+    from (
+      
+    
+  
+    
+    
+
+select
+    product_id as unique_field,
+    count(*) as n_records
+
+from "modeling_lab"."public"."dim_product"
+where product_id is not null
+group by product_id
+having count(*) > 1
+
+
+
+  
+  
+      
+    ) dbt_internal_test
+[0m02:39:22.843003 [debug] [Thread-4 (]: Finished running node test.modeling_lab.unique_dim_customer_customer_id.b42affccd1
+[0m02:39:22.845283 [debug] [Thread-1 (]: On test.modeling_lab.unique_fct_order_item_order_item_key.f3b18f4d69: /* {"app": "dbt", "dbt_version": "1.11.6", "profile_name": "modeling_lab", "target_name": "dev", "node_id": "test.modeling_lab.unique_fct_order_item_order_item_key.f3b18f4d69"} */
+
+    select
+      count(*) as failures,
+      count(*) != 0 as should_warn,
+      count(*) != 0 as should_error
+    from (
+      
+    
+  
+    
+    
+
+select
+    order_item_key as unique_field,
+    count(*) as n_records
+
+from "modeling_lab"."public"."fct_order_item"
+where order_item_key is not null
+group by order_item_key
+having count(*) > 1
+
+
+
+  
+  
+      
+    ) dbt_internal_test
+[0m02:39:22.848240 [debug] [Thread-2 (]: On test.modeling_lab.unique_dim_date_date_key.0869fd48f9: Close
+[0m02:39:22.850117 [debug] [Thread-3 (]: Opening a new connection, currently in state closed
+[0m02:39:22.852613 [debug] [Thread-4 (]: Began running node test.modeling_lab.unique_stg_olist__customers_customer_id.322bd7d968
+[0m02:39:22.854088 [debug] [Thread-7 (]: Marking all children of 'test.modeling_lab.unique_dim_customer_customer_id.b42affccd1' to be skipped because of status 'error'.  Reason: Database Error in test unique_dim_customer_customer_id (models/marts/star/schema.yml)
+  relation "public.dim_customer" does not exist
+  LINE 18: from "modeling_lab"."public"."dim_customer"
+                ^
+  compiled code at target/run/modeling_lab/models/marts/star/schema.yml/unique_dim_customer_customer_id.sql.
+[0m02:39:22.856191 [debug] [Thread-1 (]: Opening a new connection, currently in state closed
+[0m02:39:22.862710 [debug] [Thread-2 (]: Database Error in test unique_dim_date_date_key (models/marts/star/schema.yml)
+  relation "public.dim_date" does not exist
+  LINE 18: from "modeling_lab"."public"."dim_date"
+                ^
+  compiled code at target/run/modeling_lab/models/marts/star/schema.yml/unique_dim_date_date_key.sql
+[0m02:39:22.867081 [info ] [Thread-4 (]: 35 of 37 START test unique_stg_olist__customers_customer_id .................... [RUN]
+[0m02:39:22.873875 [error] [Thread-2 (]: 32 of 37 ERROR unique_dim_date_date_key ........................................ [[31mERROR[0m in 0.24s]
+[0m02:39:22.877016 [debug] [Thread-4 (]: Re-using an available connection from the pool (formerly test.modeling_lab.unique_dim_customer_customer_id.b42affccd1, now test.modeling_lab.unique_stg_olist__customers_customer_id.322bd7d968)
+[0m02:39:22.881848 [debug] [Thread-2 (]: Finished running node test.modeling_lab.unique_dim_date_date_key.0869fd48f9
+[0m02:39:22.883852 [debug] [Thread-3 (]: Postgres adapter: Postgres error: relation "public.dim_product" does not exist
+LINE 18: from "modeling_lab"."public"."dim_product"
+              ^
+
+[0m02:39:22.886115 [debug] [Thread-4 (]: Began compiling node test.modeling_lab.unique_stg_olist__customers_customer_id.322bd7d968
+[0m02:39:22.889167 [debug] [Thread-2 (]: Began running node test.modeling_lab.unique_stg_olist__orders_order_id.426f0a2be7
+[0m02:39:22.890426 [debug] [Thread-1 (]: Postgres adapter: Postgres error: relation "public.fct_order_item" does not exist
+LINE 18: from "modeling_lab"."public"."fct_order_item"
+              ^
+
+[0m02:39:22.891570 [debug] [Thread-7 (]: Marking all children of 'test.modeling_lab.unique_dim_date_date_key.0869fd48f9' to be skipped because of status 'error'.  Reason: Database Error in test unique_dim_date_date_key (models/marts/star/schema.yml)
+  relation "public.dim_date" does not exist
+  LINE 18: from "modeling_lab"."public"."dim_date"
+                ^
+  compiled code at target/run/modeling_lab/models/marts/star/schema.yml/unique_dim_date_date_key.sql.
+[0m02:39:22.893211 [debug] [Thread-3 (]: On test.modeling_lab.unique_dim_product_product_id.46495bf7fe: ROLLBACK
+[0m02:39:22.907037 [debug] [Thread-4 (]: Writing injected SQL for node "test.modeling_lab.unique_stg_olist__customers_customer_id.322bd7d968"
+[0m02:39:22.909138 [info ] [Thread-2 (]: 36 of 37 START test unique_stg_olist__orders_order_id .......................... [RUN]
+[0m02:39:22.911818 [debug] [Thread-1 (]: On test.modeling_lab.unique_fct_order_item_order_item_key.f3b18f4d69: ROLLBACK
+[0m02:39:22.918311 [debug] [Thread-3 (]: On test.modeling_lab.unique_dim_product_product_id.46495bf7fe: Close
+[0m02:39:22.922774 [debug] [Thread-2 (]: Re-using an available connection from the pool (formerly test.modeling_lab.unique_dim_date_date_key.0869fd48f9, now test.modeling_lab.unique_stg_olist__orders_order_id.426f0a2be7)
+[0m02:39:22.925754 [debug] [Thread-1 (]: On test.modeling_lab.unique_fct_order_item_order_item_key.f3b18f4d69: Close
+[0m02:39:22.932358 [debug] [Thread-3 (]: Database Error in test unique_dim_product_product_id (models/marts/star/schema.yml)
+  relation "public.dim_product" does not exist
+  LINE 18: from "modeling_lab"."public"."dim_product"
+                ^
+  compiled code at target/run/modeling_lab/models/marts/star/schema.yml/unique_dim_product_product_id.sql
+[0m02:39:22.933988 [debug] [Thread-2 (]: Began compiling node test.modeling_lab.unique_stg_olist__orders_order_id.426f0a2be7
+[0m02:39:22.940701 [debug] [Thread-4 (]: Began executing node test.modeling_lab.unique_stg_olist__customers_customer_id.322bd7d968
+[0m02:39:22.946356 [debug] [Thread-1 (]: Database Error in test unique_fct_order_item_order_item_key (models/marts/star/schema.yml)
+  relation "public.fct_order_item" does not exist
+  LINE 18: from "modeling_lab"."public"."fct_order_item"
+                ^
+  compiled code at target/run/modeling_lab/models/marts/star/schema.yml/unique_fct_order_item_order_item_key.sql
+[0m02:39:22.942539 [error] [Thread-3 (]: 33 of 37 ERROR unique_dim_product_product_id ................................... [[31mERROR[0m in 0.23s]
+[0m02:39:22.967258 [debug] [Thread-2 (]: Writing injected SQL for node "test.modeling_lab.unique_stg_olist__orders_order_id.426f0a2be7"
+[0m02:39:22.973338 [debug] [Thread-4 (]: Writing runtime sql for node "test.modeling_lab.unique_stg_olist__customers_customer_id.322bd7d968"
+[0m02:39:22.975549 [error] [Thread-1 (]: 34 of 37 ERROR unique_fct_order_item_order_item_key ............................ [[31mERROR[0m in 0.24s]
+[0m02:39:22.978822 [debug] [Thread-3 (]: Finished running node test.modeling_lab.unique_dim_product_product_id.46495bf7fe
+[0m02:39:22.985954 [debug] [Thread-1 (]: Finished running node test.modeling_lab.unique_fct_order_item_order_item_key.f3b18f4d69
+[0m02:39:22.988169 [debug] [Thread-3 (]: Began running node test.modeling_lab.unique_stg_olist__products_product_id.74d899d20a
+[0m02:39:22.989899 [debug] [Thread-7 (]: Marking all children of 'test.modeling_lab.unique_dim_product_product_id.46495bf7fe' to be skipped because of status 'error'.  Reason: Database Error in test unique_dim_product_product_id (models/marts/star/schema.yml)
+  relation "public.dim_product" does not exist
+  LINE 18: from "modeling_lab"."public"."dim_product"
+                ^
+  compiled code at target/run/modeling_lab/models/marts/star/schema.yml/unique_dim_product_product_id.sql.
+[0m02:39:22.993256 [info ] [Thread-3 (]: 37 of 37 START test unique_stg_olist__products_product_id ...................... [RUN]
+[0m02:39:22.998282 [debug] [Thread-7 (]: Marking all children of 'test.modeling_lab.unique_fct_order_item_order_item_key.f3b18f4d69' to be skipped because of status 'error'.  Reason: Database Error in test unique_fct_order_item_order_item_key (models/marts/star/schema.yml)
+  relation "public.fct_order_item" does not exist
+  LINE 18: from "modeling_lab"."public"."fct_order_item"
+                ^
+  compiled code at target/run/modeling_lab/models/marts/star/schema.yml/unique_fct_order_item_order_item_key.sql.
+[0m02:39:23.000823 [debug] [Thread-3 (]: Re-using an available connection from the pool (formerly test.modeling_lab.unique_dim_product_product_id.46495bf7fe, now test.modeling_lab.unique_stg_olist__products_product_id.74d899d20a)
+[0m02:39:23.005393 [debug] [Thread-2 (]: Began executing node test.modeling_lab.unique_stg_olist__orders_order_id.426f0a2be7
+[0m02:39:23.007412 [debug] [Thread-4 (]: Using postgres connection "test.modeling_lab.unique_stg_olist__customers_customer_id.322bd7d968"
+[0m02:39:23.008654 [debug] [Thread-3 (]: Began compiling node test.modeling_lab.unique_stg_olist__products_product_id.74d899d20a
+[0m02:39:23.018142 [debug] [Thread-2 (]: Writing runtime sql for node "test.modeling_lab.unique_stg_olist__orders_order_id.426f0a2be7"
+[0m02:39:23.020153 [debug] [Thread-4 (]: On test.modeling_lab.unique_stg_olist__customers_customer_id.322bd7d968: /* {"app": "dbt", "dbt_version": "1.11.6", "profile_name": "modeling_lab", "target_name": "dev", "node_id": "test.modeling_lab.unique_stg_olist__customers_customer_id.322bd7d968"} */
+
+    select
+      count(*) as failures,
+      count(*) != 0 as should_warn,
+      count(*) != 0 as should_error
+    from (
+      
+    
+  
+    
+    
+
+select
+    customer_id as unique_field,
+    count(*) as n_records
+
+from "modeling_lab"."public"."stg_olist__customers"
+where customer_id is not null
+group by customer_id
+having count(*) > 1
+
+
+
+  
+  
+      
+    ) dbt_internal_test
+[0m02:39:23.031885 [debug] [Thread-3 (]: Writing injected SQL for node "test.modeling_lab.unique_stg_olist__products_product_id.74d899d20a"
+[0m02:39:23.034963 [debug] [Thread-4 (]: Opening a new connection, currently in state closed
+[0m02:39:23.049826 [debug] [Thread-2 (]: Using postgres connection "test.modeling_lab.unique_stg_olist__orders_order_id.426f0a2be7"
+[0m02:39:23.052627 [debug] [Thread-2 (]: On test.modeling_lab.unique_stg_olist__orders_order_id.426f0a2be7: /* {"app": "dbt", "dbt_version": "1.11.6", "profile_name": "modeling_lab", "target_name": "dev", "node_id": "test.modeling_lab.unique_stg_olist__orders_order_id.426f0a2be7"} */
+
+    select
+      count(*) as failures,
+      count(*) != 0 as should_warn,
+      count(*) != 0 as should_error
+    from (
+      
+    
+  
+    
+    
+
+select
+    order_id as unique_field,
+    count(*) as n_records
+
+from "modeling_lab"."public"."stg_olist__orders"
+where order_id is not null
+group by order_id
+having count(*) > 1
+
+
+
+  
+  
+      
+    ) dbt_internal_test
+[0m02:39:23.055108 [debug] [Thread-3 (]: Began executing node test.modeling_lab.unique_stg_olist__products_product_id.74d899d20a
+[0m02:39:23.057357 [debug] [Thread-4 (]: Postgres adapter: Postgres error: relation "public.stg_olist__customers" does not exist
+LINE 18: from "modeling_lab"."public"."stg_olist__customers"
+              ^
+
+[0m02:39:23.058286 [debug] [Thread-2 (]: Opening a new connection, currently in state closed
+[0m02:39:23.067311 [debug] [Thread-3 (]: Writing runtime sql for node "test.modeling_lab.unique_stg_olist__products_product_id.74d899d20a"
+[0m02:39:23.069706 [debug] [Thread-4 (]: On test.modeling_lab.unique_stg_olist__customers_customer_id.322bd7d968: ROLLBACK
+[0m02:39:23.075922 [debug] [Thread-4 (]: On test.modeling_lab.unique_stg_olist__customers_customer_id.322bd7d968: Close
+[0m02:39:23.084741 [debug] [Thread-4 (]: Database Error in test unique_stg_olist__customers_customer_id (models/staging/schema.yml)
+  relation "public.stg_olist__customers" does not exist
+  LINE 18: from "modeling_lab"."public"."stg_olist__customers"
+                ^
+  compiled code at target/run/modeling_lab/models/staging/schema.yml/unique_stg_olist__customers_customer_id.sql
+[0m02:39:23.088407 [debug] [Thread-2 (]: Postgres adapter: Postgres error: relation "public.stg_olist__orders" does not exist
+LINE 18: from "modeling_lab"."public"."stg_olist__orders"
+              ^
+
+[0m02:39:23.087444 [error] [Thread-4 (]: 35 of 37 ERROR unique_stg_olist__customers_customer_id ......................... [[31mERROR[0m in 0.21s]
+[0m02:39:23.092145 [debug] [Thread-2 (]: On test.modeling_lab.unique_stg_olist__orders_order_id.426f0a2be7: ROLLBACK
+[0m02:39:23.095200 [debug] [Thread-3 (]: Using postgres connection "test.modeling_lab.unique_stg_olist__products_product_id.74d899d20a"
+[0m02:39:23.096890 [debug] [Thread-4 (]: Finished running node test.modeling_lab.unique_stg_olist__customers_customer_id.322bd7d968
+[0m02:39:23.100554 [debug] [Thread-2 (]: On test.modeling_lab.unique_stg_olist__orders_order_id.426f0a2be7: Close
+[0m02:39:23.102797 [debug] [Thread-3 (]: On test.modeling_lab.unique_stg_olist__products_product_id.74d899d20a: /* {"app": "dbt", "dbt_version": "1.11.6", "profile_name": "modeling_lab", "target_name": "dev", "node_id": "test.modeling_lab.unique_stg_olist__products_product_id.74d899d20a"} */
+
+    select
+      count(*) as failures,
+      count(*) != 0 as should_warn,
+      count(*) != 0 as should_error
+    from (
+      
+    
+  
+    
+    
+
+select
+    product_id as unique_field,
+    count(*) as n_records
+
+from "modeling_lab"."public"."stg_olist__products"
+where product_id is not null
+group by product_id
+having count(*) > 1
+
+
+
+  
+  
+      
+    ) dbt_internal_test
+[0m02:39:23.106301 [debug] [Thread-7 (]: Marking all children of 'test.modeling_lab.unique_stg_olist__customers_customer_id.322bd7d968' to be skipped because of status 'error'.  Reason: Database Error in test unique_stg_olist__customers_customer_id (models/staging/schema.yml)
+  relation "public.stg_olist__customers" does not exist
+  LINE 18: from "modeling_lab"."public"."stg_olist__customers"
+                ^
+  compiled code at target/run/modeling_lab/models/staging/schema.yml/unique_stg_olist__customers_customer_id.sql.
+[0m02:39:23.114799 [debug] [Thread-2 (]: Database Error in test unique_stg_olist__orders_order_id (models/staging/schema.yml)
+  relation "public.stg_olist__orders" does not exist
+  LINE 18: from "modeling_lab"."public"."stg_olist__orders"
+                ^
+  compiled code at target/run/modeling_lab/models/staging/schema.yml/unique_stg_olist__orders_order_id.sql
+[0m02:39:23.116573 [debug] [Thread-3 (]: Opening a new connection, currently in state closed
+[0m02:39:23.120701 [error] [Thread-2 (]: 36 of 37 ERROR unique_stg_olist__orders_order_id ............................... [[31mERROR[0m in 0.20s]
+[0m02:39:23.126355 [debug] [Thread-2 (]: Finished running node test.modeling_lab.unique_stg_olist__orders_order_id.426f0a2be7
+[0m02:39:23.129316 [debug] [Thread-7 (]: Marking all children of 'test.modeling_lab.unique_stg_olist__orders_order_id.426f0a2be7' to be skipped because of status 'error'.  Reason: Database Error in test unique_stg_olist__orders_order_id (models/staging/schema.yml)
+  relation "public.stg_olist__orders" does not exist
+  LINE 18: from "modeling_lab"."public"."stg_olist__orders"
+                ^
+  compiled code at target/run/modeling_lab/models/staging/schema.yml/unique_stg_olist__orders_order_id.sql.
+[0m02:39:23.136765 [debug] [Thread-3 (]: Postgres adapter: Postgres error: relation "public.stg_olist__products" does not exist
+LINE 18: from "modeling_lab"."public"."stg_olist__products"
+              ^
+
+[0m02:39:23.138790 [debug] [Thread-3 (]: On test.modeling_lab.unique_stg_olist__products_product_id.74d899d20a: ROLLBACK
+[0m02:39:23.141277 [debug] [Thread-3 (]: On test.modeling_lab.unique_stg_olist__products_product_id.74d899d20a: Close
+[0m02:39:23.147757 [debug] [Thread-3 (]: Database Error in test unique_stg_olist__products_product_id (models/staging/schema.yml)
+  relation "public.stg_olist__products" does not exist
+  LINE 18: from "modeling_lab"."public"."stg_olist__products"
+                ^
+  compiled code at target/run/modeling_lab/models/staging/schema.yml/unique_stg_olist__products_product_id.sql
+[0m02:39:23.150179 [error] [Thread-3 (]: 37 of 37 ERROR unique_stg_olist__products_product_id ........................... [[31mERROR[0m in 0.15s]
+[0m02:39:23.152980 [debug] [Thread-3 (]: Finished running node test.modeling_lab.unique_stg_olist__products_product_id.74d899d20a
+[0m02:39:23.155751 [debug] [Thread-7 (]: Marking all children of 'test.modeling_lab.unique_stg_olist__products_product_id.74d899d20a' to be skipped because of status 'error'.  Reason: Database Error in test unique_stg_olist__products_product_id (models/staging/schema.yml)
+  relation "public.stg_olist__products" does not exist
+  LINE 18: from "modeling_lab"."public"."stg_olist__products"
+                ^
+  compiled code at target/run/modeling_lab/models/staging/schema.yml/unique_stg_olist__products_product_id.sql.
+[0m02:39:23.161827 [debug] [MainThread]: On master: COMMIT
+[0m02:39:23.164279 [debug] [MainThread]: Using postgres connection "master"
+[0m02:39:23.165951 [debug] [MainThread]: On master: COMMIT
+[0m02:39:23.167514 [debug] [MainThread]: Opening a new connection, currently in state closed
+[0m02:39:23.183765 [debug] [MainThread]: SQL status: COMMIT in 0.016 seconds
+[0m02:39:23.185981 [debug] [MainThread]: On master: Close
+[0m02:39:23.188272 [debug] [MainThread]: Connection 'master' was properly closed.
+[0m02:39:23.190337 [debug] [MainThread]: Connection 'test.modeling_lab.unique_fct_order_item_order_item_key.f3b18f4d69' was properly closed.
+[0m02:39:23.192816 [debug] [MainThread]: Connection 'test.modeling_lab.unique_stg_olist__orders_order_id.426f0a2be7' was properly closed.
+[0m02:39:23.194610 [debug] [MainThread]: Connection 'test.modeling_lab.unique_stg_olist__products_product_id.74d899d20a' was properly closed.
+[0m02:39:23.196718 [debug] [MainThread]: Connection 'test.modeling_lab.unique_stg_olist__customers_customer_id.322bd7d968' was properly closed.
+[0m02:39:23.199535 [info ] [MainThread]: 
+[0m02:39:23.201855 [info ] [MainThread]: Finished running 37 data tests in 0 hours 0 minutes and 3.31 seconds (3.31s).
+[0m02:39:23.216656 [debug] [MainThread]: Command end result
+[0m02:39:23.320495 [debug] [MainThread]: Wrote artifact WritableManifest to /app/transform/dbt/target/manifest.json
+[0m02:39:23.332456 [debug] [MainThread]: Wrote artifact SemanticManifest to /app/transform/dbt/target/semantic_manifest.json
+[0m02:39:23.394898 [debug] [MainThread]: Wrote artifact RunExecutionResult to /app/transform/dbt/target/run_results.json
+[0m02:39:23.396857 [info ] [MainThread]: 
+[0m02:39:23.400341 [info ] [MainThread]: [31mCompleted with 27 errors, 0 partial successes, and 0 warnings:[0m
+[0m02:39:23.403251 [info ] [MainThread]: 
+[0m02:39:23.405611 [error] [MainThread]: [31mFailure in test not_null_dim_date_date_key (models/marts/star/schema.yml)[0m
+[0m02:39:23.408835 [error] [MainThread]:   Database Error in test not_null_dim_date_date_key (models/marts/star/schema.yml)
+  relation "public.dim_date" does not exist
+  LINE 17: from "modeling_lab"."public"."dim_date"
+                ^
+  compiled code at target/run/modeling_lab/models/marts/star/schema.yml/not_null_dim_date_date_key.sql
+[0m02:39:23.411266 [info ] [MainThread]: 
+[0m02:39:23.414523 [info ] [MainThread]:   compiled code at target/compiled/modeling_lab/models/marts/star/schema.yml/not_null_dim_date_date_key.sql
+[0m02:39:23.417909 [info ] [MainThread]: 
+[0m02:39:23.420502 [error] [MainThread]: [31mFailure in test not_null_dim_product_product_id (models/marts/star/schema.yml)[0m
+[0m02:39:23.423164 [error] [MainThread]:   Database Error in test not_null_dim_product_product_id (models/marts/star/schema.yml)
+  relation "public.dim_product" does not exist
+  LINE 17: from "modeling_lab"."public"."dim_product"
+                ^
+  compiled code at target/run/modeling_lab/models/marts/star/schema.yml/not_null_dim_product_product_id.sql
+[0m02:39:23.426508 [info ] [MainThread]: 
+[0m02:39:23.429488 [info ] [MainThread]:   compiled code at target/compiled/modeling_lab/models/marts/star/schema.yml/not_null_dim_product_product_id.sql
+[0m02:39:23.433101 [info ] [MainThread]: 
+[0m02:39:23.436026 [error] [MainThread]: [31mFailure in test not_null_fct_order_item_customer_id (models/marts/star/schema.yml)[0m
+[0m02:39:23.439403 [error] [MainThread]:   Database Error in test not_null_fct_order_item_customer_id (models/marts/star/schema.yml)
+  relation "public.fct_order_item" does not exist
+  LINE 17: from "modeling_lab"."public"."fct_order_item"
+                ^
+  compiled code at target/run/modeling_lab/models/marts/star/schema.yml/not_null_fct_order_item_customer_id.sql
+[0m02:39:23.442485 [info ] [MainThread]: 
+[0m02:39:23.446002 [info ] [MainThread]:   compiled code at target/compiled/modeling_lab/models/marts/star/schema.yml/not_null_fct_order_item_customer_id.sql
+[0m02:39:23.448705 [info ] [MainThread]: 
+[0m02:39:23.451853 [error] [MainThread]: [31mFailure in test not_null_dim_customer_customer_id (models/marts/star/schema.yml)[0m
+[0m02:39:23.454683 [error] [MainThread]:   Database Error in test not_null_dim_customer_customer_id (models/marts/star/schema.yml)
+  relation "public.dim_customer" does not exist
+  LINE 17: from "modeling_lab"."public"."dim_customer"
+                ^
+  compiled code at target/run/modeling_lab/models/marts/star/schema.yml/not_null_dim_customer_customer_id.sql
+[0m02:39:23.456972 [info ] [MainThread]: 
+[0m02:39:23.460829 [info ] [MainThread]:   compiled code at target/compiled/modeling_lab/models/marts/star/schema.yml/not_null_dim_customer_customer_id.sql
+[0m02:39:23.463053 [info ] [MainThread]: 
+[0m02:39:23.465335 [error] [MainThread]: [31mFailure in test not_null_fct_order_item_order_date (models/marts/star/schema.yml)[0m
+[0m02:39:23.468698 [error] [MainThread]:   Database Error in test not_null_fct_order_item_order_date (models/marts/star/schema.yml)
+  relation "public.fct_order_item" does not exist
+  LINE 17: from "modeling_lab"."public"."fct_order_item"
+                ^
+  compiled code at target/run/modeling_lab/models/marts/star/schema.yml/not_null_fct_order_item_order_date.sql
+[0m02:39:23.470717 [info ] [MainThread]: 
+[0m02:39:23.473319 [info ] [MainThread]:   compiled code at target/compiled/modeling_lab/models/marts/star/schema.yml/not_null_fct_order_item_order_date.sql
+[0m02:39:23.478049 [info ] [MainThread]: 
+[0m02:39:23.480866 [error] [MainThread]: [31mFailure in test not_null_fct_order_item_order_id (models/marts/star/schema.yml)[0m
+[0m02:39:23.483917 [error] [MainThread]:   Database Error in test not_null_fct_order_item_order_id (models/marts/star/schema.yml)
+  relation "public.fct_order_item" does not exist
+  LINE 17: from "modeling_lab"."public"."fct_order_item"
+                ^
+  compiled code at target/run/modeling_lab/models/marts/star/schema.yml/not_null_fct_order_item_order_id.sql
+[0m02:39:23.486938 [info ] [MainThread]: 
+[0m02:39:23.489824 [info ] [MainThread]:   compiled code at target/compiled/modeling_lab/models/marts/star/schema.yml/not_null_fct_order_item_order_id.sql
+[0m02:39:23.493350 [info ] [MainThread]: 
+[0m02:39:23.496813 [error] [MainThread]: [31mFailure in test not_null_fct_order_item_order_item_key (models/marts/star/schema.yml)[0m
+[0m02:39:23.500288 [error] [MainThread]:   Database Error in test not_null_fct_order_item_order_item_key (models/marts/star/schema.yml)
+  relation "public.fct_order_item" does not exist
+  LINE 17: from "modeling_lab"."public"."fct_order_item"
+                ^
+  compiled code at target/run/modeling_lab/models/marts/star/schema.yml/not_null_fct_order_item_order_item_key.sql
+[0m02:39:23.503916 [info ] [MainThread]: 
+[0m02:39:23.507723 [info ] [MainThread]:   compiled code at target/compiled/modeling_lab/models/marts/star/schema.yml/not_null_fct_order_item_order_item_key.sql
+[0m02:39:23.511157 [info ] [MainThread]: 
+[0m02:39:23.514399 [error] [MainThread]: [31mFailure in test not_null_fct_order_item_product_id (models/marts/star/schema.yml)[0m
+[0m02:39:23.517388 [error] [MainThread]:   Database Error in test not_null_fct_order_item_product_id (models/marts/star/schema.yml)
+  relation "public.fct_order_item" does not exist
+  LINE 17: from "modeling_lab"."public"."fct_order_item"
+                ^
+  compiled code at target/run/modeling_lab/models/marts/star/schema.yml/not_null_fct_order_item_product_id.sql
+[0m02:39:23.520138 [info ] [MainThread]: 
+[0m02:39:23.524968 [info ] [MainThread]:   compiled code at target/compiled/modeling_lab/models/marts/star/schema.yml/not_null_fct_order_item_product_id.sql
+[0m02:39:23.528824 [info ] [MainThread]: 
+[0m02:39:23.531656 [error] [MainThread]: [31mFailure in test not_null_stg_olist__customers_customer_id (models/staging/schema.yml)[0m
+[0m02:39:23.534132 [error] [MainThread]:   Database Error in test not_null_stg_olist__customers_customer_id (models/staging/schema.yml)
+  relation "public.stg_olist__customers" does not exist
+  LINE 17: from "modeling_lab"."public"."stg_olist__customers"
+                ^
+  compiled code at target/run/modeling_lab/models/staging/schema.yml/not_null_stg_olist__customers_customer_id.sql
+[0m02:39:23.537309 [info ] [MainThread]: 
+[0m02:39:23.540598 [info ] [MainThread]:   compiled code at target/compiled/modeling_lab/models/staging/schema.yml/not_null_stg_olist__customers_customer_id.sql
+[0m02:39:23.543764 [info ] [MainThread]: 
+[0m02:39:23.547029 [error] [MainThread]: [31mFailure in test not_null_stg_olist__order_items_order_id (models/staging/schema.yml)[0m
+[0m02:39:23.550106 [error] [MainThread]:   Database Error in test not_null_stg_olist__order_items_order_id (models/staging/schema.yml)
+  relation "public.stg_olist__order_items" does not exist
+  LINE 17: from "modeling_lab"."public"."stg_olist__order_items"
+                ^
+  compiled code at target/run/modeling_lab/models/staging/schema.yml/not_null_stg_olist__order_items_order_id.sql
+[0m02:39:23.552884 [info ] [MainThread]: 
+[0m02:39:23.555792 [info ] [MainThread]:   compiled code at target/compiled/modeling_lab/models/staging/schema.yml/not_null_stg_olist__order_items_order_id.sql
+[0m02:39:23.559204 [info ] [MainThread]: 
+[0m02:39:23.562561 [error] [MainThread]: [31mFailure in test not_null_stg_olist__order_items_product_id (models/staging/schema.yml)[0m
+[0m02:39:23.565152 [error] [MainThread]:   Database Error in test not_null_stg_olist__order_items_product_id (models/staging/schema.yml)
+  relation "public.stg_olist__order_items" does not exist
+  LINE 17: from "modeling_lab"."public"."stg_olist__order_items"
+                ^
+  compiled code at target/run/modeling_lab/models/staging/schema.yml/not_null_stg_olist__order_items_product_id.sql
+[0m02:39:23.567780 [info ] [MainThread]: 
+[0m02:39:23.571110 [info ] [MainThread]:   compiled code at target/compiled/modeling_lab/models/staging/schema.yml/not_null_stg_olist__order_items_product_id.sql
+[0m02:39:23.574717 [info ] [MainThread]: 
+[0m02:39:23.578040 [error] [MainThread]: [31mFailure in test not_null_stg_olist__orders_customer_id (models/staging/schema.yml)[0m
+[0m02:39:23.580826 [error] [MainThread]:   Database Error in test not_null_stg_olist__orders_customer_id (models/staging/schema.yml)
+  relation "public.stg_olist__orders" does not exist
+  LINE 17: from "modeling_lab"."public"."stg_olist__orders"
+                ^
+  compiled code at target/run/modeling_lab/models/staging/schema.yml/not_null_stg_olist__orders_customer_id.sql
+[0m02:39:23.583442 [info ] [MainThread]: 
+[0m02:39:23.594951 [info ] [MainThread]:   compiled code at target/compiled/modeling_lab/models/staging/schema.yml/not_null_stg_olist__orders_customer_id.sql
+[0m02:39:23.597695 [info ] [MainThread]: 
+[0m02:39:23.601629 [error] [MainThread]: [31mFailure in test not_null_stg_olist__orders_order_id (models/staging/schema.yml)[0m
+[0m02:39:23.604063 [error] [MainThread]:   Database Error in test not_null_stg_olist__orders_order_id (models/staging/schema.yml)
+  relation "public.stg_olist__orders" does not exist
+  LINE 17: from "modeling_lab"."public"."stg_olist__orders"
+                ^
+  compiled code at target/run/modeling_lab/models/staging/schema.yml/not_null_stg_olist__orders_order_id.sql
+[0m02:39:23.606556 [info ] [MainThread]: 
+[0m02:39:23.609418 [info ] [MainThread]:   compiled code at target/compiled/modeling_lab/models/staging/schema.yml/not_null_stg_olist__orders_order_id.sql
+[0m02:39:23.611903 [info ] [MainThread]: 
+[0m02:39:23.614451 [error] [MainThread]: [31mFailure in test not_null_stg_olist__products_product_id (models/staging/schema.yml)[0m
+[0m02:39:23.617932 [error] [MainThread]:   Database Error in test not_null_stg_olist__products_product_id (models/staging/schema.yml)
+  relation "public.stg_olist__products" does not exist
+  LINE 17: from "modeling_lab"."public"."stg_olist__products"
+                ^
+  compiled code at target/run/modeling_lab/models/staging/schema.yml/not_null_stg_olist__products_product_id.sql
+[0m02:39:23.620943 [info ] [MainThread]: 
+[0m02:39:23.624544 [info ] [MainThread]:   compiled code at target/compiled/modeling_lab/models/staging/schema.yml/not_null_stg_olist__products_product_id.sql
+[0m02:39:23.628999 [info ] [MainThread]: 
+[0m02:39:23.632042 [error] [MainThread]: [31mFailure in test relationships_fct_order_item_customer_id__customer_id__ref_dim_customer_ (models/marts/star/schema.yml)[0m
+[0m02:39:23.634779 [error] [MainThread]:   Database Error in test relationships_fct_order_item_customer_id__customer_id__ref_dim_customer_ (models/marts/star/schema.yml)
+  relation "public.fct_order_item" does not exist
+  LINE 16:     from "modeling_lab"."public"."fct_order_item"
+                    ^
+  compiled code at target/run/modeling_lab/models/marts/star/schema.yml/relationships_fct_order_item_4ce245512d09846e2f2c5fb27a276e40.sql
+[0m02:39:23.637666 [info ] [MainThread]: 
+[0m02:39:23.640404 [info ] [MainThread]:   compiled code at target/compiled/modeling_lab/models/marts/star/schema.yml/relationships_fct_order_item_4ce245512d09846e2f2c5fb27a276e40.sql
+[0m02:39:23.643317 [info ] [MainThread]: 
+[0m02:39:23.645816 [error] [MainThread]: [31mFailure in test relationships_fct_order_item_order_date__date_key__ref_dim_date_ (models/marts/star/schema.yml)[0m
+[0m02:39:23.648764 [error] [MainThread]:   Database Error in test relationships_fct_order_item_order_date__date_key__ref_dim_date_ (models/marts/star/schema.yml)
+  relation "public.fct_order_item" does not exist
+  LINE 16:     from "modeling_lab"."public"."fct_order_item"
+                    ^
+  compiled code at target/run/modeling_lab/models/marts/star/schema.yml/relationships_fct_order_item_e0ed897e17593c04b46f82b7743f53a8.sql
+[0m02:39:23.651083 [info ] [MainThread]: 
+[0m02:39:23.654114 [info ] [MainThread]:   compiled code at target/compiled/modeling_lab/models/marts/star/schema.yml/relationships_fct_order_item_e0ed897e17593c04b46f82b7743f53a8.sql
+[0m02:39:23.656476 [info ] [MainThread]: 
+[0m02:39:23.659431 [error] [MainThread]: [31mFailure in test relationships_fct_order_item_product_id__product_id__ref_dim_product_ (models/marts/star/schema.yml)[0m
+[0m02:39:23.662827 [error] [MainThread]:   Database Error in test relationships_fct_order_item_product_id__product_id__ref_dim_product_ (models/marts/star/schema.yml)
+  relation "public.fct_order_item" does not exist
+  LINE 16:     from "modeling_lab"."public"."fct_order_item"
+                    ^
+  compiled code at target/run/modeling_lab/models/marts/star/schema.yml/relationships_fct_order_item_7792390daabd0807cc252359559c9728.sql
+[0m02:39:23.665394 [info ] [MainThread]: 
+[0m02:39:23.668608 [info ] [MainThread]:   compiled code at target/compiled/modeling_lab/models/marts/star/schema.yml/relationships_fct_order_item_7792390daabd0807cc252359559c9728.sql
+[0m02:39:23.671329 [info ] [MainThread]: 
+[0m02:39:23.673951 [error] [MainThread]: [31mFailure in test relationships_stg_olist__order_items_order_id__order_id__ref_stg_olist__orders_ (models/staging/schema.yml)[0m
+[0m02:39:23.677712 [error] [MainThread]:   Database Error in test relationships_stg_olist__order_items_order_id__order_id__ref_stg_olist__orders_ (models/staging/schema.yml)
+  relation "public.stg_olist__order_items" does not exist
+  LINE 16:     from "modeling_lab"."public"."stg_olist__order_items"
+                    ^
+  compiled code at target/run/modeling_lab/models/staging/schema.yml/relationships_stg_olist__order_662a8536f0db16c8c9337e31e19000ac.sql
+[0m02:39:23.680050 [info ] [MainThread]: 
+[0m02:39:23.682491 [info ] [MainThread]:   compiled code at target/compiled/modeling_lab/models/staging/schema.yml/relationships_stg_olist__order_662a8536f0db16c8c9337e31e19000ac.sql
+[0m02:39:23.685489 [info ] [MainThread]: 
+[0m02:39:23.688140 [error] [MainThread]: [31mFailure in test relationships_stg_olist__order_items_product_id__product_id__ref_stg_olist__products_ (models/staging/schema.yml)[0m
+[0m02:39:23.690492 [error] [MainThread]:   Database Error in test relationships_stg_olist__order_items_product_id__product_id__ref_stg_olist__products_ (models/staging/schema.yml)
+  relation "public.stg_olist__order_items" does not exist
+  LINE 16:     from "modeling_lab"."public"."stg_olist__order_items"
+                    ^
+  compiled code at target/run/modeling_lab/models/staging/schema.yml/relationships_stg_olist__order_dc6293c65c57599fd98d33ced9562aeb.sql
+[0m02:39:23.693463 [info ] [MainThread]: 
+[0m02:39:23.696752 [info ] [MainThread]:   compiled code at target/compiled/modeling_lab/models/staging/schema.yml/relationships_stg_olist__order_dc6293c65c57599fd98d33ced9562aeb.sql
+[0m02:39:23.698910 [info ] [MainThread]: 
+[0m02:39:23.702121 [error] [MainThread]: [31mFailure in test relationships_stg_olist__orders_customer_id__customer_id__ref_stg_olist__customers_ (models/staging/schema.yml)[0m
+[0m02:39:23.704658 [error] [MainThread]:   Database Error in test relationships_stg_olist__orders_customer_id__customer_id__ref_stg_olist__customers_ (models/staging/schema.yml)
+  relation "public.stg_olist__orders" does not exist
+  LINE 16:     from "modeling_lab"."public"."stg_olist__orders"
+                    ^
+  compiled code at target/run/modeling_lab/models/staging/schema.yml/relationships_stg_olist__order_f116fbcba3ffa54aed2c19d387a7ac95.sql
+[0m02:39:23.707531 [info ] [MainThread]: 
+[0m02:39:23.711531 [info ] [MainThread]:   compiled code at target/compiled/modeling_lab/models/staging/schema.yml/relationships_stg_olist__order_f116fbcba3ffa54aed2c19d387a7ac95.sql
+[0m02:39:23.713626 [info ] [MainThread]: 
+[0m02:39:23.716501 [error] [MainThread]: [31mFailure in test unique_dim_customer_customer_id (models/marts/star/schema.yml)[0m
+[0m02:39:23.719974 [error] [MainThread]:   Database Error in test unique_dim_customer_customer_id (models/marts/star/schema.yml)
+  relation "public.dim_customer" does not exist
+  LINE 18: from "modeling_lab"."public"."dim_customer"
+                ^
+  compiled code at target/run/modeling_lab/models/marts/star/schema.yml/unique_dim_customer_customer_id.sql
+[0m02:39:23.722337 [info ] [MainThread]: 
+[0m02:39:23.726046 [info ] [MainThread]:   compiled code at target/compiled/modeling_lab/models/marts/star/schema.yml/unique_dim_customer_customer_id.sql
+[0m02:39:23.729300 [info ] [MainThread]: 
+[0m02:39:23.732008 [error] [MainThread]: [31mFailure in test unique_dim_date_date_key (models/marts/star/schema.yml)[0m
+[0m02:39:23.734569 [error] [MainThread]:   Database Error in test unique_dim_date_date_key (models/marts/star/schema.yml)
+  relation "public.dim_date" does not exist
+  LINE 18: from "modeling_lab"."public"."dim_date"
+                ^
+  compiled code at target/run/modeling_lab/models/marts/star/schema.yml/unique_dim_date_date_key.sql
+[0m02:39:23.737567 [info ] [MainThread]: 
+[0m02:39:23.740701 [info ] [MainThread]:   compiled code at target/compiled/modeling_lab/models/marts/star/schema.yml/unique_dim_date_date_key.sql
+[0m02:39:23.743565 [info ] [MainThread]: 
+[0m02:39:23.746137 [error] [MainThread]: [31mFailure in test unique_dim_product_product_id (models/marts/star/schema.yml)[0m
+[0m02:39:23.748652 [error] [MainThread]:   Database Error in test unique_dim_product_product_id (models/marts/star/schema.yml)
+  relation "public.dim_product" does not exist
+  LINE 18: from "modeling_lab"."public"."dim_product"
+                ^
+  compiled code at target/run/modeling_lab/models/marts/star/schema.yml/unique_dim_product_product_id.sql
+[0m02:39:23.751323 [info ] [MainThread]: 
+[0m02:39:23.753867 [info ] [MainThread]:   compiled code at target/compiled/modeling_lab/models/marts/star/schema.yml/unique_dim_product_product_id.sql
+[0m02:39:23.756908 [info ] [MainThread]: 
+[0m02:39:23.760067 [error] [MainThread]: [31mFailure in test unique_fct_order_item_order_item_key (models/marts/star/schema.yml)[0m
+[0m02:39:23.762461 [error] [MainThread]:   Database Error in test unique_fct_order_item_order_item_key (models/marts/star/schema.yml)
+  relation "public.fct_order_item" does not exist
+  LINE 18: from "modeling_lab"."public"."fct_order_item"
+                ^
+  compiled code at target/run/modeling_lab/models/marts/star/schema.yml/unique_fct_order_item_order_item_key.sql
+[0m02:39:23.764911 [info ] [MainThread]: 
+[0m02:39:23.767897 [info ] [MainThread]:   compiled code at target/compiled/modeling_lab/models/marts/star/schema.yml/unique_fct_order_item_order_item_key.sql
+[0m02:39:23.770023 [info ] [MainThread]: 
+[0m02:39:23.774468 [error] [MainThread]: [31mFailure in test unique_stg_olist__customers_customer_id (models/staging/schema.yml)[0m
+[0m02:39:23.777413 [error] [MainThread]:   Database Error in test unique_stg_olist__customers_customer_id (models/staging/schema.yml)
+  relation "public.stg_olist__customers" does not exist
+  LINE 18: from "modeling_lab"."public"."stg_olist__customers"
+                ^
+  compiled code at target/run/modeling_lab/models/staging/schema.yml/unique_stg_olist__customers_customer_id.sql
+[0m02:39:23.780421 [info ] [MainThread]: 
+[0m02:39:23.782467 [info ] [MainThread]:   compiled code at target/compiled/modeling_lab/models/staging/schema.yml/unique_stg_olist__customers_customer_id.sql
+[0m02:39:23.784911 [info ] [MainThread]: 
+[0m02:39:23.789491 [error] [MainThread]: [31mFailure in test unique_stg_olist__orders_order_id (models/staging/schema.yml)[0m
+[0m02:39:23.793860 [error] [MainThread]:   Database Error in test unique_stg_olist__orders_order_id (models/staging/schema.yml)
+  relation "public.stg_olist__orders" does not exist
+  LINE 18: from "modeling_lab"."public"."stg_olist__orders"
+                ^
+  compiled code at target/run/modeling_lab/models/staging/schema.yml/unique_stg_olist__orders_order_id.sql
+[0m02:39:23.796966 [info ] [MainThread]: 
+[0m02:39:23.799549 [info ] [MainThread]:   compiled code at target/compiled/modeling_lab/models/staging/schema.yml/unique_stg_olist__orders_order_id.sql
+[0m02:39:23.803641 [info ] [MainThread]: 
+[0m02:39:23.806930 [error] [MainThread]: [31mFailure in test unique_stg_olist__products_product_id (models/staging/schema.yml)[0m
+[0m02:39:23.810244 [error] [MainThread]:   Database Error in test unique_stg_olist__products_product_id (models/staging/schema.yml)
+  relation "public.stg_olist__products" does not exist
+  LINE 18: from "modeling_lab"."public"."stg_olist__products"
+                ^
+  compiled code at target/run/modeling_lab/models/staging/schema.yml/unique_stg_olist__products_product_id.sql
+[0m02:39:23.812727 [info ] [MainThread]: 
+[0m02:39:23.814951 [info ] [MainThread]:   compiled code at target/compiled/modeling_lab/models/staging/schema.yml/unique_stg_olist__products_product_id.sql
+[0m02:39:23.818200 [info ] [MainThread]: 
+[0m02:39:23.821078 [info ] [MainThread]: Done. PASS=10 WARN=0 ERROR=27 SKIP=0 NO-OP=0 TOTAL=37
+[0m02:39:23.824258 [warn ] [MainThread]: [[33mWARNING[0m][DeprecationsSummary]: Deprecated functionality
+Summary of encountered deprecations:
+- MissingArgumentsPropertyInGenericTestDeprecation: 6 occurrences
+To see all deprecation instances instead of just the first occurrence of each,
+run command again with the `--show-all-deprecations` flag. You may also need to
+run with `--no-partial-parse` as some deprecations are only encountered during
+parsing.
+[0m02:39:23.830174 [debug] [MainThread]: Resource report: {"command_name": "test", "command_success": false, "command_wall_clock_time": 10.484455, "process_in_blocks": "800", "process_kernel_time": 1.145542, "process_mem_max_rss": "143204", "process_out_blocks": "0", "process_user_time": 9.995617}
+[0m02:39:23.832893 [debug] [MainThread]: Command `dbt test` failed at 02:39:23.832508 after 10.49 seconds
+[0m02:39:23.835569 [debug] [MainThread]: Sending event: {'category': 'dbt', 'action': 'invocation', 'label': 'end', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x7fa9b6f3acd0>, <snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x7fa9b6f39ed0>, <snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x7fa9bb644ed0>]}
+[0m02:39:23.837404 [debug] [MainThread]: Flushing usage events
+[0m02:39:24.980232 [debug] [MainThread]: An error was encountered while trying to flush usage events

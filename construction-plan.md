@@ -28,17 +28,17 @@
 
 - [] Script Python: generate_synthetic.py para suscripciones/devoluciones/envíos (si faltan).
 
-- [] Script Python: extract_load.py para cargar a raw.* en Postgres.
+- [x] Script Python: extract_load.py para cargar a raw.* en Postgres.
 
 **Transformaciones**
 
-- [] dbt: stg_* + marts_star mínimo:
+- [x] dbt: stg_* + marts_star mínimo:
 
-    - [] dim_date, dim_customer, dim_product
+    - [x] dim_date, dim_customer, dim_product
 
-    - [] fct_order_item
+    - [x] fct_order_item
 
-- [] dbt tests básicos (unique/not_null/relationships).
+- [x] dbt tests básicos (unique/not_null/relationships).
 
 **Orquestación**
 

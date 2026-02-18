@@ -1,0 +1,12 @@
+modeling_lab:
+  outputs:
+    dev:
+      type: postgres
+      host: postgres
+      user: demo
+      password: demo
+      port: 5432
+      dbname: modeling_lab
+      schema: public
+      threads: 4
+  target: dev

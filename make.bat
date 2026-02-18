@@ -66,17 +66,17 @@ GOTO end
 REM ============================
 :dbt_build
 echo Running dbt build...
-docker compose exec dagster-web bash -lc "cd /app/transform/dbt && dbt build"
+docker compose exec dagster-web bash -lc "cd /app/transform/dbt && dbt build --profiles-dir ."
 GOTO end
 
 :dbt_test
 echo Running dbt tests...
-docker compose exec dagster-web bash -lc "cd /app/transform/dbt && dbt test"
+docker compose exec dagster-web bash -lc "cd /app/transform/dbt && dbt test --profiles-dir ."
 GOTO end
 
 :dbt_docs
 echo Generating dbt docs...
-docker compose exec dagster-web bash -lc "cd /app/transform/dbt && dbt docs generate"
+docker compose exec dagster-web bash -lc "cd /app/transform/dbt && dbt docs generate --profiles-dir ."
 GOTO end
 
 REM ============================

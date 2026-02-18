@@ -1,0 +1,28 @@
+name: 'modeling_lab'
+version: '1.0.0'
+config-version: 2
+
+profile: 'modeling_lab'
+
+model-paths: ["models"]
+analysis-paths: ["analyses"]
+test-paths: ["tests"]
+seed-paths: ["seeds"]
+macro-paths: ["macros"]
+snapshot-paths: ["snapshots"]
+
+target-path: "target"
+clean-targets:
+  - "target"
+  - "dbt_packages"
+
+models:
+  modeling_lab:
+    staging:
+      +materialized: view
+    core_3nf:
+      +materialized: table
+    dv:
+      +materialized: table
+    marts:
+      +materialized: table
