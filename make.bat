@@ -15,9 +15,11 @@ IF "%1"=="ps" GOTO ps
 IF "%1"=="logs" GOTO logs
 
 IF "%1"=="ingest" GOTO ingest
+IF "%1"=="dbt-deps" GOTO dbt_deps
 IF "%1"=="dbt-build" GOTO dbt_build
 IF "%1"=="dbt-test" GOTO dbt_test
 IF "%1"=="dbt-docs" GOTO dbt_docs
+IF "%1"=="dbt-serve" GOTO dbt_serve
 IF "%1"=="dq" GOTO dq
 
 IF "%1"=="run-all" GOTO run_all
@@ -64,6 +66,12 @@ docker compose exec dagster-web python /app/ingestion/generate_synthetic.py
 GOTO end
 
 REM ============================
+:dbt_deps
+echo Installing dbt dependencies...
+docker compose exec dagster-web bash -lc "cd /app/transform/dbt && dbt deps --profiles-dir ."
+GOTO end
+
+REM ============================
 :dbt_build
 echo Running dbt build...
 docker compose exec dagster-web bash -lc "cd /app/transform/dbt && dbt build --profiles-dir ."
@@ -76,7 +84,13 @@ GOTO end
 
 :dbt_docs
 echo Generating dbt docs...
+docker compose exec dagster-web bash -lc "cd /app/transform/dbt && dbt deps --profiles-dir ."
 docker compose exec dagster-web bash -lc "cd /app/transform/dbt && dbt docs generate --profiles-dir ."
+GOTO end
+
+:dbt_serve
+echo Serving dbt docs on http://localhost:8099...
+docker compose exec -d dagster-web python3 -m http.server 8099 --bind 0.0.0.0 --directory /app/transform/dbt/target
 GOTO end
 
 REM ============================
@@ -118,6 +132,7 @@ REM ============================
 :urls
 echo Dagster UI:  http://localhost:3000
 echo Metabase:   http://localhost:3001
+echo dbt Docs:   http://localhost:8099
 GOTO end
 
 REM ============================
@@ -134,9 +149,11 @@ echo   logs          Tail logs
 echo.
 echo Data:
 echo   ingest        Load raw + synthetic data
+echo   dbt-deps      Install dbt packages
 echo   dbt-build     Run dbt build
 echo   dbt-test      Run dbt tests
 echo   dbt-docs      Generate dbt docs
+echo   dbt-serve     Serve dbt docs (UI)
 echo   dq            Run data quality checks
 echo.
 echo Pipelines:

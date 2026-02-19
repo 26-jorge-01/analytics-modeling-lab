@@ -2,8 +2,8 @@ dagster==1.12.14
 dagster-webserver==1.12.14
 dagster-postgres==0.28.14
 dagster-pandas==0.28.14
+dagster-dbt==0.28.14
 pandas
-
 psycopg2-binary>=2.9,<3.0
 dbt-core
 dbt-postgres

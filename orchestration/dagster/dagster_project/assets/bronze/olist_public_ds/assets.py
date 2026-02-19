@@ -1,56 +1,32 @@
-import pandas as pd
-from dagster import asset
-
-def read_csv(path: str):
-    df = pd.read_csv(path)
-
-    context.log.info(df.head().to_string())
-    context.log.info(f"Columnas: {list(df.columns)}")
-    context.log.info(f"Filas: {len(df)}")
-
-    return df
+import subprocess
+from dagster import asset, AssetExecutionContext
 
 @asset
-def brz_customers(context):
-    df = read_csv("/app/data/brz/olistbr/olist-public-dataset/olist_customers_dataset.csv")
-    return df
+def raw_load(context: AssetExecutionContext):
+    """
+    Ingests raw data from CSV files and generates synthetic data.
+    Runs extract_load.py and generate_synthetic.py.
+    """
+    # Ingestion script path
+    extract_load_path = "/app/ingestion/extract_load.py"
+    generate_synthetic_path = "/app/ingestion/generate_synthetic.py"
+    
+    context.log.info("Starting raw data ingestion...")
+    
+    # Run extract_load.py
+    try:
+        subprocess.run(["python", extract_load_path], check=True, capture_output=True, text=True)
+        context.log.info("extract_load.py executed successfully.")
+    except subprocess.CalledProcessError as e:
+        context.log.error(f"Error running extract_load.py: {e.stderr}")
+        raise e
 
-@asset
-def brz_geolocation(context):
-    df = read_csv("/app/data/brz/olistbr/olist-public-dataset/olist_geolocation_dataset.csv")
-    return df
+    # Run generate_synthetic.py
+    try:
+        subprocess.run(["python", generate_synthetic_path], check=True, capture_output=True, text=True)
+        context.log.info("generate_synthetic.py executed successfully.")
+    except subprocess.CalledProcessError as e:
+        context.log.error(f"Error running generate_synthetic.py: {e.stderr}")
+        raise e
 
-@asset
-def brz_order_items(context):
-    df = read_csv("/app/data/brz/olistbr/olist-public-dataset/olist_order_items_dataset.csv")
-    return df
-
-@asset
-def brz_order_payments(context):
-    df = read_csv("/app/data/brz/olistbr/olist-public-dataset/olist_order_payments_dataset.csv")
-    return df
-
-@asset
-def brz_order_reviews(context):
-    df = read_csv("/app/data/brz/olistbr/olist-public-dataset/olist_order_reviews_dataset.csv")
-    return df
-
-@asset
-def brz_orders(context):
-    df = read_csv("/app/data/brz/olistbr/olist-public-dataset/olist_orders_dataset.csv")
-    return df
-
-@asset
-def brz_products(context):
-    df = read_csv("/app/data/brz/olistbr/olist-public-dataset/olist_products_dataset.csv")
-    return df
-
-@asset
-def brz_sellers(context):
-    df = read_csv("/app/data/brz/olistbr/olist-public-dataset/olist_sellers_dataset.csv")
-    return df
-
-@asset
-def brz_product_category_name_translation(context):
-    df = read_csv("/app/data/brz/olistbr/olist-public-dataset/product_category_name_translation.csv")
-    return df
+    return "Success"
