@@ -19,6 +19,52 @@ The objective is to showcase how modeling choices impact:
 
 In short, this project demonstrates how and when to use each modeling approach, not just how to build them.
 
+## Architecture
+
+```mermaid
+graph LR
+    subgraph Sources ["Fuentes de Datos"]
+        CSVs[".csv / Raw Data"]
+    end
+
+    subgraph Storage ["Almacenamiento"]
+        Postgres[("Postgres DB")]
+    end
+
+    subgraph Transformation ["Transformación & Orquestación"]
+        Dagster["Dagster (Orchestrator)"]
+        dbt["dbt (Modeling)"]
+    end
+
+    subgraph Consumption ["Consumo"]
+        Metabase["Metabase (Dashboard)"]
+    end
+
+    subgraph Infrastructure ["Infraestructura"]
+        Docker["Docker / Docker-Compose"]
+    end
+
+    CSVs -->|Extract & Load| Postgres
+    Postgres -->|Materialize| dbt
+    dbt -->|Read/Write| Postgres
+    Dagster -->|Trigger| dbt
+    Dagster -->|Manage| Postgres
+    Postgres -->|Query| Metabase
+    
+    Docker -.->|Environment| Sources
+    Docker -.->|Environment| Storage
+    Docker -.->|Environment| Transformation
+    Docker -.->|Environment| Consumption
+
+    style Sources fill:#f9f9f9,stroke:#333,stroke-width:1px
+    style Storage fill:#f9f9f9,stroke:#333,stroke-width:1px
+    style Transformation fill:#f9f9f9,stroke:#333,stroke-width:1px
+    style Consumption fill:#f9f9f9,stroke:#333,stroke-width:1px
+    style Infrastructure fill:#eeeeee,stroke:#666,stroke-width:1px,stroke-dasharray: 5 5
+```
+
+> "Piensa arquitectura, no scripts sueltos."
+
 ## Domain Used
 
 The laboratory uses a neutral and familiar transactional domain:
