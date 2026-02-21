@@ -37,7 +37,7 @@ graph TD
     end
 ```
 
-### 🧠 Senior Technical Justification
+### 🧠 Technical Justification
 
 | Component | Strategic Justification | Engineering Value |
 | :--- | :--- | :--- |
@@ -60,7 +60,7 @@ I demonstrate three distinct modeling strategies on a single e-commerce stream, 
 ---
 
 ## 💼 Architecture as a Business Enabler
-A senior engineer selects a modeling paradigm not just for technical elegance, but to solve specific executive and operational needs. This lab demonstrates how architecture drives decision-making:
+I selected a modeling paradigm not just for technical elegance, but to solve specific executive and operational needs. This lab demonstrates how architecture drives decision-making:
 
 | Paradigm | Business Persona | Simple Business Question | Technical Why |
 | :--- | :--- | :--- | :--- |
