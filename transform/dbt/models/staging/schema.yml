@@ -2,19 +2,24 @@ version: 2
 
 models:
   - name: stg_olist__customers
+    description: "Staging table for customers, cleaned and typed from raw data."
     columns:
       - name: customer_id
+        description: "Unique identifier for each customer."
         tests:
           - unique
           - not_null
 
   - name: stg_olist__orders
+    description: "Staging table for orders, including status and timestamps."
     columns:
       - name: order_id
+        description: "Unique identifier for each order."
         tests:
           - unique
           - not_null
       - name: customer_id
+        description: "Foreign key linking to the customer who placed the order."
         tests:
           - not_null
           - relationships:
@@ -22,23 +27,43 @@ models:
               field: customer_id
 
   - name: stg_olist__products
+    description: "Staging table for products, including categories and dimensions."
     columns:
       - name: product_id
+        description: "Unique identifier for each product."
         tests:
           - unique
           - not_null
 
   - name: stg_olist__order_items
+    description: "Staging table for line items within each order."
     columns:
       - name: order_id
+        description: "Foreign key to the order."
         tests:
           - not_null
           - relationships:
               to: ref('stg_olist__orders')
               field: order_id
       - name: product_id
+        description: "Foreign key to the product."
         tests:
           - not_null
           - relationships:
               to: ref('stg_olist__products')
               field: product_id
+
+  - name: stg_olist__category_translations
+    description: "Staging table for product category name translations (Portuguese to English)."
+
+  - name: stg_olist__geolocation
+    description: "Staging table for geolocation data mapped to zip codes."
+
+  - name: stg_olist__order_payments
+    description: "Staging table for order payment details (installment, type, value)."
+
+  - name: stg_olist__order_reviews
+    description: "Staging table for customer reviews and scores."
+
+  - name: stg_olist__sellers
+    description: "Staging table for seller information and locations."

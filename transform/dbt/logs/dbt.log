@@ -12797,3 +12797,1518 @@ OSError: [Errno 98] Address already in use
 [0m02:30:36.206626 [debug] [MainThread]: Sending event: {'category': 'dbt', 'action': 'invocation', 'label': 'end', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x7f55d708ec50>, <snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x7f55d708ea50>, <snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x7f55d63f6d10>]}
 [0m02:30:36.211075 [debug] [MainThread]: Flushing usage events
 [0m02:30:36.793508 [debug] [MainThread]: An error was encountered while trying to flush usage events
+[0m15:58:35.364586 [debug] [MainThread]: Sending event: {'category': 'dbt', 'action': 'invocation', 'label': 'start', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x0000019BE2E63050>, <snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x0000019BDF82AC00>, <snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x0000019BE2E606E0>]}
+
+
+============================== 15:58:35.669396 | 88950536-4f3a-44aa-98a5-668ab43b93da ==============================
+[0m15:58:35.669396 [info ] [MainThread]: Running with dbt=1.11.6
+[0m15:58:35.671411 [debug] [MainThread]: running dbt with arguments {'static_parser': 'True', 'no_print': 'None', 'version_check': 'True', 'target_path': 'None', 'warn_error_options': 'WarnErrorOptionsV2(error=[], warn=[], silence=[])', 'printer_width': '80', 'write_json': 'True', 'introspect': 'True', 'log_cache_events': 'False', 'empty': 'False', 'cache_selected_only': 'False', 'fail_fast': 'False', 'debug': 'False', 'log_format': 'default', 'profiles_dir': 'D:\\Espacios de trabajo\\portfolio\\analytics-modeling-lab\\transform\\dbt', 'send_anonymous_usage_stats': 'True', 'quiet': 'False', 'warn_error': 'None', 'partial_parse': 'True', 'invocation_command': 'dbt compile', 'indirect_selection': 'eager', 'use_colors': 'True', 'use_experimental_parser': 'False', 'log_path': 'D:\\Espacios de trabajo\\portfolio\\analytics-modeling-lab\\transform\\dbt\\logs'}
+[0m15:58:36.814283 [debug] [MainThread]: Sending event: {'category': 'dbt', 'action': 'project_id', 'label': '88950536-4f3a-44aa-98a5-668ab43b93da', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x0000019BE31A9AF0>]}
+[0m15:58:36.938046 [debug] [MainThread]: Sending event: {'category': 'dbt', 'action': 'adapter_info', 'label': '88950536-4f3a-44aa-98a5-668ab43b93da', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x0000019BE27E2AB0>]}
+[0m15:58:36.939566 [info ] [MainThread]: Registered adapter: postgres=1.10.0
+[0m15:58:37.883446 [debug] [MainThread]: checksum: ec27062d18352e9cfca161c166fcc73d2201661a23a3cf3c89196a27f32cfcb8, vars: {}, profile: , target: , version: 1.11.6
+[0m15:58:41.496855 [debug] [MainThread]: Partial parsing enabled: 198 files deleted, 198 files added, 0 files changed.
+[0m15:58:41.496855 [debug] [MainThread]: Partial parsing: added file: dbt://macros\unit_test_sql\get_fixture_sql.sql
+[0m15:58:41.498417 [debug] [MainThread]: Partial parsing: added file: dbt://macros\relations\table\create.sql
+[0m15:58:41.498417 [debug] [MainThread]: Partial parsing: added file: dbt_utils://macros\sql\nullcheck_table.sql
+[0m15:58:41.498417 [debug] [MainThread]: Partial parsing: added file: dbt://macros\relations\materialized_view\refresh.sql
+[0m15:58:41.500113 [debug] [MainThread]: Partial parsing: added file: dbt_postgres://macros\relations\view\replace.sql
+[0m15:58:41.500113 [debug] [MainThread]: Partial parsing: added file: dbt_postgres://macros\relations\materialized_view\rename.sql
+[0m15:58:41.500113 [debug] [MainThread]: Partial parsing: added file: modeling_lab://models\staging\stg_olist__products.sql
+[0m15:58:41.501687 [debug] [MainThread]: Partial parsing: added file: dbt_postgres://macros\timestamps.sql
+[0m15:58:41.501687 [debug] [MainThread]: Partial parsing: added file: dbt://macros\materializations\models\incremental\column_helpers.sql
+[0m15:58:41.501687 [debug] [MainThread]: Partial parsing: added file: dbt://macros\relations\create.sql
+[0m15:58:41.501687 [debug] [MainThread]: Partial parsing: added file: dbt://macros\generic_test_sql\unique.sql
+[0m15:58:41.503258 [debug] [MainThread]: Partial parsing: added file: dbt://macros\utils\dateadd.sql
+[0m15:58:41.503258 [debug] [MainThread]: Partial parsing: added file: dbt://macros\relations\replace.sql
+[0m15:58:41.504285 [debug] [MainThread]: Partial parsing: added file: dbt://macros\utils\cast_bool_to_text.sql
+[0m15:58:41.504285 [debug] [MainThread]: Partial parsing: added file: modeling_lab://models\staging\schema.yml
+[0m15:58:41.505298 [debug] [MainThread]: Partial parsing: added file: dbt_utils://macros\jinja_helpers\slugify.sql
+[0m15:58:41.505298 [debug] [MainThread]: Partial parsing: added file: dbt_utils://macros\generic_tests\unique_combination_of_columns.sql
+[0m15:58:41.505298 [debug] [MainThread]: Partial parsing: added file: dbt_postgres://macros\relations\view\rename.sql
+[0m15:58:41.505298 [debug] [MainThread]: Partial parsing: added file: dbt_utils://macros\sql\safe_add.sql
+[0m15:58:41.506833 [debug] [MainThread]: Partial parsing: added file: dbt://macros\relations\view\create.sql
+[0m15:58:41.506833 [debug] [MainThread]: Partial parsing: added file: dbt://macros\materializations\hooks.sql
+[0m15:58:41.507851 [debug] [MainThread]: Partial parsing: added file: dbt://macros\materializations\tests\where_subquery.sql
+[0m15:58:41.508875 [debug] [MainThread]: Partial parsing: added file: dbt://macros\utils\replace.sql
+[0m15:58:41.509621 [debug] [MainThread]: Partial parsing: added file: dbt://macros\utils\concat.sql
+[0m15:58:41.511182 [debug] [MainThread]: Partial parsing: added file: dbt_utils://macros\jinja_helpers\pretty_time.sql
+[0m15:58:41.512221 [debug] [MainThread]: Partial parsing: added file: dbt_postgres://macros\relations\materialized_view\create.sql
+[0m15:58:41.512760 [debug] [MainThread]: Partial parsing: added file: dbt://macros\utils\cast.sql
+[0m15:58:41.513987 [debug] [MainThread]: Partial parsing: added file: dbt_utils://macros\sql\safe_subtract.sql
+[0m15:58:41.513987 [debug] [MainThread]: Partial parsing: added file: dbt_utils://macros\sql\get_filtered_columns_in_relation.sql
+[0m15:58:41.515036 [debug] [MainThread]: Partial parsing: added file: dbt_utils://macros\web\get_url_parameter.sql
+[0m15:58:41.515036 [debug] [MainThread]: Partial parsing: added file: dbt://docs\overview.md
+[0m15:58:41.516592 [debug] [MainThread]: Partial parsing: added file: dbt://macros\adapters\indexes.sql
+[0m15:58:41.517164 [debug] [MainThread]: Partial parsing: added file: dbt_utils://macros\web\get_url_path.sql
+[0m15:58:41.517164 [debug] [MainThread]: Partial parsing: added file: dbt://macros\materializations\models\incremental\is_incremental.sql
+[0m15:58:41.518207 [debug] [MainThread]: Partial parsing: added file: dbt_postgres://macros\materializations\incremental_strategies.sql
+[0m15:58:41.518207 [debug] [MainThread]: Partial parsing: added file: dbt://macros\generic_test_sql\accepted_values.sql
+[0m15:58:41.519219 [debug] [MainThread]: Partial parsing: added file: dbt://macros\utils\data_types.sql
+[0m15:58:41.519219 [debug] [MainThread]: Partial parsing: added file: dbt://macros\relations\column\columns_spec_ddl.sql
+[0m15:58:41.519219 [debug] [MainThread]: Partial parsing: added file: modeling_lab://models\staging\stg_olist__orders.sql
+[0m15:58:41.520912 [debug] [MainThread]: Partial parsing: added file: dbt://macros\relations\materialized_view\replace.sql
+[0m15:58:41.520912 [debug] [MainThread]: Partial parsing: added file: dbt://macros\materializations\snapshots\helpers.sql
+[0m15:58:41.520912 [debug] [MainThread]: Partial parsing: added file: dbt://macros\materializations\functions\aggregate.sql
+[0m15:58:41.522447 [debug] [MainThread]: Partial parsing: added file: dbt://macros\materializations\seeds\seed.sql
+[0m15:58:41.522447 [debug] [MainThread]: Partial parsing: added file: modeling_lab://models\staging\stg_olist__order_items.sql
+[0m15:58:41.522447 [debug] [MainThread]: Partial parsing: added file: dbt_utils://macros\sql\get_column_values.sql
+[0m15:58:41.523990 [debug] [MainThread]: Partial parsing: added file: dbt_utils://macros\sql\width_bucket.sql
+[0m15:58:41.523990 [debug] [MainThread]: Partial parsing: added file: dbt_postgres://macros\relations\materialized_view\refresh.sql
+[0m15:58:41.526103 [debug] [MainThread]: Partial parsing: added file: dbt_postgres://macros\relations\view\drop.sql
+[0m15:58:41.526664 [debug] [MainThread]: Partial parsing: added file: dbt://macros\get_custom_name\get_custom_alias.sql
+[0m15:58:41.527698 [debug] [MainThread]: Partial parsing: added file: dbt://macros\relations\view\rename.sql
+[0m15:58:41.528703 [debug] [MainThread]: Partial parsing: added file: dbt_postgres://macros\relations.sql
+[0m15:58:41.528703 [debug] [MainThread]: Partial parsing: added file: dbt_postgres://macros\relations\materialized_view\drop.sql
+[0m15:58:41.530232 [debug] [MainThread]: Partial parsing: added file: modeling_lab://models\staging\stg_olist__geolocation.sql
+[0m15:58:41.530232 [debug] [MainThread]: Partial parsing: added file: dbt://macros\materializations\functions\scalar.sql
+[0m15:58:41.531260 [debug] [MainThread]: Partial parsing: added file: dbt://macros\utils\listagg.sql
+[0m15:58:41.531260 [debug] [MainThread]: Partial parsing: added file: dbt://macros\utils\hash.sql
+[0m15:58:41.532801 [debug] [MainThread]: Partial parsing: added file: dbt://macros\utils\any_value.sql
+[0m15:58:41.532801 [debug] [MainThread]: Partial parsing: added file: modeling_lab://models\marts\star\fct_order_item.sql
+[0m15:58:41.533841 [debug] [MainThread]: Partial parsing: added file: dbt://macros\relations\view\drop.sql
+[0m15:58:41.533841 [debug] [MainThread]: Partial parsing: added file: dbt_postgres://macros\relations\table\replace.sql
+[0m15:58:41.534837 [debug] [MainThread]: Partial parsing: added file: dbt://macros\materializations\snapshots\strategies.sql
+[0m15:58:41.534837 [debug] [MainThread]: Partial parsing: added file: modeling_lab://models\staging\stg_olist__order_reviews.sql
+[0m15:58:41.534837 [debug] [MainThread]: Partial parsing: added file: dbt_utils://macros\sql\get_relations_by_prefix.sql
+[0m15:58:41.535844 [debug] [MainThread]: Partial parsing: added file: dbt://macros\relations\schema.sql
+[0m15:58:41.536388 [debug] [MainThread]: Partial parsing: added file: dbt_postgres://macros\catalog.sql
+[0m15:58:41.536926 [debug] [MainThread]: Partial parsing: added file: dbt://macros\relations\create_intermediate.sql
+[0m15:58:41.536926 [debug] [MainThread]: Partial parsing: added file: dbt://macros\adapters\freshness.sql
+[0m15:58:41.536926 [debug] [MainThread]: Partial parsing: added file: dbt://macros\materializations\models\clone\create_or_replace_clone.sql
+[0m15:58:41.537969 [debug] [MainThread]: Partial parsing: added file: dbt_utils://macros\sql\get_table_types_sql.sql
+[0m15:58:41.537969 [debug] [MainThread]: Partial parsing: added file: dbt://macros\utils\date.sql
+[0m15:58:41.538966 [debug] [MainThread]: Partial parsing: added file: dbt_utils://macros\generic_tests\relationships_where.sql
+[0m15:58:41.538966 [debug] [MainThread]: Partial parsing: added file: dbt_postgres://macros\materializations\snapshot_merge.sql
+[0m15:58:41.538966 [debug] [MainThread]: Partial parsing: added file: dbt_utils://macros\jinja_helpers\pretty_log_format.sql
+[0m15:58:41.540492 [debug] [MainThread]: Partial parsing: added file: dbt://macros\adapters\show.sql
+[0m15:58:41.541553 [debug] [MainThread]: Partial parsing: added file: dbt://macros\etc\datetime.sql
+[0m15:58:41.543194 [debug] [MainThread]: Partial parsing: added file: dbt_utils://macros\sql\union.sql
+[0m15:58:41.543732 [debug] [MainThread]: Partial parsing: added file: dbt_postgres://macros\relations\materialized_view\alter.sql
+[0m15:58:41.543732 [debug] [MainThread]: Partial parsing: added file: dbt://macros\materializations\functions\helpers.sql
+[0m15:58:41.545274 [debug] [MainThread]: Partial parsing: added file: dbt://macros\materializations\snapshots\snapshot.sql
+[0m15:58:41.545274 [debug] [MainThread]: Partial parsing: added file: dbt://macros\relations\rename_intermediate.sql
+[0m15:58:41.546847 [debug] [MainThread]: Partial parsing: added file: dbt_utils://macros\sql\groupby.sql
+[0m15:58:41.547864 [debug] [MainThread]: Partial parsing: added file: dbt://macros\utils\equals.sql
+[0m15:58:41.547864 [debug] [MainThread]: Partial parsing: added file: modeling_lab://models\staging\stg_olist__customers.sql
+[0m15:58:41.548862 [debug] [MainThread]: Partial parsing: added file: dbt_postgres://macros\materializations\functions\scalar.sql
+[0m15:58:41.548862 [debug] [MainThread]: Partial parsing: added file: dbt://macros\materializations\configs.sql
+[0m15:58:41.550355 [debug] [MainThread]: Partial parsing: added file: dbt://macros\relations\table\replace.sql
+[0m15:58:41.550355 [debug] [MainThread]: Partial parsing: added file: dbt://macros\utils\except.sql
+[0m15:58:41.551371 [debug] [MainThread]: Partial parsing: added file: dbt_utils://macros\sql\surrogate_key.sql
+[0m15:58:41.551371 [debug] [MainThread]: Partial parsing: added file: dbt://macros\utils\position.sql
+[0m15:58:41.552390 [debug] [MainThread]: Partial parsing: added file: dbt://macros\utils\right.sql
+[0m15:58:41.552390 [debug] [MainThread]: Partial parsing: added file: dbt://macros\etc\statement.sql
+[0m15:58:41.553391 [debug] [MainThread]: Partial parsing: added file: dbt://macros\generic_test_sql\relationships.sql
+[0m15:58:41.553930 [debug] [MainThread]: Partial parsing: added file: dbt://macros\relations\table\rename.sql
+[0m15:58:41.553930 [debug] [MainThread]: Partial parsing: added file: dbt://macros\utils\generate_series.sql
+[0m15:58:41.553930 [debug] [MainThread]: Partial parsing: added file: dbt://macros\utils\bool_or.sql
+[0m15:58:41.554956 [debug] [MainThread]: Partial parsing: added file: modeling_lab://models\staging\src_olist.yml
+[0m15:58:41.554956 [debug] [MainThread]: Partial parsing: added file: dbt://macros\materializations\models\materialized_view.sql
+[0m15:58:41.554956 [debug] [MainThread]: Partial parsing: added file: dbt://macros\materializations\models\clone\clone.sql
+[0m15:58:41.556494 [debug] [MainThread]: Partial parsing: added file: dbt_utils://macros\generic_tests\mutually_exclusive_ranges.sql
+[0m15:58:41.558228 [debug] [MainThread]: Partial parsing: added file: dbt_utils://macros\sql\nullcheck.sql
+[0m15:58:41.559661 [debug] [MainThread]: Partial parsing: added file: modeling_lab://models\marts\star\dim_customer.sql
+[0m15:58:41.559661 [debug] [MainThread]: Partial parsing: added file: dbt://macros\materializations\seeds\helpers.sql
+[0m15:58:41.561180 [debug] [MainThread]: Partial parsing: added file: dbt_utils://macros\web\get_url_host.sql
+[0m15:58:41.562195 [debug] [MainThread]: Partial parsing: added file: dbt_utils://macros\sql\get_single_value.sql
+[0m15:58:41.564234 [debug] [MainThread]: Partial parsing: added file: dbt://macros\materializations\models\clone\can_clone_table.sql
+[0m15:58:41.565247 [debug] [MainThread]: Partial parsing: added file: dbt_utils://macros\generic_tests\cardinality_equality.sql
+[0m15:58:41.565247 [debug] [MainThread]: Partial parsing: added file: dbt_utils://macros\sql\deduplicate.sql
+[0m15:58:41.565247 [debug] [MainThread]: Partial parsing: added file: dbt://macros\relations\view\replace.sql
+[0m15:58:41.566759 [debug] [MainThread]: Partial parsing: added file: modeling_lab://models\staging\stg_olist__order_payments.sql
+[0m15:58:41.567769 [debug] [MainThread]: Partial parsing: added file: dbt://macros\adapters\schema.sql
+[0m15:58:41.567769 [debug] [MainThread]: Partial parsing: added file: dbt://macros\materializations\tests\unit.sql
+[0m15:58:41.568769 [debug] [MainThread]: Partial parsing: added file: dbt_utils://macros\generic_tests\equality.sql
+[0m15:58:41.596613 [debug] [MainThread]: Partial parsing: added file: dbt://macros\relations\drop_backup.sql
+[0m15:58:41.598145 [debug] [MainThread]: Partial parsing: added file: dbt_utils://macros\sql\generate_surrogate_key.sql
+[0m15:58:41.599889 [debug] [MainThread]: Partial parsing: added file: dbt://macros\adapters\columns.sql
+[0m15:58:41.601500 [debug] [MainThread]: Partial parsing: added file: dbt://macros\utils\array_append.sql
+[0m15:58:41.602494 [debug] [MainThread]: Partial parsing: added file: dbt_postgres://macros\relations\table\drop.sql
+[0m15:58:41.604010 [debug] [MainThread]: Partial parsing: added file: dbt_postgres://macros\relations\materialized_view\describe.sql
+[0m15:58:41.605356 [debug] [MainThread]: Partial parsing: added file: dbt://macros\materializations\models\incremental\on_schema_change.sql
+[0m15:58:41.606590 [debug] [MainThread]: Partial parsing: added file: dbt_utils://macros\jinja_helpers\_is_ephemeral.sql
+[0m15:58:41.609267 [debug] [MainThread]: Partial parsing: added file: dbt://macros\relations\drop.sql
+[0m15:58:41.609839 [debug] [MainThread]: Partial parsing: added file: dbt_utils://macros\sql\star.sql
+[0m15:58:41.611372 [debug] [MainThread]: Partial parsing: added file: dbt://macros\adapters\timestamps.sql
+[0m15:58:41.611372 [debug] [MainThread]: Partial parsing: added file: dbt://macros\materializations\models\view.sql
+[0m15:58:41.613019 [debug] [MainThread]: Partial parsing: added file: dbt://macros\materializations\models\incremental\strategies.sql
+[0m15:58:41.613019 [debug] [MainThread]: Partial parsing: added file: dbt_postgres://macros\utils\last_day.sql
+[0m15:58:41.614055 [debug] [MainThread]: Partial parsing: added file: dbt://macros\get_custom_name\get_custom_database.sql
+[0m15:58:41.614055 [debug] [MainThread]: Partial parsing: added file: dbt_postgres://macros\relations\table\rename.sql
+[0m15:58:41.615639 [debug] [MainThread]: Partial parsing: added file: dbt://macros\utils\split_part.sql
+[0m15:58:41.615639 [debug] [MainThread]: Partial parsing: added file: dbt_utils://macros\sql\get_query_results_as_dict.sql
+[0m15:58:41.616676 [debug] [MainThread]: Partial parsing: added file: dbt://macros\materializations\tests\helpers.sql
+[0m15:58:41.616676 [debug] [MainThread]: Partial parsing: added file: dbt_utils://macros\generic_tests\recency.sql
+[0m15:58:41.617210 [debug] [MainThread]: Partial parsing: added file: dbt_postgres://macros\utils\dateadd.sql
+[0m15:58:41.617210 [debug] [MainThread]: Partial parsing: added file: dbt_postgres://macros\utils\any_value.sql
+[0m15:58:41.617210 [debug] [MainThread]: Partial parsing: added file: dbt_utils://macros\sql\get_tables_by_prefix_sql.sql
+[0m15:58:41.618769 [debug] [MainThread]: Partial parsing: added file: dbt://macros\relations\materialized_view\create.sql
+[0m15:58:41.618769 [debug] [MainThread]: Partial parsing: added file: dbt_utils://macros\sql\date_spine.sql
+[0m15:58:41.620095 [debug] [MainThread]: Partial parsing: added file: dbt://macros\generic_test_sql\not_null.sql
+[0m15:58:41.621115 [debug] [MainThread]: Partial parsing: added file: dbt_utils://macros\generic_tests\not_constant.sql
+[0m15:58:41.622136 [debug] [MainThread]: Partial parsing: added file: dbt://macros\materializations\models\table.sql
+[0m15:58:41.623137 [debug] [MainThread]: Partial parsing: added file: dbt://macros\materializations\tests\test.sql
+[0m15:58:41.623137 [debug] [MainThread]: Partial parsing: added file: dbt://macros\relations\materialized_view\rename.sql
+[0m15:58:41.624107 [debug] [MainThread]: Partial parsing: added file: dbt://macros\utils\length.sql
+[0m15:58:41.625886 [debug] [MainThread]: Partial parsing: added file: dbt://macros\utils\escape_single_quotes.sql
+[0m15:58:41.625886 [debug] [MainThread]: Partial parsing: added file: dbt://macros\adapters\relation.sql
+[0m15:58:41.626920 [debug] [MainThread]: Partial parsing: added file: dbt_utils://macros\generic_tests\sequential_values.sql
+[0m15:58:41.627455 [debug] [MainThread]: Partial parsing: added file: dbt_utils://macros\sql\get_tables_by_pattern_sql.sql
+[0m15:58:41.627455 [debug] [MainThread]: Partial parsing: added file: dbt://macros\utils\date_spine.sql
+[0m15:58:41.628479 [debug] [MainThread]: Partial parsing: added file: dbt://macros\materializations\functions\function.sql
+[0m15:58:41.628479 [debug] [MainThread]: Partial parsing: added file: dbt://macros\adapters\apply_grants.sql
+[0m15:58:41.628479 [debug] [MainThread]: Partial parsing: added file: dbt://macros\relations\create_backup.sql
+[0m15:58:41.628479 [debug] [MainThread]: Partial parsing: added file: dbt://macros\relations\materialized_view\alter.sql
+[0m15:58:41.630009 [debug] [MainThread]: Partial parsing: added file: dbt_utils://macros\generic_tests\expression_is_true.sql
+[0m15:58:41.630585 [debug] [MainThread]: Partial parsing: added file: dbt_utils://macros\sql\pivot.sql
+[0m15:58:41.630585 [debug] [MainThread]: Partial parsing: added file: modeling_lab://models\marts\star\schema.yml
+[0m15:58:41.631626 [debug] [MainThread]: Partial parsing: added file: modeling_lab://models\marts\star\dim_product.sql
+[0m15:58:41.631626 [debug] [MainThread]: Partial parsing: added file: dbt://macros\adapters\persist_docs.sql
+[0m15:58:41.632623 [debug] [MainThread]: Partial parsing: added file: dbt://tests\generic\builtin.sql
+[0m15:58:41.632623 [debug] [MainThread]: Partial parsing: added file: dbt://macros\relations\table\drop.sql
+[0m15:58:41.632623 [debug] [MainThread]: Partial parsing: added file: dbt_postgres://macros\utils\datediff.sql
+[0m15:58:41.633761 [debug] [MainThread]: Partial parsing: added file: dbt://macros\utils\intersect.sql
+[0m15:58:41.633761 [debug] [MainThread]: Partial parsing: added file: dbt_postgres://macros\utils\split_part.sql
+[0m15:58:41.634760 [debug] [MainThread]: Partial parsing: added file: dbt://macros\materializations\models\incremental\merge.sql
+[0m15:58:41.634760 [debug] [MainThread]: Partial parsing: added file: dbt://macros\relations\rename.sql
+[0m15:58:41.635744 [debug] [MainThread]: Partial parsing: added file: modeling_lab://models\marts\star\dim_date.sql
+[0m15:58:41.636800 [debug] [MainThread]: Partial parsing: added file: dbt://macros\materializations\snapshots\snapshot_merge.sql
+[0m15:58:41.636800 [debug] [MainThread]: Partial parsing: added file: dbt_utils://macros\sql\safe_divide.sql
+[0m15:58:41.637814 [debug] [MainThread]: Partial parsing: added file: dbt://macros\adapters\metadata.sql
+[0m15:58:41.637814 [debug] [MainThread]: Partial parsing: added file: dbt://macros\utils\array_construct.sql
+[0m15:58:41.638842 [debug] [MainThread]: Partial parsing: added file: dbt://macros\python_model\python.sql
+[0m15:58:41.638842 [debug] [MainThread]: Partial parsing: added file: dbt_postgres://macros\adapters.sql
+[0m15:58:41.638842 [debug] [MainThread]: Partial parsing: added file: dbt://macros\utils\array_concat.sql
+[0m15:58:41.640370 [debug] [MainThread]: Partial parsing: added file: modeling_lab://models\staging\stg_olist__sellers.sql
+[0m15:58:41.640884 [debug] [MainThread]: Partial parsing: added file: dbt_utils://macros\generic_tests\fewer_rows_than.sql
+[0m15:58:41.641914 [debug] [MainThread]: Partial parsing: added file: dbt_utils://macros\sql\haversine_distance.sql
+[0m15:58:41.642923 [debug] [MainThread]: Partial parsing: added file: dbt_utils://macros\jinja_helpers\log_info.sql
+[0m15:58:41.642923 [debug] [MainThread]: Partial parsing: added file: dbt_utils://macros\sql\unpivot.sql
+[0m15:58:41.642923 [debug] [MainThread]: Partial parsing: added file: dbt://macros\adapters\validate_sql.sql
+[0m15:58:41.643931 [debug] [MainThread]: Partial parsing: added file: dbt_utils://macros\generic_tests\equal_rowcount.sql
+[0m15:58:41.643931 [debug] [MainThread]: Partial parsing: added file: dbt_utils://macros\sql\get_relations_by_pattern.sql
+[0m15:58:41.643931 [debug] [MainThread]: Partial parsing: added file: dbt_utils://macros\generic_tests\not_accepted_values.sql
+[0m15:58:41.645482 [debug] [MainThread]: Partial parsing: added file: dbt://macros\utils\last_day.sql
+[0m15:58:41.645482 [debug] [MainThread]: Partial parsing: added file: dbt://macros\utils\safe_cast.sql
+[0m15:58:41.646534 [debug] [MainThread]: Partial parsing: added file: dbt_utils://macros\generic_tests\not_null_proportion.sql
+[0m15:58:41.647078 [debug] [MainThread]: Partial parsing: added file: dbt://macros\get_custom_name\get_custom_schema.sql
+[0m15:58:41.647078 [debug] [MainThread]: Partial parsing: added file: dbt_utils://macros\generic_tests\not_empty_string.sql
+[0m15:58:41.647078 [debug] [MainThread]: Partial parsing: added file: dbt_utils://macros\jinja_helpers\_is_relation.sql
+[0m15:58:41.648649 [debug] [MainThread]: Partial parsing: added file: modeling_lab://models\staging\stg_olist__category_translations.sql
+[0m15:58:41.648649 [debug] [MainThread]: Partial parsing: added file: dbt://macros\utils\datediff.sql
+[0m15:58:41.648649 [debug] [MainThread]: Partial parsing: added file: dbt://macros\utils\date_trunc.sql
+[0m15:58:41.650193 [debug] [MainThread]: Partial parsing: added file: dbt_utils://macros\sql\generate_series.sql
+[0m15:58:41.650193 [debug] [MainThread]: Partial parsing: added file: dbt://macros\utils\literal.sql
+[0m15:58:41.651220 [debug] [MainThread]: Partial parsing: added file: dbt://macros\relations\materialized_view\drop.sql
+[0m15:58:41.651220 [debug] [MainThread]: Partial parsing: added file: dbt_utils://macros\generic_tests\accepted_range.sql
+[0m15:58:41.652235 [debug] [MainThread]: Partial parsing: added file: dbt_postgres://macros\utils\columns_spec_ddl.sql
+[0m15:58:41.652235 [debug] [MainThread]: Partial parsing: added file: dbt_postgres://macros\utils\listagg.sql
+[0m15:58:41.653230 [debug] [MainThread]: Partial parsing: added file: dbt://macros\materializations\models\incremental\incremental.sql
+[0m15:58:41.653230 [debug] [MainThread]: Partial parsing: added file: dbt_utils://macros\generic_tests\at_least_one.sql
+[0m15:58:41.654237 [info ] [MainThread]: Unable to do partial parsing because an error occurred. Switching to full reparse.
+[0m15:58:41.682023 [debug] [MainThread]: Partial parsing exception processing file modeling_lab://models/staging/schema.yml
+[0m15:58:41.683045 [debug] [MainThread]: PP exception info: {'code': 'new_source_file = deepcopy(self.new_files[file_id])', 'location': 'line 313 in update_in_saved', 'exception': "KeyError: 'modeling_lab://models/staging/stg_olist__orders.sql'", 'traceback': 'Traceback (most recent call last):\n  File "C:\\Users\\Usuario\\AppData\\Local\\Programs\\Python\\Python312\\Lib\\site-packages\\dbt\\parser\\manifest.py", line 554, in safe_update_project_parser_files_partially\n    project_parser_files = self.partial_parser.get_parsing_files()\n                           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File "C:\\Users\\Usuario\\AppData\\Local\\Programs\\Python\\Python312\\Lib\\site-packages\\dbt\\parser\\partial.py", line 198, in get_parsing_files\n    self.delete_schema_file(file_id)\n  File "C:\\Users\\Usuario\\AppData\\Local\\Programs\\Python\\Python312\\Lib\\site-packages\\dbt\\parser\\partial.py", line 717, in delete_schema_file\n    self.handle_schema_file_changes(saved_schema_file, saved_yaml_dict, new_yaml_dict)\n  File "C:\\Users\\Usuario\\AppData\\Local\\Programs\\Python\\Python312\\Lib\\site-packages\\dbt\\parser\\partial.py", line 743, in handle_schema_file_changes\n    self.delete_schema_mssa_links(schema_file, dict_key, elem)\n  File "C:\\Users\\Usuario\\AppData\\Local\\Programs\\Python\\Python312\\Lib\\site-packages\\dbt\\parser\\partial.py", line 911, in delete_schema_mssa_links\n    self._delete_schema_mssa_links(schema_file, dict_key, elem, elem_unique_ids)\n  File "C:\\Users\\Usuario\\AppData\\Local\\Programs\\Python\\Python312\\Lib\\site-packages\\dbt\\parser\\partial.py", line 964, in _delete_schema_mssa_links\n    self.remove_tests(schema_file, dict_key, elem["name"])\n  File "C:\\Users\\Usuario\\AppData\\Local\\Programs\\Python\\Python312\\Lib\\site-packages\\dbt\\parser\\partial.py", line 982, in remove_tests\n    self.update_in_saved(attached_node.file_id)\n  File "C:\\Users\\Usuario\\AppData\\Local\\Programs\\Python\\Python312\\Lib\\site-packages\\dbt\\parser\\partial.py", line 313, in update_in_saved\n    new_source_file = deepcopy(self.new_files[file_id])\n                               ~~~~~~~~~~~~~~^^^^^^^^^\nKeyError: \'modeling_lab://models/staging/stg_olist__orders.sql\'\n', 'parse_file_type': 'schema'}
+[0m15:58:41.685303 [debug] [MainThread]: Sending event: {'category': 'dbt', 'action': 'partial_parser', 'label': '88950536-4f3a-44aa-98a5-668ab43b93da', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x0000019BE4908E90>]}
+[0m15:58:44.069194 [warn ] [MainThread]: [[33mWARNING[0m][MissingArgumentsPropertyInGenericTestDeprecation]: Deprecated
+functionality
+Found top-level arguments to test `relationships` defined on 'fct_order_item' in
+package 'modeling_lab' (models\marts\star\schema.yml). Arguments to generic
+tests should be nested under the `arguments` property.
+[0m15:58:44.070741 [debug] [MainThread]: Sending event: {'category': 'dbt', 'action': 'deprecation', 'label': '88950536-4f3a-44aa-98a5-668ab43b93da', 'property_': 'warn', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x0000019BE51066C0>]}
+[0m15:58:44.630506 [warn ] [MainThread]: [[33mWARNING[0m]: Configuration paths exist in your dbt_project.yml file which do not apply to any resources.
+There are 2 unused configuration paths:
+- models.modeling_lab.dv
+- models.modeling_lab.core_3nf
+[0m15:58:44.650897 [debug] [MainThread]: Sending event: {'category': 'dbt', 'action': 'load_project', 'label': '88950536-4f3a-44aa-98a5-668ab43b93da', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x0000019BE5066BA0>]}
+[0m15:58:44.863788 [debug] [MainThread]: Wrote artifact WritableManifest to D:\Espacios de trabajo\portfolio\analytics-modeling-lab\transform\dbt\target\manifest.json
+[0m15:58:44.905077 [debug] [MainThread]: Wrote artifact SemanticManifest to D:\Espacios de trabajo\portfolio\analytics-modeling-lab\transform\dbt\target\semantic_manifest.json
+[0m15:58:45.295266 [debug] [MainThread]: Sending event: {'category': 'dbt', 'action': 'resource_counts', 'label': '88950536-4f3a-44aa-98a5-668ab43b93da', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x0000019BE52CA180>]}
+[0m15:58:45.297821 [info ] [MainThread]: Found 13 models, 37 data tests, 9 sources, 578 macros
+[0m15:58:45.298818 [debug] [MainThread]: Sending event: {'category': 'dbt', 'action': 'runnable_timing', 'label': '88950536-4f3a-44aa-98a5-668ab43b93da', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x0000019BE5350440>]}
+[0m15:58:45.305381 [info ] [MainThread]: 
+[0m15:58:45.307902 [info ] [MainThread]: Concurrency: 4 threads (target='dev')
+[0m15:58:45.308918 [info ] [MainThread]: 
+[0m15:58:45.311300 [debug] [MainThread]: Acquiring new postgres connection 'master'
+[0m15:58:45.320371 [debug] [ThreadPool]: Acquiring new postgres connection 'list_modeling_lab_public'
+[0m15:58:50.647725 [debug] [ThreadPool]: Using postgres connection "list_modeling_lab_public"
+[0m15:58:50.647725 [debug] [ThreadPool]: On list_modeling_lab_public: /* {"app": "dbt", "dbt_version": "1.11.6", "profile_name": "modeling_lab", "target_name": "dev", "connection_name": "list_modeling_lab_public"} */
+select
+      'modeling_lab' as database,
+      tablename as name,
+      schemaname as schema,
+      'table' as type
+    from pg_tables
+    where schemaname ilike 'public'
+    union all
+    select
+      'modeling_lab' as database,
+      viewname as name,
+      schemaname as schema,
+      'view' as type
+    from pg_views
+    where schemaname ilike 'public'
+    union all
+    select
+      'modeling_lab' as database,
+      matviewname as name,
+      schemaname as schema,
+      'materialized_view' as type
+    from pg_matviews
+    where schemaname ilike 'public'
+  
+[0m15:58:50.648724 [debug] [ThreadPool]: Opening a new connection, currently in state init
+[0m15:58:53.371297 [debug] [ThreadPool]: Postgres adapter: Got a retryable error when attempting to open a postgres connection.
+1 attempts remaining. Retrying in 0 seconds.
+Error:
+could not translate host name "postgres" to address: Name or service not known
+
+[0m15:58:56.070593 [debug] [ThreadPool]: Postgres adapter: Error running SQL: /* {"app": "dbt", "dbt_version": "1.11.6", "profile_name": "modeling_lab", "target_name": "dev", "connection_name": "list_modeling_lab_public"} */
+select
+      'modeling_lab' as database,
+      tablename as name,
+      schemaname as schema,
+      'table' as type
+    from pg_tables
+    where schemaname ilike 'public'
+    union all
+    select
+      'modeling_lab' as database,
+      viewname as name,
+      schemaname as schema,
+      'view' as type
+    from pg_views
+    where schemaname ilike 'public'
+    union all
+    select
+      'modeling_lab' as database,
+      matviewname as name,
+      schemaname as schema,
+      'materialized_view' as type
+    from pg_matviews
+    where schemaname ilike 'public'
+  
+[0m15:58:56.071630 [debug] [ThreadPool]: Postgres adapter: Rolling back transaction.
+[0m15:58:56.071630 [debug] [ThreadPool]: Postgres adapter: Error running SQL: macro list_relations_without_caching
+[0m15:58:56.072608 [debug] [ThreadPool]: Postgres adapter: Rolling back transaction.
+[0m15:58:56.072608 [debug] [ThreadPool]: On list_modeling_lab_public: No close available on handle
+[0m15:58:56.075132 [debug] [MainThread]: Connection 'master' was properly closed.
+[0m15:58:56.075132 [debug] [MainThread]: Connection 'list_modeling_lab_public' was properly closed.
+[0m15:58:56.076132 [error] [MainThread]: Encountered an error:
+Database Error
+  could not translate host name "postgres" to address: Name or service not known
+  
+[0m15:58:56.077654 [warn ] [MainThread]: [[33mWARNING[0m][DeprecationsSummary]: Deprecated functionality
+Summary of encountered deprecations:
+- MissingArgumentsPropertyInGenericTestDeprecation: 6 occurrences
+To see all deprecation instances instead of just the first occurrence of each,
+run command again with the `--show-all-deprecations` flag. You may also need to
+run with `--no-partial-parse` as some deprecations are only encountered during
+parsing.
+[0m15:58:56.078666 [debug] [MainThread]: Command `dbt compile` failed at 15:58:56.078666 after 21.08 seconds
+[0m15:58:56.080180 [debug] [MainThread]: Sending event: {'category': 'dbt', 'action': 'invocation', 'label': 'end', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x0000019BE2CA57C0>, <snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x0000019BE50A83B0>, <snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x0000019BE2D5CF20>]}
+[0m15:58:56.080180 [debug] [MainThread]: Flushing usage events
+[0m15:58:56.647097 [debug] [MainThread]: An error was encountered while trying to flush usage events
+[0m21:02:08.662625 [debug] [MainThread]: Sending event: {'category': 'dbt', 'action': 'invocation', 'label': 'start', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x7ff9e6772050>, <snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x7ff9e6710850>, <snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x7ff9e6771f90>]}
+
+
+============================== 21:02:08.679378 | 82b170f4-9b8d-4ba6-b3f6-056d105672da ==============================
+[0m21:02:08.679378 [info ] [MainThread]: Running with dbt=1.11.6
+[0m21:02:08.682600 [debug] [MainThread]: running dbt with arguments {'printer_width': '80', 'log_format': 'default', 'log_path': '/app/transform/dbt/logs', 'profiles_dir': '/app/transform/dbt', 'use_colors': 'True', 'fail_fast': 'False', 'warn_error': 'None', 'target_path': 'None', 'no_print': 'None', 'introspect': 'True', 'indirect_selection': 'eager', 'write_json': 'True', 'empty': 'None', 'cache_selected_only': 'False', 'send_anonymous_usage_stats': 'True', 'invocation_command': 'dbt docs generate', 'quiet': 'False', 'partial_parse': 'True', 'use_experimental_parser': 'False', 'version_check': 'True', 'static_parser': 'True', 'warn_error_options': 'WarnErrorOptionsV2(error=[], warn=[], silence=[])', 'log_cache_events': 'False', 'debug': 'False'}
+[0m21:02:09.285398 [debug] [MainThread]: Sending event: {'category': 'dbt', 'action': 'project_id', 'label': '82b170f4-9b8d-4ba6-b3f6-056d105672da', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x7ff9e577f090>]}
+[0m21:02:09.715986 [debug] [MainThread]: Sending event: {'category': 'dbt', 'action': 'adapter_info', 'label': '82b170f4-9b8d-4ba6-b3f6-056d105672da', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x7ff9e9629150>]}
+[0m21:02:09.723689 [info ] [MainThread]: Registered adapter: postgres=1.10.0
+[0m21:02:10.111827 [debug] [MainThread]: checksum: ec27062d18352e9cfca161c166fcc73d2201661a23a3cf3c89196a27f32cfcb8, vars: {}, profile: , target: , version: 1.11.6
+[0m21:02:12.595337 [debug] [MainThread]: Partial parsing enabled: 198 files deleted, 198 files added, 0 files changed.
+[0m21:02:12.599044 [debug] [MainThread]: Partial parsing: added file: dbt_postgres://macros/utils/dateadd.sql
+[0m21:02:12.601255 [debug] [MainThread]: Partial parsing: added file: dbt://macros/get_custom_name/get_custom_alias.sql
+[0m21:02:12.603601 [debug] [MainThread]: Partial parsing: added file: dbt://macros/utils/length.sql
+[0m21:02:12.605737 [debug] [MainThread]: Partial parsing: added file: dbt_postgres://macros/timestamps.sql
+[0m21:02:12.608637 [debug] [MainThread]: Partial parsing: added file: dbt://macros/materializations/models/incremental/is_incremental.sql
+[0m21:02:12.611401 [debug] [MainThread]: Partial parsing: added file: dbt://macros/utils/intersect.sql
+[0m21:02:12.613512 [debug] [MainThread]: Partial parsing: added file: dbt_utils://macros/generic_tests/equality.sql
+[0m21:02:12.615772 [debug] [MainThread]: Partial parsing: added file: dbt://macros/materializations/models/view.sql
+[0m21:02:12.618496 [debug] [MainThread]: Partial parsing: added file: modeling_lab://models/staging/stg_olist__order_items.sql
+[0m21:02:12.620840 [debug] [MainThread]: Partial parsing: added file: dbt://macros/get_custom_name/get_custom_schema.sql
+[0m21:02:12.623320 [debug] [MainThread]: Partial parsing: added file: modeling_lab://models/marts/star/dim_date.sql
+[0m21:02:12.626326 [debug] [MainThread]: Partial parsing: added file: dbt://macros/relations/materialized_view/replace.sql
+[0m21:02:12.629059 [debug] [MainThread]: Partial parsing: added file: dbt_utils://macros/generic_tests/sequential_values.sql
+[0m21:02:12.632159 [debug] [MainThread]: Partial parsing: added file: dbt://macros/utils/replace.sql
+[0m21:02:12.634588 [debug] [MainThread]: Partial parsing: added file: dbt_utils://macros/sql/get_query_results_as_dict.sql
+[0m21:02:12.637446 [debug] [MainThread]: Partial parsing: added file: dbt_postgres://macros/relations/view/drop.sql
+[0m21:02:12.640729 [debug] [MainThread]: Partial parsing: added file: dbt_utils://macros/sql/haversine_distance.sql
+[0m21:02:12.642862 [debug] [MainThread]: Partial parsing: added file: dbt://macros/adapters/relation.sql
+[0m21:02:12.645117 [debug] [MainThread]: Partial parsing: added file: dbt_postgres://macros/utils/any_value.sql
+[0m21:02:12.647475 [debug] [MainThread]: Partial parsing: added file: dbt://macros/utils/cast_bool_to_text.sql
+[0m21:02:12.649912 [debug] [MainThread]: Partial parsing: added file: dbt_utils://macros/generic_tests/not_constant.sql
+[0m21:02:12.652120 [debug] [MainThread]: Partial parsing: added file: dbt_utils://macros/jinja_helpers/log_info.sql
+[0m21:02:12.654726 [debug] [MainThread]: Partial parsing: added file: dbt://macros/adapters/indexes.sql
+[0m21:02:12.657737 [debug] [MainThread]: Partial parsing: added file: dbt://macros/materializations/models/incremental/incremental.sql
+[0m21:02:12.660035 [debug] [MainThread]: Partial parsing: added file: dbt_postgres://macros/utils/last_day.sql
+[0m21:02:12.662276 [debug] [MainThread]: Partial parsing: added file: dbt://macros/utils/hash.sql
+[0m21:02:12.664730 [debug] [MainThread]: Partial parsing: added file: dbt_postgres://macros/utils/split_part.sql
+[0m21:02:12.667457 [debug] [MainThread]: Partial parsing: added file: dbt_postgres://macros/adapters.sql
+[0m21:02:12.670447 [debug] [MainThread]: Partial parsing: added file: dbt://macros/relations/drop_backup.sql
+[0m21:02:12.672749 [debug] [MainThread]: Partial parsing: added file: dbt_utils://macros/web/get_url_parameter.sql
+[0m21:02:12.674911 [debug] [MainThread]: Partial parsing: added file: dbt_postgres://macros/relations/materialized_view/describe.sql
+[0m21:02:12.677090 [debug] [MainThread]: Partial parsing: added file: dbt_utils://macros/generic_tests/unique_combination_of_columns.sql
+[0m21:02:12.679587 [debug] [MainThread]: Partial parsing: added file: dbt://macros/materializations/models/incremental/column_helpers.sql
+[0m21:02:12.681636 [debug] [MainThread]: Partial parsing: added file: dbt_utils://macros/sql/get_column_values.sql
+[0m21:02:12.683586 [debug] [MainThread]: Partial parsing: added file: modeling_lab://models/marts/star/dim_product.sql
+[0m21:02:12.686637 [debug] [MainThread]: Partial parsing: added file: dbt://macros/relations/materialized_view/refresh.sql
+[0m21:02:12.689023 [debug] [MainThread]: Partial parsing: added file: dbt_utils://macros/sql/safe_subtract.sql
+[0m21:02:12.691899 [debug] [MainThread]: Partial parsing: added file: dbt://macros/adapters/metadata.sql
+[0m21:02:12.699549 [debug] [MainThread]: Partial parsing: added file: dbt://macros/materializations/configs.sql
+[0m21:02:12.702369 [debug] [MainThread]: Partial parsing: added file: dbt://macros/relations/rename.sql
+[0m21:02:12.704533 [debug] [MainThread]: Partial parsing: added file: dbt_postgres://macros/materializations/incremental_strategies.sql
+[0m21:02:12.706763 [debug] [MainThread]: Partial parsing: added file: dbt_utils://macros/sql/get_tables_by_pattern_sql.sql
+[0m21:02:12.709849 [debug] [MainThread]: Partial parsing: added file: dbt://macros/relations/view/drop.sql
+[0m21:02:12.713305 [debug] [MainThread]: Partial parsing: added file: dbt://macros/relations/table/drop.sql
+[0m21:02:12.716505 [debug] [MainThread]: Partial parsing: added file: dbt://macros/utils/datediff.sql
+[0m21:02:12.719656 [debug] [MainThread]: Partial parsing: added file: dbt_utils://macros/generic_tests/not_null_proportion.sql
+[0m21:02:12.722443 [debug] [MainThread]: Partial parsing: added file: dbt://macros/generic_test_sql/relationships.sql
+[0m21:02:12.724778 [debug] [MainThread]: Partial parsing: added file: dbt_utils://macros/generic_tests/fewer_rows_than.sql
+[0m21:02:12.727028 [debug] [MainThread]: Partial parsing: added file: dbt://macros/materializations/functions/helpers.sql
+[0m21:02:12.729240 [debug] [MainThread]: Partial parsing: added file: modeling_lab://models/staging/stg_olist__geolocation.sql
+[0m21:02:12.732030 [debug] [MainThread]: Partial parsing: added file: dbt://docs/overview.md
+[0m21:02:12.734252 [debug] [MainThread]: Partial parsing: added file: dbt://macros/materializations/models/table.sql
+[0m21:02:12.736588 [debug] [MainThread]: Partial parsing: added file: dbt_utils://macros/sql/generate_series.sql
+[0m21:02:12.738923 [debug] [MainThread]: Partial parsing: added file: modeling_lab://models/staging/stg_olist__sellers.sql
+[0m21:02:12.741291 [debug] [MainThread]: Partial parsing: added file: dbt://macros/utils/dateadd.sql
+[0m21:02:12.743582 [debug] [MainThread]: Partial parsing: added file: dbt_utils://macros/sql/generate_surrogate_key.sql
+[0m21:02:12.745906 [debug] [MainThread]: Partial parsing: added file: dbt://macros/materializations/seeds/helpers.sql
+[0m21:02:12.748973 [debug] [MainThread]: Partial parsing: added file: dbt://macros/relations/materialized_view/create.sql
+[0m21:02:12.751335 [debug] [MainThread]: Partial parsing: added file: dbt://macros/adapters/freshness.sql
+[0m21:02:12.753908 [debug] [MainThread]: Partial parsing: added file: dbt_utils://macros/generic_tests/recency.sql
+[0m21:02:12.756302 [debug] [MainThread]: Partial parsing: added file: dbt://macros/relations/table/rename.sql
+[0m21:02:12.759153 [debug] [MainThread]: Partial parsing: added file: modeling_lab://models/staging/stg_olist__orders.sql
+[0m21:02:12.761578 [debug] [MainThread]: Partial parsing: added file: dbt://macros/relations/drop.sql
+[0m21:02:12.764278 [debug] [MainThread]: Partial parsing: added file: dbt_utils://macros/jinja_helpers/slugify.sql
+[0m21:02:12.767017 [debug] [MainThread]: Partial parsing: added file: dbt_utils://macros/sql/get_filtered_columns_in_relation.sql
+[0m21:02:12.769485 [debug] [MainThread]: Partial parsing: added file: dbt_utils://macros/sql/get_table_types_sql.sql
+[0m21:02:12.771862 [debug] [MainThread]: Partial parsing: added file: dbt_utils://macros/sql/pivot.sql
+[0m21:02:12.774107 [debug] [MainThread]: Partial parsing: added file: dbt_postgres://macros/relations/table/rename.sql
+[0m21:02:12.776446 [debug] [MainThread]: Partial parsing: added file: dbt://macros/etc/datetime.sql
+[0m21:02:12.778918 [debug] [MainThread]: Partial parsing: added file: dbt://macros/adapters/schema.sql
+[0m21:02:12.781611 [debug] [MainThread]: Partial parsing: added file: dbt_utils://macros/sql/groupby.sql
+[0m21:02:12.784038 [debug] [MainThread]: Partial parsing: added file: dbt://macros/adapters/timestamps.sql
+[0m21:02:12.786707 [debug] [MainThread]: Partial parsing: added file: dbt_postgres://macros/utils/datediff.sql
+[0m21:02:12.789848 [debug] [MainThread]: Partial parsing: added file: dbt://macros/utils/right.sql
+[0m21:02:12.792551 [debug] [MainThread]: Partial parsing: added file: dbt://macros/materializations/models/clone/create_or_replace_clone.sql
+[0m21:02:12.794950 [debug] [MainThread]: Partial parsing: added file: dbt://macros/utils/listagg.sql
+[0m21:02:12.797831 [debug] [MainThread]: Partial parsing: added file: dbt://macros/materializations/snapshots/snapshot_merge.sql
+[0m21:02:12.800310 [debug] [MainThread]: Partial parsing: added file: dbt://macros/utils/cast.sql
+[0m21:02:12.802653 [debug] [MainThread]: Partial parsing: added file: modeling_lab://models/staging/stg_olist__category_translations.sql
+[0m21:02:12.804809 [debug] [MainThread]: Partial parsing: added file: dbt://macros/adapters/columns.sql
+[0m21:02:12.806909 [debug] [MainThread]: Partial parsing: added file: dbt://macros/materializations/models/incremental/strategies.sql
+[0m21:02:12.809084 [debug] [MainThread]: Partial parsing: added file: dbt_postgres://macros/relations/materialized_view/create.sql
+[0m21:02:12.811792 [debug] [MainThread]: Partial parsing: added file: dbt://macros/utils/date_trunc.sql
+[0m21:02:12.813845 [debug] [MainThread]: Partial parsing: added file: dbt://macros/utils/array_append.sql
+[0m21:02:12.816141 [debug] [MainThread]: Partial parsing: added file: dbt://macros/utils/array_concat.sql
+[0m21:02:12.818729 [debug] [MainThread]: Partial parsing: added file: dbt://macros/utils/last_day.sql
+[0m21:02:12.820930 [debug] [MainThread]: Partial parsing: added file: dbt_postgres://macros/relations/table/drop.sql
+[0m21:02:12.823367 [debug] [MainThread]: Partial parsing: added file: dbt_utils://macros/sql/nullcheck.sql
+[0m21:02:12.825917 [debug] [MainThread]: Partial parsing: added file: dbt://macros/materializations/models/incremental/on_schema_change.sql
+[0m21:02:12.829069 [debug] [MainThread]: Partial parsing: added file: dbt_utils://macros/sql/union.sql
+[0m21:02:12.831438 [debug] [MainThread]: Partial parsing: added file: dbt://macros/relations/view/rename.sql
+[0m21:02:12.833764 [debug] [MainThread]: Partial parsing: added file: dbt://macros/materializations/hooks.sql
+[0m21:02:12.836323 [debug] [MainThread]: Partial parsing: added file: modeling_lab://models/staging/stg_olist__order_payments.sql
+[0m21:02:12.839040 [debug] [MainThread]: Partial parsing: added file: dbt://macros/materializations/models/materialized_view.sql
+[0m21:02:12.841715 [debug] [MainThread]: Partial parsing: added file: dbt_postgres://macros/relations/materialized_view/alter.sql
+[0m21:02:12.845387 [debug] [MainThread]: Partial parsing: added file: dbt_utils://macros/generic_tests/relationships_where.sql
+[0m21:02:12.848128 [debug] [MainThread]: Partial parsing: added file: dbt://macros/relations/view/replace.sql
+[0m21:02:12.850994 [debug] [MainThread]: Partial parsing: added file: dbt_utils://macros/sql/get_relations_by_pattern.sql
+[0m21:02:12.853474 [debug] [MainThread]: Partial parsing: added file: dbt_postgres://macros/relations/view/rename.sql
+[0m21:02:12.855804 [debug] [MainThread]: Partial parsing: added file: dbt://macros/materializations/models/clone/can_clone_table.sql
+[0m21:02:12.858676 [debug] [MainThread]: Partial parsing: added file: dbt://macros/relations/replace.sql
+[0m21:02:12.861941 [debug] [MainThread]: Partial parsing: added file: modeling_lab://models/staging/src_olist.yml
+[0m21:02:12.864243 [debug] [MainThread]: Partial parsing: added file: dbt://macros/adapters/persist_docs.sql
+[0m21:02:12.866831 [debug] [MainThread]: Partial parsing: added file: dbt://macros/materializations/snapshots/strategies.sql
+[0m21:02:12.869364 [debug] [MainThread]: Partial parsing: added file: dbt://macros/materializations/tests/helpers.sql
+[0m21:02:12.872094 [debug] [MainThread]: Partial parsing: added file: dbt://macros/relations/materialized_view/rename.sql
+[0m21:02:12.874906 [debug] [MainThread]: Partial parsing: added file: dbt://macros/get_custom_name/get_custom_database.sql
+[0m21:02:12.877834 [debug] [MainThread]: Partial parsing: added file: dbt_utils://macros/sql/date_spine.sql
+[0m21:02:12.880452 [debug] [MainThread]: Partial parsing: added file: modeling_lab://models/marts/star/fct_order_item.sql
+[0m21:02:12.883288 [debug] [MainThread]: Partial parsing: added file: dbt_postgres://macros/materializations/snapshot_merge.sql
+[0m21:02:12.885886 [debug] [MainThread]: Partial parsing: added file: dbt_postgres://macros/relations/materialized_view/rename.sql
+[0m21:02:12.888730 [debug] [MainThread]: Partial parsing: added file: dbt_utils://macros/sql/unpivot.sql
+[0m21:02:12.891243 [debug] [MainThread]: Partial parsing: added file: modeling_lab://models/marts/star/dim_customer.sql
+[0m21:02:12.893776 [debug] [MainThread]: Partial parsing: added file: dbt://macros/relations/create.sql
+[0m21:02:12.896328 [debug] [MainThread]: Partial parsing: added file: dbt://macros/relations/view/create.sql
+[0m21:02:12.899072 [debug] [MainThread]: Partial parsing: added file: dbt://macros/utils/escape_single_quotes.sql
+[0m21:02:12.902463 [debug] [MainThread]: Partial parsing: added file: dbt://macros/utils/safe_cast.sql
+[0m21:02:12.905533 [debug] [MainThread]: Partial parsing: added file: dbt://macros/materializations/snapshots/helpers.sql
+[0m21:02:12.908084 [debug] [MainThread]: Partial parsing: added file: dbt://macros/generic_test_sql/unique.sql
+[0m21:02:12.910526 [debug] [MainThread]: Partial parsing: added file: dbt://macros/generic_test_sql/not_null.sql
+[0m21:02:12.912538 [debug] [MainThread]: Partial parsing: added file: dbt://macros/materializations/tests/unit.sql
+[0m21:02:12.914691 [debug] [MainThread]: Partial parsing: added file: dbt://macros/relations/create_backup.sql
+[0m21:02:12.917127 [debug] [MainThread]: Partial parsing: added file: dbt_utils://macros/generic_tests/at_least_one.sql
+[0m21:02:12.920602 [debug] [MainThread]: Partial parsing: added file: dbt://macros/relations/create_intermediate.sql
+[0m21:02:12.922930 [debug] [MainThread]: Partial parsing: added file: dbt://macros/generic_test_sql/accepted_values.sql
+[0m21:02:12.925552 [debug] [MainThread]: Partial parsing: added file: dbt_utils://macros/sql/get_relations_by_prefix.sql
+[0m21:02:12.928024 [debug] [MainThread]: Partial parsing: added file: dbt://macros/materializations/snapshots/snapshot.sql
+[0m21:02:12.930252 [debug] [MainThread]: Partial parsing: added file: dbt://macros/utils/split_part.sql
+[0m21:02:12.932469 [debug] [MainThread]: Partial parsing: added file: dbt_utils://macros/sql/nullcheck_table.sql
+[0m21:02:12.934601 [debug] [MainThread]: Partial parsing: added file: dbt://macros/etc/statement.sql
+[0m21:02:12.937613 [debug] [MainThread]: Partial parsing: added file: dbt://macros/utils/bool_or.sql
+[0m21:02:12.939903 [debug] [MainThread]: Partial parsing: added file: dbt_postgres://macros/relations/view/replace.sql
+[0m21:02:12.941939 [debug] [MainThread]: Partial parsing: added file: dbt://macros/relations/table/create.sql
+[0m21:02:12.945860 [debug] [MainThread]: Partial parsing: added file: dbt://macros/relations/materialized_view/alter.sql
+[0m21:02:12.949725 [debug] [MainThread]: Partial parsing: added file: dbt://macros/python_model/python.sql
+[0m21:02:12.953798 [debug] [MainThread]: Partial parsing: added file: dbt://macros/materializations/tests/where_subquery.sql
+[0m21:02:12.956175 [debug] [MainThread]: Partial parsing: added file: dbt://macros/relations/schema.sql
+[0m21:02:12.958393 [debug] [MainThread]: Partial parsing: added file: dbt_utils://macros/jinja_helpers/_is_relation.sql
+[0m21:02:12.960596 [debug] [MainThread]: Partial parsing: added file: dbt://macros/relations/rename_intermediate.sql
+[0m21:02:12.962406 [debug] [MainThread]: Partial parsing: added file: dbt://macros/utils/generate_series.sql
+[0m21:02:12.964432 [debug] [MainThread]: Partial parsing: added file: dbt_utils://macros/sql/get_tables_by_prefix_sql.sql
+[0m21:02:12.967333 [debug] [MainThread]: Partial parsing: added file: modeling_lab://models/staging/schema.yml
+[0m21:02:12.969732 [debug] [MainThread]: Partial parsing: added file: dbt_utils://macros/jinja_helpers/pretty_time.sql
+[0m21:02:12.971671 [debug] [MainThread]: Partial parsing: added file: dbt_utils://macros/generic_tests/expression_is_true.sql
+[0m21:02:12.973824 [debug] [MainThread]: Partial parsing: added file: dbt_postgres://macros/catalog.sql
+[0m21:02:12.976172 [debug] [MainThread]: Partial parsing: added file: dbt://macros/adapters/apply_grants.sql
+[0m21:02:12.978765 [debug] [MainThread]: Partial parsing: added file: dbt_utils://macros/jinja_helpers/pretty_log_format.sql
+[0m21:02:12.980961 [debug] [MainThread]: Partial parsing: added file: dbt_utils://macros/generic_tests/accepted_range.sql
+[0m21:02:12.983385 [debug] [MainThread]: Partial parsing: added file: dbt://macros/adapters/validate_sql.sql
+[0m21:02:12.985647 [debug] [MainThread]: Partial parsing: added file: dbt_utils://macros/jinja_helpers/_is_ephemeral.sql
+[0m21:02:12.987909 [debug] [MainThread]: Partial parsing: added file: dbt://macros/materializations/functions/aggregate.sql
+[0m21:02:12.990242 [debug] [MainThread]: Partial parsing: added file: dbt://macros/materializations/tests/test.sql
+[0m21:02:12.992657 [debug] [MainThread]: Partial parsing: added file: dbt://macros/utils/position.sql
+[0m21:02:12.994735 [debug] [MainThread]: Partial parsing: added file: dbt_utils://macros/web/get_url_host.sql
+[0m21:02:12.997079 [debug] [MainThread]: Partial parsing: added file: dbt_postgres://macros/materializations/functions/scalar.sql
+[0m21:02:12.999624 [debug] [MainThread]: Partial parsing: added file: dbt://macros/unit_test_sql/get_fixture_sql.sql
+[0m21:02:13.001670 [debug] [MainThread]: Partial parsing: added file: dbt://macros/relations/column/columns_spec_ddl.sql
+[0m21:02:13.004248 [debug] [MainThread]: Partial parsing: added file: dbt_utils://macros/generic_tests/equal_rowcount.sql
+[0m21:02:13.006447 [debug] [MainThread]: Partial parsing: added file: dbt_utils://macros/generic_tests/not_empty_string.sql
+[0m21:02:13.008665 [debug] [MainThread]: Partial parsing: added file: dbt_utils://macros/sql/deduplicate.sql
+[0m21:02:13.010680 [debug] [MainThread]: Partial parsing: added file: dbt://tests/generic/builtin.sql
+[0m21:02:13.012419 [debug] [MainThread]: Partial parsing: added file: dbt://macros/utils/concat.sql
+[0m21:02:13.014694 [debug] [MainThread]: Partial parsing: added file: modeling_lab://models/staging/stg_olist__products.sql
+[0m21:02:13.017181 [debug] [MainThread]: Partial parsing: added file: dbt_utils://macros/sql/surrogate_key.sql
+[0m21:02:13.019767 [debug] [MainThread]: Partial parsing: added file: dbt://macros/materializations/functions/function.sql
+[0m21:02:13.022475 [debug] [MainThread]: Partial parsing: added file: dbt_utils://macros/sql/star.sql
+[0m21:02:13.025558 [debug] [MainThread]: Partial parsing: added file: dbt_postgres://macros/relations.sql
+[0m21:02:13.028922 [debug] [MainThread]: Partial parsing: added file: dbt_postgres://macros/relations/table/replace.sql
+[0m21:02:13.031240 [debug] [MainThread]: Partial parsing: added file: dbt://macros/utils/date_spine.sql
+[0m21:02:13.033272 [debug] [MainThread]: Partial parsing: added file: dbt://macros/utils/literal.sql
+[0m21:02:13.035521 [debug] [MainThread]: Partial parsing: added file: dbt://macros/relations/table/replace.sql
+[0m21:02:13.037718 [debug] [MainThread]: Partial parsing: added file: dbt_utils://macros/sql/safe_add.sql
+[0m21:02:13.040048 [debug] [MainThread]: Partial parsing: added file: dbt://macros/utils/any_value.sql
+[0m21:02:13.041811 [debug] [MainThread]: Partial parsing: added file: dbt://macros/utils/data_types.sql
+[0m21:02:13.044193 [debug] [MainThread]: Partial parsing: added file: dbt://macros/utils/date.sql
+[0m21:02:13.048002 [debug] [MainThread]: Partial parsing: added file: dbt://macros/adapters/show.sql
+[0m21:02:13.050393 [debug] [MainThread]: Partial parsing: added file: dbt_postgres://macros/relations/materialized_view/refresh.sql
+[0m21:02:13.052539 [debug] [MainThread]: Partial parsing: added file: dbt_utils://macros/sql/safe_divide.sql
+[0m21:02:13.054505 [debug] [MainThread]: Partial parsing: added file: dbt://macros/relations/materialized_view/drop.sql
+[0m21:02:13.056656 [debug] [MainThread]: Partial parsing: added file: dbt_utils://macros/generic_tests/cardinality_equality.sql
+[0m21:02:13.058996 [debug] [MainThread]: Partial parsing: added file: dbt_utils://macros/web/get_url_path.sql
+[0m21:02:13.061826 [debug] [MainThread]: Partial parsing: added file: dbt://macros/materializations/models/clone/clone.sql
+[0m21:02:13.064646 [debug] [MainThread]: Partial parsing: added file: dbt://macros/materializations/functions/scalar.sql
+[0m21:02:13.067062 [debug] [MainThread]: Partial parsing: added file: dbt://macros/materializations/models/incremental/merge.sql
+[0m21:02:13.069242 [debug] [MainThread]: Partial parsing: added file: dbt_utils://macros/generic_tests/mutually_exclusive_ranges.sql
+[0m21:02:13.071500 [debug] [MainThread]: Partial parsing: added file: dbt_utils://macros/sql/get_single_value.sql
+[0m21:02:13.074021 [debug] [MainThread]: Partial parsing: added file: dbt://macros/utils/array_construct.sql
+[0m21:02:13.076211 [debug] [MainThread]: Partial parsing: added file: modeling_lab://models/staging/stg_olist__customers.sql
+[0m21:02:13.078961 [debug] [MainThread]: Partial parsing: added file: modeling_lab://models/marts/star/schema.yml
+[0m21:02:13.081270 [debug] [MainThread]: Partial parsing: added file: modeling_lab://models/staging/stg_olist__order_reviews.sql
+[0m21:02:13.083466 [debug] [MainThread]: Partial parsing: added file: dbt_postgres://macros/utils/columns_spec_ddl.sql
+[0m21:02:13.085631 [debug] [MainThread]: Partial parsing: added file: dbt://macros/utils/equals.sql
+[0m21:02:13.088074 [debug] [MainThread]: Partial parsing: added file: dbt_utils://macros/sql/width_bucket.sql
+[0m21:02:13.090279 [debug] [MainThread]: Partial parsing: added file: dbt://macros/materializations/seeds/seed.sql
+[0m21:02:13.092612 [debug] [MainThread]: Partial parsing: added file: dbt_postgres://macros/utils/listagg.sql
+[0m21:02:13.094859 [debug] [MainThread]: Partial parsing: added file: dbt_postgres://macros/relations/materialized_view/drop.sql
+[0m21:02:13.097034 [debug] [MainThread]: Partial parsing: added file: dbt_utils://macros/generic_tests/not_accepted_values.sql
+[0m21:02:13.099842 [debug] [MainThread]: Partial parsing: added file: dbt://macros/utils/except.sql
+[0m21:02:13.102357 [info ] [MainThread]: Unable to do partial parsing because an error occurred. Switching to full reparse.
+[0m21:02:13.109587 [debug] [MainThread]: Partial parsing exception processing file modeling_lab://models\marts\star\schema.yml
+[0m21:02:13.112244 [debug] [MainThread]: PP exception info: {'location': 'line 313 in update_in_saved', 'code': 'new_source_file = deepcopy(self.new_files[file_id])', 'traceback': 'Traceback (most recent call last):\n  File "/usr/local/lib/python3.11/site-packages/dbt/parser/manifest.py", line 554, in safe_update_project_parser_files_partially\n    project_parser_files = self.partial_parser.get_parsing_files()\n                           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File "/usr/local/lib/python3.11/site-packages/dbt/parser/partial.py", line 198, in get_parsing_files\n    self.delete_schema_file(file_id)\n  File "/usr/local/lib/python3.11/site-packages/dbt/parser/partial.py", line 717, in delete_schema_file\n    self.handle_schema_file_changes(saved_schema_file, saved_yaml_dict, new_yaml_dict)\n  File "/usr/local/lib/python3.11/site-packages/dbt/parser/partial.py", line 743, in handle_schema_file_changes\n    self.delete_schema_mssa_links(schema_file, dict_key, elem)\n  File "/usr/local/lib/python3.11/site-packages/dbt/parser/partial.py", line 911, in delete_schema_mssa_links\n    self._delete_schema_mssa_links(schema_file, dict_key, elem, elem_unique_ids)\n  File "/usr/local/lib/python3.11/site-packages/dbt/parser/partial.py", line 964, in _delete_schema_mssa_links\n    self.remove_tests(schema_file, dict_key, elem["name"])\n  File "/usr/local/lib/python3.11/site-packages/dbt/parser/partial.py", line 982, in remove_tests\n    self.update_in_saved(attached_node.file_id)\n  File "/usr/local/lib/python3.11/site-packages/dbt/parser/partial.py", line 313, in update_in_saved\n    new_source_file = deepcopy(self.new_files[file_id])\n                               ~~~~~~~~~~~~~~^^^^^^^^^\nKeyError: \'modeling_lab://models\\\\marts\\\\star\\\\fct_order_item.sql\'\n', 'exception': "KeyError: 'modeling_lab://models\\\\marts\\\\star\\\\fct_order_item.sql'", 'parse_file_type': 'schema'}
+[0m21:02:13.115164 [debug] [MainThread]: Sending event: {'category': 'dbt', 'action': 'partial_parser', 'label': '82b170f4-9b8d-4ba6-b3f6-056d105672da', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x7ff9e5345e10>]}
+[0m21:02:16.942523 [warn ] [MainThread]: [[33mWARNING[0m][MissingArgumentsPropertyInGenericTestDeprecation]: Deprecated
+functionality
+Found top-level arguments to test `relationships` defined on 'fct_order_item' in
+package 'modeling_lab' (models/marts/star/schema.yml). Arguments to generic
+tests should be nested under the `arguments` property.
+[0m21:02:16.945845 [debug] [MainThread]: Sending event: {'category': 'dbt', 'action': 'deprecation', 'label': '82b170f4-9b8d-4ba6-b3f6-056d105672da', 'property_': 'warn', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x7ff9e2d4d3d0>]}
+[0m21:02:17.800566 [warn ] [MainThread]: [[33mWARNING[0m]: Configuration paths exist in your dbt_project.yml file which do not apply to any resources.
+There are 2 unused configuration paths:
+- models.modeling_lab.dv
+- models.modeling_lab.core_3nf
+[0m21:02:17.973890 [debug] [MainThread]: Sending event: {'category': 'dbt', 'action': 'load_project', 'label': '82b170f4-9b8d-4ba6-b3f6-056d105672da', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x7ff9e771d910>]}
+[0m21:02:18.087455 [debug] [MainThread]: Sending event: {'category': 'dbt', 'action': 'resource_counts', 'label': '82b170f4-9b8d-4ba6-b3f6-056d105672da', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x7ff9e4b7fa50>]}
+[0m21:02:18.092072 [info ] [MainThread]: Found 13 models, 37 data tests, 9 sources, 578 macros
+[0m21:02:18.098950 [debug] [MainThread]: Sending event: {'category': 'dbt', 'action': 'runnable_timing', 'label': '82b170f4-9b8d-4ba6-b3f6-056d105672da', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x7ff9e4bfc9d0>]}
+[0m21:02:18.116425 [info ] [MainThread]: 
+[0m21:02:18.124522 [info ] [MainThread]: Concurrency: 4 threads (target='dev')
+[0m21:02:18.128887 [info ] [MainThread]: 
+[0m21:02:18.139614 [debug] [MainThread]: Acquiring new postgres connection 'master'
+[0m21:02:18.160896 [debug] [ThreadPool]: Acquiring new postgres connection 'list_modeling_lab_public'
+[0m21:02:18.393619 [debug] [ThreadPool]: Using postgres connection "list_modeling_lab_public"
+[0m21:02:18.396687 [debug] [ThreadPool]: On list_modeling_lab_public: /* {"app": "dbt", "dbt_version": "1.11.6", "profile_name": "modeling_lab", "target_name": "dev", "connection_name": "list_modeling_lab_public"} */
+select
+      'modeling_lab' as database,
+      tablename as name,
+      schemaname as schema,
+      'table' as type
+    from pg_tables
+    where schemaname ilike 'public'
+    union all
+    select
+      'modeling_lab' as database,
+      viewname as name,
+      schemaname as schema,
+      'view' as type
+    from pg_views
+    where schemaname ilike 'public'
+    union all
+    select
+      'modeling_lab' as database,
+      matviewname as name,
+      schemaname as schema,
+      'materialized_view' as type
+    from pg_matviews
+    where schemaname ilike 'public'
+  
+[0m21:02:18.399440 [debug] [ThreadPool]: Opening a new connection, currently in state init
+[0m21:02:18.478489 [debug] [ThreadPool]: SQL status: SELECT 13 in 0.079 seconds
+[0m21:02:18.484912 [debug] [ThreadPool]: On list_modeling_lab_public: ROLLBACK
+[0m21:02:18.488698 [debug] [ThreadPool]: On list_modeling_lab_public: Close
+[0m21:02:18.517290 [debug] [MainThread]: Using postgres connection "master"
+[0m21:02:18.520952 [debug] [MainThread]: On master: /* {"app": "dbt", "dbt_version": "1.11.6", "profile_name": "modeling_lab", "target_name": "dev", "connection_name": "master"} */
+select distinct
+        dependent_namespace.nspname as dependent_schema,
+        dependent_class.relname as dependent_name,
+        referenced_namespace.nspname as referenced_schema,
+        referenced_class.relname as referenced_name
+
+    -- Query for views: views are entries in pg_class with an entry in pg_rewrite, but we avoid
+    -- a seq scan on pg_rewrite by leveraging the fact there is an "internal" row in pg_depend for
+    -- the view...
+    from pg_class as dependent_class
+    join pg_namespace as dependent_namespace on dependent_namespace.oid = dependent_class.relnamespace
+    join pg_depend as dependent_depend on dependent_depend.refobjid = dependent_class.oid
+        and dependent_depend.classid = 'pg_rewrite'::regclass
+        and dependent_depend.refclassid = 'pg_class'::regclass
+        and dependent_depend.deptype = 'i'
+
+    -- ... and via pg_depend (that has a row per column, hence the need for "distinct" above, and
+    -- making sure to exclude the internal row to avoid a view appearing to depend on itself)...
+    join pg_depend as joining_depend on joining_depend.objid = dependent_depend.objid
+        and joining_depend.classid = 'pg_rewrite'::regclass
+        and joining_depend.refclassid = 'pg_class'::regclass
+        and joining_depend.refobjid != dependent_depend.refobjid
+
+    -- ... we can find the tables they query from in pg_class, but excluding system tables. Note we
+    -- don't need need to exclude _dependent_ system tables, because they only query from other
+    -- system tables, and so are automatically excluded by excluding _referenced_ system tables
+    join pg_class as referenced_class on referenced_class.oid = joining_depend.refobjid
+    join pg_namespace as referenced_namespace on referenced_namespace.oid = referenced_class.relnamespace
+        and referenced_namespace.nspname != 'information_schema'
+        and referenced_namespace.nspname not like 'pg\_%'
+
+    order by
+        dependent_schema, dependent_name, referenced_schema, referenced_name;
+[0m21:02:18.524557 [debug] [MainThread]: Opening a new connection, currently in state init
+[0m21:02:18.569450 [debug] [MainThread]: SQL status: SELECT 9 in 0.045 seconds
+[0m21:02:18.574436 [debug] [MainThread]: Sending event: {'category': 'dbt', 'action': 'runnable_timing', 'label': '82b170f4-9b8d-4ba6-b3f6-056d105672da', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x7ff9e4bf1710>]}
+[0m21:02:18.577485 [debug] [MainThread]: On master: ROLLBACK
+[0m21:02:18.580540 [debug] [MainThread]: On master: Close
+[0m21:02:18.607941 [debug] [Thread-1 (]: Began running node model.modeling_lab.dim_date
+[0m21:02:18.609670 [debug] [Thread-2 (]: Began running node model.modeling_lab.stg_olist__category_translations
+[0m21:02:18.611119 [debug] [Thread-3 (]: Began running node model.modeling_lab.stg_olist__customers
+[0m21:02:18.612501 [debug] [Thread-4 (]: Began running node model.modeling_lab.stg_olist__geolocation
+[0m21:02:18.615083 [debug] [Thread-1 (]: Re-using an available connection from the pool (formerly list_modeling_lab_public, now model.modeling_lab.dim_date)
+[0m21:02:18.620043 [debug] [Thread-2 (]: Acquiring new postgres connection 'model.modeling_lab.stg_olist__category_translations'
+[0m21:02:18.623921 [debug] [Thread-3 (]: Acquiring new postgres connection 'model.modeling_lab.stg_olist__customers'
+[0m21:02:18.627494 [debug] [Thread-4 (]: Acquiring new postgres connection 'model.modeling_lab.stg_olist__geolocation'
+[0m21:02:18.630720 [debug] [Thread-1 (]: Began compiling node model.modeling_lab.dim_date
+[0m21:02:18.633404 [debug] [Thread-2 (]: Began compiling node model.modeling_lab.stg_olist__category_translations
+[0m21:02:18.637054 [debug] [Thread-3 (]: Began compiling node model.modeling_lab.stg_olist__customers
+[0m21:02:18.639643 [debug] [Thread-4 (]: Began compiling node model.modeling_lab.stg_olist__geolocation
+[0m21:02:18.658846 [debug] [Thread-1 (]: Writing injected SQL for node "model.modeling_lab.dim_date"
+[0m21:02:18.669409 [debug] [Thread-2 (]: Writing injected SQL for node "model.modeling_lab.stg_olist__category_translations"
+[0m21:02:18.680470 [debug] [Thread-3 (]: Writing injected SQL for node "model.modeling_lab.stg_olist__customers"
+[0m21:02:18.692340 [debug] [Thread-4 (]: Writing injected SQL for node "model.modeling_lab.stg_olist__geolocation"
+[0m21:02:18.711382 [debug] [Thread-3 (]: Began executing node model.modeling_lab.stg_olist__customers
+[0m21:02:18.716065 [debug] [Thread-3 (]: Finished running node model.modeling_lab.stg_olist__customers
+[0m21:02:18.718381 [debug] [Thread-2 (]: Began executing node model.modeling_lab.stg_olist__category_translations
+[0m21:02:18.721458 [debug] [Thread-3 (]: Began running node model.modeling_lab.stg_olist__order_items
+[0m21:02:18.725100 [debug] [Thread-1 (]: Began executing node model.modeling_lab.dim_date
+[0m21:02:18.734299 [debug] [Thread-2 (]: Finished running node model.modeling_lab.stg_olist__category_translations
+[0m21:02:18.735845 [debug] [Thread-4 (]: Began executing node model.modeling_lab.stg_olist__geolocation
+[0m21:02:18.742838 [debug] [Thread-3 (]: Re-using an available connection from the pool (formerly model.modeling_lab.stg_olist__customers, now model.modeling_lab.stg_olist__order_items)
+[0m21:02:18.747757 [debug] [Thread-1 (]: Finished running node model.modeling_lab.dim_date
+[0m21:02:18.751245 [debug] [Thread-2 (]: Began running node model.modeling_lab.stg_olist__order_payments
+[0m21:02:18.755073 [debug] [Thread-4 (]: Finished running node model.modeling_lab.stg_olist__geolocation
+[0m21:02:18.758774 [debug] [Thread-3 (]: Began compiling node model.modeling_lab.stg_olist__order_items
+[0m21:02:18.762041 [debug] [Thread-1 (]: Began running node model.modeling_lab.stg_olist__order_reviews
+[0m21:02:18.768350 [debug] [Thread-2 (]: Re-using an available connection from the pool (formerly model.modeling_lab.stg_olist__category_translations, now model.modeling_lab.stg_olist__order_payments)
+[0m21:02:18.772005 [debug] [Thread-4 (]: Began running node model.modeling_lab.stg_olist__orders
+[0m21:02:18.786609 [debug] [Thread-3 (]: Writing injected SQL for node "model.modeling_lab.stg_olist__order_items"
+[0m21:02:18.792008 [debug] [Thread-1 (]: Re-using an available connection from the pool (formerly model.modeling_lab.dim_date, now model.modeling_lab.stg_olist__order_reviews)
+[0m21:02:18.795431 [debug] [Thread-2 (]: Began compiling node model.modeling_lab.stg_olist__order_payments
+[0m21:02:18.799498 [debug] [Thread-4 (]: Re-using an available connection from the pool (formerly model.modeling_lab.stg_olist__geolocation, now model.modeling_lab.stg_olist__orders)
+[0m21:02:18.804819 [debug] [Thread-1 (]: Began compiling node model.modeling_lab.stg_olist__order_reviews
+[0m21:02:18.817223 [debug] [Thread-2 (]: Writing injected SQL for node "model.modeling_lab.stg_olist__order_payments"
+[0m21:02:18.819891 [debug] [Thread-4 (]: Began compiling node model.modeling_lab.stg_olist__orders
+[0m21:02:18.836193 [debug] [Thread-1 (]: Writing injected SQL for node "model.modeling_lab.stg_olist__order_reviews"
+[0m21:02:18.840774 [debug] [Thread-3 (]: Began executing node model.modeling_lab.stg_olist__order_items
+[0m21:02:18.853886 [debug] [Thread-4 (]: Writing injected SQL for node "model.modeling_lab.stg_olist__orders"
+[0m21:02:18.861853 [debug] [Thread-3 (]: Finished running node model.modeling_lab.stg_olist__order_items
+[0m21:02:18.864999 [debug] [Thread-2 (]: Began executing node model.modeling_lab.stg_olist__order_payments
+[0m21:02:18.868398 [debug] [Thread-1 (]: Began executing node model.modeling_lab.stg_olist__order_reviews
+[0m21:02:18.871509 [debug] [Thread-3 (]: Began running node model.modeling_lab.stg_olist__products
+[0m21:02:18.877134 [debug] [Thread-2 (]: Finished running node model.modeling_lab.stg_olist__order_payments
+[0m21:02:18.883224 [debug] [Thread-1 (]: Finished running node model.modeling_lab.stg_olist__order_reviews
+[0m21:02:18.885206 [debug] [Thread-4 (]: Began executing node model.modeling_lab.stg_olist__orders
+[0m21:02:18.899059 [debug] [Thread-3 (]: Re-using an available connection from the pool (formerly model.modeling_lab.stg_olist__order_items, now model.modeling_lab.stg_olist__products)
+[0m21:02:18.903076 [debug] [Thread-2 (]: Began running node model.modeling_lab.stg_olist__sellers
+[0m21:02:18.906725 [debug] [Thread-1 (]: Began running node test.modeling_lab.source_not_null_olist_customers_customer_id.1d007d2aad
+[0m21:02:18.910628 [debug] [Thread-4 (]: Finished running node model.modeling_lab.stg_olist__orders
+[0m21:02:18.913355 [debug] [Thread-3 (]: Began compiling node model.modeling_lab.stg_olist__products
+[0m21:02:18.916549 [debug] [Thread-2 (]: Re-using an available connection from the pool (formerly model.modeling_lab.stg_olist__order_payments, now model.modeling_lab.stg_olist__sellers)
+[0m21:02:18.919249 [debug] [Thread-1 (]: Re-using an available connection from the pool (formerly model.modeling_lab.stg_olist__order_reviews, now test.modeling_lab.source_not_null_olist_customers_customer_id.1d007d2aad)
+[0m21:02:18.922937 [debug] [Thread-4 (]: Began running node test.modeling_lab.source_not_null_olist_order_items_order_id.6a31f38874
+[0m21:02:18.933753 [debug] [Thread-3 (]: Writing injected SQL for node "model.modeling_lab.stg_olist__products"
+[0m21:02:18.936902 [debug] [Thread-2 (]: Began compiling node model.modeling_lab.stg_olist__sellers
+[0m21:02:18.939383 [debug] [Thread-1 (]: Began compiling node test.modeling_lab.source_not_null_olist_customers_customer_id.1d007d2aad
+[0m21:02:18.942097 [debug] [Thread-4 (]: Re-using an available connection from the pool (formerly model.modeling_lab.stg_olist__orders, now test.modeling_lab.source_not_null_olist_order_items_order_id.6a31f38874)
+[0m21:02:18.955797 [debug] [Thread-2 (]: Writing injected SQL for node "model.modeling_lab.stg_olist__sellers"
+[0m21:02:18.976798 [debug] [Thread-4 (]: Began compiling node test.modeling_lab.source_not_null_olist_order_items_order_id.6a31f38874
+[0m21:02:18.992277 [debug] [Thread-1 (]: Writing injected SQL for node "test.modeling_lab.source_not_null_olist_customers_customer_id.1d007d2aad"
+[0m21:02:19.004543 [debug] [Thread-3 (]: Began executing node model.modeling_lab.stg_olist__products
+[0m21:02:19.030386 [debug] [Thread-4 (]: Writing injected SQL for node "test.modeling_lab.source_not_null_olist_order_items_order_id.6a31f38874"
+[0m21:02:19.034663 [debug] [Thread-3 (]: Finished running node model.modeling_lab.stg_olist__products
+[0m21:02:19.037300 [debug] [Thread-2 (]: Began executing node model.modeling_lab.stg_olist__sellers
+[0m21:02:19.040820 [debug] [Thread-1 (]: Began executing node test.modeling_lab.source_not_null_olist_customers_customer_id.1d007d2aad
+[0m21:02:19.047150 [debug] [Thread-3 (]: Began running node test.modeling_lab.source_not_null_olist_order_items_order_item_id.de73ad88cf
+[0m21:02:19.052973 [debug] [Thread-2 (]: Finished running node model.modeling_lab.stg_olist__sellers
+[0m21:02:19.057572 [debug] [Thread-1 (]: Finished running node test.modeling_lab.source_not_null_olist_customers_customer_id.1d007d2aad
+[0m21:02:19.061320 [debug] [Thread-3 (]: Re-using an available connection from the pool (formerly model.modeling_lab.stg_olist__products, now test.modeling_lab.source_not_null_olist_order_items_order_item_id.de73ad88cf)
+[0m21:02:19.066715 [debug] [Thread-4 (]: Began executing node test.modeling_lab.source_not_null_olist_order_items_order_id.6a31f38874
+[0m21:02:19.068986 [debug] [Thread-2 (]: Began running node test.modeling_lab.source_not_null_olist_orders_order_id.441189e023
+[0m21:02:19.072497 [debug] [Thread-1 (]: Began running node test.modeling_lab.source_not_null_olist_products_product_id.93341440fa
+[0m21:02:19.076262 [debug] [Thread-3 (]: Began compiling node test.modeling_lab.source_not_null_olist_order_items_order_item_id.de73ad88cf
+[0m21:02:19.081489 [debug] [Thread-4 (]: Finished running node test.modeling_lab.source_not_null_olist_order_items_order_id.6a31f38874
+[0m21:02:19.085654 [debug] [Thread-2 (]: Re-using an available connection from the pool (formerly model.modeling_lab.stg_olist__sellers, now test.modeling_lab.source_not_null_olist_orders_order_id.441189e023)
+[0m21:02:19.088965 [debug] [Thread-1 (]: Re-using an available connection from the pool (formerly test.modeling_lab.source_not_null_olist_customers_customer_id.1d007d2aad, now test.modeling_lab.source_not_null_olist_products_product_id.93341440fa)
+[0m21:02:19.102078 [debug] [Thread-3 (]: Writing injected SQL for node "test.modeling_lab.source_not_null_olist_order_items_order_item_id.de73ad88cf"
+[0m21:02:19.104954 [debug] [Thread-4 (]: Began running node test.modeling_lab.source_not_null_olist_sellers_seller_id.fc06a9f6bf
+[0m21:02:19.108506 [debug] [Thread-2 (]: Began compiling node test.modeling_lab.source_not_null_olist_orders_order_id.441189e023
+[0m21:02:19.111783 [debug] [Thread-1 (]: Began compiling node test.modeling_lab.source_not_null_olist_products_product_id.93341440fa
+[0m21:02:19.117145 [debug] [Thread-4 (]: Re-using an available connection from the pool (formerly test.modeling_lab.source_not_null_olist_order_items_order_id.6a31f38874, now test.modeling_lab.source_not_null_olist_sellers_seller_id.fc06a9f6bf)
+[0m21:02:19.134096 [debug] [Thread-2 (]: Writing injected SQL for node "test.modeling_lab.source_not_null_olist_orders_order_id.441189e023"
+[0m21:02:19.149290 [debug] [Thread-1 (]: Writing injected SQL for node "test.modeling_lab.source_not_null_olist_products_product_id.93341440fa"
+[0m21:02:19.151514 [debug] [Thread-4 (]: Began compiling node test.modeling_lab.source_not_null_olist_sellers_seller_id.fc06a9f6bf
+[0m21:02:19.155053 [debug] [Thread-3 (]: Began executing node test.modeling_lab.source_not_null_olist_order_items_order_item_id.de73ad88cf
+[0m21:02:19.191341 [debug] [Thread-4 (]: Writing injected SQL for node "test.modeling_lab.source_not_null_olist_sellers_seller_id.fc06a9f6bf"
+[0m21:02:19.194968 [debug] [Thread-3 (]: Finished running node test.modeling_lab.source_not_null_olist_order_items_order_item_id.de73ad88cf
+[0m21:02:19.206039 [debug] [Thread-2 (]: Began executing node test.modeling_lab.source_not_null_olist_orders_order_id.441189e023
+[0m21:02:19.215295 [debug] [Thread-1 (]: Began executing node test.modeling_lab.source_not_null_olist_products_product_id.93341440fa
+[0m21:02:19.216773 [debug] [Thread-3 (]: Began running node test.modeling_lab.source_unique_olist_customers_customer_id.efa71c64b9
+[0m21:02:19.225127 [debug] [Thread-2 (]: Finished running node test.modeling_lab.source_not_null_olist_orders_order_id.441189e023
+[0m21:02:19.263282 [debug] [Thread-2 (]: Began running node test.modeling_lab.source_unique_olist_orders_order_id.df3b066d82
+[0m21:02:19.270630 [debug] [Thread-2 (]: Re-using an available connection from the pool (formerly test.modeling_lab.source_not_null_olist_orders_order_id.441189e023, now test.modeling_lab.source_unique_olist_orders_order_id.df3b066d82)
+[0m21:02:19.259830 [debug] [Thread-3 (]: Re-using an available connection from the pool (formerly test.modeling_lab.source_not_null_olist_order_items_order_item_id.de73ad88cf, now test.modeling_lab.source_unique_olist_customers_customer_id.efa71c64b9)
+[0m21:02:19.242833 [debug] [Thread-1 (]: Finished running node test.modeling_lab.source_not_null_olist_products_product_id.93341440fa
+[0m21:02:19.248330 [debug] [Thread-4 (]: Began executing node test.modeling_lab.source_not_null_olist_sellers_seller_id.fc06a9f6bf
+[0m21:02:19.275523 [debug] [Thread-2 (]: Began compiling node test.modeling_lab.source_unique_olist_orders_order_id.df3b066d82
+[0m21:02:19.280192 [debug] [Thread-3 (]: Began compiling node test.modeling_lab.source_unique_olist_customers_customer_id.efa71c64b9
+[0m21:02:19.289586 [debug] [Thread-1 (]: Began running node test.modeling_lab.source_unique_olist_products_product_id.b191d1f5aa
+[0m21:02:19.419374 [debug] [Thread-1 (]: Re-using an available connection from the pool (formerly test.modeling_lab.source_not_null_olist_products_product_id.93341440fa, now test.modeling_lab.source_unique_olist_products_product_id.b191d1f5aa)
+[0m21:02:19.388370 [debug] [Thread-2 (]: Writing injected SQL for node "test.modeling_lab.source_unique_olist_orders_order_id.df3b066d82"
+[0m21:02:19.313268 [debug] [Thread-4 (]: Finished running node test.modeling_lab.source_not_null_olist_sellers_seller_id.fc06a9f6bf
+[0m21:02:19.444749 [debug] [Thread-4 (]: Began running node test.modeling_lab.source_unique_olist_sellers_seller_id.c8d4e16ad8
+[0m21:02:19.437400 [debug] [Thread-1 (]: Began compiling node test.modeling_lab.source_unique_olist_products_product_id.b191d1f5aa
+[0m21:02:19.433374 [debug] [Thread-3 (]: Writing injected SQL for node "test.modeling_lab.source_unique_olist_customers_customer_id.efa71c64b9"
+[0m21:02:19.452088 [debug] [Thread-4 (]: Re-using an available connection from the pool (formerly test.modeling_lab.source_not_null_olist_sellers_seller_id.fc06a9f6bf, now test.modeling_lab.source_unique_olist_sellers_seller_id.c8d4e16ad8)
+[0m21:02:19.491432 [debug] [Thread-1 (]: Writing injected SQL for node "test.modeling_lab.source_unique_olist_products_product_id.b191d1f5aa"
+[0m21:02:19.501397 [debug] [Thread-2 (]: Began executing node test.modeling_lab.source_unique_olist_orders_order_id.df3b066d82
+[0m21:02:19.507192 [debug] [Thread-4 (]: Began compiling node test.modeling_lab.source_unique_olist_sellers_seller_id.c8d4e16ad8
+[0m21:02:19.512631 [debug] [Thread-3 (]: Began executing node test.modeling_lab.source_unique_olist_customers_customer_id.efa71c64b9
+[0m21:02:19.530342 [debug] [Thread-2 (]: Finished running node test.modeling_lab.source_unique_olist_orders_order_id.df3b066d82
+[0m21:02:19.584478 [debug] [Thread-3 (]: Finished running node test.modeling_lab.source_unique_olist_customers_customer_id.efa71c64b9
+[0m21:02:19.629076 [debug] [Thread-3 (]: Began running node test.modeling_lab.not_null_stg_olist__customers_customer_id.fa12d6306e
+[0m21:02:19.607524 [debug] [Thread-2 (]: Began running node model.modeling_lab.dim_customer
+[0m21:02:19.643097 [debug] [Thread-2 (]: Re-using an available connection from the pool (formerly test.modeling_lab.source_unique_olist_orders_order_id.df3b066d82, now model.modeling_lab.dim_customer)
+[0m21:02:19.646834 [debug] [Thread-2 (]: Began compiling node model.modeling_lab.dim_customer
+[0m21:02:19.637174 [debug] [Thread-3 (]: Re-using an available connection from the pool (formerly test.modeling_lab.source_unique_olist_customers_customer_id.efa71c64b9, now test.modeling_lab.not_null_stg_olist__customers_customer_id.fa12d6306e)
+[0m21:02:19.609770 [debug] [Thread-1 (]: Began executing node test.modeling_lab.source_unique_olist_products_product_id.b191d1f5aa
+[0m21:02:19.587564 [debug] [Thread-4 (]: Writing injected SQL for node "test.modeling_lab.source_unique_olist_sellers_seller_id.c8d4e16ad8"
+[0m21:02:19.660362 [debug] [Thread-2 (]: Writing injected SQL for node "model.modeling_lab.dim_customer"
+[0m21:02:19.662825 [debug] [Thread-3 (]: Began compiling node test.modeling_lab.not_null_stg_olist__customers_customer_id.fa12d6306e
+[0m21:02:19.669085 [debug] [Thread-1 (]: Finished running node test.modeling_lab.source_unique_olist_products_product_id.b191d1f5aa
+[0m21:02:19.703933 [debug] [Thread-1 (]: Began running node test.modeling_lab.unique_stg_olist__customers_customer_id.322bd7d968
+[0m21:02:19.706928 [debug] [Thread-1 (]: Re-using an available connection from the pool (formerly test.modeling_lab.source_unique_olist_products_product_id.b191d1f5aa, now test.modeling_lab.unique_stg_olist__customers_customer_id.322bd7d968)
+[0m21:02:19.701427 [debug] [Thread-3 (]: Writing injected SQL for node "test.modeling_lab.not_null_stg_olist__customers_customer_id.fa12d6306e"
+[0m21:02:19.714122 [debug] [Thread-1 (]: Began compiling node test.modeling_lab.unique_stg_olist__customers_customer_id.322bd7d968
+[0m21:02:19.718947 [debug] [Thread-2 (]: Began executing node model.modeling_lab.dim_customer
+[0m21:02:19.732231 [debug] [Thread-4 (]: Began executing node test.modeling_lab.source_unique_olist_sellers_seller_id.c8d4e16ad8
+[0m21:02:19.757994 [debug] [Thread-1 (]: Writing injected SQL for node "test.modeling_lab.unique_stg_olist__customers_customer_id.322bd7d968"
+[0m21:02:19.775543 [debug] [Thread-4 (]: Finished running node test.modeling_lab.source_unique_olist_sellers_seller_id.c8d4e16ad8
+[0m21:02:19.770223 [debug] [Thread-2 (]: Finished running node model.modeling_lab.dim_customer
+[0m21:02:19.782041 [debug] [Thread-3 (]: Began executing node test.modeling_lab.not_null_stg_olist__customers_customer_id.fa12d6306e
+[0m21:02:19.788799 [debug] [Thread-4 (]: Began running node test.modeling_lab.not_null_dim_date_date_key.881d0a31b6
+[0m21:02:19.820332 [debug] [Thread-4 (]: Re-using an available connection from the pool (formerly test.modeling_lab.source_unique_olist_sellers_seller_id.c8d4e16ad8, now test.modeling_lab.not_null_dim_date_date_key.881d0a31b6)
+[0m21:02:19.823778 [debug] [Thread-4 (]: Began compiling node test.modeling_lab.not_null_dim_date_date_key.881d0a31b6
+[0m21:02:19.801569 [debug] [Thread-2 (]: Began running node test.modeling_lab.unique_dim_date_date_key.0869fd48f9
+[0m21:02:19.814789 [debug] [Thread-3 (]: Finished running node test.modeling_lab.not_null_stg_olist__customers_customer_id.fa12d6306e
+[0m21:02:19.854161 [debug] [Thread-4 (]: Writing injected SQL for node "test.modeling_lab.not_null_dim_date_date_key.881d0a31b6"
+[0m21:02:19.859314 [debug] [Thread-2 (]: Re-using an available connection from the pool (formerly model.modeling_lab.dim_customer, now test.modeling_lab.unique_dim_date_date_key.0869fd48f9)
+[0m21:02:19.865974 [debug] [Thread-3 (]: Began running node test.modeling_lab.not_null_stg_olist__order_items_order_id.6260e845c7
+[0m21:02:19.897859 [debug] [Thread-1 (]: Began executing node test.modeling_lab.unique_stg_olist__customers_customer_id.322bd7d968
+[0m21:02:19.914099 [debug] [Thread-2 (]: Began compiling node test.modeling_lab.unique_dim_date_date_key.0869fd48f9
+[0m21:02:19.921236 [debug] [Thread-3 (]: Re-using an available connection from the pool (formerly test.modeling_lab.not_null_stg_olist__customers_customer_id.fa12d6306e, now test.modeling_lab.not_null_stg_olist__order_items_order_id.6260e845c7)
+[0m21:02:20.048896 [debug] [Thread-3 (]: Began compiling node test.modeling_lab.not_null_stg_olist__order_items_order_id.6260e845c7
+[0m21:02:20.030301 [debug] [Thread-2 (]: Writing injected SQL for node "test.modeling_lab.unique_dim_date_date_key.0869fd48f9"
+[0m21:02:20.043077 [debug] [Thread-4 (]: Began executing node test.modeling_lab.not_null_dim_date_date_key.881d0a31b6
+[0m21:02:19.944051 [debug] [Thread-1 (]: Finished running node test.modeling_lab.unique_stg_olist__customers_customer_id.322bd7d968
+[0m21:02:20.082394 [debug] [Thread-3 (]: Writing injected SQL for node "test.modeling_lab.not_null_stg_olist__order_items_order_id.6260e845c7"
+[0m21:02:20.088488 [debug] [Thread-4 (]: Finished running node test.modeling_lab.not_null_dim_date_date_key.881d0a31b6
+[0m21:02:20.095322 [debug] [Thread-1 (]: Began running node test.modeling_lab.not_null_stg_olist__order_items_product_id.21dabede7a
+[0m21:02:20.103115 [debug] [Thread-4 (]: Began running node model.modeling_lab.fct_order_item
+[0m21:02:20.106434 [debug] [Thread-1 (]: Re-using an available connection from the pool (formerly test.modeling_lab.unique_stg_olist__customers_customer_id.322bd7d968, now test.modeling_lab.not_null_stg_olist__order_items_product_id.21dabede7a)
+[0m21:02:20.110483 [debug] [Thread-4 (]: Re-using an available connection from the pool (formerly test.modeling_lab.not_null_dim_date_date_key.881d0a31b6, now model.modeling_lab.fct_order_item)
+[0m21:02:20.114786 [debug] [Thread-1 (]: Began compiling node test.modeling_lab.not_null_stg_olist__order_items_product_id.21dabede7a
+[0m21:02:20.116396 [debug] [Thread-2 (]: Began executing node test.modeling_lab.unique_dim_date_date_key.0869fd48f9
+[0m21:02:20.119798 [debug] [Thread-4 (]: Began compiling node model.modeling_lab.fct_order_item
+[0m21:02:20.121757 [debug] [Thread-3 (]: Began executing node test.modeling_lab.not_null_stg_olist__order_items_order_id.6260e845c7
+[0m21:02:20.138954 [debug] [Thread-1 (]: Writing injected SQL for node "test.modeling_lab.not_null_stg_olist__order_items_product_id.21dabede7a"
+[0m21:02:20.143024 [debug] [Thread-2 (]: Finished running node test.modeling_lab.unique_dim_date_date_key.0869fd48f9
+[0m21:02:20.159953 [debug] [Thread-4 (]: Writing injected SQL for node "model.modeling_lab.fct_order_item"
+[0m21:02:20.163890 [debug] [Thread-3 (]: Finished running node test.modeling_lab.not_null_stg_olist__order_items_order_id.6260e845c7
+[0m21:02:20.170306 [debug] [Thread-2 (]: Began running node test.modeling_lab.not_null_stg_olist__orders_customer_id.007ae2ad2c
+[0m21:02:20.179534 [debug] [Thread-2 (]: Re-using an available connection from the pool (formerly test.modeling_lab.unique_dim_date_date_key.0869fd48f9, now test.modeling_lab.not_null_stg_olist__orders_customer_id.007ae2ad2c)
+[0m21:02:20.182326 [debug] [Thread-2 (]: Began compiling node test.modeling_lab.not_null_stg_olist__orders_customer_id.007ae2ad2c
+[0m21:02:20.175458 [debug] [Thread-3 (]: Began running node test.modeling_lab.not_null_stg_olist__orders_order_id.9ec9e196cb
+[0m21:02:20.199428 [debug] [Thread-1 (]: Began executing node test.modeling_lab.not_null_stg_olist__order_items_product_id.21dabede7a
+[0m21:02:20.202605 [debug] [Thread-2 (]: Writing injected SQL for node "test.modeling_lab.not_null_stg_olist__orders_customer_id.007ae2ad2c"
+[0m21:02:20.209914 [debug] [Thread-4 (]: Began executing node model.modeling_lab.fct_order_item
+[0m21:02:20.211624 [debug] [Thread-3 (]: Re-using an available connection from the pool (formerly test.modeling_lab.not_null_stg_olist__order_items_order_id.6260e845c7, now test.modeling_lab.not_null_stg_olist__orders_order_id.9ec9e196cb)
+[0m21:02:20.220929 [debug] [Thread-1 (]: Finished running node test.modeling_lab.not_null_stg_olist__order_items_product_id.21dabede7a
+[0m21:02:20.230651 [debug] [Thread-4 (]: Finished running node model.modeling_lab.fct_order_item
+[0m21:02:20.234946 [debug] [Thread-3 (]: Began compiling node test.modeling_lab.not_null_stg_olist__orders_order_id.9ec9e196cb
+[0m21:02:20.238785 [debug] [Thread-1 (]: Began running node test.modeling_lab.relationships_stg_olist__order_items_order_id__order_id__ref_stg_olist__orders_.352e2888e0
+[0m21:02:20.242592 [debug] [Thread-4 (]: Began running node test.modeling_lab.relationships_stg_olist__orders_customer_id__customer_id__ref_stg_olist__customers_.a9f63c5a3a
+[0m21:02:20.260505 [debug] [Thread-3 (]: Writing injected SQL for node "test.modeling_lab.not_null_stg_olist__orders_order_id.9ec9e196cb"
+[0m21:02:20.262904 [debug] [Thread-1 (]: Re-using an available connection from the pool (formerly test.modeling_lab.not_null_stg_olist__order_items_product_id.21dabede7a, now test.modeling_lab.relationships_stg_olist__order_items_order_id__order_id__ref_stg_olist__orders_.352e2888e0)
+[0m21:02:20.272867 [debug] [Thread-4 (]: Re-using an available connection from the pool (formerly model.modeling_lab.fct_order_item, now test.modeling_lab.relationships_stg_olist__orders_customer_id__customer_id__ref_stg_olist__customers_.a9f63c5a3a)
+[0m21:02:20.275509 [debug] [Thread-2 (]: Began executing node test.modeling_lab.not_null_stg_olist__orders_customer_id.007ae2ad2c
+[0m21:02:20.287598 [debug] [Thread-1 (]: Began compiling node test.modeling_lab.relationships_stg_olist__order_items_order_id__order_id__ref_stg_olist__orders_.352e2888e0
+[0m21:02:20.297558 [debug] [Thread-4 (]: Began compiling node test.modeling_lab.relationships_stg_olist__orders_customer_id__customer_id__ref_stg_olist__customers_.a9f63c5a3a
+[0m21:02:20.305057 [debug] [Thread-2 (]: Finished running node test.modeling_lab.not_null_stg_olist__orders_customer_id.007ae2ad2c
+[0m21:02:20.336984 [debug] [Thread-1 (]: Writing injected SQL for node "test.modeling_lab.relationships_stg_olist__order_items_order_id__order_id__ref_stg_olist__orders_.352e2888e0"
+[0m21:02:20.344309 [debug] [Thread-3 (]: Began executing node test.modeling_lab.not_null_stg_olist__orders_order_id.9ec9e196cb
+[0m21:02:20.356266 [debug] [Thread-4 (]: Writing injected SQL for node "test.modeling_lab.relationships_stg_olist__orders_customer_id__customer_id__ref_stg_olist__customers_.a9f63c5a3a"
+[0m21:02:20.359007 [debug] [Thread-2 (]: Began running node test.modeling_lab.unique_stg_olist__orders_order_id.426f0a2be7
+[0m21:02:20.365107 [debug] [Thread-3 (]: Finished running node test.modeling_lab.not_null_stg_olist__orders_order_id.9ec9e196cb
+[0m21:02:20.370713 [debug] [Thread-2 (]: Re-using an available connection from the pool (formerly test.modeling_lab.not_null_stg_olist__orders_customer_id.007ae2ad2c, now test.modeling_lab.unique_stg_olist__orders_order_id.426f0a2be7)
+[0m21:02:20.375163 [debug] [Thread-3 (]: Began running node model.modeling_lab.dim_product
+[0m21:02:20.379482 [debug] [Thread-1 (]: Began executing node test.modeling_lab.relationships_stg_olist__order_items_order_id__order_id__ref_stg_olist__orders_.352e2888e0
+[0m21:02:20.385201 [debug] [Thread-2 (]: Began compiling node test.modeling_lab.unique_stg_olist__orders_order_id.426f0a2be7
+[0m21:02:20.387293 [debug] [Thread-4 (]: Began executing node test.modeling_lab.relationships_stg_olist__orders_customer_id__customer_id__ref_stg_olist__customers_.a9f63c5a3a
+[0m21:02:20.390952 [debug] [Thread-3 (]: Re-using an available connection from the pool (formerly test.modeling_lab.not_null_stg_olist__orders_order_id.9ec9e196cb, now model.modeling_lab.dim_product)
+[0m21:02:20.400820 [debug] [Thread-1 (]: Finished running node test.modeling_lab.relationships_stg_olist__order_items_order_id__order_id__ref_stg_olist__orders_.352e2888e0
+[0m21:02:20.416136 [debug] [Thread-2 (]: Writing injected SQL for node "test.modeling_lab.unique_stg_olist__orders_order_id.426f0a2be7"
+[0m21:02:20.419568 [debug] [Thread-4 (]: Finished running node test.modeling_lab.relationships_stg_olist__orders_customer_id__customer_id__ref_stg_olist__customers_.a9f63c5a3a
+[0m21:02:20.422877 [debug] [Thread-3 (]: Began compiling node model.modeling_lab.dim_product
+[0m21:02:20.426240 [debug] [Thread-1 (]: Began running node test.modeling_lab.not_null_stg_olist__products_product_id.8b25aafa0b
+[0m21:02:20.431432 [debug] [Thread-4 (]: Began running node test.modeling_lab.relationships_stg_olist__order_items_product_id__product_id__ref_stg_olist__products_.260c5cc788
+[0m21:02:20.452947 [debug] [Thread-3 (]: Writing injected SQL for node "model.modeling_lab.dim_product"
+[0m21:02:20.455107 [debug] [Thread-1 (]: Re-using an available connection from the pool (formerly test.modeling_lab.relationships_stg_olist__order_items_order_id__order_id__ref_stg_olist__orders_.352e2888e0, now test.modeling_lab.not_null_stg_olist__products_product_id.8b25aafa0b)
+[0m21:02:20.459503 [debug] [Thread-4 (]: Re-using an available connection from the pool (formerly test.modeling_lab.relationships_stg_olist__orders_customer_id__customer_id__ref_stg_olist__customers_.a9f63c5a3a, now test.modeling_lab.relationships_stg_olist__order_items_product_id__product_id__ref_stg_olist__products_.260c5cc788)
+[0m21:02:20.464566 [debug] [Thread-1 (]: Began compiling node test.modeling_lab.not_null_stg_olist__products_product_id.8b25aafa0b
+[0m21:02:20.470661 [debug] [Thread-4 (]: Began compiling node test.modeling_lab.relationships_stg_olist__order_items_product_id__product_id__ref_stg_olist__products_.260c5cc788
+[0m21:02:20.472995 [debug] [Thread-2 (]: Began executing node test.modeling_lab.unique_stg_olist__orders_order_id.426f0a2be7
+[0m21:02:20.487960 [debug] [Thread-3 (]: Began executing node model.modeling_lab.dim_product
+[0m21:02:20.495067 [debug] [Thread-1 (]: Writing injected SQL for node "test.modeling_lab.not_null_stg_olist__products_product_id.8b25aafa0b"
+[0m21:02:20.515154 [debug] [Thread-4 (]: Writing injected SQL for node "test.modeling_lab.relationships_stg_olist__order_items_product_id__product_id__ref_stg_olist__products_.260c5cc788"
+[0m21:02:20.517362 [debug] [Thread-2 (]: Finished running node test.modeling_lab.unique_stg_olist__orders_order_id.426f0a2be7
+[0m21:02:20.520680 [debug] [Thread-3 (]: Finished running node model.modeling_lab.dim_product
+[0m21:02:20.527760 [debug] [Thread-2 (]: Began running node test.modeling_lab.unique_stg_olist__products_product_id.74d899d20a
+[0m21:02:20.531216 [debug] [Thread-3 (]: Began running node test.modeling_lab.not_null_dim_customer_customer_id.9775012dfc
+[0m21:02:20.535678 [debug] [Thread-2 (]: Re-using an available connection from the pool (formerly test.modeling_lab.unique_stg_olist__orders_order_id.426f0a2be7, now test.modeling_lab.unique_stg_olist__products_product_id.74d899d20a)
+[0m21:02:20.539171 [debug] [Thread-3 (]: Re-using an available connection from the pool (formerly model.modeling_lab.dim_product, now test.modeling_lab.not_null_dim_customer_customer_id.9775012dfc)
+[0m21:02:20.543375 [debug] [Thread-2 (]: Began compiling node test.modeling_lab.unique_stg_olist__products_product_id.74d899d20a
+[0m21:02:20.548548 [debug] [Thread-1 (]: Began executing node test.modeling_lab.not_null_stg_olist__products_product_id.8b25aafa0b
+[0m21:02:20.549716 [debug] [Thread-3 (]: Began compiling node test.modeling_lab.not_null_dim_customer_customer_id.9775012dfc
+[0m21:02:20.558577 [debug] [Thread-4 (]: Began executing node test.modeling_lab.relationships_stg_olist__order_items_product_id__product_id__ref_stg_olist__products_.260c5cc788
+[0m21:02:20.570418 [debug] [Thread-2 (]: Writing injected SQL for node "test.modeling_lab.unique_stg_olist__products_product_id.74d899d20a"
+[0m21:02:20.574963 [debug] [Thread-1 (]: Finished running node test.modeling_lab.not_null_stg_olist__products_product_id.8b25aafa0b
+[0m21:02:20.591721 [debug] [Thread-3 (]: Writing injected SQL for node "test.modeling_lab.not_null_dim_customer_customer_id.9775012dfc"
+[0m21:02:20.595071 [debug] [Thread-4 (]: Finished running node test.modeling_lab.relationships_stg_olist__order_items_product_id__product_id__ref_stg_olist__products_.260c5cc788
+[0m21:02:20.601297 [debug] [Thread-1 (]: Began running node test.modeling_lab.unique_dim_customer_customer_id.b42affccd1
+[0m21:02:20.606845 [debug] [Thread-4 (]: Began running node test.modeling_lab.not_null_fct_order_item_customer_id.6df20948e8
+[0m21:02:20.610017 [debug] [Thread-1 (]: Re-using an available connection from the pool (formerly test.modeling_lab.not_null_stg_olist__products_product_id.8b25aafa0b, now test.modeling_lab.unique_dim_customer_customer_id.b42affccd1)
+[0m21:02:20.613479 [debug] [Thread-4 (]: Re-using an available connection from the pool (formerly test.modeling_lab.relationships_stg_olist__order_items_product_id__product_id__ref_stg_olist__products_.260c5cc788, now test.modeling_lab.not_null_fct_order_item_customer_id.6df20948e8)
+[0m21:02:20.619431 [debug] [Thread-1 (]: Began compiling node test.modeling_lab.unique_dim_customer_customer_id.b42affccd1
+[0m21:02:20.620677 [debug] [Thread-2 (]: Began executing node test.modeling_lab.unique_stg_olist__products_product_id.74d899d20a
+[0m21:02:20.624411 [debug] [Thread-4 (]: Began compiling node test.modeling_lab.not_null_fct_order_item_customer_id.6df20948e8
+[0m21:02:20.628088 [debug] [Thread-3 (]: Began executing node test.modeling_lab.not_null_dim_customer_customer_id.9775012dfc
+[0m21:02:20.646340 [debug] [Thread-1 (]: Writing injected SQL for node "test.modeling_lab.unique_dim_customer_customer_id.b42affccd1"
+[0m21:02:20.649825 [debug] [Thread-2 (]: Finished running node test.modeling_lab.unique_stg_olist__products_product_id.74d899d20a
+[0m21:02:20.665417 [debug] [Thread-4 (]: Writing injected SQL for node "test.modeling_lab.not_null_fct_order_item_customer_id.6df20948e8"
+[0m21:02:20.669236 [debug] [Thread-3 (]: Finished running node test.modeling_lab.not_null_dim_customer_customer_id.9775012dfc
+[0m21:02:20.674572 [debug] [Thread-2 (]: Began running node test.modeling_lab.not_null_fct_order_item_order_date.01983ceb1c
+[0m21:02:20.681104 [debug] [Thread-3 (]: Began running node test.modeling_lab.not_null_fct_order_item_order_id.684c6a1570
+[0m21:02:20.685263 [debug] [Thread-2 (]: Re-using an available connection from the pool (formerly test.modeling_lab.unique_stg_olist__products_product_id.74d899d20a, now test.modeling_lab.not_null_fct_order_item_order_date.01983ceb1c)
+[0m21:02:20.689823 [debug] [Thread-3 (]: Re-using an available connection from the pool (formerly test.modeling_lab.not_null_dim_customer_customer_id.9775012dfc, now test.modeling_lab.not_null_fct_order_item_order_id.684c6a1570)
+[0m21:02:20.693107 [debug] [Thread-2 (]: Began compiling node test.modeling_lab.not_null_fct_order_item_order_date.01983ceb1c
+[0m21:02:20.696341 [debug] [Thread-4 (]: Began executing node test.modeling_lab.not_null_fct_order_item_customer_id.6df20948e8
+[0m21:02:20.700429 [debug] [Thread-1 (]: Began executing node test.modeling_lab.unique_dim_customer_customer_id.b42affccd1
+[0m21:02:20.701952 [debug] [Thread-3 (]: Began compiling node test.modeling_lab.not_null_fct_order_item_order_id.684c6a1570
+[0m21:02:20.720912 [debug] [Thread-2 (]: Writing injected SQL for node "test.modeling_lab.not_null_fct_order_item_order_date.01983ceb1c"
+[0m21:02:20.722527 [debug] [Thread-4 (]: Finished running node test.modeling_lab.not_null_fct_order_item_customer_id.6df20948e8
+[0m21:02:20.726325 [debug] [Thread-1 (]: Finished running node test.modeling_lab.unique_dim_customer_customer_id.b42affccd1
+[0m21:02:20.739748 [debug] [Thread-3 (]: Writing injected SQL for node "test.modeling_lab.not_null_fct_order_item_order_id.684c6a1570"
+[0m21:02:20.743647 [debug] [Thread-4 (]: Began running node test.modeling_lab.not_null_fct_order_item_order_item_key.63b75612ed
+[0m21:02:20.747916 [debug] [Thread-1 (]: Began running node test.modeling_lab.not_null_fct_order_item_product_id.c4924b6126
+[0m21:02:20.753831 [debug] [Thread-4 (]: Re-using an available connection from the pool (formerly test.modeling_lab.not_null_fct_order_item_customer_id.6df20948e8, now test.modeling_lab.not_null_fct_order_item_order_item_key.63b75612ed)
+[0m21:02:20.758133 [debug] [Thread-1 (]: Re-using an available connection from the pool (formerly test.modeling_lab.unique_dim_customer_customer_id.b42affccd1, now test.modeling_lab.not_null_fct_order_item_product_id.c4924b6126)
+[0m21:02:20.763944 [debug] [Thread-4 (]: Began compiling node test.modeling_lab.not_null_fct_order_item_order_item_key.63b75612ed
+[0m21:02:20.765504 [debug] [Thread-2 (]: Began executing node test.modeling_lab.not_null_fct_order_item_order_date.01983ceb1c
+[0m21:02:20.770650 [debug] [Thread-1 (]: Began compiling node test.modeling_lab.not_null_fct_order_item_product_id.c4924b6126
+[0m21:02:20.783223 [debug] [Thread-3 (]: Began executing node test.modeling_lab.not_null_fct_order_item_order_id.684c6a1570
+[0m21:02:20.808054 [debug] [Thread-4 (]: Writing injected SQL for node "test.modeling_lab.not_null_fct_order_item_order_item_key.63b75612ed"
+[0m21:02:20.811561 [debug] [Thread-2 (]: Finished running node test.modeling_lab.not_null_fct_order_item_order_date.01983ceb1c
+[0m21:02:20.830984 [debug] [Thread-1 (]: Writing injected SQL for node "test.modeling_lab.not_null_fct_order_item_product_id.c4924b6126"
+[0m21:02:20.833767 [debug] [Thread-3 (]: Finished running node test.modeling_lab.not_null_fct_order_item_order_id.684c6a1570
+[0m21:02:20.841854 [debug] [Thread-2 (]: Began running node test.modeling_lab.relationships_fct_order_item_customer_id__customer_id__ref_dim_customer_.aef2e5b1de
+[0m21:02:20.847623 [debug] [Thread-3 (]: Began running node test.modeling_lab.relationships_fct_order_item_order_date__date_key__ref_dim_date_.5f6ea6f1dc
+[0m21:02:20.852019 [debug] [Thread-2 (]: Re-using an available connection from the pool (formerly test.modeling_lab.not_null_fct_order_item_order_date.01983ceb1c, now test.modeling_lab.relationships_fct_order_item_customer_id__customer_id__ref_dim_customer_.aef2e5b1de)
+[0m21:02:20.857562 [debug] [Thread-3 (]: Re-using an available connection from the pool (formerly test.modeling_lab.not_null_fct_order_item_order_id.684c6a1570, now test.modeling_lab.relationships_fct_order_item_order_date__date_key__ref_dim_date_.5f6ea6f1dc)
+[0m21:02:20.861459 [debug] [Thread-1 (]: Began executing node test.modeling_lab.not_null_fct_order_item_product_id.c4924b6126
+[0m21:02:20.865315 [debug] [Thread-2 (]: Began compiling node test.modeling_lab.relationships_fct_order_item_customer_id__customer_id__ref_dim_customer_.aef2e5b1de
+[0m21:02:20.867103 [debug] [Thread-4 (]: Began executing node test.modeling_lab.not_null_fct_order_item_order_item_key.63b75612ed
+[0m21:02:20.870612 [debug] [Thread-3 (]: Began compiling node test.modeling_lab.relationships_fct_order_item_order_date__date_key__ref_dim_date_.5f6ea6f1dc
+[0m21:02:20.876449 [debug] [Thread-1 (]: Finished running node test.modeling_lab.not_null_fct_order_item_product_id.c4924b6126
+[0m21:02:20.897876 [debug] [Thread-2 (]: Writing injected SQL for node "test.modeling_lab.relationships_fct_order_item_customer_id__customer_id__ref_dim_customer_.aef2e5b1de"
+[0m21:02:20.900595 [debug] [Thread-4 (]: Finished running node test.modeling_lab.not_null_fct_order_item_order_item_key.63b75612ed
+[0m21:02:20.922133 [debug] [Thread-3 (]: Writing injected SQL for node "test.modeling_lab.relationships_fct_order_item_order_date__date_key__ref_dim_date_.5f6ea6f1dc"
+[0m21:02:20.923379 [debug] [Thread-1 (]: Began running node test.modeling_lab.unique_fct_order_item_order_item_key.f3b18f4d69
+[0m21:02:20.929005 [debug] [Thread-4 (]: Began running node test.modeling_lab.not_null_dim_product_product_id.02b1f06816
+[0m21:02:20.934169 [debug] [Thread-1 (]: Re-using an available connection from the pool (formerly test.modeling_lab.not_null_fct_order_item_product_id.c4924b6126, now test.modeling_lab.unique_fct_order_item_order_item_key.f3b18f4d69)
+[0m21:02:20.939804 [debug] [Thread-4 (]: Re-using an available connection from the pool (formerly test.modeling_lab.not_null_fct_order_item_order_item_key.63b75612ed, now test.modeling_lab.not_null_dim_product_product_id.02b1f06816)
+[0m21:02:20.943463 [debug] [Thread-1 (]: Began compiling node test.modeling_lab.unique_fct_order_item_order_item_key.f3b18f4d69
+[0m21:02:20.950247 [debug] [Thread-4 (]: Began compiling node test.modeling_lab.not_null_dim_product_product_id.02b1f06816
+[0m21:02:20.956285 [debug] [Thread-3 (]: Began executing node test.modeling_lab.relationships_fct_order_item_order_date__date_key__ref_dim_date_.5f6ea6f1dc
+[0m21:02:20.968329 [debug] [Thread-2 (]: Began executing node test.modeling_lab.relationships_fct_order_item_customer_id__customer_id__ref_dim_customer_.aef2e5b1de
+[0m21:02:20.982704 [debug] [Thread-1 (]: Writing injected SQL for node "test.modeling_lab.unique_fct_order_item_order_item_key.f3b18f4d69"
+[0m21:02:21.001504 [debug] [Thread-4 (]: Writing injected SQL for node "test.modeling_lab.not_null_dim_product_product_id.02b1f06816"
+[0m21:02:21.006491 [debug] [Thread-3 (]: Finished running node test.modeling_lab.relationships_fct_order_item_order_date__date_key__ref_dim_date_.5f6ea6f1dc
+[0m21:02:21.023635 [debug] [Thread-3 (]: Began running node test.modeling_lab.relationships_fct_order_item_product_id__product_id__ref_dim_product_.0119306fae
+[0m21:02:21.013887 [debug] [Thread-2 (]: Finished running node test.modeling_lab.relationships_fct_order_item_customer_id__customer_id__ref_dim_customer_.aef2e5b1de
+[0m21:02:21.028564 [debug] [Thread-3 (]: Re-using an available connection from the pool (formerly test.modeling_lab.relationships_fct_order_item_order_date__date_key__ref_dim_date_.5f6ea6f1dc, now test.modeling_lab.relationships_fct_order_item_product_id__product_id__ref_dim_product_.0119306fae)
+[0m21:02:21.051098 [debug] [Thread-3 (]: Began compiling node test.modeling_lab.relationships_fct_order_item_product_id__product_id__ref_dim_product_.0119306fae
+[0m21:02:21.052660 [debug] [Thread-1 (]: Began executing node test.modeling_lab.unique_fct_order_item_order_item_key.f3b18f4d69
+[0m21:02:21.089571 [debug] [Thread-1 (]: Finished running node test.modeling_lab.unique_fct_order_item_order_item_key.f3b18f4d69
+[0m21:02:21.065904 [debug] [Thread-4 (]: Began executing node test.modeling_lab.not_null_dim_product_product_id.02b1f06816
+[0m21:02:21.097970 [debug] [Thread-4 (]: Finished running node test.modeling_lab.not_null_dim_product_product_id.02b1f06816
+[0m21:02:21.087584 [debug] [Thread-3 (]: Writing injected SQL for node "test.modeling_lab.relationships_fct_order_item_product_id__product_id__ref_dim_product_.0119306fae"
+[0m21:02:21.041862 [debug] [Thread-2 (]: Began running node test.modeling_lab.unique_dim_product_product_id.46495bf7fe
+[0m21:02:21.106985 [debug] [Thread-2 (]: Re-using an available connection from the pool (formerly test.modeling_lab.relationships_fct_order_item_customer_id__customer_id__ref_dim_customer_.aef2e5b1de, now test.modeling_lab.unique_dim_product_product_id.46495bf7fe)
+[0m21:02:21.109949 [debug] [Thread-2 (]: Began compiling node test.modeling_lab.unique_dim_product_product_id.46495bf7fe
+[0m21:02:21.127700 [debug] [Thread-2 (]: Writing injected SQL for node "test.modeling_lab.unique_dim_product_product_id.46495bf7fe"
+[0m21:02:21.152476 [debug] [Thread-3 (]: Began executing node test.modeling_lab.relationships_fct_order_item_product_id__product_id__ref_dim_product_.0119306fae
+[0m21:02:21.171663 [debug] [Thread-3 (]: Finished running node test.modeling_lab.relationships_fct_order_item_product_id__product_id__ref_dim_product_.0119306fae
+[0m21:02:21.173634 [debug] [Thread-2 (]: Began executing node test.modeling_lab.unique_dim_product_product_id.46495bf7fe
+[0m21:02:21.185669 [debug] [Thread-2 (]: Finished running node test.modeling_lab.unique_dim_product_product_id.46495bf7fe
+[0m21:02:21.192891 [debug] [MainThread]: Connection 'master' was properly closed.
+[0m21:02:21.196261 [debug] [MainThread]: Connection 'test.modeling_lab.unique_fct_order_item_order_item_key.f3b18f4d69' was properly closed.
+[0m21:02:21.199527 [debug] [MainThread]: Connection 'test.modeling_lab.unique_dim_product_product_id.46495bf7fe' was properly closed.
+[0m21:02:21.202791 [debug] [MainThread]: Connection 'test.modeling_lab.relationships_fct_order_item_product_id__product_id__ref_dim_product_.0119306fae' was properly closed.
+[0m21:02:21.206069 [debug] [MainThread]: Connection 'test.modeling_lab.not_null_dim_product_product_id.02b1f06816' was properly closed.
+[0m21:02:21.235185 [debug] [MainThread]: Command end result
+[0m21:02:21.754208 [debug] [MainThread]: Wrote artifact WritableManifest to /app/transform/dbt/target/manifest.json
+[0m21:02:21.776506 [debug] [MainThread]: Wrote artifact SemanticManifest to /app/transform/dbt/target/semantic_manifest.json
+[0m21:02:21.821064 [debug] [MainThread]: Wrote artifact RunExecutionResult to /app/transform/dbt/target/run_results.json
+[0m21:02:21.883050 [debug] [MainThread]: Acquiring new postgres connection 'generate_catalog'
+[0m21:02:21.886765 [info ] [MainThread]: Building catalog
+[0m21:02:21.951624 [debug] [ThreadPool]: Acquiring new postgres connection 'modeling_lab.information_schema'
+[0m21:02:21.980540 [debug] [ThreadPool]: Using postgres connection "modeling_lab.information_schema"
+[0m21:02:22.007966 [debug] [ThreadPool]: On modeling_lab.information_schema: /* {"app": "dbt", "dbt_version": "1.11.6", "profile_name": "modeling_lab", "target_name": "dev", "connection_name": "modeling_lab.information_schema"} */
+
+    
+    
+
+    select
+        'modeling_lab' as table_database,
+        sch.nspname as table_schema,
+        tbl.relname as table_name,
+        case tbl.relkind
+            when 'v' then 'VIEW'
+            when 'm' then 'MATERIALIZED VIEW'
+            else 'BASE TABLE'
+        end as table_type,
+        tbl_desc.description as table_comment,
+        col.attname as column_name,
+        col.attnum as column_index,
+        pg_catalog.format_type(col.atttypid, col.atttypmod) as column_type,
+        col_desc.description as column_comment,
+        pg_get_userbyid(tbl.relowner) as table_owner
+
+    from pg_catalog.pg_namespace sch
+    join pg_catalog.pg_class tbl on tbl.relnamespace = sch.oid
+    join pg_catalog.pg_attribute col on col.attrelid = tbl.oid
+    left outer join pg_catalog.pg_description tbl_desc on (tbl_desc.objoid = tbl.oid and tbl_desc.objsubid = 0)
+    left outer join pg_catalog.pg_description col_desc on (col_desc.objoid = tbl.oid and col_desc.objsubid = col.attnum)
+    where ((upper(sch.nspname) = upper('public') and
+           upper(tbl.relname) = upper('fct_order_item')) or (upper(sch.nspname) = upper('public') and
+           upper(tbl.relname) = upper('stg_olist__order_reviews')) or (upper(sch.nspname) = upper('public') and
+           upper(tbl.relname) = upper('dim_customer')) or (upper(sch.nspname) = upper('raw') and
+           upper(tbl.relname) = upper('order_items')) or (upper(sch.nspname) = upper('raw') and
+           upper(tbl.relname) = upper('geolocation')) or (upper(sch.nspname) = upper('public') and
+           upper(tbl.relname) = upper('stg_olist__products')) or (upper(sch.nspname) = upper('raw') and
+           upper(tbl.relname) = upper('sellers')) or (upper(sch.nspname) = upper('public') and
+           upper(tbl.relname) = upper('stg_olist__order_items')) or (upper(sch.nspname) = upper('public') and
+           upper(tbl.relname) = upper('stg_olist__geolocation')) or (upper(sch.nspname) = upper('public') and
+           upper(tbl.relname) = upper('stg_olist__order_payments')) or (upper(sch.nspname) = upper('public') and
+           upper(tbl.relname) = upper('stg_olist__sellers')) or (upper(sch.nspname) = upper('raw') and
+           upper(tbl.relname) = upper('order_reviews')) or (upper(sch.nspname) = upper('public') and
+           upper(tbl.relname) = upper('dim_product')) or (upper(sch.nspname) = upper('public') and
+           upper(tbl.relname) = upper('stg_olist__orders')) or (upper(sch.nspname) = upper('raw') and
+           upper(tbl.relname) = upper('order_payments')) or (upper(sch.nspname) = upper('public') and
+           upper(tbl.relname) = upper('dim_date')) or (upper(sch.nspname) = upper('raw') and
+           upper(tbl.relname) = upper('customers')) or (upper(sch.nspname) = upper('raw') and
+           upper(tbl.relname) = upper('products')) or (upper(sch.nspname) = upper('public') and
+           upper(tbl.relname) = upper('stg_olist__customers')) or (upper(sch.nspname) = upper('public') and
+           upper(tbl.relname) = upper('stg_olist__category_translations')) or (upper(sch.nspname) = upper('raw') and
+           upper(tbl.relname) = upper('product_category_name_translation')) or (upper(sch.nspname) = upper('raw') and
+           upper(tbl.relname) = upper('orders')))
+      and not pg_is_other_temp_schema(sch.oid) -- not a temporary schema belonging to another session
+      and tbl.relpersistence in ('p', 'u') -- [p]ermanent table or [u]nlogged table. Exclude [t]emporary tables
+      and tbl.relkind in ('r', 'v', 'f', 'p', 'm') -- o[r]dinary table, [v]iew, [f]oreign table, [p]artitioned table, [m]aterialized view. Other values are [i]ndex, [S]equence, [c]omposite type, [t]OAST table
+      and col.attnum > 0 -- negative numbers are used for system columns such as oid
+      and not col.attisdropped -- column as not been dropped
+
+    order by
+        sch.nspname,
+        tbl.relname,
+        col.attnum
+[0m21:02:22.026993 [debug] [ThreadPool]: Opening a new connection, currently in state init
+[0m21:02:22.114135 [debug] [ThreadPool]: SQL status: SELECT 138 in 0.087 seconds
+[0m21:02:22.137923 [debug] [ThreadPool]: On modeling_lab.information_schema: ROLLBACK
+[0m21:02:22.142165 [debug] [ThreadPool]: On modeling_lab.information_schema: Close
+[0m21:02:22.217508 [debug] [MainThread]: Wrote artifact CatalogArtifact to /app/transform/dbt/target/catalog.json
+[0m21:02:22.423397 [debug] [MainThread]: Wrote artifact WritableManifest to /app/transform/dbt/target/manifest.json
+[0m21:02:22.443460 [debug] [MainThread]: Wrote artifact SemanticManifest to /app/transform/dbt/target/semantic_manifest.json
+[0m21:02:22.446872 [info ] [MainThread]: Catalog written to /app/transform/dbt/target/catalog.json
+[0m21:02:22.451441 [warn ] [MainThread]: [[33mWARNING[0m][DeprecationsSummary]: Deprecated functionality
+Summary of encountered deprecations:
+- MissingArgumentsPropertyInGenericTestDeprecation: 6 occurrences
+To see all deprecation instances instead of just the first occurrence of each,
+run command again with the `--show-all-deprecations` flag. You may also need to
+run with `--no-partial-parse` as some deprecations are only encountered during
+parsing.
+[0m21:02:22.458627 [debug] [MainThread]: Resource report: {"command_name": "generate", "command_success": true, "command_wall_clock_time": 14.023447, "process_in_blocks": "17392", "process_kernel_time": 1.859041, "process_mem_max_rss": "142372", "process_out_blocks": "0", "process_user_time": 14.367159}
+[0m21:02:22.464584 [debug] [MainThread]: Command `dbt docs generate` succeeded at 21:02:22.464075 after 14.03 seconds
+[0m21:02:22.468072 [debug] [MainThread]: Connection 'generate_catalog' was properly closed.
+[0m21:02:22.472442 [debug] [MainThread]: Connection 'modeling_lab.information_schema' was properly closed.
+[0m21:02:22.475844 [debug] [MainThread]: Sending event: {'category': 'dbt', 'action': 'invocation', 'label': 'end', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x7ff9e6aa6590>, <snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x7ff9e4363110>, <snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x7ff9eafd5490>]}
+[0m21:02:22.481222 [debug] [MainThread]: Flushing usage events
+[0m21:02:25.119107 [debug] [MainThread]: An error was encountered while trying to flush usage events
+[0m22:25:41.299265 [debug] [MainThread]: Sending event: {'category': 'dbt', 'action': 'invocation', 'label': 'start', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x7f0a8302fa10>, <snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x7f0a8332e6d0>, <snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x7f0a8302f550>]}
+
+
+============================== 22:25:41.311391 | aae0122a-905b-47b7-9db9-621491d2f485 ==============================
+[0m22:25:41.311391 [info ] [MainThread]: Running with dbt=1.11.6
+[0m22:25:41.314177 [debug] [MainThread]: running dbt with arguments {'empty': 'None', 'log_format': 'default', 'warn_error_options': 'WarnErrorOptionsV2(error=[], warn=[], silence=[])', 'invocation_command': 'dbt deps --profiles-dir .', 'partial_parse': 'True', 'log_path': '/app/transform/dbt/logs', 'use_colors': 'True', 'no_print': 'None', 'warn_error': 'None', 'use_experimental_parser': 'False', 'static_parser': 'True', 'debug': 'False', 'printer_width': '80', 'send_anonymous_usage_stats': 'True', 'cache_selected_only': 'False', 'log_cache_events': 'False', 'profiles_dir': '.', 'version_check': 'True', 'introspect': 'True', 'indirect_selection': 'eager', 'write_json': 'True', 'quiet': 'False', 'fail_fast': 'False', 'target_path': 'None'}
+[0m22:25:48.568541 [debug] [MainThread]: Sending event: {'category': 'dbt', 'action': 'project_id', 'label': 'aae0122a-905b-47b7-9db9-621491d2f485', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x7f0a82eeccd0>]}
+[0m22:25:42.363999 [debug] [MainThread]: Set downloads directory='/tmp/dbt-downloads-1s619egr'
+[0m22:25:42.366257 [debug] [MainThread]: Making package index registry request: GET https://hub.getdbt.com/api/v1/index.json
+[0m22:25:42.877064 [debug] [MainThread]: Response from registry index: GET https://hub.getdbt.com/api/v1/index.json 200
+[0m22:25:42.883817 [debug] [MainThread]: Making package registry request: GET https://hub.getdbt.com/api/v1/dbt-labs/dbt_utils.json
+[0m22:25:43.109119 [debug] [MainThread]: Response from registry: GET https://hub.getdbt.com/api/v1/dbt-labs/dbt_utils.json 200
+[0m22:25:43.120517 [info ] [MainThread]: Installing dbt-labs/dbt_utils
+[0m22:25:59.205483 [info ] [MainThread]: Installed from version 1.1.0
+[0m22:25:59.208824 [info ] [MainThread]: Updated version available: 1.3.3
+[0m22:25:59.214099 [debug] [MainThread]: Sending event: {'category': 'dbt', 'action': 'package', 'label': 'aae0122a-905b-47b7-9db9-621491d2f485', 'property_': 'install', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x7f0a82f10490>, <snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x7f0a82f108d0>]}
+[0m22:25:59.226479 [info ] [MainThread]: 
+[0m22:25:59.240523 [info ] [MainThread]: Updates available for packages: ['dbt-labs/dbt_utils']                 
+Update your versions in packages.yml, then run dbt deps
+[0m22:25:59.262762 [debug] [MainThread]: Resource report: {"command_name": "deps", "command_success": true, "command_wall_clock_time": 12.163111, "process_in_blocks": "272", "process_kernel_time": 1.160944, "process_mem_max_rss": "109776", "process_out_blocks": "200", "process_user_time": 3.592527}
+[0m22:25:59.274569 [debug] [MainThread]: Command `dbt deps` succeeded at 22:25:59.274156 after 12.18 seconds
+[0m22:25:59.278172 [debug] [MainThread]: Sending event: {'category': 'dbt', 'action': 'invocation', 'label': 'end', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x7f0a82fc3190>, <snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x7f0a84d72ed0>, <snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x7f0a83e88cd0>]}
+[0m22:25:59.293571 [debug] [MainThread]: Flushing usage events
+[0m22:25:53.568391 [debug] [MainThread]: An error was encountered while trying to flush usage events
+[0m22:26:08.556894 [debug] [MainThread]: Sending event: {'category': 'dbt', 'action': 'invocation', 'label': 'start', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x7f90a15e4190>, <snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x7f90a15e4f50>, <snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x7f90a15e4bd0>]}
+
+
+============================== 22:26:08.572953 | ce093c6a-d2b1-472f-b76d-ce58bcb093a0 ==============================
+[0m22:26:08.572953 [info ] [MainThread]: Running with dbt=1.11.6
+[0m22:26:08.578813 [debug] [MainThread]: running dbt with arguments {'write_json': 'True', 'printer_width': '80', 'quiet': 'False', 'static_parser': 'True', 'indirect_selection': 'eager', 'cache_selected_only': 'False', 'debug': 'False', 'profiles_dir': '.', 'invocation_command': 'dbt docs generate --profiles-dir .', 'no_print': 'None', 'partial_parse': 'True', 'target_path': 'None', 'version_check': 'True', 'warn_error_options': 'WarnErrorOptionsV2(error=[], warn=[], silence=[])', 'warn_error': 'None', 'log_format': 'default', 'log_path': '/app/transform/dbt/logs', 'introspect': 'True', 'empty': 'None', 'use_colors': 'True', 'log_cache_events': 'False', 'fail_fast': 'False', 'send_anonymous_usage_stats': 'True', 'use_experimental_parser': 'False'}
+[0m22:26:01.758397 [debug] [MainThread]: Sending event: {'category': 'dbt', 'action': 'project_id', 'label': 'ce093c6a-d2b1-472f-b76d-ce58bcb093a0', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x7f90a0934150>]}
+[0m22:26:01.948599 [debug] [MainThread]: Sending event: {'category': 'dbt', 'action': 'adapter_info', 'label': 'ce093c6a-d2b1-472f-b76d-ce58bcb093a0', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x7f90a0947f10>]}
+[0m22:26:01.951969 [info ] [MainThread]: Registered adapter: postgres=1.10.0
+[0m22:26:02.187468 [debug] [MainThread]: checksum: ec27062d18352e9cfca161c166fcc73d2201661a23a3cf3c89196a27f32cfcb8, vars: {}, profile: , target: , version: 1.11.6
+[0m22:26:04.114550 [debug] [MainThread]: Partial parsing enabled: 0 files deleted, 0 files added, 0 files changed.
+[0m22:26:04.118265 [debug] [MainThread]: Nothing changed, skipping partial parsing.
+[0m22:26:04.121027 [debug] [MainThread]: Partial parsing enabled, no changes found, skipping parsing
+[0m22:26:04.144920 [warn ] [MainThread]: [[33mWARNING[0m]: Configuration paths exist in your dbt_project.yml file which do not apply to any resources.
+There are 2 unused configuration paths:
+- models.modeling_lab.core_3nf
+- models.modeling_lab.dv
+[0m22:26:04.285932 [debug] [MainThread]: Sending event: {'category': 'dbt', 'action': 'load_project', 'label': 'ce093c6a-d2b1-472f-b76d-ce58bcb093a0', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x7f909f9a6c90>]}
+[0m22:26:04.358791 [debug] [MainThread]: Sending event: {'category': 'dbt', 'action': 'resource_counts', 'label': 'ce093c6a-d2b1-472f-b76d-ce58bcb093a0', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x7f90a09aa990>]}
+[0m22:26:04.361916 [info ] [MainThread]: Found 13 models, 37 data tests, 9 sources, 578 macros
+[0m22:26:04.365597 [debug] [MainThread]: Sending event: {'category': 'dbt', 'action': 'runnable_timing', 'label': 'ce093c6a-d2b1-472f-b76d-ce58bcb093a0', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x7f909f9284d0>]}
+[0m22:26:04.375534 [info ] [MainThread]: 
+[0m22:26:04.378045 [info ] [MainThread]: Concurrency: 4 threads (target='dev')
+[0m22:26:04.384512 [info ] [MainThread]: 
+[0m22:26:04.391547 [debug] [MainThread]: Acquiring new postgres connection 'master'
+[0m22:26:04.407226 [debug] [ThreadPool]: Acquiring new postgres connection 'list_modeling_lab_public'
+[0m22:26:04.635322 [debug] [ThreadPool]: Using postgres connection "list_modeling_lab_public"
+[0m22:26:04.638164 [debug] [ThreadPool]: On list_modeling_lab_public: /* {"app": "dbt", "dbt_version": "1.11.6", "profile_name": "modeling_lab", "target_name": "dev", "connection_name": "list_modeling_lab_public"} */
+select
+      'modeling_lab' as database,
+      tablename as name,
+      schemaname as schema,
+      'table' as type
+    from pg_tables
+    where schemaname ilike 'public'
+    union all
+    select
+      'modeling_lab' as database,
+      viewname as name,
+      schemaname as schema,
+      'view' as type
+    from pg_views
+    where schemaname ilike 'public'
+    union all
+    select
+      'modeling_lab' as database,
+      matviewname as name,
+      schemaname as schema,
+      'materialized_view' as type
+    from pg_matviews
+    where schemaname ilike 'public'
+  
+[0m22:26:04.640731 [debug] [ThreadPool]: Opening a new connection, currently in state init
+[0m22:26:04.671872 [debug] [ThreadPool]: SQL status: SELECT 13 in 0.031 seconds
+[0m22:26:04.677895 [debug] [ThreadPool]: On list_modeling_lab_public: ROLLBACK
+[0m22:26:04.680572 [debug] [ThreadPool]: On list_modeling_lab_public: Close
+[0m22:26:04.697599 [debug] [MainThread]: Using postgres connection "master"
+[0m22:26:04.699551 [debug] [MainThread]: On master: /* {"app": "dbt", "dbt_version": "1.11.6", "profile_name": "modeling_lab", "target_name": "dev", "connection_name": "master"} */
+select distinct
+        dependent_namespace.nspname as dependent_schema,
+        dependent_class.relname as dependent_name,
+        referenced_namespace.nspname as referenced_schema,
+        referenced_class.relname as referenced_name
+
+    -- Query for views: views are entries in pg_class with an entry in pg_rewrite, but we avoid
+    -- a seq scan on pg_rewrite by leveraging the fact there is an "internal" row in pg_depend for
+    -- the view...
+    from pg_class as dependent_class
+    join pg_namespace as dependent_namespace on dependent_namespace.oid = dependent_class.relnamespace
+    join pg_depend as dependent_depend on dependent_depend.refobjid = dependent_class.oid
+        and dependent_depend.classid = 'pg_rewrite'::regclass
+        and dependent_depend.refclassid = 'pg_class'::regclass
+        and dependent_depend.deptype = 'i'
+
+    -- ... and via pg_depend (that has a row per column, hence the need for "distinct" above, and
+    -- making sure to exclude the internal row to avoid a view appearing to depend on itself)...
+    join pg_depend as joining_depend on joining_depend.objid = dependent_depend.objid
+        and joining_depend.classid = 'pg_rewrite'::regclass
+        and joining_depend.refclassid = 'pg_class'::regclass
+        and joining_depend.refobjid != dependent_depend.refobjid
+
+    -- ... we can find the tables they query from in pg_class, but excluding system tables. Note we
+    -- don't need need to exclude _dependent_ system tables, because they only query from other
+    -- system tables, and so are automatically excluded by excluding _referenced_ system tables
+    join pg_class as referenced_class on referenced_class.oid = joining_depend.refobjid
+    join pg_namespace as referenced_namespace on referenced_namespace.oid = referenced_class.relnamespace
+        and referenced_namespace.nspname != 'information_schema'
+        and referenced_namespace.nspname not like 'pg\_%'
+
+    order by
+        dependent_schema, dependent_name, referenced_schema, referenced_name;
+[0m22:26:04.702081 [debug] [MainThread]: Opening a new connection, currently in state init
+[0m22:26:04.727905 [debug] [MainThread]: SQL status: SELECT 9 in 0.026 seconds
+[0m22:26:04.732090 [debug] [MainThread]: Sending event: {'category': 'dbt', 'action': 'runnable_timing', 'label': 'ce093c6a-d2b1-472f-b76d-ce58bcb093a0', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x7f90a1cdce10>]}
+[0m22:26:04.734645 [debug] [MainThread]: On master: ROLLBACK
+[0m22:26:04.737732 [debug] [MainThread]: On master: Close
+[0m22:26:04.753528 [debug] [Thread-1 (]: Began running node model.modeling_lab.dim_date
+[0m22:26:04.754958 [debug] [Thread-2 (]: Began running node model.modeling_lab.stg_olist__category_translations
+[0m22:26:04.756188 [debug] [Thread-3 (]: Began running node model.modeling_lab.stg_olist__customers
+[0m22:26:04.757861 [debug] [Thread-4 (]: Began running node model.modeling_lab.stg_olist__geolocation
+[0m22:26:04.759539 [debug] [Thread-1 (]: Re-using an available connection from the pool (formerly list_modeling_lab_public, now model.modeling_lab.dim_date)
+[0m22:26:04.762062 [debug] [Thread-2 (]: Acquiring new postgres connection 'model.modeling_lab.stg_olist__category_translations'
+[0m22:26:04.764703 [debug] [Thread-3 (]: Acquiring new postgres connection 'model.modeling_lab.stg_olist__customers'
+[0m22:26:04.767549 [debug] [Thread-4 (]: Acquiring new postgres connection 'model.modeling_lab.stg_olist__geolocation'
+[0m22:26:04.769663 [debug] [Thread-1 (]: Began compiling node model.modeling_lab.dim_date
+[0m22:26:04.772218 [debug] [Thread-2 (]: Began compiling node model.modeling_lab.stg_olist__category_translations
+[0m22:26:04.774364 [debug] [Thread-3 (]: Began compiling node model.modeling_lab.stg_olist__customers
+[0m22:26:04.776663 [debug] [Thread-4 (]: Began compiling node model.modeling_lab.stg_olist__geolocation
+[0m22:26:04.792752 [debug] [Thread-1 (]: Writing injected SQL for node "model.modeling_lab.dim_date"
+[0m22:26:04.799838 [debug] [Thread-2 (]: Writing injected SQL for node "model.modeling_lab.stg_olist__category_translations"
+[0m22:26:04.809417 [debug] [Thread-3 (]: Writing injected SQL for node "model.modeling_lab.stg_olist__customers"
+[0m22:26:04.820879 [debug] [Thread-4 (]: Writing injected SQL for node "model.modeling_lab.stg_olist__geolocation"
+[0m22:26:04.843568 [debug] [Thread-2 (]: Began executing node model.modeling_lab.stg_olist__category_translations
+[0m22:26:04.846541 [debug] [Thread-3 (]: Began executing node model.modeling_lab.stg_olist__customers
+[0m22:26:04.849584 [debug] [Thread-1 (]: Began executing node model.modeling_lab.dim_date
+[0m22:26:04.853114 [debug] [Thread-2 (]: Finished running node model.modeling_lab.stg_olist__category_translations
+[0m22:26:04.854295 [debug] [Thread-4 (]: Began executing node model.modeling_lab.stg_olist__geolocation
+[0m22:26:04.857996 [debug] [Thread-3 (]: Finished running node model.modeling_lab.stg_olist__customers
+[0m22:26:04.862663 [debug] [Thread-1 (]: Finished running node model.modeling_lab.dim_date
+[0m22:26:04.865678 [debug] [Thread-2 (]: Began running node model.modeling_lab.stg_olist__order_items
+[0m22:26:04.869660 [debug] [Thread-4 (]: Finished running node model.modeling_lab.stg_olist__geolocation
+[0m22:26:04.872399 [debug] [Thread-3 (]: Began running node model.modeling_lab.stg_olist__order_payments
+[0m22:26:04.875605 [debug] [Thread-1 (]: Began running node model.modeling_lab.stg_olist__order_reviews
+[0m22:26:04.878842 [debug] [Thread-2 (]: Re-using an available connection from the pool (formerly model.modeling_lab.stg_olist__category_translations, now model.modeling_lab.stg_olist__order_items)
+[0m22:26:04.881659 [debug] [Thread-4 (]: Began running node model.modeling_lab.stg_olist__orders
+[0m22:26:04.884571 [debug] [Thread-3 (]: Re-using an available connection from the pool (formerly model.modeling_lab.stg_olist__customers, now model.modeling_lab.stg_olist__order_payments)
+[0m22:26:04.887335 [debug] [Thread-1 (]: Re-using an available connection from the pool (formerly model.modeling_lab.dim_date, now model.modeling_lab.stg_olist__order_reviews)
+[0m22:26:04.889826 [debug] [Thread-2 (]: Began compiling node model.modeling_lab.stg_olist__order_items
+[0m22:26:04.893125 [debug] [Thread-4 (]: Re-using an available connection from the pool (formerly model.modeling_lab.stg_olist__geolocation, now model.modeling_lab.stg_olist__orders)
+[0m22:26:04.895994 [debug] [Thread-3 (]: Began compiling node model.modeling_lab.stg_olist__order_payments
+[0m22:26:04.898493 [debug] [Thread-1 (]: Began compiling node model.modeling_lab.stg_olist__order_reviews
+[0m22:26:04.910665 [debug] [Thread-2 (]: Writing injected SQL for node "model.modeling_lab.stg_olist__order_items"
+[0m22:26:04.912683 [debug] [Thread-4 (]: Began compiling node model.modeling_lab.stg_olist__orders
+[0m22:26:04.921288 [debug] [Thread-3 (]: Writing injected SQL for node "model.modeling_lab.stg_olist__order_payments"
+[0m22:26:04.929537 [debug] [Thread-1 (]: Writing injected SQL for node "model.modeling_lab.stg_olist__order_reviews"
+[0m22:26:04.940290 [debug] [Thread-4 (]: Writing injected SQL for node "model.modeling_lab.stg_olist__orders"
+[0m22:26:04.949584 [debug] [Thread-2 (]: Began executing node model.modeling_lab.stg_olist__order_items
+[0m22:26:04.951630 [debug] [Thread-3 (]: Began executing node model.modeling_lab.stg_olist__order_payments
+[0m22:26:04.956431 [debug] [Thread-2 (]: Finished running node model.modeling_lab.stg_olist__order_items
+[0m22:26:04.958786 [debug] [Thread-1 (]: Began executing node model.modeling_lab.stg_olist__order_reviews
+[0m22:26:04.961325 [debug] [Thread-4 (]: Began executing node model.modeling_lab.stg_olist__orders
+[0m22:26:04.965210 [debug] [Thread-3 (]: Finished running node model.modeling_lab.stg_olist__order_payments
+[0m22:26:04.967998 [debug] [Thread-2 (]: Began running node model.modeling_lab.stg_olist__products
+[0m22:26:04.971906 [debug] [Thread-1 (]: Finished running node model.modeling_lab.stg_olist__order_reviews
+[0m22:26:04.975235 [debug] [Thread-4 (]: Finished running node model.modeling_lab.stg_olist__orders
+[0m22:26:04.977980 [debug] [Thread-3 (]: Began running node model.modeling_lab.stg_olist__sellers
+[0m22:26:04.980975 [debug] [Thread-2 (]: Re-using an available connection from the pool (formerly model.modeling_lab.stg_olist__order_items, now model.modeling_lab.stg_olist__products)
+[0m22:26:04.983587 [debug] [Thread-1 (]: Began running node test.modeling_lab.source_not_null_olist_customers_customer_id.1d007d2aad
+[0m22:26:04.986139 [debug] [Thread-4 (]: Began running node test.modeling_lab.source_not_null_olist_order_items_order_id.6a31f38874
+[0m22:26:04.989328 [debug] [Thread-3 (]: Re-using an available connection from the pool (formerly model.modeling_lab.stg_olist__order_payments, now model.modeling_lab.stg_olist__sellers)
+[0m22:26:04.991674 [debug] [Thread-2 (]: Began compiling node model.modeling_lab.stg_olist__products
+[0m22:26:04.994257 [debug] [Thread-1 (]: Re-using an available connection from the pool (formerly model.modeling_lab.stg_olist__order_reviews, now test.modeling_lab.source_not_null_olist_customers_customer_id.1d007d2aad)
+[0m22:26:04.997922 [debug] [Thread-4 (]: Re-using an available connection from the pool (formerly model.modeling_lab.stg_olist__orders, now test.modeling_lab.source_not_null_olist_order_items_order_id.6a31f38874)
+[0m22:26:05.000637 [debug] [Thread-3 (]: Began compiling node model.modeling_lab.stg_olist__sellers
+[0m22:26:05.010270 [debug] [Thread-2 (]: Writing injected SQL for node "model.modeling_lab.stg_olist__products"
+[0m22:26:05.012577 [debug] [Thread-1 (]: Began compiling node test.modeling_lab.source_not_null_olist_customers_customer_id.1d007d2aad
+[0m22:26:05.015305 [debug] [Thread-4 (]: Began compiling node test.modeling_lab.source_not_null_olist_order_items_order_id.6a31f38874
+[0m22:26:05.023592 [debug] [Thread-3 (]: Writing injected SQL for node "model.modeling_lab.stg_olist__sellers"
+[0m22:26:05.054769 [debug] [Thread-1 (]: Writing injected SQL for node "test.modeling_lab.source_not_null_olist_customers_customer_id.1d007d2aad"
+[0m22:26:05.066530 [debug] [Thread-4 (]: Writing injected SQL for node "test.modeling_lab.source_not_null_olist_order_items_order_id.6a31f38874"
+[0m22:26:05.067931 [debug] [Thread-2 (]: Began executing node model.modeling_lab.stg_olist__products
+[0m22:26:05.075653 [debug] [Thread-2 (]: Finished running node model.modeling_lab.stg_olist__products
+[0m22:26:05.079248 [debug] [Thread-2 (]: Began running node test.modeling_lab.source_not_null_olist_order_items_order_item_id.de73ad88cf
+[0m22:26:05.081204 [debug] [Thread-3 (]: Began executing node model.modeling_lab.stg_olist__sellers
+[0m22:26:05.084199 [debug] [Thread-2 (]: Re-using an available connection from the pool (formerly model.modeling_lab.stg_olist__products, now test.modeling_lab.source_not_null_olist_order_items_order_item_id.de73ad88cf)
+[0m22:26:05.086922 [debug] [Thread-1 (]: Began executing node test.modeling_lab.source_not_null_olist_customers_customer_id.1d007d2aad
+[0m22:26:05.089680 [debug] [Thread-3 (]: Finished running node model.modeling_lab.stg_olist__sellers
+[0m22:26:05.090700 [debug] [Thread-4 (]: Began executing node test.modeling_lab.source_not_null_olist_order_items_order_id.6a31f38874
+[0m22:26:05.092741 [debug] [Thread-2 (]: Began compiling node test.modeling_lab.source_not_null_olist_order_items_order_item_id.de73ad88cf
+[0m22:26:05.096157 [debug] [Thread-1 (]: Finished running node test.modeling_lab.source_not_null_olist_customers_customer_id.1d007d2aad
+[0m22:26:05.098989 [debug] [Thread-3 (]: Began running node test.modeling_lab.source_not_null_olist_orders_order_id.441189e023
+[0m22:26:05.103239 [debug] [Thread-4 (]: Finished running node test.modeling_lab.source_not_null_olist_order_items_order_id.6a31f38874
+[0m22:26:05.115199 [debug] [Thread-2 (]: Writing injected SQL for node "test.modeling_lab.source_not_null_olist_order_items_order_item_id.de73ad88cf"
+[0m22:26:05.117619 [debug] [Thread-1 (]: Began running node test.modeling_lab.source_not_null_olist_products_product_id.93341440fa
+[0m22:26:05.120336 [debug] [Thread-3 (]: Re-using an available connection from the pool (formerly model.modeling_lab.stg_olist__sellers, now test.modeling_lab.source_not_null_olist_orders_order_id.441189e023)
+[0m22:26:05.122957 [debug] [Thread-4 (]: Began running node test.modeling_lab.source_not_null_olist_sellers_seller_id.fc06a9f6bf
+[0m22:26:05.127378 [debug] [Thread-1 (]: Re-using an available connection from the pool (formerly test.modeling_lab.source_not_null_olist_customers_customer_id.1d007d2aad, now test.modeling_lab.source_not_null_olist_products_product_id.93341440fa)
+[0m22:26:05.130029 [debug] [Thread-3 (]: Began compiling node test.modeling_lab.source_not_null_olist_orders_order_id.441189e023
+[0m22:26:05.132867 [debug] [Thread-4 (]: Re-using an available connection from the pool (formerly test.modeling_lab.source_not_null_olist_order_items_order_id.6a31f38874, now test.modeling_lab.source_not_null_olist_sellers_seller_id.fc06a9f6bf)
+[0m22:26:05.137419 [debug] [Thread-1 (]: Began compiling node test.modeling_lab.source_not_null_olist_products_product_id.93341440fa
+[0m22:26:05.154597 [debug] [Thread-3 (]: Writing injected SQL for node "test.modeling_lab.source_not_null_olist_orders_order_id.441189e023"
+[0m22:26:05.157638 [debug] [Thread-4 (]: Began compiling node test.modeling_lab.source_not_null_olist_sellers_seller_id.fc06a9f6bf
+[0m22:26:05.159565 [debug] [Thread-2 (]: Began executing node test.modeling_lab.source_not_null_olist_order_items_order_item_id.de73ad88cf
+[0m22:26:05.170910 [debug] [Thread-1 (]: Writing injected SQL for node "test.modeling_lab.source_not_null_olist_products_product_id.93341440fa"
+[0m22:26:05.184872 [debug] [Thread-4 (]: Writing injected SQL for node "test.modeling_lab.source_not_null_olist_sellers_seller_id.fc06a9f6bf"
+[0m22:26:05.188144 [debug] [Thread-2 (]: Finished running node test.modeling_lab.source_not_null_olist_order_items_order_item_id.de73ad88cf
+[0m22:26:05.191766 [debug] [Thread-3 (]: Began executing node test.modeling_lab.source_not_null_olist_orders_order_id.441189e023
+[0m22:26:05.195920 [debug] [Thread-2 (]: Began running node test.modeling_lab.source_unique_olist_customers_customer_id.efa71c64b9
+[0m22:26:05.199625 [debug] [Thread-3 (]: Finished running node test.modeling_lab.source_not_null_olist_orders_order_id.441189e023
+[0m22:26:05.202784 [debug] [Thread-2 (]: Re-using an available connection from the pool (formerly test.modeling_lab.source_not_null_olist_order_items_order_item_id.de73ad88cf, now test.modeling_lab.source_unique_olist_customers_customer_id.efa71c64b9)
+[0m22:26:05.205044 [debug] [Thread-1 (]: Began executing node test.modeling_lab.source_not_null_olist_products_product_id.93341440fa
+[0m22:26:05.207378 [debug] [Thread-3 (]: Began running node test.modeling_lab.source_unique_olist_orders_order_id.df3b066d82
+[0m22:26:05.210092 [debug] [Thread-4 (]: Began executing node test.modeling_lab.source_not_null_olist_sellers_seller_id.fc06a9f6bf
+[0m22:26:05.211356 [debug] [Thread-2 (]: Began compiling node test.modeling_lab.source_unique_olist_customers_customer_id.efa71c64b9
+[0m22:26:05.215452 [debug] [Thread-1 (]: Finished running node test.modeling_lab.source_not_null_olist_products_product_id.93341440fa
+[0m22:26:05.219238 [debug] [Thread-3 (]: Re-using an available connection from the pool (formerly test.modeling_lab.source_not_null_olist_orders_order_id.441189e023, now test.modeling_lab.source_unique_olist_orders_order_id.df3b066d82)
+[0m22:26:05.222660 [debug] [Thread-4 (]: Finished running node test.modeling_lab.source_not_null_olist_sellers_seller_id.fc06a9f6bf
+[0m22:26:05.240720 [debug] [Thread-2 (]: Writing injected SQL for node "test.modeling_lab.source_unique_olist_customers_customer_id.efa71c64b9"
+[0m22:26:05.243303 [debug] [Thread-1 (]: Began running node test.modeling_lab.source_unique_olist_products_product_id.b191d1f5aa
+[0m22:26:05.247115 [debug] [Thread-3 (]: Began compiling node test.modeling_lab.source_unique_olist_orders_order_id.df3b066d82
+[0m22:26:05.250718 [debug] [Thread-4 (]: Began running node test.modeling_lab.source_unique_olist_sellers_seller_id.c8d4e16ad8
+[0m22:26:05.257444 [debug] [Thread-1 (]: Re-using an available connection from the pool (formerly test.modeling_lab.source_not_null_olist_products_product_id.93341440fa, now test.modeling_lab.source_unique_olist_products_product_id.b191d1f5aa)
+[0m22:26:05.272892 [debug] [Thread-3 (]: Writing injected SQL for node "test.modeling_lab.source_unique_olist_orders_order_id.df3b066d82"
+[0m22:26:05.274931 [debug] [Thread-4 (]: Re-using an available connection from the pool (formerly test.modeling_lab.source_not_null_olist_sellers_seller_id.fc06a9f6bf, now test.modeling_lab.source_unique_olist_sellers_seller_id.c8d4e16ad8)
+[0m22:26:05.279874 [debug] [Thread-1 (]: Began compiling node test.modeling_lab.source_unique_olist_products_product_id.b191d1f5aa
+[0m22:26:05.287100 [debug] [Thread-2 (]: Began executing node test.modeling_lab.source_unique_olist_customers_customer_id.efa71c64b9
+[0m22:26:05.291122 [debug] [Thread-4 (]: Began compiling node test.modeling_lab.source_unique_olist_sellers_seller_id.c8d4e16ad8
+[0m22:26:05.312466 [debug] [Thread-1 (]: Writing injected SQL for node "test.modeling_lab.source_unique_olist_products_product_id.b191d1f5aa"
+[0m22:26:05.315491 [debug] [Thread-2 (]: Finished running node test.modeling_lab.source_unique_olist_customers_customer_id.efa71c64b9
+[0m22:26:05.324963 [debug] [Thread-3 (]: Began executing node test.modeling_lab.source_unique_olist_orders_order_id.df3b066d82
+[0m22:26:05.332752 [debug] [Thread-4 (]: Writing injected SQL for node "test.modeling_lab.source_unique_olist_sellers_seller_id.c8d4e16ad8"
+[0m22:26:05.337730 [debug] [Thread-2 (]: Began running node model.modeling_lab.dim_customer
+[0m22:26:05.342380 [debug] [Thread-3 (]: Finished running node test.modeling_lab.source_unique_olist_orders_order_id.df3b066d82
+[0m22:26:05.348050 [debug] [Thread-2 (]: Re-using an available connection from the pool (formerly test.modeling_lab.source_unique_olist_customers_customer_id.efa71c64b9, now model.modeling_lab.dim_customer)
+[0m22:26:05.352359 [debug] [Thread-3 (]: Began running node test.modeling_lab.not_null_stg_olist__customers_customer_id.fa12d6306e
+[0m22:26:05.355802 [debug] [Thread-2 (]: Began compiling node model.modeling_lab.dim_customer
+[0m22:26:05.357599 [debug] [Thread-1 (]: Began executing node test.modeling_lab.source_unique_olist_products_product_id.b191d1f5aa
+[0m22:26:05.360823 [debug] [Thread-3 (]: Re-using an available connection from the pool (formerly test.modeling_lab.source_unique_olist_orders_order_id.df3b066d82, now test.modeling_lab.not_null_stg_olist__customers_customer_id.fa12d6306e)
+[0m22:26:05.364929 [debug] [Thread-4 (]: Began executing node test.modeling_lab.source_unique_olist_sellers_seller_id.c8d4e16ad8
+[0m22:26:05.376678 [debug] [Thread-2 (]: Writing injected SQL for node "model.modeling_lab.dim_customer"
+[0m22:26:05.380984 [debug] [Thread-1 (]: Finished running node test.modeling_lab.source_unique_olist_products_product_id.b191d1f5aa
+[0m22:26:05.384039 [debug] [Thread-3 (]: Began compiling node test.modeling_lab.not_null_stg_olist__customers_customer_id.fa12d6306e
+[0m22:26:05.387719 [debug] [Thread-4 (]: Finished running node test.modeling_lab.source_unique_olist_sellers_seller_id.c8d4e16ad8
+[0m22:26:05.392781 [debug] [Thread-1 (]: Began running node test.modeling_lab.unique_stg_olist__customers_customer_id.322bd7d968
+[0m22:26:05.406990 [debug] [Thread-3 (]: Writing injected SQL for node "test.modeling_lab.not_null_stg_olist__customers_customer_id.fa12d6306e"
+[0m22:26:05.409428 [debug] [Thread-4 (]: Began running node test.modeling_lab.not_null_dim_date_date_key.881d0a31b6
+[0m22:26:05.412973 [debug] [Thread-1 (]: Re-using an available connection from the pool (formerly test.modeling_lab.source_unique_olist_products_product_id.b191d1f5aa, now test.modeling_lab.unique_stg_olist__customers_customer_id.322bd7d968)
+[0m22:26:05.416144 [debug] [Thread-2 (]: Began executing node model.modeling_lab.dim_customer
+[0m22:26:05.419719 [debug] [Thread-4 (]: Re-using an available connection from the pool (formerly test.modeling_lab.source_unique_olist_sellers_seller_id.c8d4e16ad8, now test.modeling_lab.not_null_dim_date_date_key.881d0a31b6)
+[0m22:26:05.423811 [debug] [Thread-1 (]: Began compiling node test.modeling_lab.unique_stg_olist__customers_customer_id.322bd7d968
+[0m22:26:05.427525 [debug] [Thread-2 (]: Finished running node model.modeling_lab.dim_customer
+[0m22:26:05.431345 [debug] [Thread-4 (]: Began compiling node test.modeling_lab.not_null_dim_date_date_key.881d0a31b6
+[0m22:26:05.444982 [debug] [Thread-1 (]: Writing injected SQL for node "test.modeling_lab.unique_stg_olist__customers_customer_id.322bd7d968"
+[0m22:26:05.448973 [debug] [Thread-2 (]: Began running node test.modeling_lab.unique_dim_date_date_key.0869fd48f9
+[0m22:26:05.451934 [debug] [Thread-3 (]: Began executing node test.modeling_lab.not_null_stg_olist__customers_customer_id.fa12d6306e
+[0m22:26:05.469645 [debug] [Thread-4 (]: Writing injected SQL for node "test.modeling_lab.not_null_dim_date_date_key.881d0a31b6"
+[0m22:26:05.473264 [debug] [Thread-2 (]: Re-using an available connection from the pool (formerly model.modeling_lab.dim_customer, now test.modeling_lab.unique_dim_date_date_key.0869fd48f9)
+[0m22:26:05.476676 [debug] [Thread-3 (]: Finished running node test.modeling_lab.not_null_stg_olist__customers_customer_id.fa12d6306e
+[0m22:26:05.481425 [debug] [Thread-2 (]: Began compiling node test.modeling_lab.unique_dim_date_date_key.0869fd48f9
+[0m22:26:05.488097 [debug] [Thread-3 (]: Began running node test.modeling_lab.not_null_stg_olist__order_items_order_id.6260e845c7
+[0m22:26:05.507748 [debug] [Thread-2 (]: Writing injected SQL for node "test.modeling_lab.unique_dim_date_date_key.0869fd48f9"
+[0m22:26:05.519795 [debug] [Thread-3 (]: Re-using an available connection from the pool (formerly test.modeling_lab.not_null_stg_olist__customers_customer_id.fa12d6306e, now test.modeling_lab.not_null_stg_olist__order_items_order_id.6260e845c7)
+[0m22:26:05.523483 [debug] [Thread-4 (]: Began executing node test.modeling_lab.not_null_dim_date_date_key.881d0a31b6
+[0m22:26:05.525389 [debug] [Thread-1 (]: Began executing node test.modeling_lab.unique_stg_olist__customers_customer_id.322bd7d968
+[0m22:26:05.528087 [debug] [Thread-3 (]: Began compiling node test.modeling_lab.not_null_stg_olist__order_items_order_id.6260e845c7
+[0m22:26:05.532308 [debug] [Thread-4 (]: Finished running node test.modeling_lab.not_null_dim_date_date_key.881d0a31b6
+[0m22:26:05.536207 [debug] [Thread-1 (]: Finished running node test.modeling_lab.unique_stg_olist__customers_customer_id.322bd7d968
+[0m22:26:05.549192 [debug] [Thread-3 (]: Writing injected SQL for node "test.modeling_lab.not_null_stg_olist__order_items_order_id.6260e845c7"
+[0m22:26:05.551833 [debug] [Thread-4 (]: Began running node test.modeling_lab.not_null_stg_olist__order_items_product_id.21dabede7a
+[0m22:26:05.555193 [debug] [Thread-2 (]: Began executing node test.modeling_lab.unique_dim_date_date_key.0869fd48f9
+[0m22:26:05.556409 [debug] [Thread-1 (]: Began running node model.modeling_lab.fct_order_item
+[0m22:26:05.561167 [debug] [Thread-4 (]: Re-using an available connection from the pool (formerly test.modeling_lab.not_null_dim_date_date_key.881d0a31b6, now test.modeling_lab.not_null_stg_olist__order_items_product_id.21dabede7a)
+[0m22:26:05.564950 [debug] [Thread-2 (]: Finished running node test.modeling_lab.unique_dim_date_date_key.0869fd48f9
+[0m22:26:05.567677 [debug] [Thread-1 (]: Re-using an available connection from the pool (formerly test.modeling_lab.unique_stg_olist__customers_customer_id.322bd7d968, now model.modeling_lab.fct_order_item)
+[0m22:26:05.570614 [debug] [Thread-4 (]: Began compiling node test.modeling_lab.not_null_stg_olist__order_items_product_id.21dabede7a
+[0m22:26:05.573903 [debug] [Thread-2 (]: Began running node test.modeling_lab.not_null_stg_olist__orders_customer_id.007ae2ad2c
+[0m22:26:05.576910 [debug] [Thread-1 (]: Began compiling node model.modeling_lab.fct_order_item
+[0m22:26:05.579476 [debug] [Thread-3 (]: Began executing node test.modeling_lab.not_null_stg_olist__order_items_order_id.6260e845c7
+[0m22:26:05.592243 [debug] [Thread-4 (]: Writing injected SQL for node "test.modeling_lab.not_null_stg_olist__order_items_product_id.21dabede7a"
+[0m22:26:05.594731 [debug] [Thread-2 (]: Re-using an available connection from the pool (formerly test.modeling_lab.unique_dim_date_date_key.0869fd48f9, now test.modeling_lab.not_null_stg_olist__orders_customer_id.007ae2ad2c)
+[0m22:26:05.623134 [debug] [Thread-3 (]: Finished running node test.modeling_lab.not_null_stg_olist__order_items_order_id.6260e845c7
+[0m22:26:05.639789 [debug] [Thread-1 (]: Writing injected SQL for node "model.modeling_lab.fct_order_item"
+[0m22:26:05.643439 [debug] [Thread-2 (]: Began compiling node test.modeling_lab.not_null_stg_olist__orders_customer_id.007ae2ad2c
+[0m22:26:05.646269 [debug] [Thread-3 (]: Began running node test.modeling_lab.not_null_stg_olist__orders_order_id.9ec9e196cb
+[0m22:26:05.662389 [debug] [Thread-2 (]: Writing injected SQL for node "test.modeling_lab.not_null_stg_olist__orders_customer_id.007ae2ad2c"
+[0m22:26:05.665183 [debug] [Thread-3 (]: Re-using an available connection from the pool (formerly test.modeling_lab.not_null_stg_olist__order_items_order_id.6260e845c7, now test.modeling_lab.not_null_stg_olist__orders_order_id.9ec9e196cb)
+[0m22:26:05.668374 [debug] [Thread-4 (]: Began executing node test.modeling_lab.not_null_stg_olist__order_items_product_id.21dabede7a
+[0m22:26:05.669951 [debug] [Thread-1 (]: Began executing node model.modeling_lab.fct_order_item
+[0m22:26:05.673165 [debug] [Thread-3 (]: Began compiling node test.modeling_lab.not_null_stg_olist__orders_order_id.9ec9e196cb
+[0m22:26:05.676631 [debug] [Thread-4 (]: Finished running node test.modeling_lab.not_null_stg_olist__order_items_product_id.21dabede7a
+[0m22:26:05.680579 [debug] [Thread-1 (]: Finished running node model.modeling_lab.fct_order_item
+[0m22:26:05.693398 [debug] [Thread-3 (]: Writing injected SQL for node "test.modeling_lab.not_null_stg_olist__orders_order_id.9ec9e196cb"
+[0m22:26:05.696414 [debug] [Thread-4 (]: Began running node test.modeling_lab.relationships_stg_olist__order_items_order_id__order_id__ref_stg_olist__orders_.352e2888e0
+[0m22:26:05.699114 [debug] [Thread-2 (]: Began executing node test.modeling_lab.not_null_stg_olist__orders_customer_id.007ae2ad2c
+[0m22:26:05.701233 [debug] [Thread-1 (]: Began running node test.modeling_lab.relationships_stg_olist__orders_customer_id__customer_id__ref_stg_olist__customers_.a9f63c5a3a
+[0m22:26:05.707487 [debug] [Thread-4 (]: Re-using an available connection from the pool (formerly test.modeling_lab.not_null_stg_olist__order_items_product_id.21dabede7a, now test.modeling_lab.relationships_stg_olist__order_items_order_id__order_id__ref_stg_olist__orders_.352e2888e0)
+[0m22:26:05.712276 [debug] [Thread-2 (]: Finished running node test.modeling_lab.not_null_stg_olist__orders_customer_id.007ae2ad2c
+[0m22:26:05.715750 [debug] [Thread-1 (]: Re-using an available connection from the pool (formerly model.modeling_lab.fct_order_item, now test.modeling_lab.relationships_stg_olist__orders_customer_id__customer_id__ref_stg_olist__customers_.a9f63c5a3a)
+[0m22:26:05.718477 [debug] [Thread-4 (]: Began compiling node test.modeling_lab.relationships_stg_olist__order_items_order_id__order_id__ref_stg_olist__orders_.352e2888e0
+[0m22:26:05.721751 [debug] [Thread-2 (]: Began running node test.modeling_lab.unique_stg_olist__orders_order_id.426f0a2be7
+[0m22:26:05.725228 [debug] [Thread-1 (]: Began compiling node test.modeling_lab.relationships_stg_olist__orders_customer_id__customer_id__ref_stg_olist__customers_.a9f63c5a3a
+[0m22:26:05.727850 [debug] [Thread-3 (]: Began executing node test.modeling_lab.not_null_stg_olist__orders_order_id.9ec9e196cb
+[0m22:26:05.746512 [debug] [Thread-4 (]: Writing injected SQL for node "test.modeling_lab.relationships_stg_olist__order_items_order_id__order_id__ref_stg_olist__orders_.352e2888e0"
+[0m22:26:05.748371 [debug] [Thread-2 (]: Re-using an available connection from the pool (formerly test.modeling_lab.not_null_stg_olist__orders_customer_id.007ae2ad2c, now test.modeling_lab.unique_stg_olist__orders_order_id.426f0a2be7)
+[0m22:26:05.768795 [debug] [Thread-1 (]: Writing injected SQL for node "test.modeling_lab.relationships_stg_olist__orders_customer_id__customer_id__ref_stg_olist__customers_.a9f63c5a3a"
+[0m22:26:05.771050 [debug] [Thread-3 (]: Finished running node test.modeling_lab.not_null_stg_olist__orders_order_id.9ec9e196cb
+[0m22:26:05.775849 [debug] [Thread-2 (]: Began compiling node test.modeling_lab.unique_stg_olist__orders_order_id.426f0a2be7
+[0m22:26:05.780386 [debug] [Thread-3 (]: Began running node model.modeling_lab.dim_product
+[0m22:26:05.793807 [debug] [Thread-2 (]: Writing injected SQL for node "test.modeling_lab.unique_stg_olist__orders_order_id.426f0a2be7"
+[0m22:26:05.795943 [debug] [Thread-1 (]: Began executing node test.modeling_lab.relationships_stg_olist__orders_customer_id__customer_id__ref_stg_olist__customers_.a9f63c5a3a
+[0m22:26:05.797781 [debug] [Thread-3 (]: Re-using an available connection from the pool (formerly test.modeling_lab.not_null_stg_olist__orders_order_id.9ec9e196cb, now model.modeling_lab.dim_product)
+[0m22:26:05.800655 [debug] [Thread-4 (]: Began executing node test.modeling_lab.relationships_stg_olist__order_items_order_id__order_id__ref_stg_olist__orders_.352e2888e0
+[0m22:26:05.805088 [debug] [Thread-1 (]: Finished running node test.modeling_lab.relationships_stg_olist__orders_customer_id__customer_id__ref_stg_olist__customers_.a9f63c5a3a
+[0m22:26:05.808834 [debug] [Thread-3 (]: Began compiling node model.modeling_lab.dim_product
+[0m22:26:05.812974 [debug] [Thread-4 (]: Finished running node test.modeling_lab.relationships_stg_olist__order_items_order_id__order_id__ref_stg_olist__orders_.352e2888e0
+[0m22:26:05.815848 [debug] [Thread-1 (]: Began running node test.modeling_lab.not_null_stg_olist__products_product_id.8b25aafa0b
+[0m22:26:05.831832 [debug] [Thread-3 (]: Writing injected SQL for node "model.modeling_lab.dim_product"
+[0m22:26:05.833155 [debug] [Thread-2 (]: Began executing node test.modeling_lab.unique_stg_olist__orders_order_id.426f0a2be7
+[0m22:26:05.834495 [debug] [Thread-4 (]: Began running node test.modeling_lab.relationships_stg_olist__order_items_product_id__product_id__ref_stg_olist__products_.260c5cc788
+[0m22:26:05.837698 [debug] [Thread-1 (]: Re-using an available connection from the pool (formerly test.modeling_lab.relationships_stg_olist__orders_customer_id__customer_id__ref_stg_olist__customers_.a9f63c5a3a, now test.modeling_lab.not_null_stg_olist__products_product_id.8b25aafa0b)
+[0m22:26:05.844319 [debug] [Thread-2 (]: Finished running node test.modeling_lab.unique_stg_olist__orders_order_id.426f0a2be7
+[0m22:26:05.847350 [debug] [Thread-4 (]: Re-using an available connection from the pool (formerly test.modeling_lab.relationships_stg_olist__order_items_order_id__order_id__ref_stg_olist__orders_.352e2888e0, now test.modeling_lab.relationships_stg_olist__order_items_product_id__product_id__ref_stg_olist__products_.260c5cc788)
+[0m22:26:05.850428 [debug] [Thread-1 (]: Began compiling node test.modeling_lab.not_null_stg_olist__products_product_id.8b25aafa0b
+[0m22:26:05.852830 [debug] [Thread-2 (]: Began running node test.modeling_lab.unique_stg_olist__products_product_id.74d899d20a
+[0m22:26:05.855646 [debug] [Thread-4 (]: Began compiling node test.modeling_lab.relationships_stg_olist__order_items_product_id__product_id__ref_stg_olist__products_.260c5cc788
+[0m22:26:05.864646 [debug] [Thread-3 (]: Began executing node model.modeling_lab.dim_product
+[0m22:26:05.869158 [debug] [Thread-1 (]: Writing injected SQL for node "test.modeling_lab.not_null_stg_olist__products_product_id.8b25aafa0b"
+[0m22:26:05.871263 [debug] [Thread-2 (]: Re-using an available connection from the pool (formerly test.modeling_lab.unique_stg_olist__orders_order_id.426f0a2be7, now test.modeling_lab.unique_stg_olist__products_product_id.74d899d20a)
+[0m22:26:05.885907 [debug] [Thread-4 (]: Writing injected SQL for node "test.modeling_lab.relationships_stg_olist__order_items_product_id__product_id__ref_stg_olist__products_.260c5cc788"
+[0m22:26:05.888574 [debug] [Thread-3 (]: Finished running node model.modeling_lab.dim_product
+[0m22:26:05.892701 [debug] [Thread-2 (]: Began compiling node test.modeling_lab.unique_stg_olist__products_product_id.74d899d20a
+[0m22:26:05.897895 [debug] [Thread-3 (]: Began running node test.modeling_lab.not_null_dim_customer_customer_id.9775012dfc
+[0m22:26:05.911997 [debug] [Thread-2 (]: Writing injected SQL for node "test.modeling_lab.unique_stg_olist__products_product_id.74d899d20a"
+[0m22:26:05.915681 [debug] [Thread-3 (]: Re-using an available connection from the pool (formerly model.modeling_lab.dim_product, now test.modeling_lab.not_null_dim_customer_customer_id.9775012dfc)
+[0m22:26:05.917516 [debug] [Thread-4 (]: Began executing node test.modeling_lab.relationships_stg_olist__order_items_product_id__product_id__ref_stg_olist__products_.260c5cc788
+[0m22:26:05.918410 [debug] [Thread-1 (]: Began executing node test.modeling_lab.not_null_stg_olist__products_product_id.8b25aafa0b
+[0m22:26:05.921583 [debug] [Thread-3 (]: Began compiling node test.modeling_lab.not_null_dim_customer_customer_id.9775012dfc
+[0m22:26:05.925236 [debug] [Thread-4 (]: Finished running node test.modeling_lab.relationships_stg_olist__order_items_product_id__product_id__ref_stg_olist__products_.260c5cc788
+[0m22:26:05.928496 [debug] [Thread-1 (]: Finished running node test.modeling_lab.not_null_stg_olist__products_product_id.8b25aafa0b
+[0m22:26:05.938369 [debug] [Thread-3 (]: Writing injected SQL for node "test.modeling_lab.not_null_dim_customer_customer_id.9775012dfc"
+[0m22:26:05.941282 [debug] [Thread-4 (]: Began running node test.modeling_lab.unique_dim_customer_customer_id.b42affccd1
+[0m22:26:05.942697 [debug] [Thread-2 (]: Began executing node test.modeling_lab.unique_stg_olist__products_product_id.74d899d20a
+[0m22:26:05.945149 [debug] [Thread-1 (]: Began running node test.modeling_lab.not_null_fct_order_item_customer_id.6df20948e8
+[0m22:26:05.949467 [debug] [Thread-4 (]: Re-using an available connection from the pool (formerly test.modeling_lab.relationships_stg_olist__order_items_product_id__product_id__ref_stg_olist__products_.260c5cc788, now test.modeling_lab.unique_dim_customer_customer_id.b42affccd1)
+[0m22:26:05.953107 [debug] [Thread-2 (]: Finished running node test.modeling_lab.unique_stg_olist__products_product_id.74d899d20a
+[0m22:26:05.955607 [debug] [Thread-1 (]: Re-using an available connection from the pool (formerly test.modeling_lab.not_null_stg_olist__products_product_id.8b25aafa0b, now test.modeling_lab.not_null_fct_order_item_customer_id.6df20948e8)
+[0m22:26:05.958162 [debug] [Thread-4 (]: Began compiling node test.modeling_lab.unique_dim_customer_customer_id.b42affccd1
+[0m22:26:05.960866 [debug] [Thread-2 (]: Began running node test.modeling_lab.not_null_fct_order_item_order_date.01983ceb1c
+[0m22:26:05.964964 [debug] [Thread-1 (]: Began compiling node test.modeling_lab.not_null_fct_order_item_customer_id.6df20948e8
+[0m22:26:05.973464 [debug] [Thread-3 (]: Began executing node test.modeling_lab.not_null_dim_customer_customer_id.9775012dfc
+[0m22:26:05.976921 [debug] [Thread-4 (]: Writing injected SQL for node "test.modeling_lab.unique_dim_customer_customer_id.b42affccd1"
+[0m22:26:05.979129 [debug] [Thread-2 (]: Re-using an available connection from the pool (formerly test.modeling_lab.unique_stg_olist__products_product_id.74d899d20a, now test.modeling_lab.not_null_fct_order_item_order_date.01983ceb1c)
+[0m22:26:05.990534 [debug] [Thread-1 (]: Writing injected SQL for node "test.modeling_lab.not_null_fct_order_item_customer_id.6df20948e8"
+[0m22:26:05.993581 [debug] [Thread-3 (]: Finished running node test.modeling_lab.not_null_dim_customer_customer_id.9775012dfc
+[0m22:26:05.997472 [debug] [Thread-2 (]: Began compiling node test.modeling_lab.not_null_fct_order_item_order_date.01983ceb1c
+[0m22:26:06.001469 [debug] [Thread-3 (]: Began running node test.modeling_lab.not_null_fct_order_item_order_id.684c6a1570
+[0m22:26:06.018186 [debug] [Thread-2 (]: Writing injected SQL for node "test.modeling_lab.not_null_fct_order_item_order_date.01983ceb1c"
+[0m22:26:06.021333 [debug] [Thread-3 (]: Re-using an available connection from the pool (formerly test.modeling_lab.not_null_dim_customer_customer_id.9775012dfc, now test.modeling_lab.not_null_fct_order_item_order_id.684c6a1570)
+[0m22:26:06.023107 [debug] [Thread-1 (]: Began executing node test.modeling_lab.not_null_fct_order_item_customer_id.6df20948e8
+[0m22:26:06.024154 [debug] [Thread-4 (]: Began executing node test.modeling_lab.unique_dim_customer_customer_id.b42affccd1
+[0m22:26:06.027255 [debug] [Thread-3 (]: Began compiling node test.modeling_lab.not_null_fct_order_item_order_id.684c6a1570
+[0m22:26:06.030357 [debug] [Thread-1 (]: Finished running node test.modeling_lab.not_null_fct_order_item_customer_id.6df20948e8
+[0m22:26:06.033453 [debug] [Thread-4 (]: Finished running node test.modeling_lab.unique_dim_customer_customer_id.b42affccd1
+[0m22:26:06.044470 [debug] [Thread-3 (]: Writing injected SQL for node "test.modeling_lab.not_null_fct_order_item_order_id.684c6a1570"
+[0m22:26:06.046990 [debug] [Thread-1 (]: Began running node test.modeling_lab.not_null_fct_order_item_order_item_key.63b75612ed
+[0m22:26:06.049631 [debug] [Thread-4 (]: Began running node test.modeling_lab.not_null_fct_order_item_product_id.c4924b6126
+[0m22:26:06.051243 [debug] [Thread-2 (]: Began executing node test.modeling_lab.not_null_fct_order_item_order_date.01983ceb1c
+[0m22:26:06.054969 [debug] [Thread-1 (]: Re-using an available connection from the pool (formerly test.modeling_lab.not_null_fct_order_item_customer_id.6df20948e8, now test.modeling_lab.not_null_fct_order_item_order_item_key.63b75612ed)
+[0m22:26:06.057666 [debug] [Thread-4 (]: Re-using an available connection from the pool (formerly test.modeling_lab.unique_dim_customer_customer_id.b42affccd1, now test.modeling_lab.not_null_fct_order_item_product_id.c4924b6126)
+[0m22:26:06.060784 [debug] [Thread-2 (]: Finished running node test.modeling_lab.not_null_fct_order_item_order_date.01983ceb1c
+[0m22:26:06.063271 [debug] [Thread-1 (]: Began compiling node test.modeling_lab.not_null_fct_order_item_order_item_key.63b75612ed
+[0m22:26:06.065703 [debug] [Thread-4 (]: Began compiling node test.modeling_lab.not_null_fct_order_item_product_id.c4924b6126
+[0m22:26:06.068278 [debug] [Thread-2 (]: Began running node test.modeling_lab.relationships_fct_order_item_customer_id__customer_id__ref_dim_customer_.aef2e5b1de
+[0m22:26:06.076338 [debug] [Thread-3 (]: Began executing node test.modeling_lab.not_null_fct_order_item_order_id.684c6a1570
+[0m22:26:06.079920 [debug] [Thread-1 (]: Writing injected SQL for node "test.modeling_lab.not_null_fct_order_item_order_item_key.63b75612ed"
+[0m22:26:06.089159 [debug] [Thread-4 (]: Writing injected SQL for node "test.modeling_lab.not_null_fct_order_item_product_id.c4924b6126"
+[0m22:26:06.091305 [debug] [Thread-2 (]: Re-using an available connection from the pool (formerly test.modeling_lab.not_null_fct_order_item_order_date.01983ceb1c, now test.modeling_lab.relationships_fct_order_item_customer_id__customer_id__ref_dim_customer_.aef2e5b1de)
+[0m22:26:06.094697 [debug] [Thread-3 (]: Finished running node test.modeling_lab.not_null_fct_order_item_order_id.684c6a1570
+[0m22:26:06.099982 [debug] [Thread-2 (]: Began compiling node test.modeling_lab.relationships_fct_order_item_customer_id__customer_id__ref_dim_customer_.aef2e5b1de
+[0m22:26:06.102741 [debug] [Thread-3 (]: Began running node test.modeling_lab.relationships_fct_order_item_order_date__date_key__ref_dim_date_.5f6ea6f1dc
+[0m22:26:06.114891 [debug] [Thread-2 (]: Writing injected SQL for node "test.modeling_lab.relationships_fct_order_item_customer_id__customer_id__ref_dim_customer_.aef2e5b1de"
+[0m22:26:06.117847 [debug] [Thread-4 (]: Began executing node test.modeling_lab.not_null_fct_order_item_product_id.c4924b6126
+[0m22:26:06.119485 [debug] [Thread-3 (]: Re-using an available connection from the pool (formerly test.modeling_lab.not_null_fct_order_item_order_id.684c6a1570, now test.modeling_lab.relationships_fct_order_item_order_date__date_key__ref_dim_date_.5f6ea6f1dc)
+[0m22:26:06.121396 [debug] [Thread-1 (]: Began executing node test.modeling_lab.not_null_fct_order_item_order_item_key.63b75612ed
+[0m22:26:06.124335 [debug] [Thread-4 (]: Finished running node test.modeling_lab.not_null_fct_order_item_product_id.c4924b6126
+[0m22:26:06.126678 [debug] [Thread-3 (]: Began compiling node test.modeling_lab.relationships_fct_order_item_order_date__date_key__ref_dim_date_.5f6ea6f1dc
+[0m22:26:06.129603 [debug] [Thread-1 (]: Finished running node test.modeling_lab.not_null_fct_order_item_order_item_key.63b75612ed
+[0m22:26:06.131823 [debug] [Thread-4 (]: Began running node test.modeling_lab.unique_fct_order_item_order_item_key.f3b18f4d69
+[0m22:26:06.145026 [debug] [Thread-3 (]: Writing injected SQL for node "test.modeling_lab.relationships_fct_order_item_order_date__date_key__ref_dim_date_.5f6ea6f1dc"
+[0m22:26:06.147424 [debug] [Thread-1 (]: Began running node test.modeling_lab.not_null_dim_product_product_id.02b1f06816
+[0m22:26:06.150276 [debug] [Thread-4 (]: Re-using an available connection from the pool (formerly test.modeling_lab.not_null_fct_order_item_product_id.c4924b6126, now test.modeling_lab.unique_fct_order_item_order_item_key.f3b18f4d69)
+[0m22:26:06.151236 [debug] [Thread-2 (]: Began executing node test.modeling_lab.relationships_fct_order_item_customer_id__customer_id__ref_dim_customer_.aef2e5b1de
+[0m22:26:06.155733 [debug] [Thread-1 (]: Re-using an available connection from the pool (formerly test.modeling_lab.not_null_fct_order_item_order_item_key.63b75612ed, now test.modeling_lab.not_null_dim_product_product_id.02b1f06816)
+[0m22:26:06.158270 [debug] [Thread-4 (]: Began compiling node test.modeling_lab.unique_fct_order_item_order_item_key.f3b18f4d69
+[0m22:26:06.161304 [debug] [Thread-2 (]: Finished running node test.modeling_lab.relationships_fct_order_item_customer_id__customer_id__ref_dim_customer_.aef2e5b1de
+[0m22:26:06.163585 [debug] [Thread-1 (]: Began compiling node test.modeling_lab.not_null_dim_product_product_id.02b1f06816
+[0m22:26:06.173549 [debug] [Thread-4 (]: Writing injected SQL for node "test.modeling_lab.unique_fct_order_item_order_item_key.f3b18f4d69"
+[0m22:26:06.175922 [debug] [Thread-2 (]: Began running node test.modeling_lab.relationships_fct_order_item_product_id__product_id__ref_dim_product_.0119306fae
+[0m22:26:06.183942 [debug] [Thread-3 (]: Began executing node test.modeling_lab.relationships_fct_order_item_order_date__date_key__ref_dim_date_.5f6ea6f1dc
+[0m22:26:06.187710 [debug] [Thread-1 (]: Writing injected SQL for node "test.modeling_lab.not_null_dim_product_product_id.02b1f06816"
+[0m22:26:06.191923 [debug] [Thread-2 (]: Re-using an available connection from the pool (formerly test.modeling_lab.relationships_fct_order_item_customer_id__customer_id__ref_dim_customer_.aef2e5b1de, now test.modeling_lab.relationships_fct_order_item_product_id__product_id__ref_dim_product_.0119306fae)
+[0m22:26:06.195100 [debug] [Thread-3 (]: Finished running node test.modeling_lab.relationships_fct_order_item_order_date__date_key__ref_dim_date_.5f6ea6f1dc
+[0m22:26:06.198681 [debug] [Thread-2 (]: Began compiling node test.modeling_lab.relationships_fct_order_item_product_id__product_id__ref_dim_product_.0119306fae
+[0m22:26:06.200827 [debug] [Thread-3 (]: Began running node test.modeling_lab.unique_dim_product_product_id.46495bf7fe
+[0m22:26:06.213849 [debug] [Thread-2 (]: Writing injected SQL for node "test.modeling_lab.relationships_fct_order_item_product_id__product_id__ref_dim_product_.0119306fae"
+[0m22:26:06.216789 [debug] [Thread-3 (]: Re-using an available connection from the pool (formerly test.modeling_lab.relationships_fct_order_item_order_date__date_key__ref_dim_date_.5f6ea6f1dc, now test.modeling_lab.unique_dim_product_product_id.46495bf7fe)
+[0m22:26:06.218428 [debug] [Thread-4 (]: Began executing node test.modeling_lab.unique_fct_order_item_order_item_key.f3b18f4d69
+[0m22:26:06.219459 [debug] [Thread-1 (]: Began executing node test.modeling_lab.not_null_dim_product_product_id.02b1f06816
+[0m22:26:06.222802 [debug] [Thread-3 (]: Began compiling node test.modeling_lab.unique_dim_product_product_id.46495bf7fe
+[0m22:26:06.226445 [debug] [Thread-4 (]: Finished running node test.modeling_lab.unique_fct_order_item_order_item_key.f3b18f4d69
+[0m22:26:06.229864 [debug] [Thread-1 (]: Finished running node test.modeling_lab.not_null_dim_product_product_id.02b1f06816
+[0m22:26:06.245568 [debug] [Thread-3 (]: Writing injected SQL for node "test.modeling_lab.unique_dim_product_product_id.46495bf7fe"
+[0m22:26:06.250778 [debug] [Thread-2 (]: Began executing node test.modeling_lab.relationships_fct_order_item_product_id__product_id__ref_dim_product_.0119306fae
+[0m22:26:06.255246 [debug] [Thread-2 (]: Finished running node test.modeling_lab.relationships_fct_order_item_product_id__product_id__ref_dim_product_.0119306fae
+[0m22:26:06.270193 [debug] [Thread-3 (]: Began executing node test.modeling_lab.unique_dim_product_product_id.46495bf7fe
+[0m22:26:06.273675 [debug] [Thread-3 (]: Finished running node test.modeling_lab.unique_dim_product_product_id.46495bf7fe
+[0m22:26:06.279469 [debug] [MainThread]: Connection 'master' was properly closed.
+[0m22:26:06.281505 [debug] [MainThread]: Connection 'test.modeling_lab.not_null_dim_product_product_id.02b1f06816' was properly closed.
+[0m22:26:06.283660 [debug] [MainThread]: Connection 'test.modeling_lab.relationships_fct_order_item_product_id__product_id__ref_dim_product_.0119306fae' was properly closed.
+[0m22:26:06.285664 [debug] [MainThread]: Connection 'test.modeling_lab.unique_dim_product_product_id.46495bf7fe' was properly closed.
+[0m22:26:06.287388 [debug] [MainThread]: Connection 'test.modeling_lab.unique_fct_order_item_order_item_key.f3b18f4d69' was properly closed.
+[0m22:26:06.300264 [debug] [MainThread]: Command end result
+[0m22:26:06.554657 [debug] [MainThread]: Wrote artifact WritableManifest to /app/transform/dbt/target/manifest.json
+[0m22:26:06.571662 [debug] [MainThread]: Wrote artifact SemanticManifest to /app/transform/dbt/target/semantic_manifest.json
+[0m22:26:06.624758 [debug] [MainThread]: Wrote artifact RunExecutionResult to /app/transform/dbt/target/run_results.json
+[0m22:26:13.604336 [debug] [MainThread]: Acquiring new postgres connection 'generate_catalog'
+[0m22:26:13.607377 [info ] [MainThread]: Building catalog
+[0m22:26:13.675142 [debug] [ThreadPool]: Acquiring new postgres connection 'modeling_lab.information_schema'
+[0m22:26:13.701757 [debug] [ThreadPool]: Using postgres connection "modeling_lab.information_schema"
+[0m22:26:13.706104 [debug] [ThreadPool]: On modeling_lab.information_schema: /* {"app": "dbt", "dbt_version": "1.11.6", "profile_name": "modeling_lab", "target_name": "dev", "connection_name": "modeling_lab.information_schema"} */
+
+    
+    
+
+    select
+        'modeling_lab' as table_database,
+        sch.nspname as table_schema,
+        tbl.relname as table_name,
+        case tbl.relkind
+            when 'v' then 'VIEW'
+            when 'm' then 'MATERIALIZED VIEW'
+            else 'BASE TABLE'
+        end as table_type,
+        tbl_desc.description as table_comment,
+        col.attname as column_name,
+        col.attnum as column_index,
+        pg_catalog.format_type(col.atttypid, col.atttypmod) as column_type,
+        col_desc.description as column_comment,
+        pg_get_userbyid(tbl.relowner) as table_owner
+
+    from pg_catalog.pg_namespace sch
+    join pg_catalog.pg_class tbl on tbl.relnamespace = sch.oid
+    join pg_catalog.pg_attribute col on col.attrelid = tbl.oid
+    left outer join pg_catalog.pg_description tbl_desc on (tbl_desc.objoid = tbl.oid and tbl_desc.objsubid = 0)
+    left outer join pg_catalog.pg_description col_desc on (col_desc.objoid = tbl.oid and col_desc.objsubid = col.attnum)
+    where ((upper(sch.nspname) = upper('public') and
+           upper(tbl.relname) = upper('dim_customer')) or (upper(sch.nspname) = upper('public') and
+           upper(tbl.relname) = upper('stg_olist__orders')) or (upper(sch.nspname) = upper('raw') and
+           upper(tbl.relname) = upper('orders')) or (upper(sch.nspname) = upper('public') and
+           upper(tbl.relname) = upper('stg_olist__products')) or (upper(sch.nspname) = upper('raw') and
+           upper(tbl.relname) = upper('order_payments')) or (upper(sch.nspname) = upper('public') and
+           upper(tbl.relname) = upper('stg_olist__category_translations')) or (upper(sch.nspname) = upper('raw') and
+           upper(tbl.relname) = upper('geolocation')) or (upper(sch.nspname) = upper('raw') and
+           upper(tbl.relname) = upper('products')) or (upper(sch.nspname) = upper('public') and
+           upper(tbl.relname) = upper('dim_product')) or (upper(sch.nspname) = upper('raw') and
+           upper(tbl.relname) = upper('order_reviews')) or (upper(sch.nspname) = upper('public') and
+           upper(tbl.relname) = upper('stg_olist__order_payments')) or (upper(sch.nspname) = upper('raw') and
+           upper(tbl.relname) = upper('sellers')) or (upper(sch.nspname) = upper('public') and
+           upper(tbl.relname) = upper('stg_olist__customers')) or (upper(sch.nspname) = upper('raw') and
+           upper(tbl.relname) = upper('product_category_name_translation')) or (upper(sch.nspname) = upper('public') and
+           upper(tbl.relname) = upper('stg_olist__order_items')) or (upper(sch.nspname) = upper('public') and
+           upper(tbl.relname) = upper('stg_olist__order_reviews')) or (upper(sch.nspname) = upper('public') and
+           upper(tbl.relname) = upper('fct_order_item')) or (upper(sch.nspname) = upper('raw') and
+           upper(tbl.relname) = upper('customers')) or (upper(sch.nspname) = upper('raw') and
+           upper(tbl.relname) = upper('order_items')) or (upper(sch.nspname) = upper('public') and
+           upper(tbl.relname) = upper('dim_date')) or (upper(sch.nspname) = upper('public') and
+           upper(tbl.relname) = upper('stg_olist__geolocation')) or (upper(sch.nspname) = upper('public') and
+           upper(tbl.relname) = upper('stg_olist__sellers')))
+      and not pg_is_other_temp_schema(sch.oid) -- not a temporary schema belonging to another session
+      and tbl.relpersistence in ('p', 'u') -- [p]ermanent table or [u]nlogged table. Exclude [t]emporary tables
+      and tbl.relkind in ('r', 'v', 'f', 'p', 'm') -- o[r]dinary table, [v]iew, [f]oreign table, [p]artitioned table, [m]aterialized view. Other values are [i]ndex, [S]equence, [c]omposite type, [t]OAST table
+      and col.attnum > 0 -- negative numbers are used for system columns such as oid
+      and not col.attisdropped -- column as not been dropped
+
+    order by
+        sch.nspname,
+        tbl.relname,
+        col.attnum
+[0m22:26:13.711114 [debug] [ThreadPool]: Opening a new connection, currently in state init
+[0m22:26:06.435315 [debug] [ThreadPool]: SQL status: SELECT 138 in 0.066 seconds
+[0m22:26:06.474048 [debug] [ThreadPool]: On modeling_lab.information_schema: ROLLBACK
+[0m22:26:06.477741 [debug] [ThreadPool]: On modeling_lab.information_schema: Close
+[0m22:26:06.547982 [debug] [MainThread]: Wrote artifact CatalogArtifact to /app/transform/dbt/target/catalog.json
+[0m22:26:06.671692 [debug] [MainThread]: Wrote artifact WritableManifest to /app/transform/dbt/target/manifest.json
+[0m22:26:06.683630 [debug] [MainThread]: Wrote artifact SemanticManifest to /app/transform/dbt/target/semantic_manifest.json
+[0m22:26:06.685959 [info ] [MainThread]: Catalog written to /app/transform/dbt/target/catalog.json
+[0m22:26:06.690664 [debug] [MainThread]: Resource report: {"command_name": "generate", "command_success": true, "command_wall_clock_time": 6.185068, "process_in_blocks": "0", "process_kernel_time": 1.151295, "process_mem_max_rss": "132044", "process_out_blocks": "0", "process_user_time": 8.458308}
+[0m22:26:06.693886 [debug] [MainThread]: Command `dbt docs generate` succeeded at 22:26:06.693459 after 6.19 seconds
+[0m22:26:06.696066 [debug] [MainThread]: Connection 'generate_catalog' was properly closed.
+[0m22:26:06.697885 [debug] [MainThread]: Connection 'modeling_lab.information_schema' was properly closed.
+[0m22:26:06.699839 [debug] [MainThread]: Sending event: {'category': 'dbt', 'action': 'invocation', 'label': 'end', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x7f90a5d713d0>, <snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x7f90a26d2910>, <snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x7f90a5ebe8d0>]}
+[0m22:26:06.701965 [debug] [MainThread]: Flushing usage events
+[0m22:26:08.106976 [debug] [MainThread]: An error was encountered while trying to flush usage events

@@ -1,12 +1,17 @@
 import subprocess
 from dagster import asset, AssetExecutionContext
 
-@asset
-def raw_load(context: AssetExecutionContext):
-    """
+@asset(
+    group_name="bronze",
+    description="""
     Ingests raw data from CSV files and generates synthetic data.
-    Runs extract_load.py and generate_synthetic.py.
-    """
+    This asset executes:
+    1. extract_load.py: Loads source CSVs into the raw database schema.
+    2. generate_synthetic.py: Creates artificial data for testing/modeling.
+    """,
+    tags={"layer": "bronze", "source": "csv"}
+)
+def raw_load(context: AssetExecutionContext):
     # Ingestion script path
     extract_load_path = "/app/ingestion/extract_load.py"
     generate_synthetic_path = "/app/ingestion/generate_synthetic.py"

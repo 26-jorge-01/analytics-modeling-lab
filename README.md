@@ -1,210 +1,104 @@
-# Synthetic & public transactional dataset used as a modeling playground.
-**Analytics Modeling Lab**
+# 🧪 Analytics Modeling Lab
+## *Evaluating Data Modeling Paradigms in the Modern Data Stack*
 
-## Overview
+[![Environment](https://img.shields.io/badge/Infrastructure-Docker-blue.svg)]()
+[![Orchestration](https://img.shields.io/badge/Orchestration-Dagster-red.svg)]()
+[![Transformation](https://img.shields.io/badge/Transformation-dbt-orange.svg)]()
+[![Modeling](https://img.shields.io/badge/Paradigm-3NF_|_Data_Vault_|_Star-green.svg)]()
 
-This project is a practical laboratory designed to demonstrate how different data modeling approaches serve different analytical needs.
+### 🎯 The Mission
+This project is an **Engineering Research Laboratory** designed to evaluate how different data modeling strategies impact downstream analytical performance, auditing capabilities, and AI readiness. 
 
-Rather than presenting a single “best” model, the project shows how the same dataset can be represented through multiple modeling paradigms — each optimized for a specific type of question, decision, and level of analysis.
+Rather than building a simple pipeline, this lab demonstrates the application of **Software Engineering principles** (Idempotency, Version Control, Automated Testing) to the Data Lifecycle. It serves as a proof-of-concept for handling complex transactional data streams across competing modeling paradigms.
 
-The objective is to showcase how modeling choices impact:
+---
 
-* The type of questions that can be answered
-
-* The speed and simplicity of analysis
-
-* The ability to track change over time
-
-* The scalability of analytical systems
-
-In short, this project demonstrates how and when to use each modeling approach, not just how to build them.
-
-## Architecture
+## 🏛️ Architectural Strategy & Design Choices
+I have implemented a **Modular Modern Data Stack (MDS)** to ensure strict decoupling of storage, compute, and orchestration.
 
 ```mermaid
-graph LR
-    subgraph Sources ["Fuentes de Datos"]
-        CSVs[".csv / Raw Data"]
+graph TD
+    subgraph Ingestion
+        Raw["Raw Data (CSVs)"] --> |Python| PGL[("Postgres (Raw Layer)")]
     end
-
-    subgraph Storage ["Almacenamiento"]
-        Postgres[("Postgres DB")]
-    end
-
-    subgraph Transformation ["Transformación & Orquestación"]
-        Dagster["Dagster (Orchestrator)"]
-        dbt["dbt (Modeling)"]
-    end
-
-    subgraph Consumption ["Consumo"]
-        Metabase["Metabase (Dashboard)"]
-    end
-
-    subgraph Infrastructure ["Infraestructura"]
-        Docker["Docker / Docker-Compose"]
-    end
-
-    CSVs -->|Extract & Load| Postgres
-    Postgres -->|Materialize| dbt
-    dbt -->|Read/Write| Postgres
-    Dagster -->|Trigger| dbt
-    Dagster -->|Manage| Postgres
-    Postgres -->|Query| Metabase
     
-    Docker -.->|Environment| Sources
-    Docker -.->|Environment| Storage
-    Docker -.->|Environment| Transformation
-    Docker -.->|Environment| Consumption
+    subgraph "Engineering Playground (Software-Defined Assets)"
+        Dagster["Dagster (Orchestrator)"]
+        dbt["dbt (Modeling Engine)"]
+        
+        Dagster <--> |Lineage & State| dbt
+        dbt --> |Star Schema| PGL
+        dbt -.-> |Next Milestones| DV["Data Vault"]
+    end
 
-    style Sources fill:#f9f9f9,stroke:#333,stroke-width:1px
-    style Storage fill:#f9f9f9,stroke:#333,stroke-width:1px
-    style Transformation fill:#f9f9f9,stroke:#333,stroke-width:1px
-    style Consumption fill:#f9f9f9,stroke:#333,stroke-width:1px
-    style Infrastructure fill:#eeeeee,stroke:#666,stroke-width:1px,stroke-dasharray: 5 5
+    subgraph "Consumer Ecosystem"
+        PGL --> |Dashboarding| Metabase["Metabase"]
+        PGL -.-> |Downstream| AI["AI / ML Flows"]
+    end
 ```
 
-> "Piensa arquitectura, no scripts sueltos."
+### 🧠 Senior Technical Justification
 
-## Domain Used
+| Component | Strategic Justification | Engineering Value |
+| :--- | :--- | :--- |
+| **Dagster** | Chosen for its **Software-Defined Assets (SDA)** paradigm. Unlike task-based orchestrators, Dagster focuses on the *state* of data, enabling explicit lineage and granular observability. | Eliminates "black box" failures; enables asset-level recovery. |
+| **dbt** | Treats SQL as a first-class engineering language. Implements modular builds and automated testing. | Ensures **DRY (Don't Repeat Yourself)** code and high data trust. |
+| **Multi-Schema Postgres** | Simulates a Data Warehouse environment with isolated layers (Raw, Staging, Marts) to prevent cross-contamination. | Enforces strict data governance and security boundaries. |
 
-The laboratory uses a neutral and familiar transactional domain:
+---
 
-**Online marketplace activity with:**
+## 🚀 Multi-Paradigm Modeling: Why it Matters
+I demonstrate three distinct modeling strategies on a single e-commerce stream, each serving a unique business and technical user:
 
-- Customers
+1.  **Third Normal Form (3NF)**: *The Operational Source of Truth.* Designed for data integrity and minimal storage footprint. 
+    *   **Value**: Ideal for verifying raw transactional consistency.
+2.  **Data Vault (v1)**: *The Enterprise Backbone.* Built for scalability and auditing. Decouples business keys (Hubs), relationships (Links), and descriptive history (Satellites).
+    *   **Value**: Essential for tracking CDC (Change Data Capture) without losing historical state.
+3.  **Star Schema (LIVE)**: *The Performance Layer.* Denormalized dimensions and fact tables optimized for compute speed.
+    *   **Value**: Reduces join complexity for BI tools and improves query latency.
 
-- Products and categories
+---
 
-- Orders and order items
+## 💼 Architecture as a Business Enabler
+A senior engineer selects a modeling paradigm not just for technical elegance, but to solve specific executive and operational needs. This lab demonstrates how architecture drives decision-making:
 
-- Payments
+| Paradigm | Business Persona | Simple Business Question | Technical Why |
+| :--- | :--- | :--- | :--- |
+| **3NF** | **Operations** | "Is the amount paid by the customer exactly the same as the product price plus shipping?" | Ensures data integrity and catches calculation errors. |
+| **Data Vault** | **Audit / History** | "Where exactly are orders getting stuck (warehouse vs. delivery) and has this improved over time?" | Tracks historical status changes without losing previous states. |
+| **Star Schema** | **Management** | "Which product categories are our top sellers today and are we growing compared to last month?" | Optimized for lightning-fast sales reports and growth trends. |
+| **Galaxy** | **Customer Success** | "Do customers give us lower ratings when their packages arrive later than promised?" | Connects different processes (Logistics vs. Reviews) to find patterns. |
 
-- Shipments
+---
 
-- Returns
+## 🤖 AI & ML Readiness
+This lab is architected to feed the AI Lifecycle:
 
-- Subscriptions and subscription events
+*   **RAG Context**: The normalized 3NF and Staging layers provide clean, structured context for LLM retrieval.
+*   **Feature Stores**: Dimension tables in the Star Schema serve as ready-to-use feature vectors for ML models.
+*   **Backtesting Truth**: The Data Vault's historical satellites provide the "point-in-time" snapshots required for accurate model validation.
 
-This domain is intentionally chosen because it is widely understood and rich enough to represent multiple real-world analytical patterns, while remaining easy to reason about.
+---
 
-The project is not a product and does not simulate a real company.
-It is a **controlled analytical environment** to compare modeling strategies.
+## 🛠️ Implementation & Quickstart
 
-## Business-Oriented Questions This Lab Explores
+### Reproducible Environment
+The entire stack is containerized. Environmental configurations are managed via a central `.env` file (abstracted from `docker-compose.yml`) to ensure production-like portability.
 
-Instead of focusing on a single business problem, the lab focuses on classes of questions, such as:
+```bash
+# Initialize
+copy .env.example .env
+.\make.bat up
 
-**1. Data Consistency & Integrity**
+# Execute Asset Lineage
+.\make.bat ingest     # Extract & Load
+.\make.bat dbt-build  # Multi-layer Transformation
+.\make.bat dbt-serve  # Inspect Documentation & Lineage (localhost:8099)
+```
 
-- Which orders are missing payments?
+---
 
-- Which products are not assigned to a category?
-
-- Are there duplicated customers or transactions?
-
-**2. Change Over Time**
-
-- How has a customer’s profile changed historically?
-
-- How many times has an order changed status?
-
-- How often do subscriptions change plan or state?
-
-**3. Aggregated Performance**
-
-- How many items are sold per day?
-
-- What is the total revenue by product or category?
-
-- How many active subscriptions exist over time?
-
-**4. Hierarchical Analysis**
-
-- Performance by category → subcategory → product
-
-- Rollups and drilldowns across product hierarchies
-
-**5. Multi-Process Analysis**
-
-- How do sales, returns, and shipments relate to each other?
-
-- Where do delays correlate with higher return rates?
-
-Each of these question types is intentionally mapped to a different modeling paradigm.
-
-## Why Multiple Models Exist in This Project
-
-The project implements several data modeling approaches in parallel to demonstrate their **strategic purpose**:
-
-### Third Normal Form (3NF)
-
-Represents clean, normalized domain entities with minimal redundancy.
-Optimized for data integrity and consistency.
-
-**Best for:**
-Understanding the operational structure of the domain and validating data correctness.
-
-### Data Vault
-
-Separates business keys, relationships, and descriptive attributes while preserving full history.
-
-**Best for:**
-Tracking change over time, auditing, and integrating evolving data sources.
-
-### Star Schema
-
-Denormalized dimensional model optimized for analytical consumption.
-
-**Best for:**
-Fast aggregation, dashboards, and straightforward analytical queries.
-
-### Snowflake Schema
-
-Normalized dimensional model where complex dimensions are decomposed into hierarchies.
-
-**Best for:**
-Hierarchical analysis and governance of shared reference data.
-
-### Galaxy / Fact Constellation
-
-Multiple fact tables sharing conformed dimensions.
-
-**Best for:**
-Analyzing multiple business processes together (sales, returns, shipments, subscriptions).
-
-## What This Project Demonstrates
-
-From a business perspective, this project demonstrates the ability to:
-
-- Translate analytical needs into appropriate data models
-
-- Design data structures aligned with specific decision-making patterns
-
-- Balance data integrity, historical tracking, and analytical usability
-
-- Build analytical systems that evolve with changing requirements
-
-From a professional standpoint, it shows:
-
-- Strong understanding of data modeling theory and practice
-
-- Ability to reason about architectural trade-offs
-
-- Experience designing reproducible analytical environments
-
-- Clear thinking about how data supports decision-making
-
-## Who This Project Is For
-
-- Recruiters evaluating data engineering / analytics engineering profiles
-
-- Hiring managers looking for modeling maturity
-
-- Teams interested in how modeling decisions impact analytics
-
-This repository is meant to be explored conceptually first.
-Technical implementation details are documented separately.
-
-## One-Sentence Summary
-
-A reproducible analytics laboratory that applies multiple data modeling paradigms to the same dataset in order to demonstrate when and why each modeling approach should be used to answer different types of analytical questions.
+## 📅 Roadmap to Enterprise Maturity
+*   **Milestone 1: Foundational Analytics (MVP - COMPLETED)**: Reliable ingestion, staging, and Star Schema for core sales metrics.
+*   **Milestone 2: Governance & History (v1)**: Implementation of Data Vault for full auditability and Soda.io for declarative data quality.
+*   **Milestone 3: Advanced Intelligence (v2)**: Galaxy schemas for multi-process analysis and automated feature engineering for churn prediction.

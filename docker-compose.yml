@@ -2,13 +2,9 @@ services:
   postgres:
     image: postgres:16
     container_name: modelinglab-postgres
-    environment:
-      POSTGRES_USER: demo
-      POSTGRES_PASSWORD: demo
-      POSTGRES_DB: modeling_lab
-      POSTGRES_DB_METADATA: dagster_meta
+    env_file: .env
     ports:
-      - "15432:5432"
+      - "15432:${POSTGRES_PORT}"
     volumes:
       - pgdata:/var/lib/postgresql/data
       - ./ops/init_db:/docker-entrypoint-initdb.d
@@ -26,19 +22,7 @@ services:
     depends_on:
       postgres:
         condition: service_healthy
-    environment:
-      DAGSTER_HOME: /opt/dagster/dagster_home
-
-      # For dagster.yaml Postgres storage:
-      POSTGRES_USER: demo
-      POSTGRES_PASSWORD: demo
-      POSTGRES_DB: modeling_lab
-      POSTGRES_DB_METADATA: dagster_meta
-      POSTGRES_HOST: postgres
-      POSTGRES_PORT: "5432"
-
-      # Tell Dagster where the code is:
-      DAGSTER_MODULE_NAME: orchestration.dagster.dagster_project
+    env_file: .env
     ports:
       - "3002:3000"
       - "8099:8099"
@@ -55,17 +39,7 @@ services:
     depends_on:
       postgres:
         condition: service_healthy
-    environment:
-      DAGSTER_HOME: /opt/dagster/dagster_home
-
-      POSTGRES_USER: demo
-      POSTGRES_PASSWORD: demo
-      POSTGRES_DB: modeling_lab
-      POSTGRES_DB_METADATA: dagster_meta
-      POSTGRES_HOST: postgres
-      POSTGRES_PORT: "5432"
-
-      DAGSTER_MODULE_NAME: orchestration.dagster.dagster_project
+    env_file: .env
     volumes:
       - dagster_home:/opt/dagster/dagster_home
       - ./:/app
@@ -79,9 +53,7 @@ services:
         condition: service_healthy
     ports:
       - "3001:3000"
-    environment:
-      # Metabase internal app DB (simple file-based); ok for local demo
-      MB_DB_FILE: /metabase-data/metabase.db
+    env_file: .env
     volumes:
       - metabase_data:/metabase-data
 
