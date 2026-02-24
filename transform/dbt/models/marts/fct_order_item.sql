@@ -15,13 +15,13 @@ joined as (
         o.customer_id,
         oi.product_id,
         oi.seller_id,
-        
+
         -- Dates
         cast(o.order_purchase_timestamp as date) as order_date,
-        
+
         -- Dimensions from orders
         o.order_status,
-        
+
         -- Measures
         oi.price,
         oi.freight_value,

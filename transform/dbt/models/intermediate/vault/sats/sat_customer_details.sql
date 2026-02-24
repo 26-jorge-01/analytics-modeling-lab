@@ -1,10 +1,10 @@
 with source as (
     select
-        customer_id as customer_pk,
         customer_unique_id,
         customer_zip_code_prefix,
         customer_city,
         customer_state,
+        customer_id as customer_pk,
         current_timestamp as load_date,
         'olist' as record_source
     from {{ ref('stg_olist__customers') }}

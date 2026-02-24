@@ -1,11 +1,11 @@
 with source as (
     select
-        order_id as order_pk,
         order_status,
         order_purchase_timestamp,
         order_approved_at,
         order_delivered_customer_date,
         order_estimated_delivery_date,
+        order_id as order_pk,
         current_timestamp as load_date,
         'olist' as record_source
     from {{ ref('stg_olist__orders') }}

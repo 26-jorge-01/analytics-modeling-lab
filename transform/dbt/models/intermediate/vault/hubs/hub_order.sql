@@ -1,7 +1,7 @@
 with orders as (
     select distinct
-        order_id as order_pk,
-        order_id
+        order_id,
+        order_id as order_pk
     from {{ ref('stg_olist__orders') }}
 )
 
