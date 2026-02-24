@@ -20,7 +20,7 @@ jobs:
 
       - name: Install dependencies
         run: |
-          pip install sqlfluff flake8 black
+          pip install sqlfluff sqlfluff-templater-dbt flake8 black dbt-postgres
 
       - name: Lint SQL (dbt)
         run: |
@@ -71,15 +71,17 @@ jobs:
 
       - name: Install dependencies
         run: |
-          pip install dagster dagster-pipes dagster-dbt pandas soda-core-postgres
+          pip install dagster dagster-pipes dagster-dbt pandas soda-core-postgres dbt-postgres
 
       - name: Validate Dagster Definitions
         run: |
           # Add current directory to PYTHONPATH so it can find the 'orchestration' module
           export PYTHONPATH=$PYTHONPATH:$(pwd)
-          # We run dbt parse first to ensure manifest exists if the asset loader needs it
+          # Set absolute path for dbt project to avoid relative path confusion
+          export DBT_PROJECT_DIR=$(pwd)/transform/dbt
+          # Run dbt parse from the project dir to ensure manifest.json exists for asset loading
           cd transform/dbt && dbt parse --profiles-dir . && cd ../..
+          # Now run the validation script from the root
           python ops/ci_validate_dagster.py
         env:
           DAGSTER_HOME: /tmp
-          DBT_PROJECT_DIR: transform/dbt
