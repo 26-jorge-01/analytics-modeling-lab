@@ -1,0 +1,64 @@
+version: 2
+
+models:
+  - name: hub_customer
+    description: "Enterprise Hub for Customers. Stores unique natural business keys (customer_id) as the integration point for all customer-related satellites and links. This is the 'Memory' of the customer identity."
+    columns:
+      - name: customer_pk
+        description: "Primary Key (Hash or Surrogate) unique to the customer business key."
+        tests:
+          - unique
+          - not_null
+
+  - name: hub_order
+    description: "Enterprise Hub for Orders. Stores unique business keys for every order placed. Acts as the anchor for order-related linkages and historical state changes."
+    columns:
+      - name: order_pk
+        description: "Primary Key unique to the order business key."
+
+  - name: link_order_customer
+    description: "Enterprise Link establishing the relationship between Orders and Customers. This decoupling allows for multi-faceted relationships and non-destructive relationship tracking."
+    columns:
+      - name: link_order_customer_pk
+        description: "Unique surrogate key for the relationship instance."
+      - name: order_pk
+        tests:
+          - not_null
+          - relationships:
+              to: ref('hub_order')
+              field: order_pk
+      - name: customer_pk
+        tests:
+          - not_null
+          - relationships:
+              to: ref('hub_customer')
+              field: customer_pk
+
+  - name: sat_order_details
+    description: "Historical Satellite for Orders. Captures descriptive context (status, timestamps) as they change over time. Uses a load-date-driven 'Insert-Only' strategy to preserve every state the order ever resided in."
+    columns:
+      - name: sat_order_details_pk
+        description: "Surrogate key for the specific version/snapshot of this order record."
+      - name: order_pk
+        tests:
+          - not_null
+          - relationships:
+              to: ref('hub_order')
+              field: order_pk
+
+  - name: sat_customer_details
+    description: "Satellite for customer descriptive attributes and history."
+    columns:
+      - name: sat_customer_details_pk
+        tests:
+          - unique
+          - not_null
+      - name: customer_pk
+        tests:
+          - not_null
+          - relationships:
+              to: ref('hub_customer')
+              field: customer_pk
+      - name: customer_unique_id
+        tests:
+          - not_null

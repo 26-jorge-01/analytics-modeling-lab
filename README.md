@@ -13,37 +13,54 @@ Rather than building a simple pipeline, this lab demonstrates the application of
 
 ---
 
-## 🏛️ Architectural Strategy & Design Choices
-I have implemented a **Modular Modern Data Stack (MDS)** to ensure strict decoupling of storage, compute, and orchestration.
+## 🏛️ Architectural Strategy: The Data Refinery
+I have implemented a **Medallion Architecture** to ensure a clear "Chain of Value" from raw data to business intelligence.
 
 ```mermaid
-graph TD
-    subgraph Ingestion
-        Raw["Raw Data (CSVs)"] --> |Python| PGL[("Postgres (Raw Layer)")]
-    end
-    
-    subgraph "Engineering Playground (Software-Defined Assets)"
-        Dagster["Dagster (Orchestrator)"]
-        dbt["dbt (Modeling Engine)"]
-        
-        Dagster <--> |Lineage & State| dbt
-        dbt --> |Star Schema| PGL
-        dbt -.-> |Next Milestones| DV["Data Vault"]
+graph LR
+    subgraph Ingestion["1. Ingestion Layer"]
+        CSV[Source CSVs] --> |Python/Pandas| Raw[(Postgres Raw)]
     end
 
-    subgraph "Consumer Ecosystem"
-        PGL --> |Dashboarding| Metabase["Metabase"]
-        PGL -.-> |Downstream| AI["AI / ML Flows"]
+    subgraph Staging["2. Staging Layer (Bronze)"]
+        Raw --> STG[stg_models]
+    end
+
+    subgraph Intermediate["3. Intermediate Layer (Silver)"]
+        direction TB
+        subgraph Vault["Data Vault (Memory)"]
+            Hubs[Hubs]
+            Links[Links]
+            Sats[Satellites]
+        end
+        subgraph Core["Core 3NF (Integrity)"]
+            CoreT[normalized_entities]
+        end
+        STG --> Hubs
+        STG --> Links
+        STG --> Sats
+        Hubs --> CoreT
+        Sats --> CoreT
+    end
+
+    subgraph Marts["4. Marts Layer (Gold)"]
+        CoreT --> Facts[Facts]
+        CoreT --> Dims[Dimensions]
+    end
+
+    subgraph BI["5. Consumption"]
+        Facts --> Dashboards[Metabase]
     end
 ```
 
 ### 🧠 Senior Technical Justification
 
-| Component | Strategic Justification | Engineering Value |
+| Layer | Strategic Justification | Engineering Value |
 | :--- | :--- | :--- |
-| **Dagster** | Chosen for its **Software-Defined Assets (SDA)** paradigm. Unlike task-based orchestrators, Dagster focuses on the *state* of data, enabling explicit lineage and granular observability. | Eliminates "black box" failures; enables asset-level recovery. |
-| **dbt** | Treats SQL as a first-class engineering language. Implements modular builds and automated testing. | Ensures **DRY (Don't Repeat Yourself)** code and high data trust. |
-| **Multi-Schema Postgres** | Simulates a Data Warehouse environment with isolated layers (Raw, Staging, Marts) to prevent cross-contamination. | Enforces strict data governance and security boundaries. |
+| **Staging** | **Cleaning & Type Casting**. Maps 1:1 with source tables but converts strings to dates/numbers. | Ensures downstream layers work with predictable types. |
+| **Intermediate (Vault)** | **Non-destructive History**. Implements Data Vault 2.0 to capture every single change in the source (Insert-Only). | Provides a "Time Machine" for any point-in-time audit. |
+| **Intermediate (Core)** | **Integrity & Normalization**. Implements 3NF logic to ensure referential integrity and a single operational state. | The "Source of Truth" for valid business entities. |
+| **Marts** | **Performance & Simplicity**. Denormalized Star Schema optimized for high-velocity BI queries. | Minimal join complexity; maximum dashboard speed. |
 
 ---
 
@@ -100,5 +117,5 @@ copy .env.example .env
 
 ## 📅 Roadmap to Enterprise Maturity
 *   **Milestone 1: Foundational Analytics (MVP - COMPLETED)**: Reliable ingestion, staging, and Star Schema for core sales metrics.
-*   **Milestone 2: Governance & History (v1)**: Implementation of Data Vault for full auditability and Soda.io for declarative data quality.
+*   **Milestone 2: Governance & History (v1 - COMPLETED)**: Implementation of Data Vault for full auditability and Soda.io for declarative data quality.
 *   **Milestone 3: Advanced Intelligence (v2)**: Galaxy schemas for multi-process analysis and automated feature engineering for churn prediction.

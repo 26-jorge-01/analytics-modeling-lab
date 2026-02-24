@@ -1,0 +1,47 @@
+# Soda Checks: The Data Health Guard
+
+# 1. Monitoring the "Raw" entry point (Staging/Raw)
+# Tag: raw
+checks for "raw"."orders":
+  - row_count > 0:
+      name: Ensure source orders are not empty
+      attributes:
+        layer: raw
+  - schema:
+      fail:
+        when required column missing: [order_id, customer_id, order_status]
+      name: Source Schema Guard (Orders)
+      attributes:
+        layer: raw
+
+# 2. Monitoring the "Intermediate" Refinery
+# Tag: core
+checks for "public"."core_orders":
+  - row_count > 0:
+      attributes:
+        layer: core
+  - freshness(order_purchase_timestamp) < 24h:
+      name: Data Freshness Check (Operational Truth)
+      attributes:
+        layer: core
+  - row_count same as "raw"."orders":
+      name: Refinery Integrity (Raw to Core consistency)
+      attributes:
+        layer: core
+
+# 3. Monitoring the "Marts" Final Store Front
+# Tag: marts
+checks for "public"."fct_order_item":
+  - row_count > 0:
+      attributes:
+        layer: marts
+  - avg(price) between 5 and 1000:
+      name: Outlier Guard (Price distribution sanity)
+      attributes:
+        layer: marts
+  - missing_count(order_id) = 0:
+      attributes:
+        layer: marts
+  - duplicate_count(order_item_key) = 0:
+      attributes:
+        layer: marts

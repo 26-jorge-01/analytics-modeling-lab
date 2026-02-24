@@ -20,7 +20,10 @@ def get_db_engine():
     conn_str = f"postgresql://{user}:{password}@{host}:{port}/{db}"
     return create_engine(conn_str)
 
-@asset(deps=["fct_order_item"])
+@asset(
+    group_name="ops",
+    deps=["fct_order_item"]
+)
 def refresh_metrics(context: AssetExecutionContext):
     """
     Professional metrics refresh: Captures dbt test results and table statistics.

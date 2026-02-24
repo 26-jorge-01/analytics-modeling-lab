@@ -7,3 +7,5 @@ pandas
 psycopg2-binary>=2.9,<3.0
 dbt-core
 dbt-postgres
+soda-core
+soda-core-postgres

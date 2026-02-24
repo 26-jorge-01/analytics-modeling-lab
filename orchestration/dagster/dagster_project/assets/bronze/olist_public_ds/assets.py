@@ -1,7 +1,8 @@
 import subprocess
-from dagster import asset, AssetExecutionContext
+from dagster import asset, AssetExecutionContext, AssetKey
 
 @asset(
+    key=AssetKey(["raw_load"]),
     group_name="bronze",
     description="""
     Ingests raw data from CSV files and generates synthetic data.

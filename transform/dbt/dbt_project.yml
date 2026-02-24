@@ -20,9 +20,10 @@ models:
   modeling_lab:
     staging:
       +materialized: view
-    core_3nf:
-      +materialized: table
-    dv:
-      +materialized: table
+    intermediate:
+      core:
+        +materialized: table
+      vault:
+        +materialized: table
     marts:
       +materialized: table

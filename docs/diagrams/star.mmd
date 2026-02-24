@@ -1,0 +1,58 @@
+%%{init: {'theme': 'neutral'}}%%
+erDiagram
+    %% =======================================================
+    %% Star Schema: Foundational Analytics Layer (Milestone 1, Refined in M2)
+    %% =======================================================
+    %% Motivation:
+    %% 1. Simplicity: This model is designed specifically for ease of use in BI tools (Metabase).
+    %% 2. Performance: Denormalized structure minimizes joins for high-velocity analytical queries.
+    %% 3. Integrated Lineage: Now refined to consume from the Core 3NF layer (Milestone 2), 
+    %%    ensuring all reports inherit validated referential integrity.
+    %% 
+    %% Comparison with other project areas:
+    %% - vs 3NF (Core Layer): This is the downstream consumer of the Core layer.
+    %% - vs Data Vault (Milestone 2): Data Vault tracks history; this mart shows the state for reporting.
+    %% - vs Galaxy/Snowflake (Milestone 3): This is an atomic star centered on a single fact.
+    %% =======================================================
+
+    dim_customer ||--o{ fct_order_item : "customer_id"
+    dim_product ||--o{ fct_order_item : "product_id"
+    dim_date ||--o{ fct_order_item : "order_date -> date_key"
+
+    fct_order_item {
+        string order_item_key PK "Surrogate Key"
+        string order_id FK
+        string customer_id FK
+        string product_id FK
+        date order_date FK
+        float price
+        float freight_value
+        float total_value
+        string order_status
+    }
+
+    dim_customer {
+        string customer_id PK
+        string customer_unique_id
+        string customer_city
+        string customer_state
+        string customer_zip_code_prefix
+    }
+
+    dim_product {
+        string product_id PK
+        string product_category
+        int product_weight_g
+        int product_length_cm
+        int product_height_cm
+        int product_width_cm
+    }
+
+    dim_date {
+        date date_key PK
+        int year
+        int month
+        int day
+        string month_name
+        boolean is_weekend
+    }

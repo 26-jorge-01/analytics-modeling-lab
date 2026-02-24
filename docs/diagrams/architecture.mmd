@@ -1,39 +1,39 @@
 graph LR
-    subgraph Sources ["Fuentes de Datos"]
-        CSVs[".csv / Raw Data"]
+    subgraph Ingestion["1. Ingestion Layer"]
+        CSV[Source CSVs] --> |Python/Pandas| Raw[(Postgres Raw)]
     end
 
-    subgraph Storage ["Almacenamiento"]
-        Postgres[("Postgres DB")]
+    subgraph Staging["2. Staging Layer (Bronze)"]
+        Raw --> STG[stg_models]
+        style STG fill:#f9f,stroke:#333,stroke-width:2px
     end
 
-    subgraph Transformation ["Transformación & Orquestación"]
-        Dagster["Dagster (Orchestrator)"]
-        dbt["dbt (Modeling)"]
+    subgraph Intermediate["3. Intermediate Layer (Silver)"]
+        direction TB
+        subgraph Vault["Data Vault (Memory)"]
+            Hubs[Hubs]
+            Links[Links]
+            Sats[Satellites]
+        end
+        subgraph Core["Core 3NF (Integrity)"]
+            CoreT[normalized_entities]
+        end
+        STG --> Hubs
+        STG --> Links
+        STG --> Sats
+        Hubs --> CoreT
+        Sats --> CoreT
     end
 
-    subgraph Consumption ["Consumo"]
-        Metabase["Metabase (Dashboard)"]
+    subgraph Marts["4. Marts Layer (Gold)"]
+        CoreT --> Facts[Facts]
+        CoreT --> Dims[Dimensions]
     end
 
-    subgraph Infrastructure ["Infraestructura"]
-        Docker["Docker / Docker-Compose"]
+    subgraph BI["5. Consumption"]
+        Facts --> Dashboards[Metabase]
+        Dims --> Dashboards
     end
 
-    CSVs -->|Extract & Load| Postgres
-    Postgres -->|Materialize| dbt
-    dbt -->|Read/Write| Postgres
-    Dagster -->|Trigger| dbt
-    Dagster -->|Manage| Postgres
-    Postgres -->|Query| Metabase
-    
-    Docker -.->|Environment| Sources
-    Docker -.->|Environment| Storage
-    Docker -.->|Environment| Transformation
-    Docker -.->|Environment| Consumption
-
-    style Sources fill:#f9f9f9,stroke:#333,stroke-width:1px
-    style Storage fill:#f9f9f9,stroke:#333,stroke-width:1px
-    style Transformation fill:#f9f9f9,stroke:#333,stroke-width:1px
-    style Consumption fill:#f9f9f9,stroke:#333,stroke-width:1px
-    style Infrastructure fill:#eeeeee,stroke:#666,stroke-width:1px,stroke-dasharray: 5 5
+    classDef standard fill:#fff,stroke:#333,stroke-width:2px;
+    class Hubs,Links,Sats,CoreT,Facts,Dims standard;

@@ -9,7 +9,7 @@ This document outlines the architectural evolution of the lab, moving from basic
 | Milestone | Objective | Key Deliverables | Status |
 | :--- | :--- | :--- | :--- |
 | **M1: Foundation** | "Zero to Lab": Raw → Staging → Star Schema MVP. | Dockerized Infra, dbt Staging, Star MVP, Metabase Dashboard. | ✅ Completed |
-| **M2: Governance** | Enterprise History & Quality: 3NF + Data Vault + Soda DQ. | ERD 3NF, DV Hubs/Links/Sats, Soda Health Reports, CI Pipeline. | 🏗️ In Progress |
+| **M2: Governance** | Enterprise History & Quality: 3NF + Data Vault + Soda DQ. | ERD 3NF, DV Hubs/Links/Sats, Soda Health Reports, CI Pipeline. | ✅ Completed |
 | **M3: Intelligence** | Advanced Modeling & AI Readiness: Snowflake/Galaxy + ML Features. | Fact Constellation, Feature Store Layer, Observability Metrics. | 📥 Backlog |
 
 ---
@@ -29,18 +29,6 @@ This document outlines the architectural evolution of the lab, moving from basic
 - [x] **Documentation**: Automatic schema generation and lineage via dbt docs.
 - [x] **BI**: Star Schema integration with Metabase for AOV and sales velocity analysis.
 
-### Evidences (screenshots) - Borrar al terminar
-
-- [x] docker compose ps
-- [x] Dagster UI assets graph + run logs
-- [x] dbt docs lineage (captures)
-- [x] dashboard en Metabase
-
-### DoD (MVP) - Borrar al terminar
-- [x] make up && make ingest && make dbt-build funciona sin errores.
-- [x] dbt test pasa.
-- [x] 1 dashboard visible con filtros (fecha/categoría).
-
 ---
 
 ## 🏗️ Milestone 2: Enterprise Governance & History (v1)
@@ -50,13 +38,13 @@ This document outlines the architectural evolution of the lab, moving from basic
 
 ### Architecture Goals
 - **Third Normal Form (3NF)**:
-    - [ ] Implement `models/core_3nf/` to provide an operational source of truth.
-    - [ ] Validate referential integrity via dbt tests.
+    - [x] Implement `models/intermediate/core/` to provide an operational source of truth.
+    - [x] Validate referential integrity via dbt tests.
 - **Data Vault 2.0**:
-    - [ ] Implement Hubs, Links, and Satellites in `models/dv/` to enable non-destructive historical tracking.
-    - [ ] Demonstrate point-in-time snapshots for auditing.
+    - [x] Implement Hubs, Links, and Satellites in `models/intermediate/vault/` to enable non-destructive historical tracking.
+    - [x] Demonstrate point-in-time snapshots for auditing.
 - **Automated Observability**:
-    - [ ] Integrate **Soda.io** for declarative data health checks (Freshness, Nullability, Schema Drift).
+    - [x] Integrate **Soda.io** for declarative data health checks (Freshness, Nullability, Schema Drift).
     - [ ] Implement GitHub Actions for CI (Linting + Testing).
 
 ### Evidences (screenshots) - Borrar al terminar
