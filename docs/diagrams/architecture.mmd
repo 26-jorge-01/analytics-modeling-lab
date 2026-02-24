@@ -1,39 +1,59 @@
-graph LR
-    subgraph Ingestion["1. Ingestion Layer"]
-        CSV[Source CSVs] --> |Python/Pandas| Raw[(Postgres Raw)]
+graph TB
+    %% =======================================================
+    %% Strategic Data Flow: The Medallion Paradigm
+    %% =======================================================
+
+    subgraph SD["Source Systems"]
+        CSV[Source CSVs]
+        S3[Cloud Storage / API]
     end
 
-    subgraph Staging["2. Staging Layer (Bronze)"]
-        Raw --> STG[stg_models]
-        style STG fill:#f9f,stroke:#333,stroke-width:2px
+    subgraph CI["1. Foundational Governance (CI/CD)"]
+        direction LR
+        Lint[Linting] --> DP[dbt Parse]
+        DP --> DVC[Dagster Validation]
     end
 
-    subgraph Intermediate["3. Intermediate Layer (Silver)"]
+    subgraph Bronze["2. Bronze Layer (Ingestion)"]
+        direction LR
+        EL[Python EL Process] --> Raw[(Postgres Raw)]
+        Raw --> SodaB[Soda Quality Gate]
+    end
+
+    subgraph Silver["3. Silver Layer (Intermediate)"]
         direction TB
-        subgraph Vault["Data Vault (Memory)"]
+        subgraph DV["Data Vault (Auditable History)"]
             Hubs[Hubs]
             Links[Links]
             Sats[Satellites]
         end
         subgraph Core["Core 3NF (Integrity)"]
-            CoreT[normalized_entities]
+            Norm[Normalized Entities]
         end
-        STG --> Hubs
-        STG --> Links
-        STG --> Sats
-        Hubs --> CoreT
-        Sats --> CoreT
+        DV --> Norm
     end
 
-    subgraph Marts["4. Marts Layer (Gold)"]
-        CoreT --> Facts[Facts]
-        CoreT --> Dims[Dimensions]
+    subgraph Gold["4. Gold Layer (Marts)"]
+        Norm --> Star[Star Schema]
+        Star --> SodaG[Soda Quality Gate]
     end
 
-    subgraph BI["5. Consumption"]
-        Facts --> Dashboards[Metabase]
-        Dims --> Dashboards
+    subgraph Consumption["5. System Consumers"]
+        SodaG --> MB[Metabase BI]
+        SodaG --> NB[DS Notebooks]
+        SodaG --> API[Backend API]
     end
 
-    classDef standard fill:#fff,stroke:#333,stroke-width:2px;
-    class Hubs,Links,Sats,CoreT,Facts,Dims standard;
+    %% Flow Connections
+    SD --> EL
+    SodaB --> DV
+    SodaB --> Norm
+    
+    %% Styling
+    style Bronze fill:#cd7f32,stroke:#333,stroke-width:2px,color:#fff
+    style Silver fill:#c0c0c0,stroke:#333,stroke-width:2px,color:#333
+    style Gold fill:#ffd700,stroke:#333,stroke-width:2px,color:#333
+    style CI fill:#f4f4f4,stroke-dasharray: 5 5
+    style MB fill:#2196f3,color:#fff
+    style NB fill:#4caf50,color:#fff
+    style API fill:#ff9800,color:#fff

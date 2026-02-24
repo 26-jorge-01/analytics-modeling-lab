@@ -1,0 +1,47 @@
+graph LR
+    %% =======================================================
+    %% Docker Infrastructure: The Containerized Data Lab
+    %% =======================================================
+
+    subgraph Host["User Host Machine"]
+        direction TB
+        subgraph Compose["Docker Compose Environment"]
+            direction LR
+            
+            DB[("modelinglab-postgres<br/>(Postgres 16)")]
+            
+            subgraph Orchestration["Dagster Engine"]
+                WEB[modelinglab-dagster-web]
+                DMN[modelinglab-dagster-daemon]
+            end
+            
+            BI[modelinglab-metabase]
+        end
+
+        subgraph Storage["Persistent Volumes"]
+            PGV[(pgdata)]
+            DGV[(dagster_home)]
+            MBV[(metabase_data)]
+        end
+    end
+
+    %% Network Connections
+    WEB <--> DB
+    DMN <--> DB
+    BI <--> DB
+    
+    %% Persistence
+    DB --- PGV
+    WEB --- DGV
+    DMN --- DGV
+    BI --- MBV
+
+    %% Styling
+    style Host fill:#f5f5f5,stroke:#333,stroke-width:2px
+    style Compose fill:#e1f5fe,stroke:#01579b,stroke-width:2px
+    style DB fill:#336791,color:#fff
+    style Orchestration fill:#fff,stroke:#e53935
+    style WEB fill:#e53935,color:#fff
+    style DMN fill:#e53935,color:#fff
+    style BI fill:#749427,color:#fff
+    style Storage fill:#fff,stroke-dasharray: 5 5

@@ -1,0 +1,34 @@
+graph TD
+    %% =======================================================
+    %% Operational Flywheel: The Reliability Cycle
+    %% =======================================================
+
+    subgraph CI["Confidence (Pre-Deploy)"]
+        L[Linting] --> DP[dbt Parse]
+        DP --> V[Dagster Dry-Run]
+    end
+
+    subgraph ELT["Execution (Data Flow)"]
+        V --> IG[Ingestion]
+        IG --> B[Bronze Soda Scan]
+        B --> BF[Build dbt Models]
+        BF --> G[Gold Soda Scan]
+    end
+
+    subgraph OPS["Observability (Feedback)"]
+        G --> M[Metrics Collection]
+        M --> L
+    end
+
+    %% Connections
+    CI --> ELT
+    ELT --> OPS
+    OPS --> CI
+
+    %% Styling
+    style CI fill:#e8f5e9,stroke:#2e7d32
+    style ELT fill:#fff3e0,stroke:#ef6c00
+    style OPS fill:#e3f2fd,stroke:#1565c0
+    
+    classDef step fill:#fff,stroke:#333,stroke-width:1px;
+    class L,DP,V,IG,B,BF,G,M step;
