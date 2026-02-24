@@ -11,6 +11,6 @@ select
     order_pk,
     customer_pk,
     link_order_customer_pk,
-    current_timestamp as load_date,
-    'olist' as record_source
+    'olist' as record_source,
+    current_timestamp as load_date
 from source

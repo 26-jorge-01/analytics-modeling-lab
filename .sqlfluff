@@ -11,6 +11,8 @@ apply_dbt_builtins = True
 library_path = ops/sqlfluff_lib
 
 [sqlfluff:rules]
+# Enable automatic fixing for most rules
+# Some rules like ST06 (column order) are often not auto-fixable and require manual adjustment.
 allow_scalar = True
 single_table_references = consistent
 

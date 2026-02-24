@@ -1,6 +1,5 @@
 with orders as (
-    select distinct
-        order_id
+    select distinct order_id
     from {{ ref('stg_olist__orders') }}
 )
 
