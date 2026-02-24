@@ -3,13 +3,19 @@ import json
 from dagster_dbt import DbtCliResource, dbt_assets, DagsterDbtTranslator
 from dagster import AssetKey, AssetDep, AssetExecutionContext
 
-DBT_PROJECT_DIR = "/app/transform/dbt"
+# Handle dbt project directory dynamically for CI/Docker compatibility
+DBT_PROJECT_DIR = os.getenv("DBT_PROJECT_DIR", "/app/transform/dbt")
 
 # Initialize dbt resource
 dbt_resource = DbtCliResource(
     project_dir=DBT_PROJECT_DIR,
-    profiles_dir=DBT_PROJECT_DIR,
+    profiles_dir=os.getenv("DBT_PROFILES_DIR", DBT_PROJECT_DIR),
 )
+
+# Look for manifest.json in the target directory
+MANIFEST_PATH = os.path.join(DBT_PROJECT_DIR, "target", "manifest.json")
+# If it doesn't exist (e.g. fresh environment), dbt_assets should still be able to handle it
+# or we can provide a fallback to a direct parse.
 
 class CustomDagsterDbtTranslator(DagsterDbtTranslator):
     def get_asset_key(self, dbt_resource_props):
@@ -49,7 +55,7 @@ class CustomDagsterDbtTranslator(DagsterDbtTranslator):
 
 # Load dbt assets
 @dbt_assets(
-    manifest=os.path.join(DBT_PROJECT_DIR, "target", "manifest.json"),
+    manifest=MANIFEST_PATH,
     dagster_dbt_translator=CustomDagsterDbtTranslator()
 )
 def dbt_project_assets(

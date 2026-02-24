@@ -20,7 +20,7 @@ jobs:
 
       - name: Install dependencies
         run: |
-          pip install sqlfluff sqlfluff-templater-dbt flake8 black dbt-postgres
+          pip install sqlfluff flake8 black
 
       - name: Lint SQL (dbt)
         run: |
