@@ -59,6 +59,7 @@ This document outlines the architectural evolution of the lab, moving from basic
 - [x] make test corre: lint + unit + dbt build + soda scan
 - [x] Documentación lista (diagramas + decisiones).
 - [x] Lineage visible y entendible.
+- [x] CI/CD Workflow structural (parse/compile/dry-run).
 
 ---
 

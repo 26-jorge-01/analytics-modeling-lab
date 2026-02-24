@@ -111,7 +111,7 @@ The implementation of a Data Vault layer ensures that every single state change 
 - **Insert-Only Architecture**: Satellites allow for the reconstruction of any historical state, providing a robust foundation for backtesting and auditing.
 
 ### 🧪 Automated Engineering Rigor
-- **Structural Validation**: CI/CD pipelines ensure that every change is linted and structurally sound before deployment.
+- **Structural Validation (CI/CD)**: Since this lab runs on a local Docker-based database, our CI pipeline focuses on **Structural Integrity** rather than execution. It performs SQL/Python linting, validates dbt projects via `dbt parse`, and dry-runs Dagster definitions to ensure the DAG is logically sound before being deployed to the local containers.
 - **Testing as Documentation**: Data contracts and relationships are enforced at the intermediate layer, serving as both quality checks and a technical specification.
 
 ---

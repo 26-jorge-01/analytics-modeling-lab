@@ -45,10 +45,10 @@ jobs:
         run: |
           pip install dbt-postgres dagster-dbt
 
-      - name: dbt Debug (Verify Profile Structure)
+      - name: dbt Parse (Check Syntax & Lineage)
         run: |
           cd transform/dbt
-          dbt debug --profiles-dir .
+          dbt parse --profiles-dir .
         env:
           DBT_HOST: localhost
           DBT_USER: demo
@@ -57,20 +57,10 @@ jobs:
           DBT_DBNAME: modeling_lab
           DBT_SCHEMA: public
 
-      - name: dbt Parse (Check Syntax & Jinja)
-        run: |
-          cd transform/dbt
-          dbt parse --profiles-dir .
-
-      - name: dbt Compile
-        run: |
-          cd transform/dbt
-          dbt compile --profiles-dir .
-        continue-on-error: true # Might fail without db connection but good for manifest generation
-
-  quality:
-    name: "Soda Configuration Check"
+  dagster-validate:
+    name: "Dagster Dry-Run"
     runs-on: ubuntu-latest
+    needs: dbt-validate
     steps:
       - uses: actions/checkout@v3
 
@@ -79,13 +69,17 @@ jobs:
         with:
           python-version: '3.10'
 
-      - name: Install Soda
+      - name: Install dependencies
         run: |
-          pip install soda-core-postgres
+          pip install dagster dagster-pipes dagster-dbt pandas soda-core-postgres
 
-      - name: Soda Config Validation
+      - name: Validate Dagster Definitions
         run: |
-          cd quality/soda
-          # Run a check that doesn't require a live connection if possible,
-          # or simply verify files exist.
-          ls configuration.yml checks_raw.yml
+          # Add current directory to PYTHONPATH so it can find the 'orchestration' module
+          export PYTHONPATH=$PYTHONPATH:$(pwd)
+          # We run dbt parse first to ensure manifest exists if the asset loader needs it
+          cd transform/dbt && dbt parse --profiles-dir . && cd ../..
+          python ops/ci_validate_dagster.py
+        env:
+          DAGSTER_HOME: /tmp
+          DBT_PROJECT_DIR: transform/dbt

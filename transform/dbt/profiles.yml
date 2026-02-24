@@ -2,11 +2,11 @@ modeling_lab:
   outputs:
     dev:
       type: postgres
-      host: postgres
-      user: demo
-      password: demo
-      port: 5432
-      dbname: modeling_lab
-      schema: public
+      host: "{{ env_var('DBT_HOST', 'postgres') }}"
+      user: "{{ env_var('DBT_USER', 'demo') }}"
+      password: "{{ env_var('DBT_PASSWORD', 'demo') }}"
+      port: {{ env_var('DBT_PORT', '5432') | int }}
+      dbname: "{{ env_var('DBT_DBNAME', 'modeling_lab') }}"
+      schema: "{{ env_var('DBT_SCHEMA', 'public') }}"
       threads: 4
   target: dev
