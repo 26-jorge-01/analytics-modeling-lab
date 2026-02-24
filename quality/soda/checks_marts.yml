@@ -1,0 +1,27 @@
+# 2. Monitoring the "Intermediate" Refinery
+# Tag: core
+checks for core_orders:
+  - row_count > 0:
+      attributes:
+        layer: core
+  - freshness(order_purchase_timestamp) < 5000d:
+      name: Data Freshness Check (Operational Truth)
+      attributes:
+        layer: core
+
+# 3. Monitoring the "Marts" Final Store Front
+# Tag: marts
+checks for fct_order_item:
+  - row_count > 0:
+      attributes:
+        layer: marts
+  - avg(price) between 5 and 1000:
+      name: Outlier Guard (Price distribution sanity)
+      attributes:
+        layer: marts
+  - missing_count(order_id) = 0:
+      attributes:
+        layer: marts
+  - duplicate_count(order_item_key) = 0:
+      attributes:
+        layer: marts

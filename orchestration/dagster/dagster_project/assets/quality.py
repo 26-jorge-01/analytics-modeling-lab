@@ -1,44 +1,46 @@
 import os
 import subprocess
-from dagster import asset, AssetExecutionContext, AssetKey
+from dagster import asset, AssetExecutionContext, AssetKey, Failure
 
 SODA_PATH = "/app/quality/soda"
 SODA_BINARY = "/usr/local/bin/soda"
 
-def run_soda_scan(context, layer_name):
-    """Helper to run a tagged Soda scan."""
-    context.log.info(f"Starting Soda.io scan for {layer_name} layer...")
-    
-    # We use -f to filter for specific checks tagged with the layer
-    # Note: Soda core currently uses 'include' or just filtering by checks file
-    # For this implementation, we will use separate check files or filter by check type
-    # but to keep it simple and robust, we will use the 'attributes' filter if supported
-    # or just run the full scan and report specific metadata.
-    
+def run_soda_scan(context, checks_file: str, layer_name: str, data_source: str = "postgres") -> str:
     cmd = [
         SODA_BINARY, "scan",
-        "-d", "postgres",
+        "-d", data_source,
         "-c", f"{SODA_PATH}/configuration.yml",
-        f"{SODA_PATH}/checks.yml"
+        f"{SODA_PATH}/{checks_file}",
+        "--verbose",
     ]
-    
-    try:
-        result = subprocess.run(cmd, capture_output=True, text=True, check=True)
 
-        context.log.info(f"Soda exit code: {result.returncode}")
-        if result.stdout:
-            context.log.info("Soda STDOUT:\n" + result.stdout)
-        if result.stderr:
-            context.log.error("Soda STDERR:\n" + result.stderr)
+    context.log.info(f"Running Soda: {' '.join(cmd)}")
 
-        result.check_returncode()  # aquí recién “revienta” con detalle ya logueado
-        return result.stdout
-    
+    result = subprocess.run(cmd, capture_output=True, text=True, check=False)
+
+    # Log SIEMPRE
+    context.log.info(f"Soda exit code: {result.returncode}")
+    if result.stdout:
+        context.log.info("Soda STDOUT:\n" + result.stdout)
+    if result.stderr:
+        context.log.error("Soda STDERR:\n" + result.stderr)
+
+    # Decide qué hacer según código
+    if result.returncode == 0:
         context.log.info(f"Soda {layer_name} scan completed successfully.")
         return result.stdout
-    except subprocess.CalledProcessError as e:
-        context.log.error(f"Soda {layer_name} scan failed.")
-        raise e
+
+    # 1/2/3/4 = no-cero => falla el op (circuit breaker)
+    raise Failure(
+        description=(
+            f"Soda {layer_name} scan failed with exit code {result.returncode}. "
+            f"See logs above for details."
+        ),
+        metadata={
+            "soda_exit_code": result.returncode,
+            "layer": layer_name,
+        },
+    )
 
 @asset(
     group_name="quality",
@@ -49,7 +51,7 @@ def soda_raw_health(context: AssetExecutionContext):
     CRITICAL: Circuit Breaker for ingested data.
     Ensures raw data is healthy BEFORE dbt starts building.
     """
-    stdout = run_soda_scan(context, "RAW")
+    stdout = run_soda_scan(context, 'checks_raw.yml', "RAW", "raw")
     context.add_output_metadata({"soda_report": stdout, "layer": "raw"})
     return "Raw Health Verified"
 
@@ -62,6 +64,19 @@ def soda_marts_health(context: AssetExecutionContext):
     Business Health Check. 
     Final verification of Marts before BI consumption.
     """
-    stdout = run_soda_scan(context, "MARTS")
+    stdout = run_soda_scan(context, 'checks_marts.yml', "MARTS", "public")
     context.add_output_metadata({"soda_report": stdout, "layer": "marts"})
     return "Marts Health Verified"
+
+@asset(
+    group_name="quality",
+    deps=[AssetKey(["core_orders"])],
+)
+def soda_recon_health(context: AssetExecutionContext):
+    """
+    Reconciliation Check.
+    Verifies consistency between Raw and Core layers.
+    """
+    stdout = run_soda_scan(context, 'checks_recon.yml', "RECON", "recon")
+    context.add_output_metadata({"soda_report": stdout, "layer": "recon"})
+    return "Reconciliation Verified"

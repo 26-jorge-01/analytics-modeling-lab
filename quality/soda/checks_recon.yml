@@ -1,0 +1,5 @@
+checks for public.core_orders:
+  - row_count same as raw.orders:
+      name: Refinery Integrity (Raw to Core consistency)
+      attributes:
+        layer: core

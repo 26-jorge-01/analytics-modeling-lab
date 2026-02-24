@@ -1,8 +1,28 @@
-data_source postgres:
+data_source raw:
   type: postgres
-  host: ${POSTGRES_HOST}
-  port: 5432
-  user: ${POSTGRES_USER}
-  password: ${POSTGRES_PASSWORD}
-  database: ${POSTGRES_DB}
-  schema: raw
+  connection:
+    host: postgres
+    port: 5432
+    username: ${POSTGRES_USER}
+    password: ${POSTGRES_PASSWORD}
+    database: ${POSTGRES_DB}
+    schema: raw
+
+data_source public:
+  type: postgres
+  connection:
+    host: postgres
+    port: 5432
+    username: ${POSTGRES_USER}
+    password: ${POSTGRES_PASSWORD}
+    database: ${POSTGRES_DB}
+    schema: public
+
+data_source recon:
+  type: postgres
+  connection:
+    host: postgres
+    port: 5432
+    username: ${POSTGRES_USER}
+    password: ${POSTGRES_PASSWORD}
+    database: ${POSTGRES_DB}
