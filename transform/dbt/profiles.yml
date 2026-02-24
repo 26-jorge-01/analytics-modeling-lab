@@ -5,7 +5,8 @@ modeling_lab:
       host: "{{ env_var('DBT_HOST', 'postgres') }}"
       user: "{{ env_var('DBT_USER', 'demo') }}"
       password: "{{ env_var('DBT_PASSWORD', 'demo') }}"
-      port: "{{ env_var('DBT_PORT', '5432') }}"
+      port: >
+        {{ env_var('DBT_PORT', '5432') | as_number }}
       dbname: "{{ env_var('DBT_DBNAME', 'modeling_lab') }}"
       schema: "{{ env_var('DBT_SCHEMA', 'public') }}"
       threads: 4
