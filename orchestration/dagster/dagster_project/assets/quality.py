@@ -1,11 +1,13 @@
-import os
 import subprocess
 from dagster import asset, AssetExecutionContext, AssetKey, Failure
 
 SODA_PATH = "/app/quality/soda"
 SODA_BINARY = "/usr/local/bin/soda"
 
-def run_soda_scan(context, checks_file: str, layer_name: str, data_source: str = "postgres") -> str:
+
+def run_soda_scan(
+    context, checks_file: str, layer_name: str, data_source: str = "postgres"
+) -> str:
     cmd = [
         SODA_BINARY, "scan",
         "-d", data_source,
@@ -33,8 +35,8 @@ def run_soda_scan(context, checks_file: str, layer_name: str, data_source: str =
     # 1/2/3/4 = no-cero => falla el op (circuit breaker)
     raise Failure(
         description=(
-            f"Soda {layer_name} scan failed with exit code {result.returncode}. "
-            f"See logs above for details."
+            f"Soda {layer_name} scan failed with exit code "
+            f"{result.returncode}. See logs above for details."
         ),
         metadata={
             "soda_exit_code": result.returncode,
@@ -44,7 +46,7 @@ def run_soda_scan(context, checks_file: str, layer_name: str, data_source: str =
 
 @asset(
     group_name="quality",
-    deps=["raw_load"], # Depends on ingestion
+    deps=["raw_load"],  # Depends on ingestion
 )
 def soda_raw_health(context: AssetExecutionContext):
     """
@@ -61,14 +63,13 @@ def soda_raw_health(context: AssetExecutionContext):
 )
 def soda_marts_health(context: AssetExecutionContext):
     """
-    Business Health Check. 
+    Business Health Check.
     Final verification of Marts before BI consumption.
     """
     stdout = run_soda_scan(context, 'checks_marts.yml', "MARTS", "public")
     context.add_output_metadata({"soda_report": stdout, "layer": "marts"})
     return "Marts Health Verified"
 
-@asset(
     group_name="quality",
     deps=[AssetKey(["core_orders"])],
 )

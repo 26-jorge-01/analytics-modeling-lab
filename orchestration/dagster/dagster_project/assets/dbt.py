@@ -1,5 +1,4 @@
 import os
-import json
 from dagster_dbt import DbtCliResource, dbt_assets, DagsterDbtTranslator
 from dagster import AssetKey, AssetDep, AssetExecutionContext
 
@@ -14,8 +13,9 @@ dbt_resource = DbtCliResource(
 
 # Look for manifest.json in the target directory
 MANIFEST_PATH = os.path.join(DBT_PROJECT_DIR, "target", "manifest.json")
-# If it doesn't exist (e.g. fresh environment), dbt_assets should still be able to handle it
-# or we can provide a fallback to a direct parse.
+# If it doesn't exist (e.g. fresh environment), dbt_assets should
+# still be able to handle it or we can provide a fallback to a direct parse.
+
 
 class CustomDagsterDbtTranslator(DagsterDbtTranslator):
     def get_asset_key(self, dbt_resource_props):
@@ -25,7 +25,10 @@ class CustomDagsterDbtTranslator(DagsterDbtTranslator):
         fqn = dbt_resource_props.get("fqn", [])
         if len(fqn) >= 3:
             layer = fqn[1]
-            return layer if layer in ["staging", "intermediate", "marts"] else "dbt"
+            return (
+                layer if layer in ["staging", "intermediate", "marts"]
+                else "dbt"
+            )
         return "dbt"
 
     def get_asset_spec(self, manifest, unique_id, project):
@@ -33,7 +36,8 @@ class CustomDagsterDbtTranslator(DagsterDbtTranslator):
         spec = super().get_asset_spec(manifest, unique_id, project)
 
         # 2. Look up the node properties from the manifest using the unique_id
-        # unique_id looks like: "model.modeling_lab.stg_customers" or "source.modeling_lab.olist.customers"
+        # unique_id looks like: "model.modeling_lab.stg_customers" or
+        # "source.modeling_lab.olist.customers"
         all_nodes = {**manifest.get("nodes", {}), **manifest.get("sources", {})}
         node = all_nodes.get(unique_id)
 
