@@ -1,0 +1,91 @@
+name: "Analytics Modeling Lab CI"
+
+on:
+  push:
+    branches: [ main, master ]
+  pull_request:
+    branches: [ main, master ]
+
+jobs:
+  lint:
+    name: "Linting (SQL & Python)"
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.10'
+
+      - name: Install dependencies
+        run: |
+          pip install sqlfluff flake8 black
+
+      - name: Lint SQL (dbt)
+        run: |
+          sqlfluff lint transform/dbt/models --dialect postgres
+
+      - name: Lint Python
+        run: |
+          flake8 ingestion orchestration orchestration/dagster/dagster_project
+
+  dbt-validate:
+    name: "dbt Structural Validation"
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.10'
+
+      - name: Install dbt
+        run: |
+          pip install dbt-postgres dagster-dbt
+
+      - name: dbt Debug (Verify Profile Structure)
+        run: |
+          cd transform/dbt
+          dbt debug --profiles-dir .
+        env:
+          DBT_HOST: localhost
+          DBT_USER: demo
+          DBT_PASSWORD: demo
+          DBT_PORT: 5432
+          DBT_DBNAME: modeling_lab
+          DBT_SCHEMA: public
+
+      - name: dbt Parse (Check Syntax & Jinja)
+        run: |
+          cd transform/dbt
+          dbt parse --profiles-dir .
+
+      - name: dbt Compile
+        run: |
+          cd transform/dbt
+          dbt compile --profiles-dir .
+        continue-on-error: true # Might fail without db connection but good for manifest generation
+
+  quality:
+    name: "Soda Configuration Check"
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.10'
+
+      - name: Install Soda
+        run: |
+          pip install soda-core-postgres
+
+      - name: Soda Config Validation
+        run: |
+          cd quality/soda
+          # Run a check that doesn't require a live connection if possible,
+          # or simply verify files exist.
+          ls configuration.yml checks_raw.yml

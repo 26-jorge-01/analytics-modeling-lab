@@ -1,0 +1,51 @@
+erDiagram
+    %% =======================================================
+    %% 3NF (Core Layer): Operational Source of Truth
+    %% =======================================================
+    %% Motivation:
+    %% 1. Integrity: Ensures strict referential integrity between business entities.
+    %% 2. Normalization: Removes redundancy, ideal for verifying transactional consistency.
+    %% =======================================================
+
+    core_customers ||--o{ core_orders : "customer_id"
+    core_orders ||--o{ core_order_items : "order_id"
+    core_products ||--o{ core_order_items : "product_id"
+
+    core_customers {
+        string customer_id PK
+        string customer_unique_id
+        string customer_city
+        string customer_state
+        string customer_zip_code_prefix
+    }
+
+    core_orders {
+        string order_id PK
+        string customer_id FK
+        string order_status
+        timestamp order_purchase_timestamp
+        timestamp order_approved_at
+        timestamp order_delivered_customer_date
+        timestamp order_estimated_delivery_date
+    }
+
+    core_order_items {
+        string order_item_key PK
+        string order_id FK
+        int order_item_id
+        string product_id FK
+        string seller_id
+        timestamp shipping_limit_date
+        float price
+        float freight_value
+    }
+
+    core_products {
+        string product_id PK
+        string product_category_name
+        string product_category_name_english
+        float product_weight_g
+        float product_length_cm
+        float product_height_cm
+        float product_width_cm
+    }

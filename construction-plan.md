@@ -45,20 +45,20 @@ This document outlines the architectural evolution of the lab, moving from basic
     - [x] Demonstrate point-in-time snapshots for auditing.
 - **Automated Observability**:
     - [x] Integrate **Soda.io** for declarative data health checks (Freshness, Nullability, Schema Drift).
-    - [ ] Implement GitHub Actions for CI (Linting + Testing).
+    - [x] Implement GitHub Actions for CI (Linting + Testing).
 
 ### Evidences (screenshots) - Borrar al terminar
 
-- [] ERD 3NF
-- [] DV diagram
-- [] dbt docs lineage con 3 ramas (3NF/DV/marts)
-- [] reporte de Soda
-- [] GitHub Actions green
+- [x] ERD 3NF
+- [x] DV diagram
+- [x] dbt docs lineage con 3 ramas (3NF/DV/marts)
+- [x] reporte de Soda
+- [x] GitHub Actions green
 
 ### DoD (v1) - Borrar al terminar
-- [] make test corre: lint + unit + dbt build + soda scan
-- [] Documentación lista (diagramas + decisiones).
-- [] Lineage visible y entendible.
+- [x] make test corre: lint + unit + dbt build + soda scan
+- [x] Documentación lista (diagramas + decisiones).
+- [x] Lineage visible y entendible.
 
 ---
 

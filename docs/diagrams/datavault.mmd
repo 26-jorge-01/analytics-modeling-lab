@@ -1,0 +1,58 @@
+erDiagram
+    %% =======================================================
+    %% Data Vault 2.0: Enterprise Historical Backbone
+    %% =======================================================
+    %% Motivation:
+    %% 1. Auditability: Captures every change in source data without loss.
+    %% 2. Scalability: Decouples business keys (Hubs) from relationships (Links).
+    %% =======================================================
+
+    hub_customer ||--o{ link_order_customer : "customer_pk"
+    hub_order ||--o{ link_order_customer : "order_pk"
+    hub_customer ||--o{ sat_customer_details : "customer_pk"
+    hub_order ||--o{ sat_order_details : "order_pk"
+
+    hub_customer {
+        string customer_pk PK "Hash/Surrogate"
+        string customer_bk "Business Key (customer_id)"
+        timestamp load_date
+        string record_source
+    }
+
+    hub_order {
+        string order_pk PK "Hash/Surrogate"
+        string order_bk "Business Key (order_id)"
+        timestamp load_date
+        string record_source
+    }
+
+    link_order_customer {
+        string link_order_customer_pk PK
+        string order_pk FK
+        string customer_pk FK
+        timestamp load_date
+        string record_source
+    }
+
+    sat_customer_details {
+        string sat_customer_details_pk PK
+        string customer_pk FK
+        string customer_unique_id
+        string customer_city
+        string customer_state
+        string customer_zip_code_prefix
+        timestamp load_date
+        string record_source
+    }
+
+    sat_order_details {
+        string sat_order_details_pk PK
+        string order_pk FK
+        string order_status
+        timestamp order_purchase_timestamp
+        timestamp order_approved_at
+        timestamp order_delivered_customer_date
+        timestamp order_estimated_delivery_date
+        timestamp load_date
+        string record_source
+    }

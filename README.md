@@ -97,10 +97,29 @@ This lab is architected to feed the AI Lifecycle:
 
 ---
 
+## 🛡️ Governance & Observability: The Trust Layer
+Moving beyond simple execution, this project demonstrates how to build trust into the data lifecycle through automated validation and historical transparency.
+
+### 🔍 Automated Data Quality (Soda.io)
+I integrated **Soda.io** to provide declarative, cross-platform data health monitoring.
+- **Circuit Breaker Pattern**: The orchestrator triggers quality gates before data moves between layers. If raw data fails checks (Freshness, Nullability, Schema Drift), processing stops immediately to prevent downstream pollution.
+- **Observability Metrics**: Automated scans generate health reports that provide transparency for both engineers and business stakeholders.
+
+### 🕒 Non-Destructive History (Data Vault 2.0)
+The implementation of a Data Vault layer ensures that every single state change from the source systems is captured and auditable.
+- **Audit Ready**: Every record is tracked with load metadata and source system identifiers.
+- **Insert-Only Architecture**: Satellites allow for the reconstruction of any historical state, providing a robust foundation for backtesting and auditing.
+
+### 🧪 Automated Engineering Rigor
+- **Structural Validation**: CI/CD pipelines ensure that every change is linted and structurally sound before deployment.
+- **Testing as Documentation**: Data contracts and relationships are enforced at the intermediate layer, serving as both quality checks and a technical specification.
+
+---
+
 ## 🛠️ Implementation & Quickstart
 
 ### Reproducible Environment
-The entire stack is containerized. Environmental configurations are managed via a central `.env` file (abstracted from `docker-compose.yml`) to ensure production-like portability.
+The entire stack is containerized. Environmental configurations are managed via a central `.env` file to ensure production-like portability and security.
 
 ```bash
 # Initialize
@@ -111,11 +130,12 @@ copy .env.example .env
 .\make.bat ingest     # Extract & Load
 .\make.bat dbt-build  # Multi-layer Transformation
 .\make.bat dbt-serve  # Inspect Documentation & Lineage (localhost:8099)
+.\make.bat dq         # Run Soda Data Quality Scans
 ```
 
 ---
 
 ## 📅 Roadmap to Enterprise Maturity
-*   **Milestone 1: Foundational Analytics (MVP - COMPLETED)**: Reliable ingestion, staging, and Star Schema for core sales metrics.
-*   **Milestone 2: Governance & History (v1)**: Implementation of Data Vault for full auditability and Soda.io for declarative data quality.
+*   **Milestone 1: Foundational Analytics (MVP)**: Reliable ingestion, staging, and Star Schema for core sales metrics.
+*   **Milestone 2: Governance & History (v1)**: Implementation of Data Vault for full auditability, Soda.io for declarative data quality, and CI/CD automation.
 *   **Milestone 3: Advanced Intelligence (v2)**: Galaxy schemas for multi-process analysis and automated feature engineering for churn prediction.
