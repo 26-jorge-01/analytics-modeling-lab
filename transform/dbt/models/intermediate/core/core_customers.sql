@@ -9,11 +9,14 @@ sats as (
 latest_sats as (
     select *
     from (
-        select 
+        select
             *,
-            row_number() over (partition by customer_pk order by load_date desc) as rn
+            row_number() over (
+                partition by customer_pk order by load_date desc
+            ) as rn
         from sats
-    ) where rn = 1
+    )
+    where rn = 1
 )
 
 select
@@ -22,5 +25,6 @@ select
     s.customer_zip_code_prefix,
     s.customer_city,
     s.customer_state
-from hubs h
-inner join latest_sats s on h.customer_pk = s.customer_pk
+from hubs as h
+inner join latest_sats as s
+    on h.customer_pk = s.customer_pk

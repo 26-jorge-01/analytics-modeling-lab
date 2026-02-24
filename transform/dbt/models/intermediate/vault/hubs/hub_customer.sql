@@ -6,8 +6,8 @@ with customers as (
 )
 
 select
-    customer_pk,
     customer_id as customer_bk,
+    customer_pk,
     current_timestamp as load_date,
     'olist' as record_source
 from customers

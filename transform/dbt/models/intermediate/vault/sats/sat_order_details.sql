@@ -12,7 +12,6 @@ with source as (
 )
 
 select
-    {{ dbt_utils.generate_surrogate_key(['order_pk', 'load_date']) }} as sat_order_details_pk,
     order_pk,
     order_status,
     order_purchase_timestamp,
@@ -20,5 +19,7 @@ select
     order_delivered_customer_date,
     order_estimated_delivery_date,
     load_date,
-    record_source
+    record_source,
+    {{ dbt_utils.generate_surrogate_key(['order_pk', 'load_date']) }}
+        as sat_order_details_pk
 from source

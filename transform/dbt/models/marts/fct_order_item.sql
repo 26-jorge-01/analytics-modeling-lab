@@ -27,8 +27,9 @@ joined as (
         oi.freight_value,
         (oi.price + oi.freight_value) as total_value
 
-    from order_items oi
-    inner join orders o on oi.order_id = o.order_id
+    from order_items as oi
+    inner join orders as o
+        on oi.order_id = o.order_id
 )
 
 select * from joined
