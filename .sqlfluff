@@ -8,10 +8,7 @@ tab_size = 4
 
 [sqlfluff:templater:jinja]
 apply_dbt_builtins = True
-
-[sqlfluff:templater:jinja:context]
-# Mock dbt_utils for jinja templater
-dbt_utils = {"generate_surrogate_key": "dummy_surrogate_key"}
+library_path = ops/sqlfluff_lib
 
 [sqlfluff:rules]
 allow_scalar = True

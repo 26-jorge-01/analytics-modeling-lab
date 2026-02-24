@@ -8,6 +8,6 @@ with orders as (
 select
     order_pk,
     order_id as order_bk,
-    current_timestamp as load_date,
-    'olist' as record_source
+    'olist' as record_source,
+    current_timestamp as load_date
 from orders

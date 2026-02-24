@@ -8,6 +8,6 @@ with customers as (
 select
     customer_pk,
     customer_id as customer_bk,
-    current_timestamp as load_date,
-    'olist' as record_source
+    'olist' as record_source,
+    current_timestamp as load_date
 from customers
