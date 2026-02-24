@@ -44,6 +44,7 @@ def run_soda_scan(
         },
     )
 
+
 @asset(
     group_name="quality",
     deps=["raw_load"],  # Depends on ingestion
@@ -56,6 +57,7 @@ def soda_raw_health(context: AssetExecutionContext):
     stdout = run_soda_scan(context, 'checks_raw.yml', "RAW", "raw")
     context.add_output_metadata({"soda_report": stdout, "layer": "raw"})
     return "Raw Health Verified"
+
 
 @asset(
     group_name="quality",
@@ -70,6 +72,8 @@ def soda_marts_health(context: AssetExecutionContext):
     context.add_output_metadata({"soda_report": stdout, "layer": "marts"})
     return "Marts Health Verified"
 
+
+@asset(
     group_name="quality",
     deps=[AssetKey(["core_orders"])],
 )

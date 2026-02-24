@@ -72,7 +72,7 @@ def refresh_metrics(context: AssetExecutionContext):
                 AND table_type = 'BASE TABLE'
             """)
             tables = conn.execute(tables_query, {"schema": schema}).fetchall()
-            
+
             for (table_name,) in tables:
                 count_query = text(
                     f'SELECT count(*) FROM "{schema}"."{table_name}"'
@@ -131,10 +131,14 @@ def refresh_metrics(context: AssetExecutionContext):
         # b) Record dbt Results
         if dbt_results_data:
             conn.execute(text("""
-                INSERT INTO ops.dbt_results (run_id, unique_id, status, execution_time, message)
-                VALUES (:run_id, :unique_id, :status, :execution_time, :message)
+                INSERT INTO ops.dbt_results (
+                    run_id, unique_id, status, execution_time, message
+                )
+                VALUES (
+                    :run_id, :unique_id, :status, :execution_time, :message
+                )
             """), dbt_results_data)
-            
+
         if table_stats:
             conn.execute(text("""
                 INSERT INTO ops.table_stats (

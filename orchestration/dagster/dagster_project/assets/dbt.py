@@ -38,7 +38,10 @@ class CustomDagsterDbtTranslator(DagsterDbtTranslator):
         # 2. Look up the node properties from the manifest using the unique_id
         # unique_id looks like: "model.modeling_lab.stg_customers" or
         # "source.modeling_lab.olist.customers"
-        all_nodes = {**manifest.get("nodes", {}), **manifest.get("sources", {})}
+        all_nodes = {
+            **manifest.get("nodes", {}),
+            **manifest.get("sources", {})
+        }
         node = all_nodes.get(unique_id)
 
         if node is None:

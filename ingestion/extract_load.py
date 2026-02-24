@@ -109,6 +109,5 @@ def load_csv_to_postgres():
             logger.error(f"Error loading {file_path.name}: {e}")
 
 
-
 if __name__ == "__main__":
     load_csv_to_postgres()
