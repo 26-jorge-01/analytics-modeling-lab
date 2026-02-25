@@ -33,8 +33,10 @@ final as (
             when r.review_score <= 2 then 1
             else 0
         end as is_negative_review
-    from order_logistics ol
-    left join reviews r on ol.order_id = r.order_id
+    from order_logistics as ol
+    left join reviews as r
+        on ol.order_id = r.order_id
 )
 
-select * from final
+select *
+from final
