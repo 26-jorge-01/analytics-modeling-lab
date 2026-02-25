@@ -86,6 +86,7 @@ graph TB
 | **Intermediate (Vault)** | **Non-destructive History**. Implements Data Vault 2.0 to capture every single change in the source (Insert-Only). | Provides a "Time Machine" for any point-in-time audit. |
 | **Intermediate (Core)** | **Integrity & Normalization**. Implements 3NF logic to ensure referential integrity and a single operational state. | The "Source of Truth" for valid business entities. |
 | **Marts** | **Performance & Simplicity**. Denormalized Star Schema optimized for high-velocity BI queries. | Minimal join complexity; maximum dashboard speed. |
+| **Marts (Snowflake)** | **Agile Hierarchy**. Normalized Snowflake models for high-level regional management. | Instant, atomic updates to regional attributes (Managers, Taxes). |
 
 ---
 
@@ -96,8 +97,10 @@ I demonstrate three distinct modeling strategies on a single e-commerce stream, 
     *   **Value**: Ideal for verifying raw transactional consistency.
 2.  **Data Vault (v1)**: *The Enterprise Backbone.* Built for scalability and auditing. Decouples business keys (Hubs), relationships (Links), and descriptive history (Satellites).
     *   **Value**: Essential for tracking CDC (Change Data Capture) without losing historical state.
-3.  **Star Schema (LIVE)**: *The Performance Layer.* Denormalized dimensions and fact tables optimized for compute speed.
+3.  **Star Schema**: *The Performance Layer.* Denormalized dimensions and fact tables optimized for compute speed.
     *   **Value**: Reduces join complexity for BI tools and improves query latency.
+4.  **Snowflake Model**: *The Operational Efficiency Layer.* A normalized hierarchy specifically for Geographic & Territory management.
+    *   **Value**: Solves the "Attribute Update" problem. Changing a Regional Manager or a State Tax Rate only requires updating 1 row in `dim_state`, rather than re-processing millions of rows in a flat geography dimension.
 
 ---
 
@@ -109,6 +112,7 @@ I selected a modeling paradigm not just for technical elegance, but to solve spe
 | **3NF** | **Operations** | "Is the amount paid by the customer exactly the same as the product price plus shipping?" | Ensures data integrity and catches calculation errors. |
 | **Data Vault** | **Audit / History** | "Where exactly are orders getting stuck (warehouse vs. delivery) and has this improved over time?" | Tracks historical status changes without losing previous states. |
 | **Star Schema** | **Management** | "Which product categories are our top sellers today and are we growing compared to last month?" | Optimized for lightning-fast sales reports and growth trends. |
+| **Snowflake** | **Territory Ops** | "Who is the Sales Manager for the Southern Region and what is the current Tax Rate in São Paulo?" | Atomic updates of regional metadata without data duplication or massive re-processing. |
 | **Galaxy** | **Customer Success** | "Do customers give us lower ratings when their packages arrive later than promised?" | Connects different processes (Logistics vs. Reviews) to find patterns. |
 
 ---

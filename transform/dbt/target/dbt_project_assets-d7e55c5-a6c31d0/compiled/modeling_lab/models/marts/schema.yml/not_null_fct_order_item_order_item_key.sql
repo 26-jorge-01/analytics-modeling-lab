@@ -1,0 +1,11 @@
+
+    
+    
+
+
+
+select order_item_key
+from "modeling_lab"."public"."fct_order_item"
+where order_item_key is null
+
+

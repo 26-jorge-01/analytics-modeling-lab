@@ -39,15 +39,22 @@ docker compose up -d --build
 GOTO end
 
 :down
-echo Stopping containers...
-docker compose down -v
+echo Stopping containers (Keeping data)...
+docker compose down
 GOTO end
 
 :rebuild
-echo Rebuilding everything...
-docker compose down -v
+echo Rebuilding containers (Keeping data)...
+docker compose stop
 docker compose build --no-cache
 docker compose up -d
+GOTO end
+
+:clean
+echo WARNING: This will delete ALL data (DB, Metabase, Dagster).
+echo Press Ctrl+C to cancel or any key to continue...
+pause
+docker compose down -v
 GOTO end
 
 :ps

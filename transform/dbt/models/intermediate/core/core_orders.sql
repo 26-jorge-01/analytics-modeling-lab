@@ -24,7 +24,8 @@ select
     -- Note: core_orders usually joins with hub_customer/link to get customer_id
     -- For simplicity in this demo, we can get it from the link or the sat
     -- Let's use the link to demonstrate the DV power
-    l.customer_pk as customer_id,
+    l.customer_pk,
+    hc.customer_bk as customer_id,
     s.order_status,
     s.order_purchase_timestamp,
     s.order_approved_at,
@@ -35,3 +36,5 @@ inner join latest_sats as s
     on h.order_pk = s.order_pk
 inner join {{ ref('link_order_customer') }} as l
     on h.order_pk = l.order_pk
+inner join {{ ref('hub_customer') }} as hc
+    on l.customer_pk = hc.customer_pk

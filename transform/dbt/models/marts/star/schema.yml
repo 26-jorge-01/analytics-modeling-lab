@@ -1,0 +1,67 @@
+version: 2
+
+models:
+  - name: dim_customer
+    description: "Customer Dimension (Gold Layer). Denormalized and optimized for BI consumption. Contains rich customer attributes for granular demographic and behavioral analysis. Derived from the integrated Core 3NF truth."
+    columns:
+      - name: customer_id
+        description: "Business key for the customer dimension."
+        tests:
+          - unique
+          - not_null
+
+  - name: dim_product
+    description: "Product Dimension (Gold Layer). Provides a unified view of products, including categories and physical dimensions. Structured for easy filtering and grouping in BI tools like Metabase."
+    columns:
+      - name: product_id
+        description: "Business key for the product dimension."
+        tests:
+          - unique
+          - not_null
+
+  - name: dim_date
+    description: "Time dimension table for analytical reporting, containing dates, month, year, etc."
+    columns:
+      - name: date_key
+        description: "Primary key for the date dimension (YYYYMMDD format)."
+        tests:
+          - unique
+          - not_null
+
+  - name: fct_order_item
+    description: "Sales Items Fact Table (Gold Layer). The primary transactional asset for business reporting. Contains quantified measures (price, freight) and transactional context for high-velocity analysis of revenue, AOV, and sales velocity."
+    columns:
+      - name: order_item_key
+        description: "Primary key for the fact grain (combined Order + Item identifier)."
+        tests:
+          - unique
+          - not_null
+      - name: order_id
+        description: "Foreign key to the source order."
+        tests:
+          - not_null
+      - name: order_status
+        description: "Status of the order."
+        tests:
+          - not_null
+          - accepted_values:
+              arguments:
+                values: ['delivered', 'shipped', 'canceled', 'invoiced', 'processing', 'approved', 'unavailable', 'created']
+      - name: customer_id
+        description: "Foreign key linking to dim_customer."
+        tests:
+          - not_null
+          - relationships:
+              to: ref('dim_customer')
+              field: customer_id
+      - name: product_id
+        description: "Foreign key linking to dim_product."
+        tests:
+          - not_null
+          - relationships:
+              to: ref('dim_product')
+              field: product_id
+      - name: order_date
+        description: "Date when the order was placed, linking to dim_date."
+        tests:
+          - not_null
