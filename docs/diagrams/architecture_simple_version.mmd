@@ -1,0 +1,29 @@
+graph TB
+
+A[Data Sources]
+B[Raw Data]
+C[Organized Data]
+
+D1[History and Traceability]
+D2[Consistency and Integrity]
+D3[Analytics Models]
+
+E[Data Validation]
+
+F1[Dashboards]
+F2[Data Science]
+F3[Applications]
+
+A --> B
+B --> C
+
+C --> D1
+C --> D2
+
+D2 --> D3
+D1 --> E
+D3 --> E
+
+E --> F1
+E --> F2
+E --> F3
