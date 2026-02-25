@@ -1,7 +1,7 @@
 # 🧪 Analytics Modeling Lab
 ## *Evaluating Data Modeling Paradigms in the Modern Data Stack*
 
-[![CI](https://github.com/actions/workflows/ci.yml/badge.svg)](https://github.com)
+[![CI](https://github.com/26-jorge-01/analytics-modeling-lab/actions/workflows/ci.yml/badge.svg)](https://github.com/26-jorge-01/analytics-modeling-lab/actions/)
 [![Infrastructure](https://img.shields.io/badge/Infrastructure-Docker-blue.svg)]()
 [![Orchestration](https://img.shields.io/badge/Orchestration-Dagster-red.svg)]()
 [![Transformation](https://img.shields.io/badge/Transformation-dbt_1.11-orange.svg)]()
