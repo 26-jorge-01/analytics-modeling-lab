@@ -1,17 +1,67 @@
-# 🎬 Orchestration: The Pipeline Conductor
+# 🎻 Dagster Orchestration — Asset-Based Data Orchestration
 
-## 📖 How it Works (Dagster)
-We use **Dagster** as our orchestration engine. Unlike older tools (like Airflow), Dagster is **Asset-Based**.
-- **Software-Defined Assets**: We don't define "Tasks"; we define "Data Products" (like `stg_orders` or `fct_sales`).
-- **Lineage**: Dagster automatically understands that `fct_sales` depends on `stg_orders` and ensures they run in the correct order.
+> **Layer role:** Defines, schedules, and monitors the full data pipeline as a graph of software-defined assets. Provides lineage, observability, and re-materialization control at the asset level.
 
-## 🚀 Why it is Important (Industry)
-- **Developer Experience**: Local testing of pipelines is 10x faster and more reliable.
-- **Integrations**: Seamless connections with dbt, Soda, and custom Python scripts.
-- **Observability**: One unified dashboard to see the health of the entire data ecosystem.
+---
 
-## 🧪 Use Case in this Lab
-We use the `CustomDagsterDbtTranslator` to map dbt models directly into Dagster assets. This allows us to trigger dbt runs from a professional UI and see exactly which model failed and why.
+## Navigation
 
-## 💡 Pro Tip for Beginners
-Orchestration is the difference between a "Collection of Scripts" and a "System". Always aim to have your orchestration layer as the single source of truth for pipeline status.
+| Section | Topic |
+| :--- | :--- |
+| [Architecture Decision](#architecture-decision-assets-vs-tasks) | Why Dagster over Airflow |
+| [Asset Graph Structure](#asset-graph-structure) | How the pipeline is modeled |
+| [Reliability Pattern](#reliability-pattern-circuit-breaker) | Quality gates in the DAG |
+
+---
+
+## Architecture Decision: Assets vs. Tasks
+
+Dagster's asset-based model is a fundamentally different paradigm from task-based orchestrators (Airflow, Prefect):
+
+| Dimension | Task-Based (Airflow) | Asset-Based (Dagster) |
+| :--- | :--- | :--- |
+| **Mental model** | "Run this function" | "Produce this dataset" |
+| **Lineage visibility** | Implicit in DAG edges | First-class: assets know their upstream dependencies |
+| **Re-run granularity** | Entire DAG or task group | Individual asset or any subgraph |
+| **Failure recovery** | Manual retry from checkpoint | Auto-detect stale assets; re-materialize only what changed |
+| **Testing** | Mock DAG execution | `build_asset_context()` for unit-testable asset functions |
+
+For a data engineering portfolio, Dagster's explicit lineage model makes the pipeline's intent visible without reading code — a meaningful difference when being evaluated by a technical reviewer.
+
+---
+
+## Asset Graph Structure
+
+```
+raw_quality_check          (Soda: validates raw schema)
+       │
+       ▼
+staging_models             (dbt: stg_*)
+       │
+       ▼
+intermediate_models        (dbt: hub_*, link_*, sat_*, core_*)
+       │
+       ▼
+mart_models                (dbt: Star + Snowflake + Galaxy + AI)
+       │
+       ▼
+gold_quality_check         (Soda: validates mart outputs)
+```
+
+The Soda quality checks are modeled as assets with explicit dependencies — not as post-hooks or side effects. This ensures that if a Soda check fails, Dagster correctly marks all downstream assets as stale and prevents their execution.
+
+---
+
+## Reliability Pattern: Circuit Breaker
+
+The `raw_quality_check` asset implements the circuit breaker pattern: before any dbt model runs, Soda validates the raw schema for completeness, freshness, and null rates. If the check fails, the pipeline stops — poison data cannot propagate to analytical layers.
+
+This is the equivalent of a schema registry validation in a Kafka ecosystem: you do not allow bad records to enter the stream.
+
+---
+
+## References
+
+- [Main Architecture](../../README.md) — System-level orchestration flow
+- [Quality Gates](../../quality/README.md) — Soda check details
+- [dbt Project](../../transform/dbt/README.md) — Models triggered by Dagster assets

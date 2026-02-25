@@ -1,24 +1,44 @@
-# 🎯 Marts: The Analytical Gold Layer
+# 🎯 Marts — The Gold Layer
 
-## 📖 Strategy
-The Marts layer is where raw data is turned into **Business Intelligence**. In this lab, we don't just provide one type of model; we demonstrate a **Multi-Paradigm** strategy to solve different business needs.
+> **Layer role:** Consumption-optimized analytical models. Each mart paradigm is a deliberate architectural choice targeting a specific query profile, team, and update pattern.
 
-### 📚 The Modeling Handbook
-| Paradigm | Best For | Technical implementation | Folder |
+---
+
+## Navigation
+
+| Paradigm | Path | Query Profile |
+| :--- | :--- | :--- |
+| **⭐ Star Schema** | [star/README.md](./star/README.md) | High-volume BI queries, low join depth |
+| **❄️ Snowflake Model** | [snowflake/README.md](./snowflake/README.md) | Hierarchical management, atomic attribute updates |
+| **🌌 Galaxy Schema** | [galaxy/README.md](./galaxy/README.md) | Cross-process correlation, conformed dimensions |
+| **🤖 AI Readiness** | [ai_readiness/README.md](./ai_readiness/README.md) | Feature vectors for ML training and inference |
+
+---
+
+## The Multi-Paradigm Decision
+
+A single modeling paradigm cannot optimally serve all analytical consumers. The decision to implement four parallel paradigms is driven by a fundamental engineering insight:
+
+> *The "best" data model is defined by its consumer's query pattern — not by an abstract standard.*
+
+| Consumer | Query Pattern | Bottleneck | Optimal Paradigm |
 | :--- | :--- | :--- | :--- |
-| **Star Schema** | Dashboard speed & Analysts | Denormalized Wide Tables | [star/](./star/) |
-| **Snowflake** | Hierarchies & Data Integrity | Normalized Multi-level Dims | [snowflake/](./snowflake/) |
-| **Galaxy Schema** | Cross-Process Correlation | Shared Conformed Dimensions | [galaxy/](./galaxy/) |
-| **AI Readiness** | Machine Learning Training | Feature Engineering / Recency | [ai_readiness/](./ai_readiness/) |
+| Metabase BI Analyst | Aggregating metrics over time | Join depth | Star Schema |
+| Territory Manager | Looking up a single region's attributes | Write amplification on updates | Snowflake Model |
+| Customer Success Team | Correlating two business processes | Cross-fact joins | Galaxy Schema |
+| Data Scientist | Retrieving feature vectors for a cohort | Feature freshness, batch extraction | AI Readiness |
 
-## 🚀 Why This Matters
-A mature data team shouldn't be dogmatic about one modeling style.
-- **Star** is king for performance.
-- **Snowflake** is king for territory management.
-- **Galaxy** is king for finding hidden business causes.
+Building all four in the same project — from the same upstream Core layer — demonstrates the ability to reason about this decision explicitly and implement it systematically.
 
-## 💡 How to navigate this folder
-If you are looking for a specific metric:
-- **Sales & Orders**: Go to [Star Schema](./star/).
-- **Logistics vs Reviews**: Go to [Galaxy Schema](./galaxy/).
-- **ML Features**: Go to [AI Readiness](./ai_readiness/).
+---
+
+## Shared Foundation: Conformed Dimensions
+
+All paradigms in this layer draw from the same Core 3NF models. Customer IDs, Product IDs, and Date keys are **conformed** — their grain and identity are consistent across all facts. This is what makes the Galaxy Schema possible: you can join facts from different paradigms because their shared dimension keys are identical.
+
+---
+
+## Upstream Reference
+
+- [Core 3NF](../intermediate/core/README.md) — Source of all mart models
+- [dbt Project](../../../README.md) — Transformation project overview

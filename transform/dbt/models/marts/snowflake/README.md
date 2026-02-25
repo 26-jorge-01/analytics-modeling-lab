@@ -1,17 +1,45 @@
-# ❄️ Snowflake Model: The Operational Efficiency Layer
+# ❄️ Snowflake Model — Normalized Hierarchy for Operational Agility
 
-## 📖 How it Works
-A Snowflake Model is a variation of the Star Schema where **dimensions are normalized** into multiple related tables. Instead of one flat "Geography" table, we have a hierarchy: `dim_state` -> `dim_city` -> `dim_geography` (Zip Code).
+> **Layer role:** Preserves referential integrity across geographic and organizational hierarchies. Designed for attributes that change frequently and require atomic, single-row updates.
 
-## 🚀 Why it is Important (Industry)
-- **Data Integrity**: Eliminates redundancy at the dimension level.
-- **Atomic Updates**: Changing an attribute at a high level (e.g., a State's Tax Rate) only requires a single row update.
-- **Small Footprint**: Efficient storage by not repeating long string values across millions of rows.
+---
 
-## 🧪 Business Case in this Lab (Territory Management)
-We use the Snowflake hierarchy to manage **Territory Operations**.
-- **The Problem**: In a flat schema, updating a "Regional Sales Manager" for the state of São Paulo requires updating millions of rows in the geography dimension.
-- **The Solution**: By normalizing into `dim_state`, we update **1 row**. The change propagates instantly to all joined reports, demonstrating superior operational agility.
+## Models
 
-## 💡 Pro Tip for Beginners
-Snowflake models are often criticized for join complexity, but they are essential when your dimension attributes (like Tax Rates or Sales Territories) change frequently and you need to preserve historical accuracy without massive data duplication.
+| Model | Grain | Role in Hierarchy |
+| :--- | :--- | :--- |
+| `dim_state` | One row per Brazilian state | Root of geographic hierarchy |
+| `dim_city` | One row per city/state combination | Mid-level hierarchy node |
+| `dim_geography` | One row per zip code prefix | Leaf-level geographic entity |
+| `dim_territory_management` | One row per zip code prefix (denormalized view) | Consumer-facing unified view |
+
+---
+
+## Why Not Just Flatten Geography into the Star Schema?
+
+This is the right question to ask. The answer is in the **update propagation problem**:
+
+Consider `region_manager` — an attribute of a state, assigned to a region. In a flat Star Schema, this attribute would appear in every row of `dim_customer` for every customer in that state. Olist has ~100k customers across 27 states.
+
+| Action | Flat Star Schema | Snowflake Model |
+| :--- | :--- | :--- |
+| Change a Regional Manager | `UPDATE dim_customer SET region_manager = 'X' WHERE state = 'SP'` — tens of thousands of rows | `UPDATE dim_state SET region_manager = 'X' WHERE state_code = 'SP'` — **1 row** |
+| Risk of inconsistency | High — partial update leaves corrupted state | Zero — atomicity guaranteed by single-row update |
+| Rebuild cost | Full `dbt build` to re-materialize the dimension | `dbt build --select dim_state+` — only affected models |
+
+At scale, this is the difference between a 2-minute routine operation and a multi-hour reprocessing job.
+
+---
+
+## `dim_territory_management` — The Consumer Interface
+
+The normalized hierarchy introduces join complexity that operational users should not be exposed to. `dim_territory_management` resolves this by pre-joining the full hierarchy into a single flat view — providing the atomic-update guarantees of the Snowflake structure with the query simplicity of a Star Schema.
+
+This pattern — **normalize for writes, denormalize for reads** — is a standard enterprise pattern for reference data management.
+
+---
+
+## References
+
+- [Marts Overview](../README.md) — When to choose Snowflake vs Star
+- [Star Schema](../star/README.md) — Contrasting approach for non-hierarchical dimensions

@@ -1,50 +1,76 @@
 # 🧪 Analytics Modeling Lab
 ## *Evaluating Data Modeling Paradigms in the Modern Data Stack*
 
-[![Environment](https://img.shields.io/badge/Infrastructure-Docker-blue.svg)]()
+[![CI](https://github.com/actions/workflows/ci.yml/badge.svg)](https://github.com)
+[![Infrastructure](https://img.shields.io/badge/Infrastructure-Docker-blue.svg)]()
 [![Orchestration](https://img.shields.io/badge/Orchestration-Dagster-red.svg)]()
-[![Transformation](https://img.shields.io/badge/Transformation-dbt-orange.svg)]()
-[![Modeling](https://img.shields.io/badge/Paradigm-3NF_|_Data_Vault_|_Star-green.svg)]()
+[![Transformation](https://img.shields.io/badge/Transformation-dbt_1.11-orange.svg)]()
+[![Quality](https://img.shields.io/badge/Quality-Soda.io-brightgreen.svg)]()
+[![Linting](https://img.shields.io/badge/Linting-SQLFluff_|_Flake8-blueviolet.svg)]()
 
-### 🎯 The Mission
-This project is an **Engineering Research Laboratory** designed to evaluate how different data modeling strategies impact downstream analytical performance, auditing capabilities, and AI readiness. 
+---
 
-Rather than building a simple pipeline, this lab demonstrates the application of **Software Engineering principles** (Idempotency, Version Control, Automated Testing) to the Data Lifecycle. It serves as a proof-of-concept for handling complex transactional data streams across competing modeling paradigms.
+## 📖 Documentation Index
+
+This project is documented as a **technical reference** across multiple layers. Use the index below to navigate:
+
+| Area | Guide | Purpose |
+| :--- | :--- | :--- |
+| **Architecture** | [This file](#-architectural-strategy-the-data-refinery) | System overview, design rationale, quickstart |
+| **Ingestion** | [ingestion/README.md](./ingestion/README.md) | EL strategy, idempotency, trade-offs vs. managed connectors |
+| **Transformation** | [transform/dbt/README.md](./transform/dbt/README.md) | dbt project structure, Medallion layers, best practices |
+| **Staging (Bronze)** | [staging/README.md](./transform/dbt/models/staging/README.md) | Data contracts, type normalization, source decoupling |
+| **Core 3NF (Silver)** | [core/README.md](./transform/dbt/models/intermediate/core/README.md) | Referential integrity, operational source of truth |
+| **Data Vault (Silver)** | [vault/README.md](./transform/dbt/models/intermediate/vault/README.md) | DV 2.0 architecture, insert-only design, CDC patterns |
+| **Marts Overview** | [marts/README.md](./transform/dbt/models/marts/README.md) | Multi-paradigm strategy, when to use each model |
+| **⭐ Star Schema** | [star/README.md](./transform/dbt/models/marts/star/README.md) | BI optimization, denormalization trade-offs |
+| **❄️ Snowflake Model** | [snowflake/README.md](./transform/dbt/models/marts/snowflake/README.md) | Normalized hierarchies, atomic updates |
+| **🌌 Galaxy Schema** | [galaxy/README.md](./transform/dbt/models/marts/galaxy/README.md) | Cross-process fact constellation, conformed dimensions |
+| **🤖 AI Readiness** | [ai_readiness/README.md](./transform/dbt/models/marts/ai_readiness/README.md) | Feature engineering, ML context, churn prediction |
+| **Orchestration** | [dagster/README.md](./orchestration/dagster/README.md) | Asset-based DAGs, Dagster vs Airflow decision |
+| **Quality Gates** | [quality/README.md](./quality/README.md) | Soda.io declarative checks, circuit breaker pattern |
+| **Ops & Infra** | [ops/README.md](./ops/README.md) | Docker multi-DB setup, idempotent init, DX tooling |
+
+---
+
+## 🎯 The Engineering Thesis
+
+This is not a tutorial project. It is an **engineering research platform** built around a single question:
+
+> *How do different data modeling paradigms affect analytical performance, audit capability, operational agility, and AI readiness — when applied to the same transactional dataset?*
+
+The Olist Brazilian E-Commerce dataset provides a realistic transactional stream: 100k+ orders, 9 source entities, complex delivery logistics, and multi-dimensional customer behavior. The complexity is intentional — clean data requires no architectural decisions.
+
+The outcome is a system where you can trace any metric back to its raw source row, replay any historical state through the Data Vault, and serve an ML model from the same warehouse that feeds your executive dashboards.
 
 ---
 
 ## 🏛️ Architectural Strategy: The Data Refinery
-I have implemented a **Medallion Architecture** to ensure a clear "Chain of Value" from raw data to business intelligence.
+
+A **Medallion Architecture** with a strict contract between layers — no layer can be skipped, and each layer has a defined responsibility.
 
 ```mermaid
 graph TB
-    %% =======================================================
-    %% Strategic Data Flow: The Medallion Paradigm
-    %% =======================================================
-
     subgraph SD["Source Systems"]
         CSV[Source CSVs]
-        S3[Cloud Storage / API]
     end
 
-    subgraph CI["1. Foundational Governance (CI/CD)"]
+    subgraph CI["Foundational Governance (CI/CD)"]
         direction LR
-        Lint[Linting] --> DP[dbt Parse]
-        DP --> DVC[Dagster Validation]
+        Lint[SQLFluff + Flake8] --> DP[dbt Parse]
+        DP --> DVC[Dagster Dry-Run]
     end
 
-    subgraph Bronze["2. Bronze Layer (Ingestion)"]
+    subgraph Bronze["Bronze Layer (Ingestion)"]
         direction LR
-        EL[Python EL Process] --> Raw[(Postgres Raw)]
+        EL[Python EL Process] --> Raw[(Postgres: Raw Schema)]
         Raw --> SodaB[Soda Quality Gate]
     end
 
-    subgraph Silver["3. Silver Layer (Intermediate)"]
+    subgraph Silver["Silver Layer (Intermediate)"]
         direction TB
-        subgraph DV["Data Vault (Auditable History)"]
-            Hubs[Hubs]
-            Links[Links]
-            Sats[Satellites]
+        subgraph DV["Data Vault 2.0 (History)"]
+            Hubs[Hubs] --> Links[Links] --> Sats[Satellites]
         end
         subgraph Core["Core 3NF (Integrity)"]
             Norm[Normalized Entities]
@@ -52,191 +78,149 @@ graph TB
         DV --> Norm
     end
 
-    subgraph Gold["4. Gold Layer (Marts)"]
+    subgraph Gold["Gold Layer (Marts)"]
         Norm --> Star[Star Schema]
+        Norm --> Snow[Snowflake Model]
+        Norm --> Gal[Galaxy Schema]
+        Norm --> AI[AI Features]
         Star --> SodaG[Soda Quality Gate]
     end
 
-    subgraph Consumption["5. System Consumers"]
+    subgraph Consumption["System Consumers"]
         SodaG --> MB[Metabase BI]
-        SodaG --> NB[DS Notebooks]
+        SodaG --> ML[ML Model Training]
         SodaG --> API[Backend API]
     end
 
-    %% Flow Connections
     SD --> EL
     SodaB --> DV
     SodaB --> Norm
-    
-    %% Styling
+
     style Bronze fill:#cd7f32,stroke:#333,stroke-width:2px,color:#fff
     style Silver fill:#c0c0c0,stroke:#333,stroke-width:2px,color:#333
     style Gold fill:#ffd700,stroke:#333,stroke-width:2px,color:#333
     style CI fill:#f4f4f4,stroke-dasharray: 5 5
-    style MB fill:#2196f3,color:#fff
-    style NB fill:#4caf50,color:#fff
-    style API fill:#ff9800,color:#fff
 ```
 
-### 🧠 Technical Justification
+### Layer Contract
 
-| Layer | Strategic Justification | Engineering Value |
+| Layer | Responsibility | Key Design Decision |
 | :--- | :--- | :--- |
-| **Staging** | **Cleaning & Type Casting**. Maps 1:1 with source tables but converts strings to dates/numbers. | Ensures downstream layers work with predictable types. |
-| **Intermediate (Vault)** | **Non-destructive History**. Implements Data Vault 2.0 to capture every single change in the source (Insert-Only). | Provides a "Time Machine" for any point-in-time audit. |
-| **Intermediate (Core)** | **Integrity & Normalization**. Implements 3NF logic to ensure referential integrity and a single operational state. | The "Source of Truth" for valid business entities. |
-| **Marts** | **Performance & Simplicity**. Denormalized Star Schema optimized for high-velocity BI queries. | Minimal join complexity; maximum dashboard speed. |
-| **Marts (Snowflake)** | **Agile Hierarchy**. Normalized Snowflake models for high-level regional management. | Instant, atomic updates to regional attributes (Managers, Taxes). |
+| **Staging** | Source decoupling, type casting | 1-to-1 with source; never joined at this layer |
+| **Data Vault** | Insert-only historical record | Hubs hold BKs; Sats hold mutable attributes |
+| **Core 3NF** | Integrated operational view | Derives from Vault; provides referential integrity |
+| **Marts** | Consumption-optimized paradigms | Multiple models serve different query profiles |
 
 ---
 
-## 🚀 Multi-Paradigm Modeling: Why it Matters
-I demonstrate three distinct modeling strategies on a single e-commerce stream, each serving a unique business and technical user:
+## 🗺️ Multi-Paradigm Model Strategy
 
-1.  **Third Normal Form (3NF)**: *The Operational Source of Truth.* Designed for data integrity and minimal storage footprint. 
-    *   **Value**: Ideal for verifying raw transactional consistency.
-2.  **Data Vault (v1)**: *The Enterprise Backbone.* Built for scalability and auditing. Decouples business keys (Hubs), relationships (Links), and descriptive history (Satellites).
-    *   **Value**: Essential for tracking CDC (Change Data Capture) without losing historical state.
-3.  **Star Schema**: *The Performance Layer.* Denormalized dimensions and fact tables optimized for compute speed.
-    *   **Value**: Reduces join complexity for BI tools and improves query latency.
-4.  **Snowflake Model**: *The Operational Efficiency Layer.* A normalized hierarchy specifically for Geographic & Territory management.
-    *   **Value**: Solves the "Attribute Update" problem. Changing a Regional Manager or a State Tax Rate only requires updating 1 row in `dim_state`, rather than re-processing millions of rows in a flat geography dimension.
+The core of this lab is demonstrating that **no single modeling paradigm is universally optimal**. The choice is a function of the query profile, the update frequency, and the consumer's technical sophistication.
+
+| Paradigm | Optimized For | Trade-off Accepted |
+| :--- | :--- | :--- |
+| **Star Schema** | BI query speed, low join depth | Redundancy in dimension tables |
+| **Snowflake Model** | Attribute update agility, hierarchy integrity | Higher join complexity at query time |
+| **Galaxy Schema** | Cross-process correlation | Requires conformed dimensions across facts |
+| **AI Readiness** | ML feature stability, recency signals | Denormalized, point-in-time snapshot |
+
+Detailed reasoning for each choice is documented in their respective README files (see [Documentation Index](#-documentation-index) above).
 
 ---
 
-## 💼 Architecture as a Business Enabler
-I selected a modeling paradigm not just for technical elegance, but to solve specific executive and operational needs. This lab demonstrates how architecture drives decision-making:
+## 💼 Architectural Decisions as Business Enablers
 
-| Paradigm | Business Persona | Simple Business Question | Technical Why |
-| :--- | :--- | :--- | :--- |
-| **3NF** | **Operations** | "Is the amount paid by the customer exactly the same as the product price plus shipping?" | Ensures data integrity and catches calculation errors. |
-| **Data Vault** | **Audit / History** | "Where exactly are orders getting stuck (warehouse vs. delivery) and has this improved over time?" | Tracks historical status changes without losing previous states. |
-| **Star Schema** | **Management** | "Which product categories are our top sellers today and are we growing compared to last month?" | Optimized for lightning-fast sales reports and growth trends. |
-| **Snowflake** | **Territory Ops** | "Who is the Sales Manager for the Southern Region and what is the current Tax Rate in São Paulo?" | Atomic updates of regional metadata without data duplication or massive re-processing. |
-| **Galaxy** | **Customer Success** | "Do customers give us lower ratings when their packages arrive later than promised?" | Connects different processes (Logistics vs. Reviews) to find patterns. |
+| Paradigm | Stakeholder | Business Question Answered |
+| :--- | :--- | :--- |
+| **3NF** | Operations | "Is the amount paid equal to price + freight, for every order?" |
+| **Data Vault** | Compliance / Audit | "What was the order status on a specific historical date?" |
+| **Star Schema** | Executive / BI | "Which product categories are trending this quarter vs. last?" |
+| **Snowflake** | Territory Ops | "Who manages the Southern Region and what is the tax rate?" |
+| **Galaxy** | Customer Success | "Do late deliveries directly correlate with negative reviews?" |
+| **AI Readiness** | Data Science | "Which customers are at risk of churning in the next 30 days?" |
 
 ---
 
 ## 🤖 AI & ML Readiness
-This lab is architected to feed the AI Lifecycle:
 
-*   **RAG Context**: The normalized 3NF and Staging layers provide clean, structured context for LLM retrieval.
-*   **Feature Stores**: Dimension tables in the Star Schema serve as ready-to-use feature vectors for ML models.
-*   **Backtesting Truth**: The Data Vault's historical satellites provide the "point-in-time" snapshots required for accurate model validation.
+This architecture is designed to feed the full AI development lifecycle — not just reporting:
+
+- **Feature Store Integration**: `fct_customer_churn_features` provides production-ready feature vectors (Recency, Frequency, Monetary) without requiring a data scientist to re-clean transactional data.
+- **Point-in-Time Truth**: Data Vault satellites enable backtesting ML models against historical warehouse states, preventing data leakage.
+- **RAG Context**: The normalized 3NF layer provides clean, structured entites for LLM retrieval-augmented generation use cases.
 
 ---
 
-### 🧪 Infrastructure & Governance: The Trust Layer
-Moving beyond simple execution, this project demonstrates how to build trust into the data lifecycle through automated validation and historical transparency.
-
-#### 🐳 Containerized Environment
-The entire stack is orchestrated using **Docker Compose**, ensuring a reproducible, isolated, and scalable environment for multi-service orchestration.
-
-```mermaid
-graph LR
-    subgraph Host["User Host Machine"]
-        direction TB
-        subgraph Compose["Docker Compose Environment"]
-            direction LR
-            
-            DB[("modelinglab-postgres<br/>(Postgres 16)")]
-            
-            subgraph Orchestration["Dagster Engine"]
-                WEB[modelinglab-dagster-web]
-                DMN[modelinglab-dagster-daemon]
-            end
-            
-            BI[modelinglab-metabase]
-        end
-
-        subgraph Storage["Persistent Volumes"]
-            PGV[(pgdata)]
-            DGV[(dagster_home)]
-            MBV[(metabase_data)]
-        end
-    end
-
-    %% Network Connections
-    WEB <--> DB
-    DMN <--> DB
-    BI <--> DB
-    
-    %% Persistence
-    DB --- PGV
-    WEB --- DGV
-    DMN --- DGV
-    BI --- MBV
-
-    %% Styling
-    style Host fill:#f5f5f5,stroke:#333,stroke-width:2px
-    style Compose fill:#e1f5fe,stroke:#01579b,stroke-width:2px
-    style DB fill:#336791,color:#fff
-    style Orchestration fill:#fff,stroke:#e53935
-    style WEB fill:#e53935,color:#fff
-    style DMN fill:#e53935,color:#fff
-    style BI fill:#749427,color:#fff
-    style Storage fill:#fff,stroke-dasharray: 5 5
-```
-
-#### 🔍 Data Reliability Flywheel
-We apply a **Reliability cycle** where CI/CD, Quality Gates, and Monitoring create a feedback loop of trust.
+## 🛡️ Governance: The Reliability Flywheel
 
 ```mermaid
 graph TD
     subgraph CI["Confidence (Pre-Deploy)"]
-        L[Linting] --> DP[dbt Parse]
+        L[SQLFluff Lint] --> DP[dbt Parse]
         DP --> V[Dagster Dry-Run]
     end
-
-    subgraph ELT["Execution (Data Flow)"]
-        V --> IG[Ingestion]
-        IG --> B[Bronze Soda Scan]
-        B --> BF[Build dbt Models]
+    subgraph ELT["Execution"]
+        IG[Ingestion] --> B[Bronze Soda Scan]
+        B --> BF[dbt Build]
         BF --> G[Gold Soda Scan]
     end
-
-    subgraph OPS["Observability (Feedback)"]
-        G --> M[Metrics Collection]
+    subgraph OBS["Observability"]
+        G --> M[Dagster Asset Monitoring]
         M --> L
     end
+    CI --> ELT --> OBS --> CI
 
-    %% Connections
-    CI --> ELT
-    ELT --> OPS
-    OPS --> CI
-
-    %% Styling
     style CI fill:#e8f5e9,stroke:#2e7d32
     style ELT fill:#fff3e0,stroke:#ef6c00
-    style OPS fill:#e3f2fd,stroke:#1565c0
+    style OBS fill:#e3f2fd,stroke:#1565c0
 ```
 
-### 🔍 Automated Data Quality (Soda.io)
-I integrated **Soda.io** to provide declarative, cross-platform data health monitoring.
-- **Circuit Breaker Pattern**: The orchestrator triggers quality gates before data moves between layers. If raw data fails checks (Freshness, Nullability, Schema Drift), processing stops immediately to prevent downstream pollution.
+Every state change passes through three gates: **code quality** (linting), **schema validity** (dbt parse + tests), and **data health** (Soda checks). This eliminates the most common classes of production failures before they reach consumers.
 
 ---
 
-## 🛠️ Implementation & Quickstart
-
-### Reproducible Environment
-The entire stack is containerized. Environmental configurations are managed via a central `.env` file to ensure production-like portability and security.
+## 🛠️ Quickstart
 
 ```bash
-# Initialize
+# 1. Set environment
 copy .env.example .env
+
+# 2. Start the full stack (Postgres + Dagster + Metabase)
 .\make.bat up
 
-# Execute Asset Lineage
-.\make.bat ingest     # Extract & Load
-.\make.bat dbt-build  # Multi-layer Transformation
-.\make.bat dbt-serve  # Inspect Documentation & Lineage (localhost:8099)
-.\make.bat dq         # Run Soda Data Quality Scans
+# 3. Run the pipeline
+.\make.bat ingest       # Extract & Load from CSVs → Raw schema
+.\make.bat dbt-build    # Transform: Raw → Staging → Vault → Core → Marts
+.\make.bat dq           # Soda data quality scans
+
+# 4. Explore
+# → Dagster UI:    http://localhost:3000
+# → Metabase BI:   http://localhost:3001
+# → dbt Docs:      .\make.bat dbt-serve  (http://localhost:8099)
 ```
 
 ---
 
-## 📅 Roadmap to Enterprise Maturity
-*   **Milestone 1: Foundational Analytics (MVP)**: Reliable ingestion, staging, and Star Schema for core sales metrics.
-*   **Milestone 2: Governance & History (v1)**: Implementation of Data Vault for full auditability, Soda.io for declarative data quality, and CI/CD automation.
-*   **Milestone 3: Advanced Intelligence (v2)**: Galaxy schemas for multi-process analysis and automated feature engineering for churn prediction.
+## 📐 Infrastructure
+
+The full stack runs locally via Docker Compose with persistent volumes — no cloud dependency for development.
+
+| Service | Image | Port | Purpose |
+| :--- | :--- | :--- | :--- |
+| `postgres` | postgres:16 | 5432 | Primary warehouse + metadata DBs |
+| `dagster-web` | custom Python 3.11 | 3000 | Orchestration UI + dbt runner |
+| `dagster-daemon` | custom Python 3.11 | — | Asset scheduler |
+| `metabase` | metabase/metabase:latest | 3001 | BI visualization |
+
+Metabase uses a dedicated PostgreSQL database (`metabase_db`) for persistent dashboard storage — avoiding the default H2 ephemeral engine.
+
+---
+
+## 📅 Project Milestones
+
+| Milestone | Scope | Status |
+| :--- | :--- | :--- |
+| **M1: Foundational Analytics** | Ingestion, Staging, Star Schema | ✅ Complete |
+| **M2: Governance** | Data Vault, Soda QG, CI/CD, dbt Tests | ✅ Complete |
+| **M3: Advanced Intelligence** | Galaxy, AI Readiness, Snowflake, Metabase Persistence | ✅ Complete |
+| **M4: Educational Depth** | Universal Documentation, Multi-paradigm validation | ✅ Complete |
