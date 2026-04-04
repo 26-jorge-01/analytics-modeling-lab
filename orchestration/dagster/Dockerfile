@@ -11,10 +11,8 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
 
 WORKDIR /app
 
-# deps (ruta real en tu repo)
-COPY orchestration/dagster/requirements.txt /app/requirements.txt
-RUN pip install --no-cache-dir -U pip \
- && pip install --no-cache-dir -r /app/requirements.txt
+# upgrade pip
+RUN pip install --no-cache-dir -U pip
 
 # dagster home + config (tu carpeta real)
 RUN mkdir -p ${DAGSTER_HOME}
@@ -22,6 +20,7 @@ COPY orchestration/dagster/dagster_home/ ${DAGSTER_HOME}/
 
 # tu código (ajusta si quieres copiar solo subcarpetas)
 COPY . /app
+RUN pip install --no-cache-dir /app/
 
 # entrypoint (ruta real)
 COPY orchestration/dagster/entrypoint.sh /entrypoint.sh

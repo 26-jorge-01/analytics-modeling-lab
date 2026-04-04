@@ -20,9 +20,9 @@ final as (
         s.state_tax_rate,
         g.lat,
         g.lng
-    from geography g
-    left join cities c on g.city_pk = c.city_pk
-    left join states s on c.state_code = s.state_code
+    from geography as g
+    left join cities as c on g.city_pk = c.city_pk
+    left join states as s on c.state_code = s.state_code
 )
 
 select * from final

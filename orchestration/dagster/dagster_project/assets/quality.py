@@ -20,19 +20,19 @@ def run_soda_scan(
 
     result = subprocess.run(cmd, capture_output=True, text=True, check=False)
 
-    # Log SIEMPRE
+    # Log ALWAYS
     context.log.info(f"Soda exit code: {result.returncode}")
     if result.stdout:
         context.log.info("Soda STDOUT:\n" + result.stdout)
     if result.stderr:
         context.log.error("Soda STDERR:\n" + result.stderr)
 
-    # Decide qué hacer según código
+    # Decide what to do based on return code
     if result.returncode == 0:
         context.log.info(f"Soda {layer_name} scan completed successfully.")
         return result.stdout
 
-    # 1/2/3/4 = no-cero => falla el op (circuit breaker)
+    # 1/2/3/4 = non-zero => fail the op (circuit breaker)
     raise Failure(
         description=(
             f"Soda {layer_name} scan failed with exit code "
@@ -47,7 +47,12 @@ def run_soda_scan(
 
 @asset(
     group_name="quality",
-    deps=["raw_load"],  # Depends on ingestion
+    deps=["raw_secop_api"],
+    compute_kind="soda",
+    tags={
+        "domain": "data_quality",
+        "context": "raw_health"
+    }
 )
 def soda_raw_health(context: AssetExecutionContext):
     """
@@ -57,31 +62,3 @@ def soda_raw_health(context: AssetExecutionContext):
     stdout = run_soda_scan(context, 'checks_raw.yml', "RAW", "raw")
     context.add_output_metadata({"soda_report": stdout, "layer": "raw"})
     return "Raw Health Verified"
-
-
-@asset(
-    group_name="quality",
-    deps=[AssetKey(["fct_order_item"])],
-)
-def soda_marts_health(context: AssetExecutionContext):
-    """
-    Business Health Check.
-    Final verification of Marts before BI consumption.
-    """
-    stdout = run_soda_scan(context, 'checks_marts.yml', "MARTS", "public")
-    context.add_output_metadata({"soda_report": stdout, "layer": "marts"})
-    return "Marts Health Verified"
-
-
-@asset(
-    group_name="quality",
-    deps=[AssetKey(["core_orders"])],
-)
-def soda_recon_health(context: AssetExecutionContext):
-    """
-    Reconciliation Check.
-    Verifies consistency between Raw and Core layers.
-    """
-    stdout = run_soda_scan(context, 'checks_recon.yml', "RECON", "recon")
-    context.add_output_metadata({"soda_report": stdout, "layer": "recon"})
-    return "Reconciliation Verified"

@@ -1,0 +1,79 @@
+version: 2
+
+sources:
+  - name: secop
+    schema: raw
+    description: "Raw SECOP dataset ingested from EXCEL files."
+    tables:
+      - name: contratos_icbf_secop_ii_20260301
+        description: "Contratos ICBF SECOP II 20260301."
+      - name: contratos_icbf_secop_ii_20260204v2
+        description: "Contratos ICBF SECOP II 20260204v2."
+      - name: raw_secop_api_contracts
+        description: "Contratos ICBF SECOP II via Socrata API."
+
+  - name: cuentame
+    schema: raw
+    description: "Raw Cuentame dataset ingested from EXCEL files."
+    tables:
+      - name: info_contratos_unicos
+        description: "Info contratos unicos."
+      - name: info_entidades_administradoras_servicio
+        description: "Info entidades administradoras de servicio."
+      - name: reporte_unidades_2024
+        description: "Reporte unidades 2024."
+      - name: reporte_unidades_2025
+        description: "Reporte unidades 2025."
+      - name: reporte_unidades_2026
+        description: "Reporte unidades 2026."
+
+# sources:
+#   - name: olist
+#     schema: raw
+#     description: "Raw Olist e-commerce dataset ingested from CSV files."
+#     tables:
+#       - name: customers
+#         description: "Customer data including location and unique IDs."
+#         columns:
+#           - name: customer_id
+#             tests:
+#               - unique
+#               - not_null
+#       - name: geolocation
+#         description: "Geolocation information for zip codes."
+#       - name: order_items
+#         description: "Items contained within each order."
+#         columns:
+#           - name: order_id
+#             tests:
+#               - not_null
+#           - name: order_item_id
+#             tests:
+#               - not_null
+#       - name: order_payments
+#         description: "Payment methods and values for orders."
+#       - name: order_reviews
+#         description: "Customer reviews for orders."
+#       - name: orders
+#         description: "Core order information including status and timestamps."
+#         columns:
+#           - name: order_id
+#             tests:
+#               - unique
+#               - not_null
+#       - name: products
+#         description: "Product details like category and dimensions."
+#         columns:
+#           - name: product_id
+#             tests:
+#               - unique
+#               - not_null
+#       - name: sellers
+#         description: "Information about sellers on the platform."
+#         columns:
+#           - name: seller_id
+#             tests:
+#               - unique
+#               - not_null
+#       - name: product_category_name_translation
+#         description: "Translation of product category names to English."

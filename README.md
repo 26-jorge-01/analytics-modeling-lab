@@ -34,6 +34,22 @@ This project is documented as a **technical reference** across multiple layers. 
 ---
 
 ## 🎯 The Engineering Thesis
+---
+
+## 🚀 2026 Project Update: Transitioning to SECOP API
+
+This project is currently being transitioned from the Olist Brazilian E-Commerce dataset to the **SECOP II (Colombian Public Procurement)** dataset.
+
+**Main Goals of this modification:**
+- **API-First Ingestion**: Moving from static CSVs to dynamic API extraction using the Socrata Open Data API and `pysecop`.
+- **Medallion for Procurement**: Applying Star Schema, Snowflake, and Data Vault paradigms to complex public contract data.
+- **Modern DX**: Standardizing on `pyproject.toml` for dependency management and enforcing cross-platform compatibility (Linux/Windows containers).
+
+*Note: Olist assets are temporarily maintained in the codebase as an architectural reference during the transition.*
+
+---
+
+## 🎯 The Engineering Thesis
 
 This is not a tutorial project. It is an **engineering research platform** built around a single question:
 

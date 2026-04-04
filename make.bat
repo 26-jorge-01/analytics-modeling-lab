@@ -17,6 +17,7 @@ IF "%1"=="logs" GOTO logs
 IF "%1"=="ingest" GOTO ingest
 IF "%1"=="dbt-deps" GOTO dbt_deps
 IF "%1"=="dbt-build" GOTO dbt_build
+IF "%1"=="dbt-compile" GOTO dbt_compile
 IF "%1"=="dbt-test" GOTO dbt_test
 IF "%1"=="dbt-docs" GOTO dbt_docs
 IF "%1"=="dbt-serve" GOTO dbt_serve
@@ -82,6 +83,11 @@ REM ============================
 :dbt_build
 echo Running dbt build...
 docker compose exec dagster-web bash -lc "cd /app/transform/dbt && dbt build --profiles-dir ."
+GOTO end
+
+:dbt_compile
+echo Compiling dbt models for Dagster (Reload metadata)...
+docker compose exec dagster-web bash -lc "cd /app/transform/dbt && dbt compile --profiles-dir ."
 GOTO end
 
 :dbt_test
@@ -158,6 +164,7 @@ echo Data:
 echo   ingest        Load raw + synthetic data
 echo   dbt-deps      Install dbt packages
 echo   dbt-build     Run dbt build
+echo   dbt-compile   Compile dbt models (for Dagster reloads)
 echo   dbt-test      Run dbt tests
 echo   dbt-docs      Generate dbt docs
 echo   dbt-serve     Serve dbt docs (UI)

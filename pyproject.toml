@@ -1,0 +1,40 @@
+[build-system]
+requires = ["setuptools>=61.0"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "analytics-modeling-lab"
+version = "1.0.0"
+description = "Analytics Modeling Lab - Evaluating Data Modeling Paradigms"
+readme = "README.md"
+requires-python = ">=3.11"
+authors = [
+    { name = "Jorge", email = "jonan0804@gmail.com" }
+]
+dependencies = [
+    "dagster==1.12.14",
+    "dagster-webserver==1.12.14",
+    "dagster-postgres==0.28.14",
+    "dagster-pandas==0.28.14",
+    "dagster-dbt==0.28.14",
+    "pandas",
+    "psycopg2-binary>=2.9,<3.0",
+    "dbt-core",
+    "dbt-postgres",
+    "soda-core",
+    "soda-core-postgres",
+    "openpyxl",
+    "pyarrow",
+    "pysecop"
+]
+
+[tool.setuptools]
+packages = ["orchestration", "ingestion", "quality"]
+
+[tool.sqlfluff.core]
+templater = "dbt"
+dialect = "postgres"
+
+[tool.sqlfluff.templater.dbt]
+project_dir = "transform/dbt"
+profiles_dir = "transform/dbt"

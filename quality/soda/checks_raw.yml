@@ -1,19 +1,19 @@
 # Soda Checks: The Data Health Guard
 
 # 1. Monitoring the "Raw" entry point (Staging/Raw)
-# Tag: raw
-checks for orders:
+# -- SECOP --
+checks for raw_secop_api_contracts:
   - row_count > 0:
-      name: Ensure source orders are not empty
+      name: Ensure source are not empty
       attributes:
         layer: raw
 
   - schema:
-      name: Source Schema Guard (Orders)
+      name: Source Schema Guard (SECOP Contracts)
       attributes:
         layer: raw
       fail:
         when required column missing:
-          - order_id
-          - customer_id
-          - order_status
+          - nombre_entidad
+          - nit_entidad
+          - id_contrato
