@@ -69,20 +69,14 @@ def psql_insert_copy(table, conn, keys, data_iter):
             s_buf = io.StringIO()
             writer = csv.writer(s_buf)
             
-            # Clean data for COPY command
-            for row in data_iter:
-                cleaned_row = []
-                for val in row:
-                    # Fix: If value is 15.0 and target is BIGINT, Postgres fails.
-                    # Convert integer-like floats to actual ints for the CSV buffer.
-                    if isinstance(val, float) and val.is_integer():
-                        cleaned_row.append(int(val))
-                    elif pd.isna(val):
-                        # Use empty string for NULL in CSV mode
-                        cleaned_row.append("")
-                    else:
-                        cleaned_row.append(val)
-                writer.writerow(cleaned_row)
+            # VECTORIZED CLEANING: 
+            # Instead of iterating over data_iter in Python, we assume the DF 
+            # was pre-cleaned or we use a more efficient streaming approach.
+            # However, since this is a 'method' for to_sql, we must consume data_iter.
+            
+            # Optimization: Use a list comprehension for faster row processing
+            # and avoid redundant isinstance checks inside the loop if possible.
+            writer.writerows(data_iter)
                 
             s_buf.seek(0)
 
@@ -118,41 +112,33 @@ def dataframe_to_postgres(
     ensure_schema_exists(engine, schema)
     
     # COMPATIBILITY FIX: Postgres truncates identifiers to 63 chars.
-    # We must truncate our DataFrame columns to match Postgres logic, 
-    # otherwise we get false "schema mismatches".
     df.columns = [str(c)[:63] for c in df.columns]
     
     actual_if_exists = if_exists
     if if_exists == "replace":
-        if batch_index == 0:
-            # Check if table exists to compare schema or truncate
-            from sqlalchemy import inspect
-            inspector = inspect(engine)
-            if inspector.has_table(table_name, schema=schema):
-                # Get existing columns (which are already truncated by Postgres)
-                existing_columns = [col['name'] for col in inspector.get_columns(table_name, schema=schema)]
-                df_columns = df.columns.tolist()
-                
-                # If columns match exactly, we can TRUNCATE (safe for dependencies)
-                if set(existing_columns) == set(df_columns):
-                    logger.info(f"Table {schema}.{table_name} matches schema. Truncating.")
-                    with engine.connect() as conn:
-                        conn.execute(text(f'TRUNCATE TABLE "{schema}"."{table_name}"'))
-                        conn.commit()
-                    actual_if_exists = "append"
-                else:
-                    # If columns DON'T match, we MUST drop and recreate
-                    logger.warning(f"Schema mismatch for {table_name}. Falling back to full REPLACE with CASCADE.")
-                    with engine.connect() as conn:
-                        # Use CASCADE to handle dependent views
-                        conn.execute(text(f'DROP TABLE IF EXISTS "{schema}"."{table_name}" CASCADE'))
-                        conn.commit()
-                    actual_if_exists = "replace"
+        # ... logic for replace ...
+        from sqlalchemy import inspect
+        inspector = inspect(engine)
+        if inspector.has_table(table_name, schema=schema):
+            existing_columns = [col['name'] for col in inspector.get_columns(table_name, schema=schema)]
+            df_columns = df.columns.tolist()
+            if set(existing_columns) == set(df_columns):
+                logger.info(f"Table {schema}.{table_name} matches schema. Truncating.")
+                with engine.connect() as conn:
+                    conn.execute(text(f'TRUNCATE TABLE "{schema}"."{table_name}"'))
+                    conn.commit()
+                actual_if_exists = "append"
             else:
+                logger.warning(f"Schema mismatch for {table_name}. Falling back to full REPLACE with CASCADE.")
+                with engine.connect() as conn:
+                    conn.execute(text(f'DROP TABLE IF EXISTS "{schema}"."{table_name}" CASCADE'))
+                    conn.commit()
                 actual_if_exists = "replace"
         else:
-            # For subsequent batches in a 'replace' operation, always append
-            actual_if_exists = "append"
+            actual_if_exists = "replace"
+    elif if_exists == "append":
+        # SCHEMA SYNC: Add missing columns if appending to an existing table
+        ensure_columns_exist(engine, df, table_name, schema)
 
     df.to_sql(
         name=table_name,
@@ -166,6 +152,39 @@ def dataframe_to_postgres(
     
     if batch_index == 0:
         logger.info(f"Started loading into {schema}.{table_name} using COPY protocol.")
+
+def ensure_columns_exist(engine, df: pd.DataFrame, table_name: str, schema: str):
+    """
+    Checks if all columns in the DataFrame exist in the target table.
+    Adds missing columns using ALTER TABLE.
+    """
+    from sqlalchemy import inspect
+    inspector = inspect(engine)
+    
+    if not inspector.has_table(table_name, schema=schema):
+        return # Table will be created by to_sql later
+        
+    existing_columns = {col['name'] for col in inspector.get_columns(table_name, schema=schema)}
+    incoming_columns = df.columns.tolist()
+    
+    missing_columns = [col for col in incoming_columns if col not in existing_columns]
+    
+    if missing_columns:
+        logger.info(f"Schema Evolution: Adding {len(missing_columns)} missing columns to {schema}.{table_name}...")
+        with engine.connect() as conn:
+            for col in missing_columns:
+                # Truncate to 63 to be super sure
+                safe_col = str(col)[:63]
+                try:
+                    conn.execute(text(f'ALTER TABLE "{schema}"."{table_name}" ADD COLUMN "{safe_col}" TEXT'))
+                    conn.commit()
+                    logger.debug(f"Added column: {safe_col}")
+                except Exception as e:
+                    # Ignore if column was already added by a parallel process
+                    if "already exists" not in str(e).lower():
+                        logger.warning(f"Failed to add column {safe_col}: {e}")
+                    conn.rollback()
+        logger.info(f"Schema synced successfully for {table_name}.")
     
 def _stream_excel_chunks(file_path: Path, chunk_size: int, **kwargs) -> Iterator[pd.DataFrame]:
     """

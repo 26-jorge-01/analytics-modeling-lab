@@ -16,8 +16,8 @@ services:
 
   dagster-web:
     build:
-      context: .
-      dockerfile: orchestration/dagster/Dockerfile
+      context: ..
+      dockerfile: analytics-modeling-lab/orchestration/dagster/Dockerfile
     container_name: modelinglab-dagster-web
     depends_on:
       postgres:
@@ -29,12 +29,13 @@ services:
     volumes:
       - dagster_home:/orchestration/dagster/dagster_home
       - ./:/app
+      - ../pysecop:/libs/pysecop
     command: [ "dagster-webserver", "-h", "0.0.0.0", "-p", "3000", "-m", "orchestration.dagster.dagster_project" ]
 
   dagster-daemon:
     build:
-      context: .
-      dockerfile: orchestration/dagster/Dockerfile
+      context: ..
+      dockerfile: analytics-modeling-lab/orchestration/dagster/Dockerfile
     container_name: modelinglab-dagster-daemon
     depends_on:
       postgres:
@@ -43,6 +44,7 @@ services:
     volumes:
       - dagster_home:/opt/dagster/dagster_home
       - ./:/app
+      - ../pysecop:/libs/pysecop
     command: [ "dagster-daemon", "run" ]
 
   metabase:

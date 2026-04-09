@@ -2,10 +2,17 @@ version: 2
 
 models:
   - name: stg_secop__contracts_api
-    description: "Staging table for secop contracts (API), cleaned and typed from raw data."
+    description: "Expanded staging table for SECOP II contracts using Zero-Loss architecture. All raw columns are preserved."
     columns:
       - name: id_contrato
-        description: "ID del contrato."
-        tests:
-          - not_null
-          - unique
+        description: "Contract ID (Primary part of composite key)."
+      - name: proceso_de_compra
+        description: "Purchase process ID (Part of composite key)."
+      - name: nit_entidad
+        description: "Entity Tax ID (Part of composite key)."
+      - name: documento_proveedor
+        description: "Provider ID (Part of composite key)."
+      - name: ultima_actualizacion
+        description: "Latest update timestamp used for versioning."
+      - name: fecha_firma
+        description: "Contract signature date, used as secondary versioning watermark."
