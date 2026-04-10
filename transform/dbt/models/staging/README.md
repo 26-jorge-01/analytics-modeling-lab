@@ -41,6 +41,22 @@ This ensures that quality failures are caught at the earliest possible point in 
 
 ---
 
+---
+
+## 🚀 2026 Update: SECOP II (Unified Matrix)
+
+The staging layer has been enhanced to support the **SECOP II (Colombian Public Procurement)** dataset using a "Unified Matrix" approach.
+
+### Key Strategy: Zero-Loss Preservation
+We use the `dbt_utils.star` pattern in `stg_secop__contracts_api.sql` to explicitly curate and audit critical business columns while automatically preserving 100+ raw attributes.
+
+### Data Vault (DV) Stabilization
+- **Preserved Casing**: Categorical fields avoid normalization (lower/trim) at this layer to ensure high-fidelity historical records in the Data Vault.
+- **High-Precision**: All currency and value fields are cast to `DECIMAL(20, 4)` to maintain BI-grade accuracy across the Medallion lifecycle.
+- **Robust Watermarking**: Implemented a multi-level fallback for `fecha_referencia` (`Signature` -> `Start` -> `Update Watermark`) to ensure 100% data freshness integrity.
+
+---
+
 ## References
 
 - [Ingestion Layer](../../../ingestion/README.md) — Upstream data source

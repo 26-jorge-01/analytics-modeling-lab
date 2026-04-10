@@ -45,7 +45,7 @@ This project is currently being transitioned from the Olist Brazilian E-Commerce
 - **Medallion for Procurement**: Applying Star Schema, Snowflake, and Data Vault paradigms to complex public contract data.
 - **Modern DX**: Standardizing on `pyproject.toml` for dependency management and ensuring cross-platform stability (successfully resolved orchestration structural issues).
 
-*Note: The SECOP II pipeline is now active. Olist assets are maintained in the codebase as an architectural reference.*
+*Note: The SECOP II pipeline is now active. Staging is fully stabilized for High-Precision and Data Vault requirements. Olist assets are maintained in the codebase as an architectural reference.*
 
 ---
 
