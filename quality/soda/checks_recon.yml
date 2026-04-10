@@ -1,5 +1,16 @@
-checks for public.core_orders:
-  - row_count same as raw.orders:
-      name: Refinery Integrity (Raw to Core consistency)
+# Reconciliation: Ensuring transformation integrity
+
+checks for public.stg_secop__contracts_api:
+  - row_count > 0:
+      name: Staging is not empty
       attributes:
-        layer: core
+        layer: staging
+
+  # Cross-schema reconciliation using a custom query check
+  - failed rows:
+      name: Volume Reconciliation (Staged vs Raw Unique Contracts)
+      attributes:
+        layer: reconciliation
+      fail condition: |
+        (SELECT count(*) FROM public.stg_secop__contracts_api) != 
+        (SELECT count(distinct id_contrato) FROM raw.raw_secop_api_contracts)

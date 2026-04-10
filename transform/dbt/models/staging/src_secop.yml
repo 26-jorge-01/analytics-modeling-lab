@@ -3,14 +3,14 @@ version: 2
 sources:
   - name: secop
     schema: raw
-    description: "Raw SECOP dataset ingested from EXCEL files."
+    description: "Unified Matrix for Colombian Procurement (SECOP I & II) ingested via Socrata API."
     tables:
-      - name: contratos_icbf_secop_ii_20260301
-        description: "Contratos ICBF SECOP II 20260301."
-      - name: contratos_icbf_secop_ii_20260204v2
-        description: "Contratos ICBF SECOP II 20260204v2."
       - name: raw_secop_api_contracts
-        description: "Contratos ICBF SECOP II via Socrata API."
+        description: "Main consolidated contracts table. Unified schema containing 100+ raw columns from both SECOP versions."
+        freshness:
+          warn_after: {count: 24, period: hour}
+          error_after: {count: 48, period: hour}
+        loaded_at_field: ultima_actualizacion
 
   - name: cuentame
     schema: raw

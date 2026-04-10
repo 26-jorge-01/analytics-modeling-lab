@@ -109,7 +109,12 @@ GOTO end
 REM ============================
 :dq
 echo Running data quality checks (Soda)...
-docker compose exec dagster-web bash -lc "cd /app/quality/soda && soda scan -d postgres -c configuration.yml checks.yml"
+echo   -- Scanning Raw Layer...
+docker compose exec dagster-web bash -lc "cd /app/quality/soda && soda scan -d raw -c configuration.yml checks_raw.yml"
+echo   -- Scanning Reconciliation Gates...
+docker compose exec dagster-web bash -lc "cd /app/quality/soda && soda scan -d recon -c configuration.yml checks_recon.yml"
+echo   -- Scanning Consumer Marts...
+docker compose exec dagster-web bash -lc "cd /app/quality/soda && soda scan -d public -c configuration.yml checks_marts.yml"
 GOTO end
 
 REM ============================

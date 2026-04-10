@@ -3,16 +3,47 @@ version: 2
 models:
   - name: stg_secop__contracts_api
     description: "Expanded staging table for SECOP II contracts using Zero-Loss architecture. All raw columns are preserved."
+    tests:
+      - dbt_utils.unique_combination_of_columns:
+          combination_of_columns:
+            - id_contrato
+            - proceso_de_compra
+            - nit_entidad
+            - documento_proveedor
     columns:
       - name: id_contrato
-        description: "Contract ID (Primary part of composite key)."
+        description: "Primary key part: Contract ID."
+        tests:
+          - not_null
       - name: proceso_de_compra
-        description: "Purchase process ID (Part of composite key)."
+        description: "Primary key part: Purchase process ID."
+        tests:
+          - not_null
       - name: nit_entidad
-        description: "Entity Tax ID (Part of composite key)."
+        description: "Primary key part: Entity Tax ID."
+        tests:
+          - not_null
       - name: documento_proveedor
-        description: "Provider ID (Part of composite key)."
+        description: "Primary key part: Provider identification."
+      - name: codigo_entidad
+        description: "Primary key part: Internal entity code."
+        tests:
+          - not_null
+      - name: valor_del_contrato
+        description: "High-precision contract value (DECIMAL 20,4)."
+        tests:
+          - not_null
+      - name: valor_pagado
+        description: "High-precision total paid value (DECIMAL 20,4)."
+      - name: fecha_referencia
+        description: "Primary temporal watermark: fecha_de_firma with fallbacks."
+        tests:
+          - not_null
       - name: ultima_actualizacion
-        description: "Latest update timestamp used for versioning."
-      - name: fecha_firma
-        description: "Contract signature date, used as secondary versioning watermark."
+        description: "Versioning watermark: Latest update timestamp."
+        tests:
+          - not_null
+      - name: modalidad_de_contratacion
+        description: "Original contracting modality string."
+      - name: estado_contrato
+        description: "Raw Spanish status string."
