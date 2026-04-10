@@ -4,9 +4,30 @@
 # -- SECOP --
 checks for raw_secop_api_contracts:
   - row_count > 0:
-      name: Ensure source are not empty
+      name: Ensure source is not empty
       attributes:
         layer: raw
+
+  - duplicate_count(id_contrato, proceso_de_compra, documento_proveedor, codigo_entidad, ultima_actualizacion, source) = 0:
+      name: Source Uniqueness Guard (Business PK)
+      attributes:
+        layer: raw
+
+  - missing_count(id_contrato) = 0
+  - missing_count(nit_entidad) = 0
+  - missing_count(nombre_entidad) = 0
+  - missing_count(valor_del_contrato) = 0
+
+  - min(valor_del_contrato) >= 0:
+      name: Contract Value Sanity (No negative amounts)
+      attributes:
+        layer: raw
+
+  # - TODO: Implementar freshness check luego de estabilizar el proceso
+  # - freshness(ultima_actualizacion) < 72h:
+  #     name: Ingestion Freshness (Latest update < 72h)
+  #     attributes:
+  #       layer: raw
 
   - schema:
       name: Source Schema Guard (SECOP Contracts)
@@ -17,3 +38,6 @@ checks for raw_secop_api_contracts:
           - nombre_entidad
           - nit_entidad
           - id_contrato
+          - proceso_de_compra
+          - valor_del_contrato
+          - ultima_actualizacion

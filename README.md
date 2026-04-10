@@ -43,9 +43,9 @@ This project is currently being transitioned from the Olist Brazilian E-Commerce
 **Main Goals of this modification:**
 - **API-First Ingestion**: Moving from static CSVs to dynamic API extraction using the Socrata Open Data API and `pysecop`.
 - **Medallion for Procurement**: Applying Star Schema, Snowflake, and Data Vault paradigms to complex public contract data.
-- **Modern DX**: Standardizing on `pyproject.toml` for dependency management and enforcing cross-platform compatibility (Linux/Windows containers).
+- **Modern DX**: Standardizing on `pyproject.toml` for dependency management and ensuring cross-platform stability (successfully resolved orchestration structural issues).
 
-*Note: Olist assets are temporarily maintained in the codebase as an architectural reference during the transition.*
+*Note: The SECOP II pipeline is now active. Olist assets are maintained in the codebase as an architectural reference.*
 
 ---
 

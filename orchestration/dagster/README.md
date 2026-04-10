@@ -60,6 +60,15 @@ This is the equivalent of a schema registry validation in a Kafka ecosystem: you
 
 ---
 
+## Structural Requirements: Package Initialization
+
+Inside the `dagster_project/assets` directory, a strict package structure must be maintained to ensure the code loader can resolve relative imports correctly, especially when running in Docker or as an editable package.
+
+> [!IMPORTANT]
+> Every nested subdirectory (e.g., `bronze/`, `silver/`, `gold/`) **must** contain an `__init__.py` file. Failure to include these will result in a `DagsterCodeLocationLoadError` (ImportError), as Dagster’s internal module discovery requires explicit package boundaries for nested asset modules.
+
+---
+
 ## References
 
 - [Main Architecture](../../README.md) — System-level orchestration flow

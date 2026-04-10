@@ -27,8 +27,8 @@ Most projects choose one path (e.g., Star Schema). This lab implements **all of 
 
 ### Phase 2: The SECOP II Pivot (Evolution)
 *   **The Upgrade**: Moving from static files to **API-First live streams**.
-*   **The Shift**: Switching the domain to **Public Procurement (SECOP II)**—a significantly more complex and socially impactful dataset.
 *   **Engineering Challenge**: Handling millions of rows via the Socrata API while maintaining idempotency and high throughput.
+*   **The Reliability Flywheel**: Implementing cross-layer quality gates with Soda.io. *Note: Freshness checks were temporarily staggered during initial backfill to prevent false positives while stabilizing the high-volume parallel stream.*
 
 ### Phase 3: The Parallelism Discovery (Optimization)
 *   **The Problem**: Serial ingestion of 20M+ records was projected to take days.
@@ -76,3 +76,4 @@ Most projects choose one path (e.g., Star Schema). This lab implements **all of 
 *   **Rediscovering Data Vault**: Realized that Hubs and Satellites aren't just for 'big' data; they are for 'audit-heavy' data.
 *   **Postgres as a Warehouse**: Proved that with proper indexing and dbt materialization strategies, Postgres can handle multi-million row analytical workloads comfortably for most MVP/MID-tier use cases.
 *   **Metabase Persistence**: Learned the hard way that BI dashboards shouldn't live in ephemeral containers—moving to a dedicated Postgres volume for metadata was a game-changer for project durability.
+*   **The Package Structure Discovery**: Discovered that nested Dagster asset modules (e.g., `bronze.secop`) require explicit `__init__.py` files even in modern Python namespace-capable environments, as the Dagster code loader requires defined package boundaries to resolve relative imports correctly inside Docker containers.
