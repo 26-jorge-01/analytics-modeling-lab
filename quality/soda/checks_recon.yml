@@ -13,4 +13,4 @@ checks for public.stg_secop__contracts_api:
         layer: reconciliation
       fail condition: |
         (SELECT count(*) FROM public.stg_secop__contracts_api) != 
-        (SELECT count(distinct id_contrato) FROM raw.raw_secop_api_contracts)
+        (SELECT count(distinct id_contrato) FROM raw.secop_contracts)

@@ -34,10 +34,9 @@ Most projects choose one path (e.g., Star Schema). This lab implements **all of 
 *   **The Problem**: Serial ingestion of 20M+ records was projected to take days.
 *   **The Solution**: A **Producer-Consumer architecture** using staggered offsets.
 *   **The "Aha!" Moment**: We discovered that by decoupling the "fetching" (Producer) from the "materialization" (Consumer), we could saturate the network bandwidth without crashing the database transaction logs.
-
 *   **The Impact**: **Zero-Loss Totality**. By decoupling ingestion from unreliable timestamps, we ensure every single taxpayer-funded contract—even those with administrative metadata errors—is 100% captured and audit-ready.
 
-### Phase 5: The Resilience Layer (High-Fidelity Staging)
+### Phase 4: The Resilience Layer (High-Fidelity Staging)
 *   **The Problem**: A 5.6M record backfill from public sources guaranteed thousands of "edge case" failures (type mismatches, nulls in critical metadata). In a strict pipeline, a 0.004% failure rate would stop 100% of the value.
 *   **The Solution**: Implementing **Resilience Engineering** in dbt and Dagster. We reconfigured our quality gates to use "Severity Triage"—halting for critical technical identity (`hash_id` collisions) but merely flagging legacy data gaps as warnings.
 *   **The Discovery**: Realized that a truly robust pipeline must distinguish between "Technical Errors" (corruption) and "Business Anomalies" (missing codes on old contracts).
