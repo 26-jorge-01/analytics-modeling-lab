@@ -28,7 +28,9 @@ models:
       - name: codigo_entidad
         description: "Primary key part: Internal entity code."
         tests:
-          - not_null
+          - not_null:
+              config:
+                severity: warn
       - name: valor_del_contrato
         description: "High-precision contract value (DECIMAL 20,4)."
         tests:

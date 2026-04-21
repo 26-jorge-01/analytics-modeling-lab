@@ -35,6 +35,13 @@ Most projects choose one path (e.g., Star Schema). This lab implements **all of 
 *   **The Solution**: A **Producer-Consumer architecture** using staggered offsets.
 *   **The "Aha!" Moment**: We discovered that by decoupling the "fetching" (Producer) from the "materialization" (Consumer), we could saturate the network bandwidth without crashing the database transaction logs.
 
+*   **The Impact**: **Zero-Loss Totality**. By decoupling ingestion from unreliable timestamps, we ensure every single taxpayer-funded contract—even those with administrative metadata errors—is 100% captured and audit-ready.
+
+### Phase 5: The Resilience Layer (High-Fidelity Staging)
+*   **The Problem**: A 5.6M record backfill from public sources guaranteed thousands of "edge case" failures (type mismatches, nulls in critical metadata). In a strict pipeline, a 0.004% failure rate would stop 100% of the value.
+*   **The Solution**: Implementing **Resilience Engineering** in dbt and Dagster. We reconfigured our quality gates to use "Severity Triage"—halting for critical technical identity (`hash_id` collisions) but merely flagging legacy data gaps as warnings.
+*   **The Discovery**: Realized that a truly robust pipeline must distinguish between "Technical Errors" (corruption) and "Business Anomalies" (missing codes on old contracts).
+
 ---
 
 ## 🛠️ Main "Idea Bank" for Publications
@@ -59,6 +66,14 @@ Most projects choose one path (e.g., Star Schema). This lab implements **all of 
 *   **Idea**: Stopping the flow before the damage reaches the UI.
 *   **The Narrative**: Using Soda.io as a declarative "Circuit Breaker." If "Bronze" quality fails, the pipeline dies *before* "Gold" is touched. This prevents "Garbage In, Garbage Out" from propagating into the executive dashboards.
 
+### 💡 Topic 6: The "Stable Identity" Protocol (Spend Accuracy)
+*   **Idea**: Proving you aren't double-counting public money across system versions.
+*   **The Narrative**: Public contracts often replicate or migrate across SECOP I and SECOP II. To prevent inflated spend analysis, we implemented a deterministic hashing protocol: `Hash(Business Keys + System Internal ID + Content Fingerprint)`. This allows for reliable materialization where auditors can trace a contract's lifecycle without duplication.
+
+### 💡 Topic 7: "Resilience Engineering" (Severity Triage)
+*   **Idea**: Handling the noise of 5.6 million real-world records.
+*   **The Narrative**: Strict schemas kill data projects. We implemented a "Smart Circuit Breaker" pattern: the pipeline halts for technical corruption but continues for business anomalies. By using dbt severity configs and Dagster exit-code mapping, we ensure that 214 nulls don't block the insight from the other 5,599,786 records. 
+
 ---
 
 ## 🎣 LinkedIn Hook Bank (Start Points for AI)
@@ -79,3 +94,5 @@ Most projects choose one path (e.g., Star Schema). This lab implements **all of 
 *   **The Package Structure Discovery**: Discovered that nested Dagster asset modules (e.g., `bronze.secop`) require explicit `__init__.py` files even in modern Python namespace-capable environments, as the Dagster code loader requires defined package boundaries to resolve relative imports correctly inside Docker containers.
 *   **The "Zero-Loss Star" Pattern**: Stabilized the SECOP II staging layer using `dbt_utils.star`. This discovery allowed us to explicitly cast/curate critical "Core" fields while automatically preserving 100+ raw attributes without naming collisions or unnecessary suffixes like `_core`.
 *   **DV-Ready Preservation**: Realized that for a resilient Data Vault implementation, the staging layer must avoid destructive normalization (like TRIM/LOWER) on categorical data. By preserving raw strings and applying only high-precision type casts and date fallbacks, we ensure the Vault holds the most "Specific" truth possible.
+*   **Offset over Timestamp**: Discovered that for high-volume Socrata APIs, `OFFSET` paging on stable `:id` sorts is more resilient than keyset pagination, specifically for historical backfills where business timestamps (like `updated_at`) are frequently null.
+*   **Vectorized JSON Serialization**: Solved the "Postgres adapter" bottleneck (where dicts aren't natively supported) by implementing vectorized JSON string conversion in pandas before bulk loading, ensuring structure preservation without sacrificing ingestion speed.

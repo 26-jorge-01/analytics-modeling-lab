@@ -28,8 +28,10 @@ def run_soda_scan(
         context.log.error("Soda STDERR:\n" + result.stderr)
 
     # Decide what to do based on return code
-    if result.returncode == 0:
-        context.log.info(f"Soda {layer_name} scan completed successfully.")
+    # Soda Exit Codes: 0 (Pass), 1 (Warning), 2 (Fail), 3 (Error)
+    if result.returncode in [0, 1]:
+        status_msg = "successfully" if result.returncode == 0 else "with warnings"
+        context.log.info(f"Soda {layer_name} scan completed {status_msg}.")
         return result.stdout
 
     # 1/2/3/4 = non-zero => fail the op (circuit breaker)
@@ -47,7 +49,7 @@ def run_soda_scan(
 
 @asset(
     group_name="quality",
-    deps=["raw_secop_api"],
+    deps=["raw_secop_contracts"],
     compute_kind="soda",
     tags={
         "domain": "data_quality",

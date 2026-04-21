@@ -2,14 +2,20 @@
 
 # 1. Monitoring the "Raw" entry point (Staging/Raw)
 # -- SECOP --
-checks for raw_secop_api_contracts:
+checks for secop_contracts:
   - row_count > 0:
       name: Ensure source is not empty
       attributes:
         layer: raw
 
-  - duplicate_count(id_contrato, proceso_de_compra, documento_proveedor, codigo_entidad, ultima_actualizacion, source) = 0:
-      name: Source Uniqueness Guard (Business PK)
+  - duplicate_count(hash_id) = 0:
+      name: Source Uniqueness Guard (Primary hash_id)
+      attributes:
+        layer: raw
+
+  - duplicate_count(id_contrato, proceso_de_compra, documento_proveedor, codigo_entidad, ultima_actualizacion, source):
+      name: Business PK Overlap (Warning)
+      warn: when > 0
       attributes:
         layer: raw
 
@@ -18,8 +24,11 @@ checks for raw_secop_api_contracts:
   - missing_count(nombre_entidad) = 0
   - missing_count(valor_del_contrato) = 0
 
-  - min(valor_del_contrato) >= 0:
+  - min_contract_value >= 0:
       name: Contract Value Sanity (No negative amounts)
+      min_contract_value query: |
+        SELECT MIN(CAST(NULLIF(valor_del_contrato, '') AS NUMERIC))
+        FROM raw.secop_contracts
       attributes:
         layer: raw
 

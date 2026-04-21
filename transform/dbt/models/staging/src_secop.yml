@@ -5,12 +5,12 @@ sources:
     schema: raw
     description: "Unified Matrix for Colombian Procurement (SECOP I & II) ingested via Socrata API."
     tables:
-      - name: raw_secop_api_contracts
+      - name: secop_contracts
         description: "Main consolidated contracts table. Unified schema containing 100+ raw columns from both SECOP versions."
         freshness:
           warn_after: {count: 24, period: hour}
           error_after: {count: 48, period: hour}
-        loaded_at_field: ultima_actualizacion
+        loaded_at_field: ingested_at
 
   - name: cuentame
     schema: raw
