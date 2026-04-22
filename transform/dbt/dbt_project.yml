@@ -20,8 +20,7 @@ models:
   modeling_lab:
     staging:
       +materialized: view
+    intermediate:
+      +materialized: table
     marts:
-      core:
-        +materialized: table
-      audit:
-        +materialized: view
+      +materialized: table

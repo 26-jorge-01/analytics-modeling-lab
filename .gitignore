@@ -22,3 +22,9 @@ transform/dbt/logs/
 .DS_Store
 Thumbs.db
 .gemini/
+
+# Strategy and Private Docs
+docs/strategy/
+
+# One-off analysis scripts
+scratch/

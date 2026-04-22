@@ -54,6 +54,7 @@ final as (
         trim(cast(nit_entidad as text)) as nit_entidad,
         trim(cast(documento_proveedor as text)) as documento_proveedor,
         trim(cast(codigo_entidad as text)) as codigo_entidad,
+        coalesce(trim(nombre_entidad), trim(entidad), 'ENTIDAD NO ESPECIFICADA') as nombre_entidad,
         
         /* 
         2. High-Precision Financial Metrics
@@ -88,6 +89,7 @@ final as (
         cast(fecha_de_fin_del_contrato as timestamp) as fecha_de_fin_del_contrato,
         cast(fecha_de_cargue_en_el_secop as timestamp) as fecha_de_cargue_en_el_secop,
         cast(fecha_inicio_liquidacion as timestamp) as fecha_inicio_liquidacion,
+        cast(ingested_at as timestamp) as ingested_at,
         
         /* 
         4. Raw Categoricals (DV-Ready)
@@ -124,7 +126,7 @@ final as (
                 'anno_cargue_secop', 'anno_firma_contrato', 'id_modalidad', 'id_regimen_de_contratacion',
                 'fecha_de_cargue_en_el_secop', 'cuantia_contrato', 'id_sub_unidad_ejecutora', 'fecha_inicio_liquidacion',
                 'valor_total_de_adiciones', 'valor_rubro', 'valor_de_pago_adelantado', 'valor_pendiente_de', 'valor_pendiente_de_ejecucion',
-                'cuantia_proceso'
+                'cuantia_proceso', 'ingested_at', 'nombre_entidad', 'entidad'
             ]
         ) }}
 

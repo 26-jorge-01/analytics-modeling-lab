@@ -1,5 +1,5 @@
-# 🧪 Analytics Modeling Lab
-## *Evaluating Data Modeling Paradigms in the Modern Data Stack*
+# 📊 Procurement Intelligence Hub (SECOP II)
+## *Harnessing Colombian Public Data for Competitive Advantage*
 
 [![CI](https://github.com/26-jorge-01/analytics-modeling-lab/actions/workflows/ci.yml/badge.svg)](https://github.com/26-jorge-01/analytics-modeling-lab/actions/)
 [![Infrastructure](https://img.shields.io/badge/Infrastructure-Docker-blue.svg)]()
@@ -36,16 +36,17 @@ This project is documented as a **technical reference** across multiple layers. 
 ## 🎯 The Engineering Thesis
 ---
 
-## 🚀 2026 Project Update: Transitioning to SECOP API
+## 🚀 2026 Strategic Pivot: SECOP Intelligence
 
-This project is currently being transitioned from the Olist Brazilian E-Commerce dataset to the **SECOP II (Colombian Public Procurement)** dataset.
+This project has transitioned from a general analytics lab to a specialized **Procurement Intelligence** engine using the **SECOP II (Colombian Public Procurement)** dataset.
 
-**Main Goals of this modification:**
-- **API-First Ingestion**: Moving from static CSVs to dynamic API extraction using the Socrata Open Data API and `pysecop`.
-- **Medallion for Procurement**: Applying Star Schema, Snowflake, and Data Vault paradigms to complex public contract data.
-- **Modern DX**: Standardizing on `pyproject.toml` for dependency management and ensuring cross-platform stability (successfully resolved orchestration structural issues).
+**Key Intelligence Pillars:**
+- **Competitive Advantage**: Mapping vendor playbooks and pricing deltas via the `PROCESOS` vs. `CONTRACTS` lifecyle join.
+- **Market Opportunity**: Identifying "Blue Ocean" agencies with low participation density and high budget availability.
+- **Audit-Grade Identity**: Solving the "NIT Entropy" problem using synthetic fingerprinting and meticulous normalization.
+- **Modern DX**: Hardened Medallion architecture using dbt, Dagster, and Soda.io for professional-grade reliability.
 
-*Note: The SECOP II pipeline is now active. Staging is fully stabilized for High-Precision and Data Vault requirements. Olist assets are maintained in the codebase as an architectural reference.*
+*Note: The SECOP II pipeline is currently the primary focus. Olist legacy assets are maintained as an architectural reference for Data Vault and Star Schema comparisons.*
 
 ---
 
