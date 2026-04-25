@@ -16,19 +16,15 @@ RUN pip install --no-cache-dir -U pip
 
 # dagster home + config (tu carpeta real)
 RUN mkdir -p ${DAGSTER_HOME}
-COPY analytics-modeling-lab/orchestration/dagster/dagster_home/ ${DAGSTER_HOME}/
+COPY orchestration/dagster/dagster_home/ ${DAGSTER_HOME}/
 
 # tu código (ajusta si quieres copiar solo subcarpetas)
-# Install local libraries first to satisfy dependencies
-COPY pysecop /libs/pysecop
-RUN pip install -e /libs/pysecop
-
 # Install the main project
-COPY analytics-modeling-lab /app
+COPY . /app
 RUN pip install -e /app
 
 # entrypoint (ruta real)
-COPY analytics-modeling-lab/orchestration/dagster/entrypoint.sh /entrypoint.sh
+COPY orchestration/dagster/entrypoint.sh /entrypoint.sh
 RUN chmod +x /entrypoint.sh
 
 EXPOSE 3000

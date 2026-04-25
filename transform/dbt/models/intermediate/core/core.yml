@@ -1,0 +1,61 @@
+version: 2
+
+models:
+  - name: int_secop__agencies
+    description: "Unique procurement agencies extracted from SECOP contracts."
+    columns:
+      - name: agency_key
+        tests:
+          - unique
+          - not_null
+      - name: nit_entidad
+        tests:
+          - not_null
+
+  - name: int_secop__vendors
+    description: "Unique vendors/contractors extracted from SECOP contracts."
+    columns:
+      - name: vendor_key
+        tests:
+          - unique
+          - not_null
+      - name: documento_proveedor
+        tests:
+          - not_null
+
+  - name: int_secop__locations
+    description: "Unique geographical locations (Department + Municipality) extracted from SECOP contracts."
+    columns:
+      - name: location_key
+        tests:
+          - unique
+          - not_null
+
+  - name: int_secop__contracts
+    description: "Normalized core model for SECOP contracts, referencing separate entity dimensions."
+    columns:
+      - name: contract_fingerprint
+        tests:
+          - unique
+          - not_null
+      - name: agency_key
+        tests:
+          - not_null
+          - relationships:
+              arguments:
+                to: ref('int_secop__agencies')
+                field: agency_key
+      - name: vendor_key
+        tests:
+          - not_null
+          - relationships:
+              arguments:
+                to: ref('int_secop__vendors')
+                field: vendor_key
+      - name: location_key
+        tests:
+          - not_null
+          - relationships:
+              arguments:
+                to: ref('int_secop__locations')
+                field: location_key

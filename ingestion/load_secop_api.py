@@ -341,7 +341,7 @@ class MatrixStreamer:
                     # If target table exists, aligned df to it
                     # SCHEMA EVOLUTION:
                     # Add missing columns to the target table before attempting to use it for LIKE
-                    from ingestion.load_core import ensure_columns_exist
+                    from load_core import ensure_columns_exist
                     ensure_columns_exist(self.engine, df, self.table_name, RAW_SCHEMA)
 
                     conn.execute(text(f'CREATE TEMP TABLE {staging_table} (LIKE "{RAW_SCHEMA}"."{self.table_name}")'))
