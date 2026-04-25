@@ -25,7 +25,7 @@ dependencies = [
     "soda-core-postgres",
     "openpyxl",
     "pyarrow",
-    "pysecop>=1.4.3"
+    "pysecop>=1.4.4"
 ]
 
 [tool.setuptools]

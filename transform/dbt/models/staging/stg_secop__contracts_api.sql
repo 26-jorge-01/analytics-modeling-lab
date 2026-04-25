@@ -54,7 +54,7 @@ final as (
         trim(cast(nit_entidad as text)) as nit_entidad,
         trim(cast(documento_proveedor as text)) as documento_proveedor,
         trim(cast(codigo_entidad as text)) as codigo_entidad,
-        coalesce(trim(nombre_entidad), trim(entidad), 'ENTIDAD NO ESPECIFICADA') as nombre_entidad,
+        coalesce(trim(nombre_entidad), 'ENTIDAD NO ESPECIFICADA') as nombre_entidad,
         
         /* 
         2. High-Precision Financial Metrics
@@ -126,7 +126,7 @@ final as (
                 'anno_cargue_secop', 'anno_firma_contrato', 'id_modalidad', 'id_regimen_de_contratacion',
                 'fecha_de_cargue_en_el_secop', 'cuantia_contrato', 'id_sub_unidad_ejecutora', 'fecha_inicio_liquidacion',
                 'valor_total_de_adiciones', 'valor_rubro', 'valor_de_pago_adelantado', 'valor_pendiente_de', 'valor_pendiente_de_ejecucion',
-                'cuantia_proceso', 'ingested_at', 'nombre_entidad', 'entidad'
+                'cuantia_proceso', 'ingested_at', 'nombre_entidad'
             ]
         ) }}
 

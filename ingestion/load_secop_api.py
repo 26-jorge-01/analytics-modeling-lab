@@ -32,9 +32,13 @@ sh.setFormatter(logging.Formatter("%(asctime)s - %(threadName)s - %(levelname)s 
 logger.addHandler(sh)
 
 try:
-    from load_core import get_engine, ensure_schema_exists, RAW_SCHEMA, dataframe_to_postgres
+    from ingestion.load_core import (
+        get_engine, ensure_schema_exists, dataframe_to_postgres, 
+        RAW_SCHEMA, load_file
+    )
     from pysecop import SecopClient, QueryBuilder, DATASETS
-    from pysecop.utils import normalize_dataframe, get_unified_columns, get_mapped_column
+    from pysecop.utils import normalize_dataframe, get_unified_columns
+    from pysecop.utils.helpers import get_mapped_column
 except ImportError as e:
     logger.error(f"Failed to import dependencies: {e}")
     sys.exit(1)
@@ -98,7 +102,7 @@ class MatrixStreamer:
         
         # 2. Add technical metadata columns
         tech_cols = ["source", "hash_id", "ingested_at"]
-        all_cols = list(set(unified_cols + tech_cols))
+        all_cols = sorted(list(set(unified_cols + tech_cols)))
         
         # 3. Create dummy DF for schema inference
         schema_df = pd.DataFrame(columns=all_cols)
@@ -211,7 +215,6 @@ class MatrixStreamer:
     def fetcher_worker(self, source_label, mode="sync", limit=0, date_filter=None):
         """Unified fetcher for both incremental and sliced-backfill."""
         from pysecop import QueryBuilder
-        from pysecop.utils.helpers import get_mapped_column
         
         logger.info(f"FETCHER ({source_label} - {mode}): Starting...")
         api_source = source_label.replace('_', ' ')
@@ -338,7 +341,7 @@ class MatrixStreamer:
                     # If target table exists, aligned df to it
                     # SCHEMA EVOLUTION:
                     # Add missing columns to the target table before attempting to use it for LIKE
-                    from load_core import ensure_columns_exist
+                    from ingestion.load_core import ensure_columns_exist
                     ensure_columns_exist(self.engine, df, self.table_name, RAW_SCHEMA)
 
                     conn.execute(text(f'CREATE TEMP TABLE {staging_table} (LIKE "{RAW_SCHEMA}"."{self.table_name}")'))
