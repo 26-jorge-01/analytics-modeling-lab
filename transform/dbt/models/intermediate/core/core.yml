@@ -1,17 +1,6 @@
 version: 2
 
 models:
-  - name: int_secop__agencies
-    description: "Unique procurement agencies extracted from SECOP contracts."
-    columns:
-      - name: agency_key
-        tests:
-          - unique
-          - not_null
-      - name: nit_entidad
-        tests:
-          - not_null
-
   - name: int_secop__vendors
     description: "Unique vendors/contractors extracted from SECOP contracts."
     columns:

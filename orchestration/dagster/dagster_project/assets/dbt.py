@@ -22,14 +22,19 @@ class CustomDagsterDbtTranslator(DagsterDbtTranslator):
         return AssetKey([dbt_resource_props["name"]])
 
     def get_group_name(self, dbt_resource_props):
+        res_type = dbt_resource_props.get("resource_type")
+        
+        # Seeds are raw data entry points, identical to other ingestion assets
+        if res_type == "seed":
+            return "bronze"
+            
         fqn = dbt_resource_props.get("fqn", [])
         if len(fqn) >= 3:
             layer = fqn[1]
-            return (
-                layer if layer in ["staging", "intermediate", "marts"]
-                else "dbt"
-            )
-        return "dbt"
+            if layer in ["staging", "intermediate", "marts"]:
+                return layer
+                
+        return "bronze" # Default to bronze for any other unrecognized raw inputs
 
     def get_asset_spec(self, manifest, unique_id, project):
         # 1. Get the base spec with all standard Dagster logic

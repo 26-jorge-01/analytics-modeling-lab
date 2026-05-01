@@ -62,7 +62,7 @@ A **Medallion Architecture** with a strict contract between layers — no layer 
 ```mermaid
 graph TB
     subgraph SD["Source Systems"]
-        API[SECOP II API]
+        API[SECOP API]
     end
 
     subgraph CI["Foundational Governance (CI/CD)"]

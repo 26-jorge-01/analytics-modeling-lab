@@ -1,7 +1,6 @@
 # Soda Checks: The Data Health Guard
 
-# 1. Monitoring the "Raw" entry point (Staging/Raw)
-# -- SECOP --
+# -- SECOP CONTRACTS --
 checks for secop_contracts:
   - row_count > 0:
       name: Ensure source is not empty
@@ -28,15 +27,9 @@ checks for secop_contracts:
       name: Contract Value Sanity (No negative amounts)
       min_contract_value query: |
         SELECT MIN(CAST(NULLIF(valor_del_contrato, '') AS NUMERIC))
-        FROM raw.secop_contracts
+        FROM secop_contracts
       attributes:
         layer: raw
-
-  # - TODO: Implementar freshness check luego de estabilizar el proceso
-  # - freshness(ultima_actualizacion) < 72h:
-  #     name: Ingestion Freshness (Latest update < 72h)
-  #     attributes:
-  #       layer: raw
 
   - schema:
       name: Source Schema Guard (SECOP Contracts)
@@ -50,3 +43,56 @@ checks for secop_contracts:
           - proceso_de_compra
           - valor_del_contrato
           - ultima_actualizacion
+
+  - nit_length_sanity:
+      name: NIT Length Distribution (Short NIT Warning)
+      warn: when > 50
+      nit_length_sanity query: |
+        SELECT count(*) FROM secop_contracts 
+        WHERE LENGTH(split_part(nit_entidad, '-', 1)) < 8
+      attributes:
+        layer: raw
+
+# -- AGENCY OVERRIDES --
+checks for agency_overrides:
+  - row_count > 0:
+      name: Ensure manual override seed is not empty
+      attributes:
+        layer: raw
+
+  - duplicate_count(raw_nit_entidad) = 0:
+      name: Seed Raw NIT Uniqueness Guard (No conflicting rules)
+      attributes:
+        layer: raw
+
+  - missing_count(raw_nit_entidad) = 0:
+      name: Raw NIT must not be null
+      attributes:
+        layer: raw
+
+  - missing_count(canonical_nit_entidad) = 0:
+      name: Canonical NIT must not be null
+      attributes:
+        layer: raw
+
+# -- AGENCY ACRONYMS --
+checks for agency_acronyms:
+  - row_count > 0:
+      name: Ensure acronym dictionary is not empty
+      attributes:
+        layer: raw
+
+  - duplicate_count(acronym) = 0:
+      name: Acronym Uniqueness Guard (No conflicting definitions)
+      attributes:
+        layer: raw
+
+  - missing_count(acronym) = 0:
+      name: Acronym must not be null
+      attributes:
+        layer: raw
+
+  - missing_count(expanded_name) = 0:
+      name: Expanded name must not be null
+      attributes:
+        layer: raw

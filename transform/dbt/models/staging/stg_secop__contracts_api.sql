@@ -6,7 +6,7 @@
 }}
 
 with source as (
-    select * from {{ source('secop', 'secop_contracts') }}
+    select * from {{ source('raw', 'secop_contracts') }}
 ),
 
 ranked as (
@@ -97,7 +97,7 @@ final as (
         */
         cast(modalidad_de_contratacion as text) as modalidad_de_contratacion,
         cast(tipo_de_contrato as text) as tipo_de_contrato,
-        cast(municipio_de_obtencion as text) as municipio_de_obtencion,
+        cast(ciudad as text) as ciudad,
         cast(departamento as text) as departamento,
         cast(estado_contrato as text) as estado_contrato,
 
@@ -117,12 +117,12 @@ final as (
         This avoids naming collisions while ensuring 100% data availability.
         */
         {{ dbt_utils.star(
-            from=source('secop', 'secop_contracts'), 
+            from=source('raw', 'secop_contracts'), 
             except=[
                 'id_contrato', 'proceso_de_compra', 'nit_entidad', 'documento_proveedor', 'codigo_entidad',
                 'valor_del_contrato', 'valor_pagado', 'valor_amortizado', 'valor_facturado', 'valor_pendiente_de_pago',
                 'ultima_actualizacion', 'fecha_de_firma', 'fecha_de_inicio_del_contrato', 'fecha_de_fin_del_contrato',
-                'modalidad_de_contratacion', 'tipo_de_contrato', 'municipio_de_obtencion', 'departamento', 'estado_contrato',
+                'modalidad_de_contratacion', 'tipo_de_contrato', 'ciudad', 'departamento', 'estado_contrato',
                 'anno_cargue_secop', 'anno_firma_contrato', 'id_modalidad', 'id_regimen_de_contratacion',
                 'fecha_de_cargue_en_el_secop', 'cuantia_contrato', 'id_sub_unidad_ejecutora', 'fecha_inicio_liquidacion',
                 'valor_total_de_adiciones', 'valor_rubro', 'valor_de_pago_adelantado', 'valor_pendiente_de', 'valor_pendiente_de_ejecucion',

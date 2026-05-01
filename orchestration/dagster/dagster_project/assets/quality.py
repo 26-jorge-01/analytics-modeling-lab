@@ -49,7 +49,7 @@ def run_soda_scan(
 
 @asset(
     group_name="quality",
-    deps=["raw_secop_contracts"],
+    deps=["raw_secop_contracts", "raw_agency_overrides", "raw_agency_acronyms"],
     compute_kind="soda",
     tags={
         "domain": "data_quality",

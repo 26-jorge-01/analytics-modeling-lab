@@ -1,0 +1,5 @@
+version: 2
+
+models:
+  - name: audit_secop_agency_matches
+    description: "Audit model showing exactly which raw agencies were merged into Canonical Agencies, their linkage method, and confidence score. Use this in BI to find False Positives and override them in the seed."

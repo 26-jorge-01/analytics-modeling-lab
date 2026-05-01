@@ -1,0 +1,30 @@
+version: 2
+
+models:
+  - name: int_secop__agencies_base
+    description: "Step 1 of Agency MDM: Extracts base NIT and strips generic words from names for text similarity comparison."
+    columns:
+      - name: raw_nit
+        tests:
+          - not_null
+          
+  - name: int_secop__agencies_linkage
+    description: "Step 2 of Agency MDM: The mapping engine. Implements Anchor-based matching to cluster agencies based on NIT prefix and trigram name similarity (>=0.60). Incorporates manual overrides from stg_seed__agency_overrides."
+    columns:
+      - name: raw_nit
+        tests:
+          - not_null
+      - name: canonical_nit
+        tests:
+          - not_null
+
+  - name: int_secop__agencies
+    description: "Step 3 of Agency MDM: The final deduplicated Golden Record. Applies survivorship rules to pick the most used name for each Canonical Agency cluster."
+    columns:
+      - name: agency_key
+        tests:
+          - unique
+          - not_null
+      - name: nit_entidad
+        tests:
+          - not_null

@@ -1,16 +1,22 @@
 version: 2
 
 sources:
-  - name: secop
+  - name: raw
     schema: raw
-    description: "Unified Matrix for Colombian Procurement (SECOP I & II) ingested via Socrata API."
+    description: "Unified Matrix for Colombian Procurement (SECOP I & II) and Manual CSV Overrides."
     tables:
       - name: secop_contracts
-        description: "Main consolidated contracts table. Unified schema containing 100+ raw columns from both SECOP versions."
+        description: "Main consolidated contracts table."
         freshness:
           warn_after: {count: 24, period: hour}
           error_after: {count: 48, period: hour}
         loaded_at_field: ingested_at
+      
+      - name: agency_overrides
+        description: "Manual override dictionary for SECOP Agency ER, loaded via Python."
+
+      - name: agency_acronyms
+        description: "Manual acronym dictionary for SECOP Agency ER, loaded via Python."
 
   - name: cuentame
     schema: raw
