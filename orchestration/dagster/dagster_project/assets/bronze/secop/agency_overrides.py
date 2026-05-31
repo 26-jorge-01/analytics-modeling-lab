@@ -46,15 +46,43 @@ def raw_agency_overrides(context: AssetExecutionContext):
     
     engine = create_engine(f"postgresql://{db_user}:{db_pass}@{db_host}:5432/{db_name}")
     
+    from sqlalchemy import text
+    
     # Write to RAW schema
-    # Treat it exactly like other raw ingested tables
-    df.to_sql(
-        name="agency_overrides",
-        con=engine,
-        schema="raw",
-        if_exists="replace",
-        index=False
-    )
+    # We use a TRUNCATE + APPEND strategy instead of REPLACE to preserve dependent views
+    # as Postgres prevents dropping tables that have dependent objects (like stg_secop__agency_overrides).
+    with engine.begin() as conn:
+        exists_query = text("SELECT EXISTS (SELECT FROM information_schema.tables WHERE table_schema = 'raw' AND table_name = 'agency_overrides')")
+        table_exists = conn.execute(exists_query).scalar()
+        
+        if table_exists:
+            context.log.info("Table raw.agency_overrides exists. Checking for schema updates.")
+            
+            # Check for missing columns and add them (Schema Evolution)
+            for column in df.columns:
+                col_exists_query = text(f"SELECT EXISTS (SELECT FROM information_schema.columns WHERE table_schema = 'raw' AND table_name = 'agency_overrides' AND column_name = '{column}')")
+                if not conn.execute(col_exists_query).scalar():
+                    context.log.info(f"Adding missing column '{column}' to raw.agency_overrides")
+                    conn.execute(text(f'ALTER TABLE raw.agency_overrides ADD COLUMN "{column}" TEXT'))
+            
+            context.log.info("Truncating and appending data.")
+            conn.execute(text("TRUNCATE TABLE raw.agency_overrides"))
+            df.to_sql(
+                name="agency_overrides",
+                con=conn,
+                schema="raw",
+                if_exists="append",
+                index=False
+            )
+        else:
+            context.log.info("Table raw.agency_overrides does not exist. Performing initial load.")
+            df.to_sql(
+                name="agency_overrides",
+                con=conn,
+                schema="raw",
+                if_exists="replace",
+                index=False
+            )
     
     context.log.info(f"Successfully loaded {len(df)} overrides to raw.agency_overrides")
     return "Success"

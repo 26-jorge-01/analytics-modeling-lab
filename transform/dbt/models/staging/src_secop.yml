@@ -18,6 +18,9 @@ sources:
       - name: agency_acronyms
         description: "Manual acronym dictionary for SECOP Agency ER, loaded via Python."
 
+      - name: location_homologation
+        description: "Manual location mapping dictionary for SECOP Agency ER, loaded via Python."
+
   - name: cuentame
     schema: raw
     description: "Raw Cuentame dataset ingested from EXCEL files."

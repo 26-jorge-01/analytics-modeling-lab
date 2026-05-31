@@ -7,6 +7,9 @@ models:
   - name: stg_secop__acronyms
     description: "Staging model for the agency acronym dictionary, loaded from the raw Python ingestion."
 
+  - name: stg_secop__location_homologation
+    description: "Staging model for the location homologation dictionary, used to clean city and department names."
+
   - name: stg_secop__contracts_api
     description: "Expanded staging table for SECOP II contracts using Zero-Loss architecture. All raw columns are preserved."
     tests:

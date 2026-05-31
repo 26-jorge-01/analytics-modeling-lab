@@ -1,5 +1,16 @@
+{{
+    config(
+        materialized='incremental',
+        unique_key='issue_key',
+        on_schema_change='sync_all_columns'
+    )
+}}
+
 with base as (
     select * from {{ ref('int_secop__standardized') }}
+    {% if is_incremental() %}
+        where ingested_at >= (select max(detected_at) from {{ this }}) - interval '3 days'
+    {% endif %}
 ),
 
 rules as (
@@ -122,6 +133,13 @@ rules as (
     from base
     where (nit_entidad is null or trim(nit_entidad) = '')
       and (nombre_entidad is not null and trim(nombre_entidad) <> '' and nombre_entidad <> 'ENTIDAD NO ESPECIFICADA')
+),
+
+final as (
+    select
+        md5(concat(record_id, rule_id)) as issue_key,
+        *
+    from rules
 )
 
-select * from rules
+select * from final

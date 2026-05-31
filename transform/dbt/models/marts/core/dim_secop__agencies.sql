@@ -11,11 +11,12 @@ base as (
 -- Aggregate agency-level metrics by the resolved Canonical NIT
 agency_metrics as (
     select
-        canonical_nit,
-        sum(num_contracts) as total_contracts,
-        max(ultima_actualizacion) as last_updated
-    from linkage
-    group by 1
+        l.canonical_nit,
+        sum(b.num_contracts) as total_contracts,
+        max(b.ultima_actualizacion) as last_updated
+    from linkage l
+    join base b on l.raw_nit = b.raw_nit and l.smart_blocking_key = b.smart_blocking_key
+    group by l.canonical_nit
 ),
 
 -- Identify the "Golden Name" (The name of the anchor for each canonical group)
@@ -24,9 +25,15 @@ golden_names as (
         canonical_nit,
         compared_against_name as golden_name,
         compared_against_anchor as anchor_nit
-    from linkage
-    where raw_nit = canonical_nit -- The record itself is the representative
-    qualify row_number() over (partition by canonical_nit order by linkage_tier asc) = 1
+    from (
+        select 
+            canonical_nit,
+            compared_against_name,
+            compared_against_anchor,
+            row_number() over (partition by canonical_nit order by linkage_tier asc) as rn
+        from linkage
+        where raw_nit = canonical_nit -- The record itself is the representative
+    ) where rn = 1
 ),
 
 -- Enrich with metadata from the base table

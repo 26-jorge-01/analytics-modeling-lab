@@ -43,14 +43,34 @@ def raw_agency_acronyms(context: AssetExecutionContext):
     
     engine = create_engine(f"postgresql://{db_user}:{db_pass}@{db_host}:5432/{db_name}")
     
+    from sqlalchemy import text
+    
     # Write to RAW schema
-    df.to_sql(
-        name="agency_acronyms",
-        con=engine,
-        schema="raw",
-        if_exists="replace",
-        index=False
-    )
+    # We use a TRUNCATE + APPEND strategy instead of REPLACE to preserve dependent views
+    # as Postgres prevents dropping tables that have dependent objects (like stg_secop__acronyms).
+    with engine.begin() as conn:
+        exists_query = text("SELECT EXISTS (SELECT FROM information_schema.tables WHERE table_schema = 'raw' AND table_name = 'agency_acronyms')")
+        table_exists = conn.execute(exists_query).scalar()
+        
+        if table_exists:
+            context.log.info("Table raw.agency_acronyms exists. Truncating and appending to preserve dependencies.")
+            conn.execute(text("TRUNCATE TABLE raw.agency_acronyms"))
+            df.to_sql(
+                name="agency_acronyms",
+                con=conn,
+                schema="raw",
+                if_exists="append",
+                index=False
+            )
+        else:
+            context.log.info("Table raw.agency_acronyms does not exist. Performing initial load.")
+            df.to_sql(
+                name="agency_acronyms",
+                con=conn,
+                schema="raw",
+                if_exists="replace",
+                index=False
+            )
     
     context.log.info(f"Successfully loaded {len(df)} acronyms to raw.agency_acronyms")
     return "Success"

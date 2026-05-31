@@ -44,14 +44,16 @@ except ImportError as e:
     sys.exit(1)
 
 def sanitize_db_columns(df: pd.DataFrame) -> pd.DataFrame:
-    """Postgres-safe column name sanitization."""
+    """Strictly Postgres-safe column name sanitization (max 63 chars)."""
     def _normalize(c):
-        original_c = str(c)
-        c = "".join(ch for ch in unicodedata.normalize('NFKD', original_c) if not unicodedata.combining(ch))
-        c = c.lower().strip().replace(" ", "_").replace("-", "_").replace(".", "_")
-        c = re.sub(r'[^a-z0-9_]', '', c)
+        c = "".join(ch for ch in unicodedata.normalize('NFKD', str(c)) if not unicodedata.combining(ch))
+        c = re.sub(r'[^a-zA-Z0-9]', '_', c).lower()
+        c = re.sub(r'_+', '_', c).strip('_')
         return c[:63]
     df.columns = [_normalize(c) for c in df.columns]
+    # Drop socrata-specific hidden columns early
+    cols_to_drop = [c for c in df.columns if c.startswith('id_') and len(c) < 5 or c in ['id', 'uid', 'id_']]
+    df.drop(columns=cols_to_drop, inplace=True, errors='ignore')
     return df
 
 def serialize_complex_vectorized(df: pd.DataFrame) -> pd.DataFrame:
@@ -117,39 +119,38 @@ class MatrixStreamer:
         )
         
         # 4. Add primary key constraint on hash_id
+    def _create_table(self, df=None):
+        logger.info(f"Target table {RAW_SCHEMA}.{self.table_name} not found. Creating Snapshot structure...")
+        
+        unified_cols = get_unified_columns()
+        tech_cols = ["source", "hash_id", "ingested_at", "socrata_id"]
+        all_cols = sorted(list(set(unified_cols + tech_cols)))
+        
+        schema_df = pd.DataFrame(columns=all_cols)
+        schema_df.to_sql(name=self.table_name, con=self.engine, schema=RAW_SCHEMA, if_exists='replace', index=False)
+        
+        # 4. Add Primary Key on Business Key for Snapshot logic
         with self.engine.begin() as conn:
-            conn.execute(text(f'ALTER TABLE "{RAW_SCHEMA}"."{self.table_name}" ADD PRIMARY KEY (hash_id)'))
+            conn.execute(text(f'ALTER TABLE "{RAW_SCHEMA}"."{self.table_name}" ADD PRIMARY KEY (source, id_contrato, nit_entidad)'))
+            # Attach the Audit Trigger
+            conn.execute(text(f"""
+                DROP TRIGGER IF EXISTS trg_audit_secop ON "{RAW_SCHEMA}"."{self.table_name}";
+                CREATE TRIGGER trg_audit_secop
+                BEFORE UPDATE ON "{RAW_SCHEMA}"."{self.table_name}"
+                FOR EACH ROW EXECUTE FUNCTION raw.audit_secop_changes();
+            """))
             
-        logger.info(f"Unified table {RAW_SCHEMA}.{self.table_name} created with {len(all_cols)} columns.")
+        logger.info(f"Unified Snapshot table {RAW_SCHEMA}.{self.table_name} created.")
 
     def finalize_sync(self):
-        """Indexes and maintenance after bulk ingestion."""
-        if self.fatal_error:
-            raise self.fatal_error
-            
-        if not self._table_exists():
-            logger.warning("MAINTENANCE: Table does not exist. Skipping index creation.")
-            return
+        """Indexes and maintenance."""
+        if self.fatal_error: raise self.fatal_error
+        if not self._table_exists(): return
 
         with self.engine.connect() as conn:
             logger.info("MAINTENANCE: Creating performance indexes...")
-            
-            # Helper to create index only if column exists
-            def safe_create_index(idx_name, columns):
-                # Check if all columns exist
-                for col in columns:
-                    check = conn.execute(text(f"SELECT 1 FROM information_schema.columns WHERE table_schema = :s AND table_name = :t AND column_name = :c"), {"s": RAW_SCHEMA, "t": self.table_name, "c": col}).fetchone()
-                    if not check:
-                        logger.warning(f"Skipping index {idx_name}: column {col} missing.")
-                        return
-                
-                cols_str = ", ".join(columns)
-                conn.execute(text(f'CREATE INDEX IF NOT EXISTS {idx_name} ON "{RAW_SCHEMA}"."{self.table_name}" ({cols_str})'))
-
-            safe_create_index("idx_secop_watermark", ["source", "ultima_actualizacion"])
-            safe_create_index("idx_secop_dedup", ["source", "id_contrato"])
-            safe_create_index("idx_secop_dedup_adjudicacion", ["source", "id_adjudicacion"])
-            
+            conn.execute(text(f'CREATE INDEX IF NOT EXISTS idx_secop_hash ON "{RAW_SCHEMA}"."{self.table_name}" (hash_id)'))
+            conn.execute(text(f'CREATE INDEX IF NOT EXISTS idx_secop_audit_lookup ON "{RAW_SCHEMA}"."{self.table_name}" (source, id_contrato, nit_entidad)'))
             conn.commit()
 
     def _get_data_watermark(self, source_label):
@@ -164,35 +165,34 @@ class MatrixStreamer:
 
     def _get_metadata(self, source_key):
         with self.engine.connect() as conn:
-            row = conn.execute(text(f'SELECT historical_offset, historical_watermark FROM "{RAW_SCHEMA}"."ingestion_metadata" WHERE source = :s'), {"s": source_key}).fetchone()
-            return (row[0], row[1]) if row else (0, None)
+            # We use historical_offset as a generic string storage for the last_id if it's not a number
+            row = conn.execute(text(f'SELECT historical_offset_val, historical_watermark FROM "{RAW_SCHEMA}"."ingestion_metadata" WHERE source = :s'), {"s": source_key}).fetchone()
+            return (row[0], row[1]) if row else (None, None)
 
-    def _update_metadata(self, source_key, offset, watermark):
+    def _update_metadata(self, source_key, last_id, watermark):
         with self.engine.connect() as conn:
             query = f"""
-                INSERT INTO "{RAW_SCHEMA}"."ingestion_metadata" (source, historical_offset, historical_watermark, last_run)
+                INSERT INTO "{RAW_SCHEMA}"."ingestion_metadata" (source, historical_offset_val, historical_watermark, last_run)
                 VALUES (:s, :o, :w, CURRENT_TIMESTAMP)
                 ON CONFLICT (source) DO UPDATE SET 
-                    historical_offset = EXCLUDED.historical_offset, 
+                    historical_offset_val = EXCLUDED.historical_offset_val, 
                     historical_watermark = EXCLUDED.historical_watermark,
                     last_run = CURRENT_TIMESTAMP
             """
-            conn.execute(text(query), {"s": source_key, "o": offset, "w": watermark})
+            conn.execute(text(query), {"s": source_key, "o": str(last_id), "w": watermark})
             conn.commit()
 
     def make_hash(self, row):
-        """Zero-Loss Deterministic Hashing."""
+        """Zero-Loss Deterministic Hashing using Stable Business Keys."""
         try:
-            # Identifiers + System ID for absolute uniqueness
             ident_parts = [
                 str(row.get('source', '')).strip().upper(),
                 str(row.get('id_contrato', '')).strip().upper(),
                 str(row.get('proceso_de_compra', '')).strip().upper(),
-                str(row.get('nit_entidad', '')).strip().upper(),
-                str(row.get(':id', '')).strip() # Socrata internal ID
+                str(row.get('nit_entidad', '')).strip().upper()
             ]
             
-            # Watermark hardening (Optional but helps detect changes)
+            # Watermark: Use the update timestamp if available
             ua = row.get('ultima_actualizacion')
             ua_str = '1900-01-01T00:00:00.000000'
             if pd.notnull(ua):
@@ -202,179 +202,162 @@ class MatrixStreamer:
             
             identity = "|".join(ident_parts)
             
-            # Content fingerprint
-            exclude = {'hash_id', 'ingested_at', 'id', 'uid'}
+            # Exclude technical metadata from the content fingerprint
+            exclude = {'hash_id', 'ingested_at', 'id', 'uid', 'socrata_id'}
             content_row = {str(k): str(v) for k, v in row.items() if k not in exclude}
             content_str = json.dumps(content_row, sort_keys=True)
             
             return hashlib.md5(f"{identity}||{content_str}".encode('utf-8')).hexdigest()
         except:
-            # Fallback for extreme cases to avoid thread crash
             return hashlib.md5(str(row).encode('utf-8')).hexdigest()
 
-    def fetcher_worker(self, source_label, mode="sync", limit=0, date_filter=None):
-        """Unified fetcher for both incremental and sliced-backfill."""
+    def fetcher_worker(self, source_label, mode="sync", limit=0, date_filter=None, deep_scavenge=False):
+        """
+        Hyper-Careful Fetcher:
+        - Uses id_contrato (Business Key) as a stable keyset cursor to bypass OFFSET limits.
+        - If deep_scavenge=True, ignores timestamps and scans the entire dataset by ID to find silent changes.
+        """
         from pysecop import QueryBuilder
         
-        logger.info(f"FETCHER ({source_label} - {mode}): Starting...")
+        logger.info(f"FETCHER ({source_label} - {mode}): Starting hyper-careful scan...")
         api_source = source_label.replace('_', ' ')
         search_limit = 50000 
         ua_col = get_mapped_column(source_label, "ultima_actualizacion")
+        id_col = get_mapped_column(source_label, "id_contrato")
         
         # Paging state recovery
-        state_key = source_label if mode == "sync" else f"{source_label}:{date_filter}"
-        h_offset, h_watermark = self._get_metadata(state_key)
+        state_key = f"{source_label}:cursor" if not date_filter else f"{source_label}:{date_filter}:cursor"
+        last_business_id, _ = self._get_metadata(state_key)
         
-        last_watermark = h_watermark
-        offset_within_watermark = h_offset
         total_fetched_this_source = 0
-        
-        logger.info(f"FETCHER ({source_label} - {mode}): Resuming from watermark={last_watermark}, offset={offset_within_watermark}")
+        logger.info(f"FETCHER ({source_label}): Resuming from Business ID cursor: {last_business_id}")
         
         while not self.stop_event.is_set():
             try:
                 qb = QueryBuilder()
-                qb.select(["*", ":id"]) # Ensure system :id is fetched for stable paging
+                qb.select(["*", ":id"]) 
                 
-                # BASE FILTERS
+                # BASE FILTERS (Business Rules)
                 if source_label == "SECOP_I":
                     qb.where_custom("upper(estado_del_proceso) = 'ADJUDICADO'")
 
-                if mode == "backfill" and date_filter:
-                    qb.where_custom(date_filter)
-                    # We still use Keyset pagination within the backfill slice
-                    if last_watermark:
-                        # Slice further by progress
-                        ts = last_watermark
-                        if not isinstance(ts, str): ts = pd.to_datetime(ts).isoformat()
-                        qb.where_custom(f"{ua_col} >= '{ts}'")
+                # HYPER-CAREFUL LOGIC
+                if deep_scavenge:
+                    # Ignore timestamps, use only the ID cursor to find silent ghosts
+                    if last_business_id:
+                        qb.where_custom(f"{id_col} > '{last_business_id}'")
                 elif mode == "sync":
-                    current_wm = last_watermark or self._get_data_watermark(source_label)
-                    if current_wm:
-                        ts = current_wm
-                        if not isinstance(ts, str): ts = pd.to_datetime(ts).isoformat()
-                        qb.where_custom(f"{ua_col} >= '{ts}'")
+                    # Standard sync with a 7-day "Lookback Window" to catch delayed updates
+                    lookback_date = (datetime.now() - timedelta(days=7)).strftime('%Y-%m-%dT%H:%M:%S')
+                    qb.where_custom(f"{ua_col} >= '{lookback_date}'")
+                    if last_business_id:
+                         qb.where_custom(f"{id_col} > '{last_business_id}'")
+                elif mode == "backfill" and date_filter:
+                    qb.where_custom(date_filter)
+                    if last_business_id:
+                        qb.where_custom(f"{id_col} > '{last_business_id}'")
                 
-                # Stable Paging Configuration
-                # Megastream: We use :id as the primary sort to guarantee zero-loss over 5M+ records
-                qb.order(":id", "ASC") 
+                # Stable Keyset Paging on Business ID
+                qb.order(id_col, "ASC") 
                 qb.limit(search_limit)
-                qb.offset(offset_within_watermark)
 
                 # Fetch batch
                 df = self.client.fetch(source_label, qb, content_type="json")
                 if df.empty: break
                 
-                # Robust Date Handling (fix TypeError in comparisons)
+                # Robust Date Handling
                 df[ua_col] = pd.to_datetime(df[ua_col], errors='coerce')
+                df[ua_col] = df[ua_col].fillna(pd.Timestamp("1900-01-01"))
                 
-                if mode == "backfill":
-                    # For historical backfill, we MUST NOT lose data even if ua_col is null
-                    df[ua_col] = df[ua_col].fillna(pd.Timestamp("1900-01-01"))
-                else:
-                    # In sync mode, only keep records with valid update dates for correct watermarking
-                    df = df.dropna(subset=[ua_col])
-                    
-                if df.empty: break
-
-                # Update Paging Logic for next iteration
-                # In Megastream mode, we primarily move by OFFSET within a stable :id sort
-                current_batch_last_wm = df[ua_col].iloc[-1]
+                # Update Cursor
+                last_business_id = df[id_col].iloc[-1]
                 
-                # Update offset for next batch
-                offset_within_watermark += len(df)
-                last_watermark = current_batch_last_wm
+                logger.info(f"FETCHER ({source_label}): Progressed to Business ID {last_business_id}. Batch size: {len(df)}")
                 
-                logger.info(f"FETCHER ({source_label}): Progressed to offset {offset_within_watermark}. Batch last watermark: {last_watermark}")
-                
-                # Processing using pysecop official logic
+                # Processing
                 df['source'] = api_source
                 df = normalize_dataframe(df, source_label)
-                
-                # Vectorized serialization (fixes 'can't adapt type dict')
+                df = sanitize_db_columns(df) # Early sanitization
                 df = serialize_complex_vectorized(df)
                 
-                # Cleanup system columns that might collide with unified matrix
-                for c in ['id', 'uid', ':id']:
-                    if c in df.columns:
-                         df.drop(columns=[c], inplace=True)
-                
-                # Generate unique Hash ID for upsert/deduplication
+                # Generate unique Hash ID (Includes all columns, so it detects "Silent Updates")
                 df['hash_id'] = df.apply(self.make_hash, axis=1)
                 df['ingested_at'] = datetime.now()
                 
-                self.queue.put((state_key, mode, offset_within_watermark, last_watermark, df))
+                # Update metadata with the Business ID cursor
+                self.queue.put((state_key, mode, last_business_id, df[ua_col].max(), df))
                 total_fetched_this_source += len(df)
                 
                 if limit > 0 and total_fetched_this_source >= limit: break
                 if len(df) < search_limit: break
                 time.sleep(0.1)
             except Exception as e:
-                # Throttling Resilience (Exponential Backoff)
-                error_msg = str(e).lower()
-                if "429" in error_msg or "throttle" in error_msg:
-                    wait_time = 30 # Socrata usually throttles for 30-60s
-                    logger.warning(f"FETCHER ({source_label}): Throttled by Socrata. Waiting {wait_time}s...")
-                    time.sleep(wait_time)
-                else:
-                    logger.error(f"FETCHER ERROR ({source_label}): {e}\n{traceback.format_exc()}")
-                    time.sleep(5)
+                logger.error(f"FETCHER ERROR ({source_label}): {e}")
+                time.sleep(10) # Longer wait on error to be careful with API limits
+
 
     def writer_worker(self):
-        """Consumer: Atomic Merge to Postgres."""
+        """Consumer: Atomic Business-Key UPSERT to Postgres."""
+        from sqlalchemy.dialects.postgresql import insert
+        
         while True:
             item = self.queue.get()
             if item is None: break
-            source_key, mode, n_offset, n_watermark, df = item
+            source_key, mode, n_cursor, n_watermark, df = item
             try:
                 if not self._table_exists():
                     self._create_table(df)
-                    
-                unique_id = uuid.uuid4().hex
-                staging_table = f"staging_{unique_id}"
                 
-                # SCHEMA ALIGNMENT:
-                # Ensure the staging table exists with a schema that matches the final table
-                # We do this by selecting from the final table with a false condition
+                # Dynamic column discovery for UPSERT
+                target_table = f'"{RAW_SCHEMA}"."{self.table_name}"'
+                
+                # Use a more robust upsert method
                 with self.engine.begin() as conn:
-                    # Resolve differences between SECOP I and II on-the-fly
-                    # If target table exists, aligned df to it
-                    # SCHEMA EVOLUTION:
-                    # Add missing columns to the target table before attempting to use it for LIKE
                     from load_core import ensure_columns_exist
                     ensure_columns_exist(self.engine, df, self.table_name, RAW_SCHEMA)
-
-                    conn.execute(text(f'CREATE TEMP TABLE {staging_table} (LIKE "{RAW_SCHEMA}"."{self.table_name}")'))
                     
-                    # POSTGRES LIMIT: Avoid parameter overflow
-                    df.to_sql(
-                        name=staging_table, 
-                        con=conn, 
-                        if_exists='append', 
-                        index=False, 
-                        method='multi', # Multi is safe if chunksize is small
-                        chunksize=50
-                    )
+                    # DIRTY DATA SHIELD: PK columns cannot be NULL
+                    for col in ['source', 'id_contrato', 'nit_entidad']:
+                        if col in df.columns:
+                            df[col] = df[col].fillna(f'UNKNOWN_{col.upper()}').astype(str)
                     
-                    cols = [f'"{c}"' for c in df.columns]
-                    conn.execute(text(f"""
-                        INSERT INTO "{RAW_SCHEMA}"."{self.table_name}" ({', '.join(cols)})
-                        SELECT {', '.join(cols)} FROM {staging_table}
-                        ON CONFLICT ("hash_id") DO NOTHING
-                    """))
+                    # IDENTITY GUARD: Deduplicate within the batch to prevent CardinalityViolation
+                    df.drop_duplicates(subset=['source', 'id_contrato', 'nit_entidad'], keep='last', inplace=True)
+                    
+                    # Prepare the data for chunked bulk upsert
+                    chunk_size = 500
+                    data_list = df.to_dict(orient='records')
+                    
+                    from sqlalchemy import MetaData, Table
+                    metadata = MetaData()
+                    table = Table(self.table_name, metadata, autoload_with=self.engine, schema=RAW_SCHEMA)
+                    
+                    for i in range(0, len(data_list), chunk_size):
+                        chunk = data_list[i:i + chunk_size]
+                        if not chunk: continue
+                        
+                        stmt = insert(table).values(chunk)
+                        update_cols = {c.name: c for c in stmt.excluded if c.name not in ['source', 'id_contrato', 'nit_entidad']}
+                        
+                        upsert_stmt = stmt.on_conflict_do_update(
+                            index_elements=['source', 'id_contrato', 'nit_entidad'],
+                            set_=update_cols,
+                            where=(table.c.hash_id != stmt.excluded.hash_id)
+                        )
+                        conn.execute(upsert_stmt)
+                    
                 self.total_ingested += len(df)
-                # ATOMIC CHECKPOINT: Update progress after successful commit
-                self._update_metadata(source_key, n_offset, n_watermark)
-                logger.info(f"WRITER: Persisted {len(df)} rows. Mode: {mode}. Checkpoint: {n_watermark} @ {n_offset}. Global Total: {self.total_ingested}")
+                self._update_metadata(source_key, n_cursor, n_watermark)
+                logger.info(f"WRITER: Snapshot Upsert complete for {len(df)} rows. Total: {self.total_ingested}")
             except Exception as e: 
-                logger.error(f"WRITER ERROR: {e}\n{traceback.format_exc()}")
+                logger.error(f"WRITER ERROR: {e}")
                 self.fatal_error = e
-                self.stop_event.set() # Stop fetchers
+                self.stop_event.set() 
             finally: self.queue.task_done()
 
-    def run_sync(self, reset=False, backfill_years=None, limit=0):
+    def run_sync(self, reset=False, backfill_years=None, limit=0, deep_scavenge=False):
         if reset:
-            logger.warning(f"RESET: Cleaning up {self.table_name} for full reconstruction...")
+            logger.warning(f"RESET: Cleaning up {self.table_name}...")
             with self.engine.connect() as conn:
                 if self._table_exists():
                     conn.execute(text(f'TRUNCATE TABLE "{RAW_SCHEMA}"."{self.table_name}" CASCADE'))
@@ -385,34 +368,49 @@ class MatrixStreamer:
 
         dataset_threads = []
         target_datasets = ["SECOP_I", "SECOP_II"]
-        self._worker_signals = len(target_datasets)
 
         for source in target_datasets:
-            if backfill_years:
-                if source == "SECOP_II":
-                    # MEGASTREAM: SECOP II is too large and has too many null dates for Year-Slicing.
-                    # We use a single continuous stream to ensure 100% coverage.
-                    t = threading.Thread(
-                        target=self.fetcher_worker, 
-                        args=(source, "backfill", 0, None), 
-                        name=f"Global-Stream-{source}"
-                    )
-                    t.start()
-                    dataset_threads.append(t)
-                else:
-                    # SECOP I: Sparse data with business filters works well with year slices.
-                    for yr in backfill_years:
-                        date_col = "fecha_de_firma_del_contrato"
-                        condition = f"{date_col} between '{yr}-01-01T00:00:00' and '{yr}-12-31T23:59:59'"
+            if deep_scavenge:
+                # TOTAL VIGILANCE: Full business-key scan
+                t = threading.Thread(
+                    target=self.fetcher_worker, 
+                    args=(source, "backfill", 0, None, True), 
+                    name=f"DeepScan-{source}"
+                )
+                t.start()
+                dataset_threads.append(t)
+            elif backfill_years:
+                # SLICED BACKFILL: Year-based slices + NULL Date Pass
+                date_col = get_mapped_column(source, "fecha_de_firma")
+                
+                # 1. Standard Year Slices
+                for i in range(0, len(backfill_years), 4):
+                    batch = backfill_years[i:i+4]
+                    batch_threads = []
+                    for yr in batch:
                         t = threading.Thread(
                             target=self.fetcher_worker, 
-                            args=(source, "backfill", 0, condition), 
+                            args=(source, "backfill", 0, f"{date_col} between '{yr}-01-01' and '{yr}-12-31'"), 
                             name=f"Backfill-{source}-{yr}"
                         )
                         t.start()
+                        batch_threads.append(t)
                         dataset_threads.append(t)
+                    
+                    for t in batch_threads: t.join()
+                
+                # 2. NULL Date Pass: Catch records that have no signature date but exist in API
+                logger.info(f"BACKFILL ({source}): Starting NULL date recovery pass...")
+                t_null = threading.Thread(
+                    target=self.fetcher_worker,
+                    args=(source, "backfill", 0, f"{date_col} is null"),
+                    name=f"Backfill-{source}-NULLS"
+                )
+                t_null.start()
+                dataset_threads.append(t_null)
+                t_null.join()
             else:
-                # SYNC MODE: Respect scavenge_limit from Dagster config
+                # INCREMENTAL SYNC
                 t = threading.Thread(target=self.fetcher_worker, args=(source, "sync", limit), name=f"Sync-{source}")
                 t.start()
                 dataset_threads.append(t)
@@ -421,24 +419,27 @@ class MatrixStreamer:
         self.queue.join()
         self.queue.put(None)
         
-        if self.fatal_error:
-            logger.error(f"Sync failed due to fatal error in writer thread: {self.fatal_error}")
-            raise self.fatal_error
-
+        if self.fatal_error: raise self.fatal_error
         self.finalize_sync()
 
 if __name__ == "__main__":
-    parser = argparse.ArgumentParser(description="Unified SECOP Dagster Ingestor")
+    parser = argparse.ArgumentParser(description="Unified SECOP Hyper-Careful Ingestor")
     parser.add_argument("--reset", action="store_true", help="Truncate table and clear metadata")
-    parser.add_argument("--full-backfill", action="store_true", help="Trigger Date-Sliced ingestion for all years")
-    parser.add_argument("--test-run", action="store_true", help="Backfill only 2024 for testing")
-    parser.add_argument("--scavenge-limit", type=int, default=100000, help="Row limit for the sync process")
+    parser.add_argument("--full-backfill", action="store_true", help="Trigger Full Historical Reconstruction")
+    parser.add_argument("--deep-scavenge", action="store_true", help="Perform full-dataset scan for silent updates")
+    parser.add_argument("--scavenge-limit", type=int, default=0, help="Row limit (0 for unlimited)")
     
     args = parser.parse_args()
     streamer = MatrixStreamer()
     
     backfill_range = None
-    if args.full_backfill: backfill_range = range(2005, 2026)
-    elif args.test_run: backfill_range = [2024]
+    if args.full_backfill: 
+        # range(2000, 2027) covers 2000 to 2026 (current year)
+        backfill_range = range(2000, 2030)
     
-    streamer.run_sync(reset=args.reset, backfill_years=backfill_range, limit=args.scavenge_limit)
+    streamer.run_sync(
+        reset=args.reset, 
+        backfill_years=backfill_range, 
+        limit=args.scavenge_limit,
+        deep_scavenge=args.deep_scavenge
+    )

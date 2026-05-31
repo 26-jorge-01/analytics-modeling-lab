@@ -60,8 +60,8 @@ checks for agency_overrides:
       attributes:
         layer: raw
 
-  - duplicate_count(raw_nit_entidad) = 0:
-      name: Seed Raw NIT Uniqueness Guard (No conflicting rules)
+  - duplicate_count(raw_nit_entidad, raw_name_entidad) = 0:
+      name: Seed Uniqueness Guard (NIT + Name combination)
       attributes:
         layer: raw
 
@@ -74,6 +74,18 @@ checks for agency_overrides:
       name: Canonical NIT must not be null
       attributes:
         layer: raw
+
+  - schema:
+      name: Override Seed Schema Guard
+      attributes:
+        layer: raw
+      fail:
+        when required column missing:
+          - raw_nit_entidad
+          - raw_name_entidad
+          - canonical_nit_entidad
+          - canonical_name
+          - override_subdivision_type
 
 # -- AGENCY ACRONYMS --
 checks for agency_acronyms:
@@ -94,5 +106,22 @@ checks for agency_acronyms:
 
   - missing_count(expanded_name) = 0:
       name: Expanded name must not be null
+      attributes:
+        layer: raw
+
+# -- LOCATION HOMOLOGATION --
+checks for location_homologation:
+  - row_count > 0:
+      name: Ensure location homologation seed is not empty
+      attributes:
+        layer: raw
+
+  - duplicate_count(raw_location_name) = 0:
+      name: Location Raw Name Uniqueness Guard (No conflicting mappings)
+      attributes:
+        layer: raw
+
+  - missing_count(raw_location_name) = 0:
+      name: Raw location name must not be null
       attributes:
         layer: raw

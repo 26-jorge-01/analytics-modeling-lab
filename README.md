@@ -30,6 +30,9 @@ This project is documented as a **technical reference** across multiple layers. 
 | **Orchestration** | [dagster/README.md](./orchestration/dagster/README.md) | Asset-based DAGs, Dagster vs Airflow decision |
 | **Quality Gates** | [quality/README.md](./quality/README.md) | Soda.io declarative checks, circuit breaker pattern |
 | **Ops & Infra** | [ops/README.md](./ops/README.md) | Docker multi-DB setup, idempotent init, DX tooling |
+| **Changelog** | [CHANGELOG.md](./CHANGELOG.md) | Release history, fix log, migration notes |
+| **Business Metrics** | [BUSINESS_METRICS.md](./docs/BUSINESS_METRICS.md) | KPI summary, before/after impact, LinkedIn hooks |
+| **ER Metrics SQL** | [agency_er_metrics.sql](./docs/sql/agency_er_metrics.sql) | Run these queries to get your exact entity resolution numbers |
 
 ---
 
@@ -129,3 +132,4 @@ copy .env.example .env
 | **M3: Advanced Intelligence** | Galaxy, AI Readiness, Snowflake, Metabase Persistence | ✅ Complete |
 | **M4: Resilience & Enrichment** | 3NF Normalization, 11GB Zero-Loss Migration, pysecop 1.4.4 | ✅ Complete |
 | **M5: Educational Depth** | Universal Documentation, Multi-paradigm validation | 🏗️ In Progress |
+| **M6: Resilience Hardening** | NaN handling in staging, referential integrity in 3NF contracts, QUALIFY→PG compat, linkage audit columns, severity triage for location gaps | ✅ Complete |

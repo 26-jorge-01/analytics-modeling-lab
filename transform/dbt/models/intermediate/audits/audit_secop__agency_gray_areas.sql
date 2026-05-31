@@ -1,4 +1,4 @@
-{{ config(materialized='view') }}
+{{ config(materialized='table') }}
 
 with linkage as (
     select * from {{ ref('int_secop__agencies_linkage') }}
@@ -22,7 +22,7 @@ cross_city_matches as (
     from base b
     -- Find anchors in OTHER smart_blocking_key buckets that share the same base_nit
     inner join (
-        select anchor_nit, smart_blocking_key, base_nit, anchor_clean_name, anchor_raw_name 
+        select anchor_nit, smart_blocking_key, base_nit, anchor_clean_name, anchor_raw_name, subdivision_type 
         from (
             select 
                 raw_nit as anchor_nit, 
@@ -30,11 +30,35 @@ cross_city_matches as (
                 base_nit, 
                 clean_name_for_sim as anchor_clean_name,
                 raw_name as anchor_raw_name,
+                subdivision_type,
                 row_number() over (partition by smart_blocking_key order by num_contracts desc) as r
             from base
         ) where r = 1
     ) a on b.base_nit = a.base_nit and b.smart_blocking_key != a.smart_blocking_key
     where similarity(b.clean_name_for_sim, a.anchor_clean_name) >= 0.60
+      -- Only flag as a potential merge if they share the SAME subdivision type
+      -- If one is REGIONAL and other is CENTRAL, they are likely different units and NOT a missing merge.
+      and b.subdivision_type = a.subdivision_type
+),
+
+-- Detect cases where subdivisions might have been misclassified as CENTRAL
+subdivision_anomalies as (
+    select
+        b.raw_nit,
+        b.raw_name,
+        l.compared_against_anchor as anchor_nit,
+        l.compared_against_name as anchor_name,
+        l.algorithm_confidence,
+        'SUBDIVISION ANOMALY: Potential un-detected subdivision in Central bucket' as review_reason,
+        'POTENTIAL FALSE POSITIVE (Merge of distinct units)' as linkage_tier,
+        concat(b.raw_nit, ',', b.raw_nit) as suggested_csv_entry
+    from linkage l
+    join base b on l.raw_nit = b.raw_nit and l.smart_blocking_key = b.smart_blocking_key
+    where l.subdivision_type = 'CENTRAL'
+      and (
+          b.raw_name ~* '\y(REGIONAL|SECCIONAL|TERRITORIAL|CENTRO ZONAL|CZ|SEDE|CENTRO|SECRETARIA|CONCEJO)\y'
+          OR (b.raw_name ~* '\yDEPARTAMENTO\y' AND b.raw_name !~* ('\yDEPARTAMENTO (DE |DEL )?' || upper(coalesce(b.departamento, ''))))
+      )
 ),
 
 -- Detect cases where different NITs have extremely similar names (Typo Detection)
@@ -53,21 +77,31 @@ cross_nit_matches as (
         select 
             l.compared_against_anchor as anchor_nit, 
             l.compared_against_name as anchor_raw_name,
-            b.clean_name_for_sim as anchor_clean_name
+            b.clean_name_for_sim as anchor_clean_name,
+            b.subdivision_type
         from linkage l
-        join base b on l.raw_nit = b.raw_nit
+        join base b on l.raw_nit = b.raw_nit and l.smart_blocking_key = b.smart_blocking_key
         where l.linkage_tier = 'TIER 2: IS THE ANCHOR'
     ) a
     inner join (
         select 
             l.compared_against_anchor as anchor_nit, 
             l.compared_against_name as anchor_raw_name,
-            b.clean_name_for_sim as anchor_clean_name
+            b.clean_name_for_sim as anchor_clean_name,
+            b.subdivision_type,
+            b.num_contracts
         from linkage l
-        join base b on l.raw_nit = b.raw_nit
+        join base b on l.raw_nit = b.raw_nit and l.smart_blocking_key = b.smart_blocking_key
         where l.linkage_tier = 'TIER 2: IS THE ANCHOR'
-    ) b on a.anchor_nit < b.anchor_nit -- Unique pairs
-    -- Only compare different base NITs (Cross-City is already handled above)
+          and b.num_contracts > 1
+    ) b on a.anchor_nit < b.anchor_nit 
+    -- Align with Subdivision Logic: Only compare like-with-like
+    and a.subdivision_type = b.subdivision_type
+    
+    -- INDEXED BLOCKING: Use the % operator to leverage the GIST index
+    and a.anchor_clean_name % b.anchor_clean_name
+    
+    -- Only compare different base NITs
     where split_part(a.anchor_nit, '-', 1) != split_part(b.anchor_nit, '-', 1)
       and similarity(a.anchor_clean_name, b.anchor_clean_name) >= 0.85
 ),
@@ -117,6 +151,11 @@ final_queue as (
 
     -- New Cross-NIT potential duplicates
     select * from cross_nit_matches
+
+    union all
+
+    -- New Subdivision Anomalies
+    select * from subdivision_anomalies
 ),
 
 deduplicated_queue as (
@@ -127,10 +166,11 @@ deduplicated_queue as (
                 partition by raw_nit 
                 order by 
                     case 
+                        when review_reason like 'SUBDIVISION%' then 0
                         when review_reason like 'CROSS-NIT%' then 1
                         when review_reason like 'CROSS-CITY%' then 2
                         else 3 
-                    end asc,
+                      end asc,
                     algorithm_confidence desc
             ) as priority_rank
         from final_queue
@@ -139,7 +179,7 @@ deduplicated_queue as (
 
 select * from deduplicated_queue
 order by 
-    review_reason, 
+    priority_rank asc,
     case 
         when review_reason like '%NEGATIVE%' then algorithm_confidence 
         else (1 - algorithm_confidence) 

@@ -1,12 +1,16 @@
 {{
     config(
-        materialized='table',
-        unique_key='contract_key'
+        materialized='incremental',
+        unique_key='contract_key',
+        on_schema_change='sync_all_columns'
     )
 }}
 
 with source as (
     select * from {{ source('raw', 'secop_contracts') }}
+    {% if is_incremental() %}
+        where cast(nullif(cast(ingested_at as text), 'NaN') as timestamp) >= (select max(ingested_at) from {{ this }}) - interval '3 days'
+    {% endif %}
 ),
 
 ranked as (
@@ -78,18 +82,18 @@ final as (
         Implementing fallback logic: Signature Date -> Start Date -> Update Watermark.
         */
         cast(coalesce(
-            cast(fecha_de_firma as timestamp), 
-            cast(fecha_de_inicio_del_contrato as timestamp), 
-            cast(ultima_actualizacion as timestamp)
+            cast(nullif(cast(fecha_de_firma as text), 'NaN') as timestamp), 
+            cast(nullif(cast(fecha_de_inicio_del_contrato as text), 'NaN') as timestamp), 
+            cast(nullif(cast(ultima_actualizacion as text), 'NaN') as timestamp)
         ) as timestamp) as fecha_referencia,
         
-        cast(ultima_actualizacion as timestamp) as ultima_actualizacion,
-        cast(fecha_de_firma as timestamp) as fecha_de_firma,
-        cast(fecha_de_inicio_del_contrato as timestamp) as fecha_de_inicio_del_contrato,
-        cast(fecha_de_fin_del_contrato as timestamp) as fecha_de_fin_del_contrato,
-        cast(fecha_de_cargue_en_el_secop as timestamp) as fecha_de_cargue_en_el_secop,
-        cast(fecha_inicio_liquidacion as timestamp) as fecha_inicio_liquidacion,
-        cast(ingested_at as timestamp) as ingested_at,
+        cast(nullif(cast(ultima_actualizacion as text), 'NaN') as timestamp) as ultima_actualizacion,
+        cast(nullif(cast(fecha_de_firma as text), 'NaN') as timestamp) as fecha_de_firma,
+        cast(nullif(cast(fecha_de_inicio_del_contrato as text), 'NaN') as timestamp) as fecha_de_inicio_del_contrato,
+        cast(nullif(cast(fecha_de_fin_del_contrato as text), 'NaN') as timestamp) as fecha_de_fin_del_contrato,
+        cast(nullif(cast(fecha_de_cargue_en_el_secop as text), 'NaN') as timestamp) as fecha_de_cargue_en_el_secop,
+        cast(nullif(cast(fecha_inicio_liquidacion as text), 'NaN') as timestamp) as fecha_inicio_liquidacion,
+        cast(nullif(cast(ingested_at as text), 'NaN') as timestamp) as ingested_at,
         
         /* 
         4. Raw Categoricals (DV-Ready)

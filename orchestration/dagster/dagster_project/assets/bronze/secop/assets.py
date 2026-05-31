@@ -4,9 +4,10 @@ from dagster import asset, AssetExecutionContext, AssetKey, Config, RetryPolicy,
 import os
 
 class SecopConfig(Config):
-    full_backfill: bool = True
+    full_backfill: bool = False
+    deep_scavenge: bool = False
     reset: bool = False
-    scavenge_limit: int = 10000000 # Default to 10M for totality
+    scavenge_limit: int = 0 # 0 for unlimited in hyper-careful mode
 
 @asset(
     key=AssetKey(["raw_secop_contracts"]),
@@ -14,7 +15,7 @@ class SecopConfig(Config):
     description="""
     Ingests raw data from SECOP API into a Unified Matrix.
     Implements a High-Performance Parallel Ingestor with 
-    Incremental Frontier and Historical Scavenger Sync.
+    Incremental Frontier and Business-Key Keyset Scavenging.
     """,
     tags={
         "layer": "bronze",
@@ -31,21 +32,21 @@ class SecopConfig(Config):
 )
 def raw_secop_api_load(context: AssetExecutionContext, config: SecopConfig):
     # Resolve script path dynamically for both local and container environments
-    # Default to local path if not in container
     base_dir = os.getcwd()
     load_secop_path = os.path.join(base_dir, "ingestion", "load_secop_api.py")
     
     if not os.path.exists(load_secop_path):
-        # Fallback to absolute container path if needed
         load_secop_path = "/app/ingestion/load_secop_api.py"
 
-    context.log.info(f"Starting raw SECOP ingestion (Full: {config.full_backfill}, Reset: {config.reset}, Scavenge Limit: {config.scavenge_limit})...")
+    context.log.info(f"Starting SECOP ingestion (Backfill: {config.full_backfill}, Deep Scavenge: {config.deep_scavenge}, Reset: {config.reset})...")
 
-    # Command construction - aligned with MatrixStreamer
     cmd = ["python", load_secop_path, "--scavenge-limit", str(config.scavenge_limit)]
     
     if config.full_backfill:
         cmd.append("--full-backfill")
+    
+    if config.deep_scavenge:
+        cmd.append("--deep-scavenge")
     
     if config.reset:
         cmd.append("--reset")

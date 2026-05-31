@@ -19,12 +19,14 @@ ai_ready as (
 ),
 
 review_queue as (
+    -- Identifying records with high-severity quality issues for the review queue metric
     select 
-        date_trunc('year', fecha_referencia) as fiscal_year,
-        count(*) as total_records,
-        avg(quality_score) as avg_quality_score,
+        date_trunc('year', detected_at) as fiscal_year,
+        count(distinct record_id) as total_records,
+        0.0 as avg_quality_score,
         'Review Queue' as category
-    from {{ ref('mart_secop__review_queue') }}
+    from {{ ref('int_secop__quality_issues') }}
+    where severity in ('Critical', 'High')
     group by 1
 ),
 

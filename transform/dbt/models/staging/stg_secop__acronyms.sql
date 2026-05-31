@@ -6,8 +6,8 @@ with source as (
 
 renamed as (
     select
-        upper(trim(acronym)) as acronym,
-        upper(trim(expanded_name)) as expanded_name
+        lower(trim(acronym)) as acronym,
+        lower(trim(expanded_name)) as expanded_name
     from source
 )
 
